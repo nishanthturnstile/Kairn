@@ -1,0 +1,111 @@
+{
+  "observedAt": "2026-11-01T14:57:38.699568+00:00",
+  "node": "v26.13.0",
+  "pnpm": "12.16.1",
+  "generator": "openapi-typescript@7.13.0",
+  "declaredCompilerPeer": "^5.x",
+  "scope": "Isolated temporary installations, CLI/API generation of a synthetic OpenAPI3.1 fixture, discriminated unions and decimal-string consumer checks. No application dependencies installed.",
+  "cases": [
+    {
+      "typescript": "5.9.3",
+      "install": {
+        "exitCode": 0,
+        "stdoutTail": "Progress: resolved 0, reused 1, downloaded 0, added 0\nPackages: +33\n+++++++++++++++++++++++++++++++++\nProgress: resolved 33, reused 33, downloaded 0, added 33, done\n\ndevDependencies:\n+ openapi-typescript 7.13.0\n+ typescript 5.9.3\n\nDone in 339ms using pnpm v12.16.1\n",
+        "stderrTail": ""
+      },
+      "resolvedCompiler": {
+        "exitCode": 0,
+        "stdoutTail": "{\"version\":\"5.9.3\",\"factory\":\"object\",\"syntaxKind\":\"object\",\"resolved\":\"file:///private/var/folders/62/6b9pc1_s5h19n0zds2k79pn00000gn/T/kairn-ts6-probe-4vlsymdk/5.9.3/node_modules/.pnpm/typescript@5.9.3/node_modules/typescript/lib/typescript.js\"}\n",
+        "stderrTail": ""
+      },
+      "cliGeneration": {
+        "exitCode": 0,
+        "stdoutTail": "\u2728 openapi-typescript 7.13.0\n\ud83d\ude80 schema.json \u2192 generated.d.ts [35.9ms]\n",
+        "stderrTail": ""
+      },
+      "apiGeneration": {
+        "exitCode": 0,
+        "stdoutTail": "API generation passed\n",
+        "stderrTail": ""
+      },
+      "generatedSha256": "10c1e3c7d4862033616a91da3edc4bb1440bf9858f0ae8b963682596b1e2b68f",
+      "consumerTypecheck": {
+        "exitCode": 0,
+        "stdoutTail": "",
+        "stderrTail": ""
+      }
+    },
+    {
+      "typescript": "6.0.3",
+      "install": {
+        "exitCode": 0,
+        "stdoutTail": "Progress: resolved 0, reused 1, downloaded 0, added 0\nPackages: +33\n+++++++++++++++++++++++++++++++++\nProgress: resolved 33, reused 33, downloaded 0, added 33, done\n[WARN] Issues with peer dependencies found. Run \"pnpm peers check\" to list them.\n\ndevDependencies:\n+ openapi-typescript 7.13.0\n+ typescript 6.0.3\n\nDone in 158ms using pnpm v12.16.1\n",
+        "stderrTail": ""
+      },
+      "resolvedCompiler": {
+        "exitCode": 0,
+        "stdoutTail": "{\"version\":\"6.0.3\",\"factory\":\"object\",\"syntaxKind\":\"object\",\"resolved\":\"file:///private/var/folders/62/6b9pc1_s5h19n0zds2k79pn00000gn/T/kairn-ts6-probe-4vlsymdk/6.0.3/node_modules/.pnpm/typescript@6.0.3/node_modules/typescript/lib/typescript.js\"}\n",
+        "stderrTail": ""
+      },
+      "cliGeneration": {
+        "exitCode": 0,
+        "stdoutTail": "\u2728 openapi-typescript 7.13.0\n\ud83d\ude80 schema.json \u2192 generated.d.ts [30ms]\n",
+        "stderrTail": ""
+      },
+      "apiGeneration": {
+        "exitCode": 0,
+        "stdoutTail": "API generation passed\n",
+        "stderrTail": ""
+      },
+      "generatedSha256": "10c1e3c7d4862033616a91da3edc4bb1440bf9858f0ae8b963682596b1e2b68f",
+      "consumerTypecheck": {
+        "exitCode": 0,
+        "stdoutTail": "",
+        "stderrTail": ""
+      }
+    },
+    {
+      "typescript": "7.0.2",
+      "install": {
+        "exitCode": 0,
+        "stdoutTail": "Progress: resolved 0, reused 1, downloaded 0, added 0\nPackages: +34\n++++++++++++++++++++++++++++++++++\nProgress: resolved 34, reused 34, downloaded 0, added 34, done\n[WARN] Issues with peer dependencies found. Run \"pnpm peers check\" to list them.\n\ndevDependencies:\n+ openapi-typescript 7.13.0\n+ typescript 7.0.2\n\nDone in 248ms using pnpm v12.16.1\n",
+        "stderrTail": ""
+      },
+      "resolvedCompiler": {
+        "exitCode": 0,
+        "stdoutTail": "{\"version\":\"7.0.2\",\"factory\":\"undefined\",\"syntaxKind\":\"undefined\",\"resolved\":\"file:///private/var/folders/62/6b9pc1_s5h19n0zds2k79pn00000gn/T/kairn-ts6-probe-4vlsymdk/7.0.2/node_modules/.pnpm/typescript@7.0.2/node_modules/typescript/lib/version.cjs\"}\n",
+        "stderrTail": ""
+      },
+      "cliGeneration": {
+        "exitCode": 1,
+        "stdoutTail": "",
+        "stderrTail": "file:///private/var/folders/62/6b9pc1_s5h19n0zds2k79pn00000gn/T/kairn-ts6-probe-4vlsymdk/7.0.2/node_modules/.pnpm/openapi-typescript@7.13.0_typescript@7.0.2/node_modules/openapi-typescript/dist/lib/ts.mjs:11\nconst BOOLEAN = ts.factory.createKeywordTypeNode(ts.SyntaxKind.BooleanKeyword);\n                           ^\n\nTypeError: Cannot read properties of undefined (reading 'createKeywordTypeNode')\n    at file:///private/var/folders/62/6b9pc1_s5h19n0zds2k79pn00000gn/T/kairn-ts6-probe-4vlsymdk/7.0.2/node_modules/.pnpm/openapi-typescript@7.13.0_typescript@7.0.2/node_modules/openapi-typescript/dist/lib/ts.mjs:11:28\n    at ModuleJob.run (node:internal/modules/esm/module_job:569:25)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async node:internal/modules/esm/loader:650:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:105:5)\n\nNode.js v26.13.0\n"
+      },
+      "apiGeneration": {
+        "exitCode": 1,
+        "stdoutTail": "",
+        "stderrTail": "file:///private/var/folders/62/6b9pc1_s5h19n0zds2k79pn00000gn/T/kairn-ts6-probe-4vlsymdk/7.0.2/node_modules/.pnpm/openapi-typescript@7.13.0_typescript@7.0.2/node_modules/openapi-typescript/dist/lib/ts.mjs:11\nconst BOOLEAN = ts.factory.createKeywordTypeNode(ts.SyntaxKind.BooleanKeyword);\n                           ^\n\nTypeError: Cannot read properties of undefined (reading 'createKeywordTypeNode')\n    at file:///private/var/folders/62/6b9pc1_s5h19n0zds2k79pn00000gn/T/kairn-ts6-probe-4vlsymdk/7.0.2/node_modules/.pnpm/openapi-typescript@7.13.0_typescript@7.0.2/node_modules/openapi-typescript/dist/lib/ts.mjs:11:28\n    at ModuleJob.run (node:internal/modules/esm/module_job:569:25)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async node:internal/modules/esm/loader:226:26\n    at async ModuleLoader.executeModuleJob (node:internal/modules/esm/loader:223:20)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:105:5)\n\nNode.js v26.13.0\n"
+      }
+    }
+  ],
+  "typescript6OutputConsumerChecks": [
+    {
+      "consumerCompiler": "5.9.3",
+      "exitCode": 0,
+      "stdoutTail": "",
+      "stderrTail": ""
+    },
+    {
+      "consumerCompiler": "6.0.3",
+      "exitCode": 0,
+      "stdoutTail": "",
+      "stderrTail": ""
+    },
+    {
+      "consumerCompiler": "7.0.2",
+      "exitCode": 0,
+      "stdoutTail": "",
+      "stderrTail": ""
+    }
+  ]
+}

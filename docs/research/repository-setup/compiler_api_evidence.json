@@ -1,0 +1,68 @@
+{
+  "observedAt": "2026-11-01T14:30:59.792315+00:00",
+  "meaning": "Isolated probe of the exact TypeScript7 root export and the OpenAPI generator factory expression. No dependency installation and no full generator execution.",
+  "packages": [
+    {
+      "name": "typescript",
+      "version": "7.0.2",
+      "source": "https://registry.npmjs.org/typescript/7.0.2",
+      "exports": {
+        ".": "./lib/version.cjs",
+        "./unstable/fs": "./dist/api/fs.js",
+        "./package.json": "./package.json",
+        "./unstable/ast": "./dist/ast/index.js",
+        "./unstable/sync": "./dist/api/sync/api.js",
+        "./unstable/async": "./dist/api/async/api.js",
+        "./unstable/proto": "./dist/api/proto.js",
+        "./unstable/ast/is": "./dist/ast/is.js",
+        "./unstable/ast/clone": "./dist/ast/clone.js",
+        "./unstable/ast/utils": "./dist/ast/utils.js",
+        "./unstable/ast/factory": "./dist/ast/factory.generated.js",
+        "./unstable/ast/scanner": "./dist/ast/scanner.js",
+        "./unstable/ast/visitor": "./dist/ast/visitor.js"
+      },
+      "main": null,
+      "peerDependencies": {},
+      "tarball": "https://registry.npmjs.org/typescript/-/typescript-7.0.2.tgz"
+    },
+    {
+      "name": "openapi-typescript",
+      "version": "7.13.0",
+      "source": "https://registry.npmjs.org/openapi-typescript/7.13.0",
+      "exports": {
+        ".": {
+          "import": "./dist/index.mjs",
+          "default": "./dist/index.mjs",
+          "require": "./dist/index.cjs"
+        },
+        "./*": "./*",
+        "./*.js": "./*.mjs"
+      },
+      "main": "./dist/index.mjs",
+      "peerDependencies": {
+        "typescript": "^5.x"
+      },
+      "tarball": "https://registry.npmjs.org/openapi-typescript/-/openapi-typescript-7.13.0.tgz"
+    },
+    {
+      "name": "typescript",
+      "version": "5.9.3",
+      "source": "https://registry.npmjs.org/typescript/5.9.3",
+      "exports": null,
+      "main": "./lib/typescript.js",
+      "peerDependencies": {},
+      "tarball": "https://registry.npmjs.org/typescript/-/typescript-5.9.3.tgz"
+    }
+  ],
+  "openapiSourceFile": "package/dist/lib/ts.mjs",
+  "typescriptRootExportFile": "package/lib/version.cjs",
+  "probe": {
+    "exports": [
+      "version",
+      "versionMajorMinor"
+    ],
+    "factoryType": "undefined",
+    "syntaxKindType": "undefined",
+    "generatorExpressionFailure": "TypeError: Cannot read properties of undefined (reading 'createKeywordTypeNode')"
+  }
+}
