@@ -1,0 +1,209 @@
+{
+  "observedAt": "2026-11-01T11:39:43.527272+00:00",
+  "currency": "USD",
+  "userInput": {
+    "launchPeopleCeiling": 10000
+  },
+  "modelAssumptions": {
+    "allPeopleMonthlyMapActive": true,
+    "webShare": 0.8,
+    "nativeShare": 0.2,
+    "mutuallyExclusivePlatformGroups": true,
+    "defaultMapOpensPerPerson": 4,
+    "defaultIllustrativeWeightedVectorUnitsPerOpen": 30,
+    "identicalActualRequestCountsAcrossProviders": false,
+    "staticSearchRoutingOfflineUsage": 0,
+    "taxFxSupportVpsStorageAiExcluded": true
+  },
+  "sources": {
+    "mapbox": "https://www.mapbox.com/pricing",
+    "mapboxHybridMeter": "https://docs.mapbox.com/accounts/guides/pricing/#hybrid-frameworks",
+    "maptiler": "https://www.maptiler.com/cloud/pricing/",
+    "maptilerBilling": "https://docs.maptiler.com/guides/account/sessions-vs-requests/"
+  },
+  "progressivePerThousandTiers": {
+    "mapbox_web": [
+      [
+        50000,
+        "0"
+      ],
+      [
+        100000,
+        "5"
+      ],
+      [
+        200000,
+        "4"
+      ],
+      [
+        1000000,
+        "3"
+      ],
+      [
+        5000000,
+        "2.5"
+      ]
+    ],
+    "mapbox_mobile": [
+      [
+        25000,
+        "0"
+      ],
+      [
+        125000,
+        "4"
+      ],
+      [
+        250000,
+        "3.2"
+      ],
+      [
+        1250000,
+        "2.4"
+      ]
+    ],
+    "mapbox_vector": [
+      [
+        200000,
+        "0"
+      ],
+      [
+        2000000,
+        ".25"
+      ],
+      [
+        4000000,
+        ".20"
+      ],
+      [
+        20000000,
+        ".15"
+      ]
+    ]
+  },
+  "maptilerFlex": {
+    "baseUsd": 30,
+    "includedRequests": 500000,
+    "extraRequestsPerThousandUsd": 0.15,
+    "includedWebSdkSessions": 25000,
+    "extraWebSdkSessionsPerThousandUsd": 2.5
+  },
+  "scenarios": [
+    {
+      "name": "Small",
+      "people": 1000,
+      "webPeople": 800,
+      "nativeMau": 200,
+      "opensPerPerson": 4,
+      "webMapLoads": 3200,
+      "nativeMapOpens": 800,
+      "totalMapOpens": 4000,
+      "illustrativeUnitsPerOpen": 30,
+      "illustrativeVectorRequests": 120000,
+      "mapboxSdkUsd": 0.0,
+      "maptilerMapLibreUsd": 30.0,
+      "maptilerMixedSdkUsd": 30.0,
+      "mapboxMapLibreVectorUsd": 0.0
+    },
+    {
+      "name": "Growing",
+      "people": 5000,
+      "webPeople": 4000,
+      "nativeMau": 1000,
+      "opensPerPerson": 4,
+      "webMapLoads": 16000,
+      "nativeMapOpens": 4000,
+      "totalMapOpens": 20000,
+      "illustrativeUnitsPerOpen": 30,
+      "illustrativeVectorRequests": 600000,
+      "mapboxSdkUsd": 0.0,
+      "maptilerMapLibreUsd": 45.0,
+      "maptilerMixedSdkUsd": 30.0,
+      "mapboxMapLibreVectorUsd": 100.0
+    },
+    {
+      "name": "Launch ceiling",
+      "people": 10000,
+      "webPeople": 8000,
+      "nativeMau": 2000,
+      "opensPerPerson": 4,
+      "webMapLoads": 32000,
+      "nativeMapOpens": 8000,
+      "totalMapOpens": 40000,
+      "illustrativeUnitsPerOpen": 30,
+      "illustrativeVectorRequests": 1200000,
+      "mapboxSdkUsd": 0.0,
+      "maptilerMapLibreUsd": 135.0,
+      "maptilerMixedSdkUsd": 47.5,
+      "mapboxMapLibreVectorUsd": 250.0
+    },
+    {
+      "name": "Frequent opens at same ceiling",
+      "people": 10000,
+      "webPeople": 8000,
+      "nativeMau": 2000,
+      "opensPerPerson": 10,
+      "webMapLoads": 80000,
+      "nativeMapOpens": 20000,
+      "totalMapOpens": 100000,
+      "illustrativeUnitsPerOpen": 30,
+      "illustrativeVectorRequests": 3000000,
+      "mapboxSdkUsd": 150.0,
+      "maptilerMapLibreUsd": 405.0,
+      "maptilerMixedSdkUsd": 182.5,
+      "mapboxMapLibreVectorUsd": 650.0
+    }
+  ],
+  "sensitivity": [
+    {
+      "name": "q=10",
+      "people": 10000,
+      "webPeople": 8000,
+      "nativeMau": 2000,
+      "opensPerPerson": 4,
+      "webMapLoads": 32000,
+      "nativeMapOpens": 8000,
+      "totalMapOpens": 40000,
+      "illustrativeUnitsPerOpen": 10,
+      "illustrativeVectorRequests": 400000,
+      "mapboxSdkUsd": 0.0,
+      "maptilerMapLibreUsd": 30.0,
+      "maptilerMixedSdkUsd": 47.5,
+      "mapboxMapLibreVectorUsd": 50.0
+    },
+    {
+      "name": "q=30",
+      "people": 10000,
+      "webPeople": 8000,
+      "nativeMau": 2000,
+      "opensPerPerson": 4,
+      "webMapLoads": 32000,
+      "nativeMapOpens": 8000,
+      "totalMapOpens": 40000,
+      "illustrativeUnitsPerOpen": 30,
+      "illustrativeVectorRequests": 1200000,
+      "mapboxSdkUsd": 0.0,
+      "maptilerMapLibreUsd": 135.0,
+      "maptilerMixedSdkUsd": 47.5,
+      "mapboxMapLibreVectorUsd": 250.0
+    },
+    {
+      "name": "q=60",
+      "people": 10000,
+      "webPeople": 8000,
+      "nativeMau": 2000,
+      "opensPerPerson": 4,
+      "webMapLoads": 32000,
+      "nativeMapOpens": 8000,
+      "totalMapOpens": 40000,
+      "illustrativeUnitsPerOpen": 60,
+      "illustrativeVectorRequests": 2400000,
+      "mapboxSdkUsd": 0.0,
+      "maptilerMapLibreUsd": 315.0,
+      "maptilerMixedSdkUsd": 47.5,
+      "mapboxMapLibreVectorUsd": 530.0
+    }
+  ],
+  "selectedPricingRoute": "mapbox_sdk_web_loads_and_native_mau",
+  "selectionNote": "Alternative tariffs remain comparison evidence only. Exact selected dependencies belong in architecture section 14. Ordinary SDK basemap/satellite use follows the SDK billing route; direct-tile scenarios are vector-only."
+}

@@ -1,0 +1,100 @@
+{
+  "observedAt": "2026-11-01T12:02:53.066431+00:00",
+  "purpose": "Dated package evidence. Architecture section 14 owns current selections and install stages.",
+  "registrySources": {
+    "mapbox-gl": "https://registry.npmjs.org/mapbox-gl/latest",
+    "@rnmapbox/maps": "https://registry.npmjs.org/@rnmapbox/maps/latest"
+  },
+  "packages": {
+    "mapbox-gl": {
+      "name": "mapbox-gl",
+      "version": "3.34.1",
+      "license": "SEE LICENSE IN LICENSE.txt",
+      "dist": {
+        "shasum": "88834690f6197c8c5372dd5a935342bbce077c95",
+        "tarball": "https://registry.npmjs.org/mapbox-gl/-/mapbox-gl-3.34.1.tgz",
+        "fileCount": 53,
+        "integrity": "sha512-r4UbcZyEljltuMkMoHhwBSpbWnflHKFBUAfhvjEGxlR2mBjNxI0OBFzrr4AlbHsXnMVPMCWAvdHD5HWtMThWPg==",
+        "signatures": [
+          {
+            "sig": "MEYCIQDy5b/OU8jNgvPdJ/qErTat5Z4YIcF1MyE9tHhmP1f9bQIhAPHYYTmhd10dHu/gaUCLkUQT6NIZ/p5oNSUO0PzZaAWl",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          },
+          {
+            "sig": "MEUCIQDoZ7u0Y2aoyZAb+Hwi+IPA4bgGMlKSzNbzsR1yzLKM6gIgOGe3gWI6Dt1lBXzHFbK8TrujfH7ORnVW8tmNZFp6dCA=",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 67728372
+      }
+    },
+    "@rnmapbox/maps": {
+      "name": "@rnmapbox/maps",
+      "version": "10.3.16",
+      "license": "MIT",
+      "peerDependencies": {
+        "expo": ">=47.0.0",
+        "react": ">=17.0.0",
+        "mapbox-gl": "^2.9.0",
+        "react-dom": ">= 17.0.0",
+        "react-native": ">=0.79"
+      },
+      "peerDependenciesMeta": {
+        "expo": {
+          "optional": true
+        },
+        "mapbox-gl": {
+          "optional": true
+        },
+        "react-dom": {
+          "optional": true
+        }
+      },
+      "dependencies": {
+        "debounce": "^2.2.0",
+        "@turf/along": "6.5.0",
+        "@turf/length": "6.5.0",
+        "@turf/helpers": "6.5.0",
+        "@turf/distance": "6.5.0",
+        "@types/geojson": "^7946.0.7",
+        "@turf/nearest-point-on-line": "6.5.0"
+      },
+      "dist": {
+        "shasum": "115c9b91270d86385d12b4e7543d8a5fede62938",
+        "tarball": "https://registry.npmjs.org/@rnmapbox/maps/-/maps-10.3.16.tgz",
+        "fileCount": 1289,
+        "integrity": "sha512-Kmy1Yuz4dUr0qbYGk43mKSBnowE25Hvn78Y+y1/K8twPjlLxiBHbYcnEYCf4qJRiNUkvdcwKR7BDZRmgrSRjiQ==",
+        "signatures": [
+          {
+            "sig": "MEQCIH8Nj//UK5pDLR3lWzylTNb+mcLbH6CufikgZh04UVKlAiAXgGk2pzTdkk4OGqD6wgk/AgUsdre6uF9PGWGMCB/LQg==",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          },
+          {
+            "sig": "MEUCIEkeGMfIO+7eRbNSY3REJIrwic2UfaIyPrZmktbHMhoQAiEAmaPQox2atwZuvOvfDSGiwKzhraqpxwlmwBOnuOAvX+Y=",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "attestations": {
+          "url": "https://registry.npmjs.org/-/npm/v1/attestations/@rnmapbox%2fmaps@10.3.16",
+          "provenance": {
+            "predicateType": "https://slsa.dev/provenance/v1"
+          }
+        },
+        "unpackedSize": 3781488
+      },
+      "mapbox": {
+        "ios": "~> 11.33.0",
+        "android": "11.33.0"
+      }
+    }
+  },
+  "compatibility": {
+    "nativeOnlyBridge": true,
+    "bridgeOptionalWebPeerMatchesSelectedWeb": false,
+    "webBridgeShimSelected": false,
+    "nativeBuildAndDeviceQualificationPerformed": false,
+    "nativeDefaultsEvidence": "The published bridge package.json mapbox fields supply the Android Gradle and iOS podspec defaults. Resolve exact native artifacts in the production build.",
+    "installationDocs": "https://rnmapbox.github.io/docs/install",
+    "installationDocsCaveat": "The installation page labels its instructions as the 10.2 series. Current published source and actual builds govern the selected release."
+  }
+}

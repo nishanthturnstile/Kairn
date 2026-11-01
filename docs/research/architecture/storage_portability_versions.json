@@ -1,0 +1,19 @@
+{
+  "observedAt": "2026-11-01T11:34:02.683763+00:00",
+  "seaweedfs": {
+    "sourceUrl": "https://api.github.com/repos/seaweedfs/seaweedfs/releases/latest",
+    "tag_name": "4.51",
+    "html_url": "https://github.com/seaweedfs/seaweedfs/releases/tag/4.51",
+    "prerelease": false,
+    "published_at": "2026-10-25T19:39:12Z"
+  },
+  "s3_client": {
+    "sourceUrl": "https://registry.npmjs.org/@aws-sdk%2fclient-s3/latest",
+    "name": "@aws-sdk/client-s3",
+    "version": "3.1161.0",
+    "engines": {
+      "node": ">=20.0.0"
+    },
+    "license": "Apache-2.0"
+  }
+}
