@@ -1,0 +1,110 @@
+{
+  "observedAt": "2026-11-01T16:03:10.194090+00:00",
+  "purpose": "Candidate mobile styling dependency selection; metadata and upstream documentation only. No application packages installed or native builds performed.",
+  "selectedBaseline": {
+    "expo": "58.0.22",
+    "reactNative": "0.88.1",
+    "react": "19.3.0",
+    "newArchitecture": true,
+    "styling": "Unistyles v3",
+    "nativeWind": false
+  },
+  "packages": {
+    "react-native-unistyles": {
+      "version": "3.7.0",
+      "registryUrl": "https://registry.npmjs.org/react-native-unistyles/3.7.0",
+      "peerDependencies": {
+        "react": "*",
+        "react-native": ">=0.81.0",
+        "react-native-reanimated": "*",
+        "react-native-edge-to-edge": "*",
+        "react-native-nitro-modules": "*",
+        "@react-native/normalize-colors": "*"
+      },
+      "peerDependenciesMeta": {
+        "react-native-reanimated": {
+          "optional": true
+        },
+        "react-native-edge-to-edge": {
+          "optional": true
+        }
+      },
+      "engines": {
+        "node": ">= 20.18.0"
+      },
+      "integrity": "sha512-Rh2MElgv2gCP/Q4BG0ztWz8iawH1BSyCgAvBRCpw10+lA8N8WqTT97rY4OgfJhB7m9eZLWUH2nQch2HfVNk3+Q=="
+    },
+    "react-native-nitro-modules": {
+      "version": "0.37.1",
+      "registryUrl": "https://registry.npmjs.org/react-native-nitro-modules/0.37.1",
+      "peerDependencies": {
+        "react": "*",
+        "react-native": "*"
+      },
+      "peerDependenciesMeta": {},
+      "engines": {},
+      "integrity": "sha512-KpW6EQVQ/bfegpCGxN9Be+ndvsfj56t4IESEvCASu9gWpJa/NDfHpIeIwCOvZQ3eXmLEj6YD4wCLqcC1FJPr2w=="
+    },
+    "react-native": {
+      "version": "0.88.1",
+      "registryUrl": "https://registry.npmjs.org/react-native/0.88.1",
+      "peerDependencies": {
+        "react": "^19.3.0",
+        "@types/react": "^19.1.1"
+      },
+      "peerDependenciesMeta": {
+        "@types/react": {
+          "optional": true
+        }
+      },
+      "engines": {
+        "node": "^22.13.0 || ^24.3.0 || >= 26.0.0"
+      },
+      "integrity": "sha512-wajWcLZ93GCN7k4Uwh4CS4L2Ah8ohcvkOXnvIYmh4Yvuqho5j3APZ9qozK+nQrHWSgauq4h8D3HN5DKK84SrHA==",
+      "normalizeColorsDependency": "0.88.1"
+    },
+    "@react-native/normalize-colors": {
+      "version": "0.88.1",
+      "registryUrl": "https://registry.npmjs.org/@react-native/normalize-colors/0.88.1",
+      "peerDependencies": {},
+      "peerDependenciesMeta": {},
+      "engines": {},
+      "integrity": "sha512-2SAKiLyZRf+peBLkhhJWGY5vC26w1Uj9QBgUZvjAnOxjgeEKUGBE5riPS0R7+YoqSrRL0w8ucwZB4M+vvy9HMg=="
+    }
+  },
+  "upstreamRequirements": {
+    "minimumReactNative": "0.81.0",
+    "minimumReact": "19",
+    "minimumExpoSdk": "54",
+    "minimumXcodeForNitro": "16.4",
+    "minimumNitroForUnistyles34Plus": "0.37.1",
+    "exactNitroPinRequired": true,
+    "expoGoSupported": false,
+    "edgeToEdgePackageRequired": false
+  },
+  "integration": {
+    "choice": "babel",
+    "plugin": "react-native-unistyles/plugin",
+    "root": "src",
+    "preset": "babel-preset-expo",
+    "routes": "src/app",
+    "entry": "index.ts",
+    "initializationOrder": [
+      "./src/theme/unistyles",
+      "expo-router/entry"
+    ],
+    "experimentalMetroWrapper": false
+  },
+  "sources": [
+    "https://www.unistyl.es/v3/start/getting-started/",
+    "https://github.com/jpudysz/react-native-unistyles#installation",
+    "https://www.unistyl.es/v3/other/babel-plugin/",
+    "https://www.unistyl.es/v3/guides/expo-router/"
+  ],
+  "remainingEvidence": [
+    "Resolve actual SDK dependency graph and autolinking",
+    "Android native build and runtime",
+    "Local iOS native build and runtime",
+    "Theme initialization before routes, larger text, safe areas, orientation/resizing, Fast Refresh and relaunch"
+  ]
+}

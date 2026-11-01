@@ -1,5 +1,7 @@
 # Repository setup research plan
 
+> Historical research plan: this records the earlier Android-first investigation. The current [setup plan](../../implementation/repository_setup_plan.md) and [mobile development plan](../../implementation/mobile_development_plan.md) include local iOS development and move development containers to Windows/WSL. References below to architecture 1.4 or the former Mac runtime host describe that investigation, not the current decision.
+
 Date: 1 November 2026.
 
 Question: How should Kairn establish the repository foundation for web, Android, server, worker, and shared packages, with reproducible build and check commands, while preserving architecture version 1.4?

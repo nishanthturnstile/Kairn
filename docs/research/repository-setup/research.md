@@ -1,6 +1,8 @@
 # Repository setup research
 
-Date: 1 November 2026. Scope: the repository foundation for web, Android, server, worker, shared packages, and build/check commands. The [implementation plan](../../repository_setup_plan.md) turns these findings into reviewable work. Architecture version 1.4 remains the stack authority.
+> Historical research note: the current [repository setup plan](../../implementation/repository_setup_plan.md) and [mobile development plan](../../implementation/mobile_development_plan.md) supersede earlier host/platform recommendations below. Development containers now belong on Windows/WSL, Android tools on Windows, and iOS builds/tests on the Mac. iOS implementation is included now; only public distribution is deferred. Earlier measurements and execution results remain dated evidence, not a current host qualification. Architecture section 14 remains the current dependency authority.
+
+Date: 1 November 2026. Original scope: the repository foundation for web, Android, server, worker, shared packages, and build/check commands against architecture version 1.4. The current [implementation plan](../../implementation/repository_setup_plan.md) incorporates later host/platform decisions, and current architecture section 14 is the stack authority.
 
 ## Summary
 
@@ -10,7 +12,7 @@ Executed follow-up tests establish that the generator works with TypeScript 6.0.
 
 ## Stack
 
-The repository already selects Vite+ React/TanStack web, Expo/React Native Android, Hono Node HTTP, PostgreSQL/pg-boss jobs, and pure shared packages. There is no reason to introduce another task runner or change client frameworks for repository setup. [Architecture sections 5 and 14](../../architecture.md#5-module-ownership-and-repository-structure).
+The repository already selects Vite+ React/TanStack web, Expo/React Native Android, Hono Node HTTP, PostgreSQL/pg-boss jobs, and pure shared packages. There is no reason to introduce another task runner or change client frameworks for repository setup. [Architecture sections 5 and 14](../../core/architecture.md#5-module-ownership-and-repository-structure).
 
 First-party metadata confirms the availability of the recorded Vite+, pnpm, Hono, contract, queue, and Expo package pins. The selected local Node and pnpm versions match the architecture. Availability and declared engines establish candidate compatibility, not integrated build success. [Toolchain evidence](findings_toolchain.md), [Android evidence](findings_android.md), [registry and host observations](metadata.json).
 
@@ -26,7 +28,7 @@ There is one initial commit and documentation only. No package manifests, depend
 
 The baseline separates server policy/data from client-safe contracts, pure rules, sync protocol, and design tokens. Web and native UI stay inside their apps. Preserve this separation before domain modules exist so future code has a clear ownership boundary.
 
-The requirements' ten delivery steps remain the complete R1 commitment. Repository setup precedes the first account/domain work and proves the build/runtime connections. It does not establish accounts, capture durability, media authorization, publishing, or release readiness. [Requirements delivery sequence](../../product_requirements.md#182-dependency-aware-implementation-sequence).
+The requirements' ten delivery steps remain the complete R1 commitment. Repository setup precedes the first account/domain work and proves the build/runtime connections. It does not establish accounts, capture durability, media authorization, publishing, or release readiness. [Requirements delivery sequence](../../core/product_requirements.md#182-dependency-aware-implementation-sequence).
 
 ## Integration points
 

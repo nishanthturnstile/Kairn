@@ -1,0 +1,369 @@
+{
+  "version": 1,
+  "installedAt": "2026-11-01",
+  "installer": "Codex skill-installer helper",
+  "scope": "project",
+  "skills": [
+    {
+      "name": "expo-overview",
+      "repo": "expo/skills",
+      "path": "plugins/expo/skills/expo-overview",
+      "commit": "05754e71d02abe0d2d7a2fb5259ccac41f5ea59c",
+      "sourceUrl": "https://github.com/expo/skills/tree/05754e71d02abe0d2d7a2fb5259ccac41f5ea59c/plugins/expo/skills/expo-overview",
+      "contentSha256": "162adca43fdd7b252be18004102f3e5780bb840cf7774d136a7a6b901f8178bd",
+      "sourceType": "github"
+    },
+    {
+      "name": "expo-project-structure",
+      "repo": "expo/skills",
+      "path": "plugins/expo/skills/expo-project-structure",
+      "commit": "05754e71d02abe0d2d7a2fb5259ccac41f5ea59c",
+      "sourceUrl": "https://github.com/expo/skills/tree/05754e71d02abe0d2d7a2fb5259ccac41f5ea59c/plugins/expo/skills/expo-project-structure",
+      "contentSha256": "b8a28ead7a8e5b61c2d00b9dd784248af600952d54c8bc2b316677ec87ec25b2",
+      "sourceType": "github"
+    },
+    {
+      "name": "expo-router",
+      "repo": "expo/skills",
+      "path": "plugins/expo/skills/expo-router",
+      "commit": "05754e71d02abe0d2d7a2fb5259ccac41f5ea59c",
+      "sourceUrl": "https://github.com/expo/skills/tree/05754e71d02abe0d2d7a2fb5259ccac41f5ea59c/plugins/expo/skills/expo-router",
+      "contentSha256": "ce3999dad571e77de873b31b2610e2b0381739513d9bb441abd61ed97ccae762",
+      "sourceType": "github"
+    },
+    {
+      "name": "expo-native-ui",
+      "repo": "expo/skills",
+      "path": "plugins/expo/skills/expo-native-ui",
+      "commit": "05754e71d02abe0d2d7a2fb5259ccac41f5ea59c",
+      "sourceUrl": "https://github.com/expo/skills/tree/05754e71d02abe0d2d7a2fb5259ccac41f5ea59c/plugins/expo/skills/expo-native-ui",
+      "contentSha256": "c4fe37f26f8752e43281f4a7011d12d3f1acbda72bed1f2d2155d5550969dcbc",
+      "sourceType": "github"
+    },
+    {
+      "name": "expo-design-system",
+      "repo": "expo/skills",
+      "path": "plugins/expo/skills/expo-design-system",
+      "commit": "05754e71d02abe0d2d7a2fb5259ccac41f5ea59c",
+      "sourceUrl": "https://github.com/expo/skills/tree/05754e71d02abe0d2d7a2fb5259ccac41f5ea59c/plugins/expo/skills/expo-design-system",
+      "contentSha256": "3fce42c3467e4c2ce2e7578ffdf13f89331d5eb647c1afcd8cc8f5734b8f46c7",
+      "sourceType": "github"
+    },
+    {
+      "name": "expo-ui",
+      "repo": "expo/skills",
+      "path": "plugins/expo/skills/expo-ui",
+      "commit": "05754e71d02abe0d2d7a2fb5259ccac41f5ea59c",
+      "sourceUrl": "https://github.com/expo/skills/tree/05754e71d02abe0d2d7a2fb5259ccac41f5ea59c/plugins/expo/skills/expo-ui",
+      "contentSha256": "bb5ca948d691f9fa5966eec8b0650ca1d9436b6bae3a7acc8e9d59ee9c945f45",
+      "sourceType": "github"
+    },
+    {
+      "name": "expo-data-fetching",
+      "repo": "expo/skills",
+      "path": "plugins/expo/skills/expo-data-fetching",
+      "commit": "05754e71d02abe0d2d7a2fb5259ccac41f5ea59c",
+      "sourceUrl": "https://github.com/expo/skills/tree/05754e71d02abe0d2d7a2fb5259ccac41f5ea59c/plugins/expo/skills/expo-data-fetching",
+      "contentSha256": "9b0f2a7674230ee9a433c360f504f0df2589c379d2551436d0ecd725facedfa5",
+      "sourceType": "github"
+    },
+    {
+      "name": "expo-animation",
+      "repo": "expo/skills",
+      "path": "plugins/expo/skills/expo-animation",
+      "commit": "05754e71d02abe0d2d7a2fb5259ccac41f5ea59c",
+      "sourceUrl": "https://github.com/expo/skills/tree/05754e71d02abe0d2d7a2fb5259ccac41f5ea59c/plugins/expo/skills/expo-animation",
+      "contentSha256": "948be91e7f59ada69a87926b49ca2c9a55dd7e6e1d7bca15fc96b1eff6667dd0",
+      "sourceType": "github"
+    },
+    {
+      "name": "expo-module",
+      "repo": "expo/skills",
+      "path": "plugins/expo/skills/expo-module",
+      "commit": "05754e71d02abe0d2d7a2fb5259ccac41f5ea59c",
+      "sourceUrl": "https://github.com/expo/skills/tree/05754e71d02abe0d2d7a2fb5259ccac41f5ea59c/plugins/expo/skills/expo-module",
+      "contentSha256": "0505de2d1dbabea194c095e45fb68d33bc03f02abc7ea1d716e9a1f542edd3bb",
+      "sourceType": "github"
+    },
+    {
+      "name": "expo-dev-client",
+      "repo": "expo/skills",
+      "path": "plugins/expo/skills/expo-dev-client",
+      "commit": "05754e71d02abe0d2d7a2fb5259ccac41f5ea59c",
+      "sourceUrl": "https://github.com/expo/skills/tree/05754e71d02abe0d2d7a2fb5259ccac41f5ea59c/plugins/expo/skills/expo-dev-client",
+      "contentSha256": "bddb4706a69a567a052a8b4617b7593b8d67a165108ad83e5c60f8286708b59d",
+      "sourceType": "github"
+    },
+    {
+      "name": "expo-examples",
+      "repo": "expo/skills",
+      "path": "plugins/expo/skills/expo-examples",
+      "commit": "05754e71d02abe0d2d7a2fb5259ccac41f5ea59c",
+      "sourceUrl": "https://github.com/expo/skills/tree/05754e71d02abe0d2d7a2fb5259ccac41f5ea59c/plugins/expo/skills/expo-examples",
+      "contentSha256": "9f14a842ea7cade385cb65707cea2e8f397e23c2ffe8c4c4e37a15bfb2d3fa8d",
+      "sourceType": "github"
+    },
+    {
+      "name": "expo-upgrade",
+      "repo": "expo/skills",
+      "path": "plugins/expo/skills/expo-upgrade",
+      "commit": "05754e71d02abe0d2d7a2fb5259ccac41f5ea59c",
+      "sourceUrl": "https://github.com/expo/skills/tree/05754e71d02abe0d2d7a2fb5259ccac41f5ea59c/plugins/expo/skills/expo-upgrade",
+      "contentSha256": "d2dd4f729835f571c7662c98a1a3c2c9828f460f2dd96c61b86cd291ce92c10a",
+      "sourceType": "github"
+    },
+    {
+      "name": "router-core",
+      "repo": "TanStack/router",
+      "path": "packages/router-core/skills/router-core",
+      "commit": "da2adec76dbe6c0da6d6a0d5640f7b9388217f45",
+      "sourceUrl": "https://github.com/TanStack/router/tree/da2adec76dbe6c0da6d6a0d5640f7b9388217f45/packages/router-core/skills/router-core",
+      "contentSha256": "d956939a648f2d934b6e289ac453392f245be58e0200786b00a325440fc40b25",
+      "sourceType": "github"
+    },
+    {
+      "name": "react-router",
+      "repo": "TanStack/router",
+      "path": "packages/react-router/skills/react-router",
+      "commit": "da2adec76dbe6c0da6d6a0d5640f7b9388217f45",
+      "sourceUrl": "https://github.com/TanStack/router/tree/da2adec76dbe6c0da6d6a0d5640f7b9388217f45/packages/react-router/skills/react-router",
+      "contentSha256": "68ddbbb4c01acbf084437c18186c50f45158436a41627bb6b1700f3329230e4a",
+      "sourceType": "github"
+    },
+    {
+      "name": "router-query",
+      "repo": "TanStack/router",
+      "path": "packages/react-router/skills/compositions/router-query",
+      "commit": "da2adec76dbe6c0da6d6a0d5640f7b9388217f45",
+      "sourceUrl": "https://github.com/TanStack/router/tree/da2adec76dbe6c0da6d6a0d5640f7b9388217f45/packages/react-router/skills/compositions/router-query",
+      "contentSha256": "32417e8d8bb6a967c25a90df70f7fef3d9a4dad0412ff5b7a35309053cee13a2",
+      "sourceType": "github"
+    },
+    {
+      "name": "better-auth-best-practices",
+      "repo": "better-auth/skills",
+      "path": "better-auth/best-practices",
+      "commit": "20c9e88a5c007461a703f1c213572b073196113e",
+      "sourceUrl": "https://github.com/better-auth/skills/tree/20c9e88a5c007461a703f1c213572b073196113e/better-auth/best-practices",
+      "contentSha256": "2ca64e870d2b84b9f769fad6b322ac5e1eb3765db26a01f98f3fdb0b2a22cb56",
+      "sourceType": "github"
+    },
+    {
+      "name": "better-auth-security-best-practices",
+      "repo": "better-auth/skills",
+      "path": "security",
+      "commit": "20c9e88a5c007461a703f1c213572b073196113e",
+      "sourceUrl": "https://github.com/better-auth/skills/tree/20c9e88a5c007461a703f1c213572b073196113e/security",
+      "contentSha256": "97c5db7392b8a3691117908c949cc4229eef904110c9e1b1fd278f2aff245917",
+      "sourceType": "github"
+    },
+    {
+      "name": "supabase-postgres-best-practices",
+      "repo": "supabase/agent-skills",
+      "path": "skills/supabase-postgres-best-practices",
+      "commit": "c9be0e931b7930f7d02126d04774d904c381e7d7",
+      "sourceUrl": "https://github.com/supabase/agent-skills/tree/c9be0e931b7930f7d02126d04774d904c381e7d7/skills/supabase-postgres-best-practices",
+      "contentSha256": "a714d433362542f2d52e8b7958d1691c49fa4f43c9645c9a647895fb3ca85f92",
+      "sourceType": "github"
+    },
+    {
+      "name": "multi-stage-dockerfile",
+      "repo": "github/awesome-copilot",
+      "path": "skills/multi-stage-dockerfile",
+      "commit": "5269f7ea2d6c3a9bfda5ed878b6726cf509121fd",
+      "sourceUrl": "https://github.com/github/awesome-copilot/tree/5269f7ea2d6c3a9bfda5ed878b6726cf509121fd/skills/multi-stage-dockerfile",
+      "contentSha256": "6ab1ed0d7a7b94ccfa5fcbad4aff631383f178c783d0e647becd1e8ac0fad78d",
+      "sourceType": "github"
+    },
+    {
+      "name": "playwright-best-practices",
+      "repo": "currents-dev/playwright-best-practices-skill",
+      "path": "playwright-best-practices",
+      "commit": "283d5cbc5d11aac1abda058b16ad22c317d54dc0",
+      "sourceUrl": "https://github.com/currents-dev/playwright-best-practices-skill/tree/283d5cbc5d11aac1abda058b16ad22c317d54dc0/playwright-best-practices",
+      "contentSha256": "1c0a686422dfa63861fbcf36145c3df18e8e5b1694711cb8123be99603dda0b1",
+      "sourceType": "github"
+    },
+    {
+      "name": "vercel-react-best-practices",
+      "repo": "vercel-labs/agent-skills",
+      "path": "skills/react-best-practices",
+      "commit": "1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62",
+      "sourceUrl": "https://github.com/vercel-labs/agent-skills/tree/1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62/skills/react-best-practices",
+      "contentSha256": "e3f2294574b469c7c198373a443a86571012769d0bbeed68854bd55642ec0d7b",
+      "sourceType": "github"
+    },
+    {
+      "name": "vercel-react-native-skills",
+      "repo": "vercel-labs/agent-skills",
+      "path": "skills/react-native-skills",
+      "commit": "1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62",
+      "sourceUrl": "https://github.com/vercel-labs/agent-skills/tree/1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62/skills/react-native-skills",
+      "contentSha256": "7a13afc40d6cf74e431d845f5c19a3047caf4fdfe2d1fed1dbd0c77ed2db7b0b",
+      "sourceType": "github"
+    },
+    {
+      "name": "web-design-guidelines",
+      "repo": "vercel-labs/agent-skills",
+      "path": "skills/web-design-guidelines",
+      "commit": "1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62",
+      "sourceUrl": "https://github.com/vercel-labs/agent-skills/tree/1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62/skills/web-design-guidelines",
+      "contentSha256": "f3bc47f890f42a44db1007ab390709ec368e4b8c089baee6b0007182236ac474",
+      "sourceType": "github"
+    },
+    {
+      "name": "mapbox-web-integration-patterns",
+      "repo": "mapbox/mapbox-agent-skills",
+      "path": "skills/mapbox-web-integration-patterns",
+      "commit": "f71cd72b8d8937b06db440538bd65559eb792c49",
+      "sourceUrl": "https://github.com/mapbox/mapbox-agent-skills/tree/f71cd72b8d8937b06db440538bd65559eb792c49/skills/mapbox-web-integration-patterns",
+      "contentSha256": "6ed3a56802ca9ec595215daefeac93e79923a875f82fcd31a8515074efcbfb77",
+      "sourceType": "github"
+    },
+    {
+      "name": "mapbox-web-performance-patterns",
+      "repo": "mapbox/mapbox-agent-skills",
+      "path": "skills/mapbox-web-performance-patterns",
+      "commit": "f71cd72b8d8937b06db440538bd65559eb792c49",
+      "sourceUrl": "https://github.com/mapbox/mapbox-agent-skills/tree/f71cd72b8d8937b06db440538bd65559eb792c49/skills/mapbox-web-performance-patterns",
+      "contentSha256": "b9a7ec8089ced53fe6664aa90bc21a845ceb209f48b8b13408a184a248fa8b1b",
+      "sourceType": "github"
+    },
+    {
+      "name": "mapbox-ios-patterns",
+      "repo": "mapbox/mapbox-agent-skills",
+      "path": "skills/mapbox-ios-patterns",
+      "commit": "f71cd72b8d8937b06db440538bd65559eb792c49",
+      "sourceUrl": "https://github.com/mapbox/mapbox-agent-skills/tree/f71cd72b8d8937b06db440538bd65559eb792c49/skills/mapbox-ios-patterns",
+      "contentSha256": "43dd4c599c3d78915d859650b0c2953a3cf3040ce87029547442ed36fd3370ac",
+      "sourceType": "github"
+    },
+    {
+      "name": "mapbox-android-patterns",
+      "repo": "mapbox/mapbox-agent-skills",
+      "path": "skills/mapbox-android-patterns",
+      "commit": "f71cd72b8d8937b06db440538bd65559eb792c49",
+      "sourceUrl": "https://github.com/mapbox/mapbox-agent-skills/tree/f71cd72b8d8937b06db440538bd65559eb792c49/skills/mapbox-android-patterns",
+      "contentSha256": "377eb270f8e2a447230445dc42fd553afaa14e7e4b65fde07849546b492761a6",
+      "sourceType": "github"
+    },
+    {
+      "name": "ai-sdk",
+      "repo": "vercel/ai",
+      "path": "skills/use-ai-sdk",
+      "commit": "dffe4053c15709577329518044b1ec1d4c6bb0fe",
+      "sourceUrl": "https://github.com/vercel/ai/tree/dffe4053c15709577329518044b1ec1d4c6bb0fe/skills/use-ai-sdk",
+      "contentSha256": "aee5bf7ecb066b54eae76799610fa8a9be9ff1ca9a000ea92d17c14ec862938b",
+      "sourceType": "github"
+    },
+    {
+      "name": "vitest",
+      "repo": "antfu/skills",
+      "path": "skills/vitest",
+      "commit": "7de210b51c8d48cc405a4eac3e17cbb1396c653b",
+      "sourceUrl": "https://github.com/antfu/skills/tree/7de210b51c8d48cc405a4eac3e17cbb1396c653b/skills/vitest",
+      "contentSha256": "4e3c847b54102499354b5aa1faf25ad4fd63b0f0d75c43f7de915dd4516ab01b",
+      "sourceType": "github"
+    },
+    {
+      "name": "hono",
+      "repo": "honojs/skills",
+      "path": "skills/hono",
+      "commit": "e54ce51f6effaeb574ebd2629e89e086e14a2db3",
+      "sourceUrl": "https://github.com/honojs/skills/tree/e54ce51f6effaeb574ebd2629e89e086e14a2db3/skills/hono",
+      "contentSha256": "fc8c5721d683a91a6f46dbef4ed1d14af6cffc8cc0af67f788c3a1ba5d4410e5",
+      "sourceType": "github"
+    },
+    {
+      "name": "react-native-unistyles-v3",
+      "repo": "jpudysz/react-native-unistyles",
+      "path": "skills/react-native-unistyles-v3",
+      "commit": "da0f7bd45956e945a2a1c6f9aa129411f9732a81",
+      "sourceUrl": "https://github.com/jpudysz/react-native-unistyles/tree/da0f7bd45956e945a2a1c6f9aa129411f9732a81/skills/react-native-unistyles-v3",
+      "contentSha256": "d797978f952efe0afb41f78cef6ec174ac6c8c5b25d672cf073fb1d608f7de61",
+      "sourceType": "github"
+    },
+    {
+      "name": "find-skills",
+      "repo": "vercel-labs/skills",
+      "path": "skills/find-skills",
+      "commit": "92a9a34ac3bf88e695e468b90c7bf32f163d32c8",
+      "sourceUrl": "https://github.com/vercel-labs/skills/tree/92a9a34ac3bf88e695e468b90c7bf32f163d32c8/skills/find-skills",
+      "contentSha256": "b146008599c31057cef1c145774cea5d5afb30e8f43fa802e47a4b461419aaaf",
+      "sourceType": "github"
+    },
+    {
+      "name": "emil-design-eng",
+      "repo": "emilkowalski/skills",
+      "path": "skills/emil-design-eng",
+      "commit": "a81dbca07f2217b7103e510c0f13f8d5b017afc9",
+      "sourceUrl": "https://github.com/emilkowalski/skills/tree/a81dbca07f2217b7103e510c0f13f8d5b017afc9/skills/emil-design-eng",
+      "contentSha256": "a993a1e593a9ac53e0c72b319ff4ef273dcfe17569a2da510fab68deb070e273",
+      "sourceType": "github"
+    },
+    {
+      "name": "shadcn",
+      "repo": "shadcn-ui/ui",
+      "path": "skills/shadcn",
+      "commit": "c0d63c339d6cd2fc26135590a54cf1f362269451",
+      "sourceUrl": "https://github.com/shadcn-ui/ui/tree/c0d63c339d6cd2fc26135590a54cf1f362269451/skills/shadcn",
+      "contentSha256": "221a317e591a76c27ba2801b60048ef05596d3550c6d8daf70a8016086b00d07",
+      "sourceType": "github"
+    },
+    {
+      "name": "kairn-architecture",
+      "sourceType": "local",
+      "path": ".agents/skills/kairn-architecture",
+      "contentSha256": "2915e91db00bce5c0111f0980c9ae6353d42de4829eace899acee9e2e08ed602"
+    },
+    {
+      "name": "kairn-capture-sync",
+      "sourceType": "local",
+      "path": ".agents/skills/kairn-capture-sync",
+      "contentSha256": "a23f88b2d4a426a296adefb52aed820d96e464ce965e21216584944c73504b30"
+    },
+    {
+      "name": "kairn-publication-access",
+      "sourceType": "local",
+      "path": ".agents/skills/kairn-publication-access",
+      "contentSha256": "48e5eaf528d34aa1881ad98d1e80844892c543080f8faefc9243af8e6ffc0d70"
+    },
+    {
+      "name": "eas-app-stores",
+      "repo": "expo/skills",
+      "path": "plugins/expo/skills/eas-app-stores",
+      "commit": "05754e71d02abe0d2d7a2fb5259ccac41f5ea59c",
+      "sourceUrl": "https://github.com/expo/skills/tree/05754e71d02abe0d2d7a2fb5259ccac41f5ea59c/plugins/expo/skills/eas-app-stores",
+      "sourceType": "github",
+      "contentSha256": "a9cb12b2396431b9be50cc79fd6666f942a08b79033401c02a64586a735f22b2"
+    },
+    {
+      "name": "eas-workflows",
+      "repo": "expo/skills",
+      "path": "plugins/expo/skills/eas-workflows",
+      "commit": "05754e71d02abe0d2d7a2fb5259ccac41f5ea59c",
+      "sourceUrl": "https://github.com/expo/skills/tree/05754e71d02abe0d2d7a2fb5259ccac41f5ea59c/plugins/expo/skills/eas-workflows",
+      "sourceType": "github",
+      "contentSha256": "a6936b1656a2e394c1d754a2cc4026e7891b88a5844e64959d1602c283ff8934"
+    },
+    {
+      "name": "eas-update",
+      "repo": "expo/skills",
+      "path": "plugins/expo/skills/eas-update",
+      "commit": "05754e71d02abe0d2d7a2fb5259ccac41f5ea59c",
+      "sourceUrl": "https://github.com/expo/skills/tree/05754e71d02abe0d2d7a2fb5259ccac41f5ea59c/plugins/expo/skills/eas-update",
+      "sourceType": "github",
+      "contentSha256": "aa73a50dcf55a4af29ad9d9b9928da46377a38ef8125af36e04e6e4773b25d03"
+    },
+    {
+      "name": "eas-update-insights",
+      "repo": "expo/skills",
+      "path": "plugins/expo/skills/eas-update-insights",
+      "commit": "05754e71d02abe0d2d7a2fb5259ccac41f5ea59c",
+      "sourceUrl": "https://github.com/expo/skills/tree/05754e71d02abe0d2d7a2fb5259ccac41f5ea59c/plugins/expo/skills/eas-update-insights",
+      "sourceType": "github",
+      "contentSha256": "37c6b89e8409663994bb5211ba5d301b61dec32d50c27fb42fafa9e6c1d86027"
+    }
+  ],
+  "contentHashAlgorithm": "sha256(sorted relative file path UTF-8 + NUL + file bytes + NUL)"
+}

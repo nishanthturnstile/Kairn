@@ -1,6 +1,8 @@
 # Client architecture research
 
-Historical first-pass research. Recommendations may be superseded by the current architecture. The sole current stack/dependency register is [architecture section 14](../../architecture.md#14-canonical-stack-and-dependency-register). This file is evidence, not an install list.
+> Current mobile policy: the later [mobile development plan](../../implementation/mobile_development_plan.md) requires Android and iOS implementation/local testing now, with Apple enrollment/public iOS distribution deferred and no EAS subscription during development. Earlier alternative/service-budget discussion below is dated research, not authorization for paid mobile services.
+
+Historical first-pass research. Recommendations may be superseded by the current architecture. The sole current stack/dependency register is [architecture section 14](../../core/architecture.md#14-canonical-stack-and-dependency-register). This file is evidence, not an install list.
 
 Research date: 1 November 2026. These are architecture recommendations and metadata observations, not implementation evidence. Sources are the official maintainers' documentation, release notes, and package registries. No community blog establishes a compatibility claim here. The user clarified that application/data hosting belongs on the existing VPS, external maps and AI are allowed, and budget is not a current constraint.
 

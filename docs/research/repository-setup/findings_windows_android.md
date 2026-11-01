@@ -1,5 +1,7 @@
 # Windows Android development findings
 
+> Superseded host recommendation: the API/Compose host below was the Mac at research time. The current [mobile development plan](../../implementation/mobile_development_plan.md) places containers on Windows/WSL, keeps Windows-native Android tooling, and reserves the Mac for iOS. Mac API URLs and remote-Metro alternatives below are historical. T3 native tools have since been found, but discovery reported Agent device access disabled; actual device hosts remain unqualified.
+
 Research date: 1 November 2026. Scope: Android development on the user's Windows computer while Docker Compose services and the current repository live on the MacBook. This is a development-host recommendation, not an installation or device qualification.
 
 ## Summary

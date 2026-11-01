@@ -1,6 +1,6 @@
 # MapTiler pricing and product fit
 
-> Evaluated alternative. Mapbox web/native SDKs are selected for the current implementation. This pricing research does not add MapTiler or MapLibre dependencies. Use the [canonical stack register](../../architecture.md#14-canonical-stack-and-dependency-register) for the current stack.
+> Evaluated alternative. Mapbox web/native SDKs are selected for the current implementation. This pricing research does not add MapTiler or MapLibre dependencies. Use the [canonical stack register](../../core/architecture.md#14-canonical-stack-and-dependency-register) for the current stack.
 
 Research date: 1 November 2026. This is dated supporting evidence, not a second canonical stack register. Architecture section 14 owns selected dependencies. No paid account, keyed map render, or production traffic measurement was performed.
 

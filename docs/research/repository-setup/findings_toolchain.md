@@ -1,6 +1,6 @@
 # Repository toolchain findings
 
-Research date: 1 November 2026. Scope: workspace, web and Node build tooling. This report supports [the research plan](research_plan.md) and preserves [architecture section 14](../../architecture.md#14-canonical-stack-and-dependency-register) as the selected dependency register. No application dependencies were installed or built.
+Research date: 1 November 2026. Scope: workspace, web and Node build tooling. This report supports [the research plan](research_plan.md) and preserves [architecture section 14](../../core/architecture.md#14-canonical-stack-and-dependency-register) as the selected dependency register. No application dependencies were installed or built.
 
 ## Summary
 

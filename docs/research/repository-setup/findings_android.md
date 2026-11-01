@@ -1,5 +1,7 @@
 # Android repository setup findings
 
+> Historical scope note: these Android generation findings remain evidence for that platform. The current [setup plan](../../implementation/repository_setup_plan.md) extends foundation acceptance to local iOS builds and device checks without paid Apple membership or an EAS subscription. Architecture section 14 is the current dependency authority.
+
 Research date: 1 November 2026. Scope: the repository foundation for the Android-first Expo application. These findings preserve architecture version 1.4. No application was scaffolded, installed, generated, built, signed, or run.
 
 ## Summary

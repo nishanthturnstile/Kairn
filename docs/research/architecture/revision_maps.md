@@ -1,8 +1,8 @@
 # Map provider revision research
 
-> Historical comparison. The MapLibre/MapTiler recommendation below is superseded by Mapbox web/native SDKs with basemaps and satellite. Use the [canonical stack register](../../architecture.md#14-canonical-stack-and-dependency-register) for current decisions. This file preserves the earlier Esri comparison and is not an install plan.
+> Historical comparison. The MapLibre/MapTiler recommendation below is superseded by Mapbox web/native SDKs with basemaps and satellite. Use the [canonical stack register](../../core/architecture.md#14-canonical-stack-and-dependency-register) for current decisions. This file preserves the earlier Esri comparison and is not an install plan.
 
-Research date: 1 November 2026. Scope: the complete R1 product's licensed 2D journey map, web/native parity, evidence overlays, and static sharing. This is research evidence and a recommendation, not a second canonical stack register. The current selected stack belongs in `docs/architecture.md` section 14.
+Research date: 1 November 2026. Scope: the complete R1 product's licensed 2D journey map, web/native parity, evidence overlays, and static sharing. This is research evidence and a recommendation, not a second canonical stack register. The current selected stack belongs in `docs/core/architecture.md` section 14.
 
 ## Recommendation
 

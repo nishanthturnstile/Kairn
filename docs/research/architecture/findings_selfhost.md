@@ -1,6 +1,6 @@
 # Self-hosted services research
 
-Historical first-pass research. Recommendations may be superseded by the current architecture. The sole current stack/dependency register is [architecture section 14](../../architecture.md#14-canonical-stack-and-dependency-register). This file is evidence, not an install list.
+Historical first-pass research. Recommendations may be superseded by the current architecture. The sole current stack/dependency register is [architecture section 14](../../core/architecture.md#14-canonical-stack-and-dependency-register). This file is evidence, not an install list.
 
 Research date: 1 November 2026. These are proposed decisions for the complete R1 product, not implementation evidence. Product requirements remain authoritative.
 

@@ -1,6 +1,6 @@
 # Mapbox pricing and product-fit research
 
-> Selection update: Mapbox web/native SDKs are now selected. The alternatives below remain dated comparison evidence. Current versions and installation stages belong in the [canonical stack register](../../architecture.md#14-canonical-stack-and-dependency-register).
+> Selection update: Mapbox web/native SDKs are now selected. The alternatives below remain dated comparison evidence. Current versions and installation stages belong in the [canonical stack register](../../core/architecture.md#14-canonical-stack-and-dependency-register).
 
 Research date: 1 November 2026. Scope: Kairn's R1 web/native 2D journey maps. This is supporting evidence, not a selected dependency list. Architecture section 14 remains the canonical stack register. USD estimates exclude taxes, currency conversion, support, special contracts, storage, AI, and VPS costs.
 

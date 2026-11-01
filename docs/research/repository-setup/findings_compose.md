@@ -1,12 +1,14 @@
 # Docker Compose setup findings
 
+> Current host clarification: Compose remains required, but development containers now run on Windows/WSL rather than the 16 GB Mac. Android and iOS are native clients; their SDKs, Metro, builds, and device tools run outside Compose. See the [mobile development plan](../../implementation/mobile_development_plan.md). Earlier host observations below are historical.
+
 Date: 1 November 2026. Scope: the user's requirement that all application runtime services run through Docker Compose. This revises the previous host-process development plan. No images, Compose files, application code, or services were created or run by this research.
 
 ## Recommendation
 
 Docker Compose owns the application runtime from the first repository milestone. Keep the agreed modular monolith and separate HTTP/worker processes, but package them as separate containers. The browser and Android app remain clients. An Android emulator, Android Studio, and local Gradle development are host tools, not application services that should be put inside the Compose project.
 
-The following service ownership preserves [architecture section 15.1](../../architecture.md#151-deployment-units-and-portable-object-storage):
+The following service ownership preserves [architecture section 15.1](../../core/architecture.md#151-deployment-units-and-portable-object-storage):
 
 | Service | Runtime responsibility | Scope and exposure |
 |---|---|---|
