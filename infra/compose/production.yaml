@@ -1,0 +1,8 @@
+# Explicit -f files omit the automatically loaded development override.
+# This verifies the final runtime locally; VPS deployment/TLS is a later milestone.
+services:
+  server:
+    build:
+      target: runtime
+    environment:
+      NODE_ENV: production

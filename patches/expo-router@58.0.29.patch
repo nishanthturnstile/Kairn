@@ -1,0 +1,142 @@
+diff --git a/build/fork/native-stack/createNativeStackNavigator.d.ts b/build/fork/native-stack/createNativeStackNavigator.d.ts
+index d806a35b4f47af8b902cda7cead076faff6d4a10..5ae71ccf8466a42ea1c277729ec25c48be7db1da 100644
+--- a/build/fork/native-stack/createNativeStackNavigator.d.ts
++++ b/build/fork/native-stack/createNativeStackNavigator.d.ts
+@@ -16,5 +16,5 @@ export type StandardNativeStackEventMap = {
+ export declare const createStandardNativeStackNavigator: {
+     readonly type: "standard";
+     readonly version: 1;
+-    readonly NavigatorContent: React.ComponentType<import("standard-navigation").NavigatorArgs<NativeStackNavigationOptions, StandardNativeStackEventMap> & Omit<NativeStackNavigatorCreateProps, keyof import("standard-navigation").NavigatorArgs<NavigatorOptions, NavigatorEventMap>>>;
++    readonly NavigatorContent: React.ComponentType<import("standard-navigation").NavigatorArgs<NativeStackNavigationOptions, StandardNativeStackEventMap> & Omit<NativeStackNavigatorCreateProps, keyof import("standard-navigation").NavigatorArgs<NativeStackNavigationOptions, StandardNativeStackEventMap>>>;
+ };
+diff --git a/build/layouts/experimental-stack/createExperimentalStackNavigator.d.ts b/build/layouts/experimental-stack/createExperimentalStackNavigator.d.ts
+index 4a4a860a09f03852b7fc87c308f2a6ddd1c58edf..04a91f739aa79cb641306d5f4e29c6f2f29eb6f1 100644
+--- a/build/layouts/experimental-stack/createExperimentalStackNavigator.d.ts
++++ b/build/layouts/experimental-stack/createExperimentalStackNavigator.d.ts
+@@ -15,5 +15,5 @@ export type StandardExperimentalStackNavigationEventMap = {
+ export declare const createStandardExperimentalStackNavigator: {
+     readonly type: "standard";
+     readonly version: 1;
+-    readonly NavigatorContent: React.ComponentType<import("standard-navigation").NavigatorArgs<ExperimentalStackNavigationOptions, StandardExperimentalStackNavigationEventMap> & Omit<ExperimentalStackNavigatorCreateProps, keyof import("standard-navigation").NavigatorArgs<NavigatorOptions, NavigatorEventMap>>>;
++    readonly NavigatorContent: React.ComponentType<import("standard-navigation").NavigatorArgs<ExperimentalStackNavigationOptions, StandardExperimentalStackNavigationEventMap> & Omit<ExperimentalStackNavigatorCreateProps, keyof import("standard-navigation").NavigatorArgs<ExperimentalStackNavigationOptions, StandardExperimentalStackNavigationEventMap>>>;
+ };
+diff --git a/build/performance/index.d.ts b/build/performance/index.d.ts
+index 2759db567d4080cdd4b1d3259301577a6b492175..dd38db60deae83c7b0934ab9c32ff250943f83f7 100644
+--- a/build/performance/index.d.ts
++++ b/build/performance/index.d.ts
+@@ -1,4 +1,4 @@
+-import type { RouterPerformanceMarkByName, RouterPerformanceMarkName } from './types';
++import type { RouterPerformanceMarkByName, RouterPerformanceMarkName, RouterPerformanceMark } from './types';
+ export type * from './types';
+ export { isEnabled, unstable_enablePerformanceIntegration } from './enable';
+ export declare function mark<Name extends RouterPerformanceMarkName>(name: Name, detail: RouterPerformanceMarkByName<Name>['detail']): void;
+@@ -14,7 +14,7 @@ export declare function mark<Name extends RouterPerformanceMarkName>(name: Name,
+  *
+  * @experimental
+  */
+-export declare const unstable_performance: Pick<Performance, 'getEntries' | 'getEntriesByName' | 'getEntriesByType' | 'clearMarks'>;
++export declare const unstable_performance: { getEntries(): RouterPerformanceMark[]; getEntriesByName(name: string, type?: string): RouterPerformanceMark[]; getEntriesByType(type: string): RouterPerformanceMark[]; clearMarks(name?: string): void };
+ /**
+  * Observes the performance marks that Expo Router records during navigation. On web, it is the
+  * global [`PerformanceObserver`](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver).
+@@ -44,15 +44,15 @@ export declare const unstable_performance: Pick<Performance, 'getEntries' | 'get
+  *
+  * @experimental
+  */
+-export declare class unstable_PerformanceObserver implements PerformanceObserver {
++export declare class unstable_PerformanceObserver {
+     private readonly callback;
+     static readonly supportedEntryTypes: readonly string[];
+-    constructor(callback: PerformanceObserverCallback);
++    constructor(callback: (list: Pick<typeof unstable_performance, "getEntries" | "getEntriesByName" | "getEntriesByType">, observer: unstable_PerformanceObserver) => void);
+     /**
+      * Starts to observe marks. With `buffered: true`, the callback first receives the marks
+      * recorded before this call.
+      */
+-    observe(options?: PerformanceObserverInit): void;
++    observe(options?: { type?: string; entryTypes?: string[]; buffered?: boolean; durationThreshold?: number }): void;
+     /**
+      * Stops the observer from receiving marks.
+      */
+@@ -60,5 +60,5 @@ export declare class unstable_PerformanceObserver implements PerformanceObserver
+     /**
+      * Always returns an empty list, because the callback receives each mark when it is recorded.
+      */
+-    takeRecords(): PerformanceEntryList;
++    takeRecords(): RouterPerformanceMark[];
+ }
+diff --git a/build/performance/types.d.ts b/build/performance/types.d.ts
+index 465a722ef35506621292667258c1a1725311fb0f..d2d4e3af75504055b9e41050676b8ed6245a8a98 100644
+--- a/build/performance/types.d.ts
++++ b/build/performance/types.d.ts
+@@ -39,7 +39,10 @@ export interface RouterActionMarkDetail {
+  * To read `detail`, check its `name` and cast it to the matching mark type, such as
+  * `RouterPageFocusedMark`.
+  */
+-export interface BaseRouterPerformanceMark<Name extends string, Detail> extends PerformanceMark {
++export interface BaseRouterPerformanceMark<Name extends string, Detail> {
++    readonly startTime: number;
++    readonly duration: number;
++    toJSON(): object;
+     readonly entryType: 'mark';
+     /**
+      * The name of the mark, which also determines the shape of `detail`.
+diff --git a/build/react-navigation/bottom-tabs/navigators/createBottomTabNavigator.d.ts b/build/react-navigation/bottom-tabs/navigators/createBottomTabNavigator.d.ts
+index a1988e8667eeb0ef27dcad2080001bf50be501e2..99299d37057350a8cc87b3a8b382b82730984e07 100644
+--- a/build/react-navigation/bottom-tabs/navigators/createBottomTabNavigator.d.ts
++++ b/build/react-navigation/bottom-tabs/navigators/createBottomTabNavigator.d.ts
+@@ -10,5 +10,5 @@ export type BottomTabNavigatorContentProps = BottomTabNavigationConfig & BottomT
+ export declare const createStandardBottomTabNavigator: {
+     readonly type: "standard";
+     readonly version: 1;
+-    readonly NavigatorContent: import("react").ComponentType<import("standard-navigation").NavigatorArgs<BottomTabNavigationOptions, BottomTabNavigationEventMap> & Omit<BottomTabNavigatorContentProps, keyof import("standard-navigation").NavigatorArgs<NavigatorOptions, NavigatorEventMap>>>;
++    readonly NavigatorContent: import("react").ComponentType<import("standard-navigation").NavigatorArgs<BottomTabNavigationOptions, BottomTabNavigationEventMap> & Omit<BottomTabNavigatorContentProps, keyof import("standard-navigation").NavigatorArgs<BottomTabNavigationOptions, BottomTabNavigationEventMap>>>;
+ };
+diff --git a/build/react-navigation/core/types.d.ts b/build/react-navigation/core/types.d.ts
+index 1b6d1101800776c2df63a0d8339666f425fc7683..7ba85677d067a50faea44c448f165b282118c1ee 100644
+--- a/build/react-navigation/core/types.d.ts
++++ b/build/react-navigation/core/types.d.ts
+@@ -231,7 +231,7 @@ type NavigationHelpersCommon<ParamList extends ParamListBase, State extends Navi
+      *
+      * `screen` is the name of the route to preload. `params` contains the route params.
+      */
+-    preload<RouteName extends keyof ParamList>(...args: RouteName extends unknown ? undefined extends ParamList[RouteName] ? [screen: RouteName, params?: ParamList[RouteName]] : [screen: RouteName, params: ParamList[RouteName]] : never): void;
++    preload<RouteName extends Keyof<ParamList>>(...args: RouteName extends unknown ? undefined extends ParamList[RouteName] ? [screen: RouteName, params?: ParamList[RouteName]] : [screen: RouteName, params: ParamList[RouteName]] : never): void;
+     /**
+      * Reset the navigation state to the provided state.
+      *
+diff --git a/build/react-navigation/routers/types.d.ts b/build/react-navigation/routers/types.d.ts
+index 59939a9b45e34a4512b9a8a8eb66e072979cfac4..1b0f89fda7ddd4937c91ab096ecf87b601370621 100644
+--- a/build/react-navigation/routers/types.d.ts
++++ b/build/react-navigation/routers/types.d.ts
+@@ -71,7 +71,7 @@ export type Route<RouteName extends string, Params extends object | undefined =
+     /**
+      * Params for this route
+      */
+-    params?: Readonly<Params>;
++    params?: Readonly<Params> | undefined;
+ }> : Readonly<{
+     /**
+      * Params for this route
+@@ -87,7 +87,7 @@ export type NavigationAction = Readonly<{
+     /**
+      * Additional data for the action
+      */
+-    payload?: object;
++    payload?: object | undefined;
+     /**
+      * Key of the route which dispatched this action.
+      */
+diff --git a/build/views/Try.d.ts b/build/views/Try.d.ts
+index 525ec506885cc0d67df7f8f346d8f64676583916..ca9962a45483cb161a36e6ff33b94824a7ca6025 100644
+--- a/build/views/Try.d.ts
++++ b/build/views/Try.d.ts
+@@ -9,7 +9,7 @@ export type ErrorBoundaryProps = {
+ export declare class Try extends Component<PropsWithChildren<{
+     catch: ComponentType<ErrorBoundaryProps>;
+ }>, {
+-    error?: Error;
++    error?: Error | undefined;
+ }> {
+     state: {
+         error: undefined;

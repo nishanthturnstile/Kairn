@@ -1,0 +1,93 @@
+{
+  "components": {
+    "parameters": {},
+    "schemas": {
+      "ApiError": {
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "enum": [
+              "invalid_request",
+              "unsupported_protocol",
+              "internal_error"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ],
+        "type": "object"
+      },
+      "SystemStatus": {
+        "additionalProperties": false,
+        "properties": {
+          "contractVersion": {
+            "enum": [
+              1
+            ],
+            "type": "number"
+          },
+          "status": {
+            "enum": [
+              "ok"
+            ],
+            "type": "string"
+          },
+          "syncProtocolVersion": {
+            "exclusiveMinimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "contractVersion",
+          "syncProtocolVersion",
+          "status"
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Kairn API",
+    "version": "1"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/api/v1/system": {
+      "get": {
+        "operationId": "getSystemStatus",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemStatus"
+                }
+              }
+            },
+            "description": "Service status; contains no journey or account information."
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Safe service error."
+          }
+        },
+        "summary": "Read setup contract and protocol status"
+      }
+    }
+  },
+  "webhooks": {}
+}

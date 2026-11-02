@@ -1,0 +1,123 @@
+services:
+  worker:
+    build:
+      target: worker-development
+    environment:
+      NODE_ENV: development
+    read_only: false
+    develop:
+      watch:
+        - action: sync+restart
+          path: ./apps/worker/src
+          target: /app/apps/worker/src
+        - action: rebuild
+          path: ./packages
+          ignore: ["**/dist/**", "**/node_modules/**"]
+        - action: rebuild
+          path: ./pnpm-lock.yaml
+        - action: rebuild
+          path: ./pnpm-workspace.yaml
+        - action: rebuild
+          path: ./package.json
+        - action: rebuild
+          path: ./apps/worker/package.json
+        - action: rebuild
+          path: ./apps/worker/vite.config.ts
+        - action: rebuild
+          path: ./apps/worker/tsconfig.json
+        - action: rebuild
+          path: ./tsconfig.base.json
+        - action: rebuild
+          path: ./tsconfig.json
+        - action: rebuild
+          path: ./config
+        - action: rebuild
+          path: ./tools/api-generation
+          ignore: ["node_modules/**"]
+        - action: rebuild
+          path: ./vite.config.ts
+        - action: rebuild
+          path: ./patches
+        - action: rebuild
+          path: ./infra/images/server.Dockerfile
+  mailpit:
+    image: axllent/mailpit:v1.33.0@sha256:9b3a463be15354c0f0eba91697d80e3e0d8a5623ef0e627cacc836bc17fd5231
+    user: "1000:1000"
+    environment:
+      MP_DISABLE_VERSION_CHECK: "true"
+      MP_MAX_MESSAGES: "100"
+      MP_MAX_MESSAGE_SIZE: "5"
+    ports: ["127.0.0.1:${KAIRN_MAILPIT_PORT:-8025}:8025"]
+    networks: [default]
+    read_only: true
+    tmpfs: [/tmp]
+    healthcheck:
+      test: [CMD, /mailpit, readyz]
+      interval: 5s
+      timeout: 3s
+      retries: 6
+    mem_limit: 128m
+    cpus: 0.5
+    pids_limit: 64
+  tooling:
+    environment:
+      TEST_MAILPIT_URL: http://mailpit:8025
+      TEST_SMTP_HOST: mailpit
+  server:
+    build:
+      target: development
+    environment:
+      NODE_ENV: development
+    read_only: false
+    mem_limit: 2g
+    cpus: 2
+    develop:
+      watch:
+        - action: sync
+          path: ./apps/web/src
+          target: /app/apps/web/src
+          ignore: [routeTree.gen.ts]
+        - action: sync+restart
+          path: ./apps/server/src
+          target: /app/apps/server/src
+        - action: rebuild
+          path: ./packages
+          ignore: ["**/dist/**", "**/node_modules/**"]
+        - action: rebuild
+          path: ./pnpm-lock.yaml
+        - action: rebuild
+          path: ./pnpm-workspace.yaml
+        - action: rebuild
+          path: ./package.json
+        - action: rebuild
+          path: ./apps/web/package.json
+        - action: rebuild
+          path: ./apps/server/package.json
+        - action: rebuild
+          path: ./apps/web/vite.config.ts
+        - action: sync
+          path: ./apps/web/index.html
+          target: /app/apps/web/index.html
+        - action: rebuild
+          path: ./config
+        - action: rebuild
+          path: ./patches
+        - action: rebuild
+          path: ./tsconfig.base.json
+        - action: rebuild
+          path: ./tsconfig.json
+        - action: rebuild
+          path: ./vite.config.ts
+        - action: rebuild
+          path: ./apps/server/vite.config.ts
+        - action: rebuild
+          path: ./apps/server/tsconfig.json
+        - action: rebuild
+          path: ./apps/web/tsconfig.json
+        - action: rebuild
+          path: ./apps/web/tsconfig.reader.json
+        - action: rebuild
+          path: ./tools/api-generation
+          ignore: ["node_modules/**"]
+        - action: rebuild
+          path: ./infra/images/server.Dockerfile

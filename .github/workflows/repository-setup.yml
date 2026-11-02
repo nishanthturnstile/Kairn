@@ -1,0 +1,193 @@
+name: Repository setup
+
+on:
+  pull_request:
+  push:
+    branches: [main, development]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  CI: "1"
+  FORCE_COLOR: "0"
+
+jobs:
+  quality:
+    name: Quality
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - name: Check out source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Select Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 26.13.0
+      - name: Install the pinned package manager
+        run: npm install --global pnpm@12.16.1
+      - name: Record the host inputs
+        run: |
+          mkdir -p .kairn/ci
+          {
+            git rev-parse HEAD
+            uname -a
+            node --version
+            pnpm --version
+            docker version
+            docker compose version
+            sha256sum package.json pnpm-lock.yaml pnpm-workspace.yaml
+          } > .kairn/ci/quality-inputs.txt
+      - name: Verify the complete composed foundation
+        # verify owns isolated stacks and volumes; tooling containers have no Docker socket.
+        # The tooling-image install is frozen, and its build includes both Metro exports.
+        run: pnpm verify 2>&1 | tee .kairn/ci/quality.log
+      - name: Require unchanged source after verification
+        run: |
+          git diff --exit-code
+          test -z "$(git ls-files --others --exclude-standard)"
+      - name: Preserve quality evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: quality-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            .kairn/ci/quality*
+            .kairn/verification/**
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 14
+
+  android:
+    name: Android
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      # One debug ABI proves native compilation; device acceptance remains separate.
+      KAIRN_ANDROID_ARCHITECTURES: x86_64
+    steps:
+      - name: Check out source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Select Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 26.13.0
+      - name: Install the pinned package manager
+        run: npm install --global pnpm@12.16.1
+      - name: Locate the pnpm store
+        id: pnpm-store
+        run: echo "path=$(pnpm store path --silent)" >> "$GITHUB_OUTPUT"
+      - name: Cache package downloads
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
+        with:
+          path: ${{ steps.pnpm-store.outputs.path }}
+          key: ${{ runner.os }}-${{ runner.arch }}-pnpm-12.16.1-node-26.13.0-${{ hashFiles('pnpm-lock.yaml', 'pnpm-workspace.yaml', 'patches/**') }}
+      - name: Select JDK 17
+        uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Cache Gradle dependency downloads
+        # Exclude task/build outputs until their invalidation is qualified.
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
+        with:
+          path: |
+            ~/.gradle/caches/modules-2
+            ~/.gradle/wrapper/dists
+          key: ${{ runner.os }}-${{ runner.arch }}-gradle-9.4.1-jdk-17-node-26.13.0-${{ hashFiles('pnpm-lock.yaml', 'apps/mobile/app.json', 'apps/mobile/babel.config.cjs', 'scripts/mobile.mjs', 'patches/**') }}
+      - name: Locate the runner Android SDK
+        id: android-sdk
+        run: |
+          test -x "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          echo "path=$ANDROID_HOME" >> "$GITHUB_OUTPUT"
+      - name: Cache the selected Android SDK downloads
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
+        with:
+          path: |
+            ${{ steps.android-sdk.outputs.path }}/platforms/android-37
+            ${{ steps.android-sdk.outputs.path }}/build-tools/37.0.0
+            ${{ steps.android-sdk.outputs.path }}/ndk/27.1.12297006
+            ${{ steps.android-sdk.outputs.path }}/cmake/3.22.1
+          key: ${{ runner.os }}-${{ runner.arch }}-android-37-build-37.0.0-ndk-27.1.12297006-cmake-3.22.1-${{ hashFiles('apps/mobile/app.json', 'scripts/mobile.mjs') }}
+      - name: Install the selected Android SDK components
+        run: |
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --install \
+            "platform-tools" "platforms;android-37" "build-tools;37.0.0" \
+            "ndk;27.1.12297006" "cmake;3.22.1"
+      - name: Reproduce the dependency graph
+        run: |
+          mkdir -p .kairn/ci
+          pnpm install --frozen-lockfile 2>&1 | tee .kairn/ci/android-install.log
+      - name: Record the native inputs
+        run: |
+          {
+            git rev-parse HEAD
+            uname -a
+            node --version
+            pnpm --version
+            java -version 2>&1
+            "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --list_installed
+            sha256sum package.json pnpm-lock.yaml apps/mobile/package.json \
+              apps/mobile/app.json apps/mobile/babel.config.cjs scripts/mobile.mjs
+          } > .kairn/ci/android-inputs.txt
+      - name: Check, generate, build, and lint Android
+        run: pnpm verify:android 2>&1 | tee .kairn/ci/android-build.log
+      - name: Require unchanged source after native generation
+        run: |
+          git diff --exit-code
+          test -z "$(git ls-files --others --exclude-standard)"
+      - name: Preserve generated build settings
+        if: ${{ always() }}
+        run: |
+          mkdir -p .kairn/ci/android-generated
+          for file in \
+            apps/mobile/android/gradle/wrapper/gradle-wrapper.properties \
+            apps/mobile/android/gradle.properties \
+            apps/mobile/android/build.gradle \
+            apps/mobile/android/app/build.gradle; do
+            if [[ -f "$file" ]]; then
+              cp --parents "$file" .kairn/ci/android-generated/
+            fi
+          done
+      - name: Preserve Android APK, lint, and failure logs
+        if: ${{ always() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: android-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            .kairn/ci/android*
+            apps/mobile/android/app/build/outputs/apk/debug/*.apk
+            apps/mobile/android/app/build/reports/lint-results-debug.*
+            apps/mobile/android/build/reports/problems/**
+          include-hidden-files: true
+          if-no-files-found: warn
+          compression-level: 0
+          retention-days: 14
+
+  required:
+    name: Repository setup required
+    if: ${{ always() }}
+    needs: [quality, android]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Require both foundation jobs to succeed
+        env:
+          QUALITY_RESULT: ${{ needs.quality.result }}
+          ANDROID_RESULT: ${{ needs.android.result }}
+        run: |
+          printf 'Quality: %s\nAndroid: %s\n' "$QUALITY_RESULT" "$ANDROID_RESULT"
+          [[ "$QUALITY_RESULT" == success && "$ANDROID_RESULT" == success ]]

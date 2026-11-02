@@ -697,7 +697,7 @@ Maintain an evaluation corpus covering missing evidence, old prices, group versu
 
 ## 14. Canonical stack and dependency register
 
-This is the sole current stack/dependency register. Other sections explain decisions; research files record alternatives and observations. They must not be merged into an install list. A library is added when its listed production workstream starts, not because it appeared in a comparison. No application packages were installed by this document update.
+This is the sole current stack/dependency register. Other sections explain decisions; research files record alternatives and observations. They must not be merged into an install list. A library is added when its listed production workstream starts, not because it appeared in a comparison. [Repository setup progress](../implementation/repository_setup_progress.md) records installed foundation dependencies and executed compatibility checks; installation is not native/runtime qualification.
 
 ### 14.1 Consolidated stack
 
@@ -741,10 +741,13 @@ Observed on 1 November 2026. Exact direct pins and the resolved lockfile are req
 | HTTP | `hono`, `@hono/node-server` | `4.13.16`, `2.1.5` | API, auth, renderer and protected gateways. |
 | Contracts | `zod`, `@hono/zod-openapi` | `4.6.7`, `1.6.3` | Wire validation and OpenAPI. |
 | API clients | `openapi-typescript`, `openapi-fetch` | `7.13.0`, `0.17.0` | Generated versioned client contracts. |
+| Generator compiler | `typescript` in `tools/api-generation` | `6.0.3` exact | Development-only compiler API exception for `openapi-typescript@7.13.0`; its declared `^5.x` peer is extended only for this exact tested pair. Root/shared remain on TypeScript 7; contracts never depend on this tool. |
 | Database access | `drizzle-orm`, `drizzle-kit`, `pg` | `0.45.4`, `0.31.11`, `8.23.1` | Reviewed data schema/migrations, raw spatial/retrieval SQL where needed. |
 | Authentication | `better-auth`, `@better-auth/expo` | `1.7.15` | Accounts, sessions, recovery, native integration. |
 | Durable worker | `pg-boss` | `12.38.0` | First asynchronous domain work; direct `fromDrizzle` transaction adapter. |
-| Portable object storage | `@aws-sdk/client-s3` | `3.1161.0` | Source uploads/media workstream. Server-only S3 protocol client against SeaweedFS, with future R2/AWS S3 endpoint configuration. |
+| Queue peer | `@opentelemetry/api` | `1.10.0` | Required pg-boss peer at foundation; no tracing backend is introduced. |
+| PostgreSQL declarations | `@types/pg` | `8.23.1` | Backend development types for the selected driver. |
+| Portable object storage | `@aws-sdk/client-s3` | `3.1161.0` | Development-only foundation storage acceptance, then server-only source uploads/media adapter. Future R2/AWS S3 endpoint configuration stays behind that adapter. |
 | AI tasks | `ai` | `7.0.159` | Transcription/embedding/generation workstream. Gateway provider is exported from this package. |
 | SMTP | `nodemailer` | `10.3.1` | Account email/invitations; same transport for both environments. |
 | Logs | `pino` | `10.4.0` | Server/worker foundation, with redaction. |
@@ -761,6 +764,14 @@ Vite+ bundles Vite `8.3.5`, Rolldown `1.2.15`, Vitest `5.0.5`, Oxlint `1.89.0`, 
 
 The Vite+ alias target's semver does not literally match the React plugin's upstream Vite-major peer. Keep the current CLI-generated scoped compatibility rule and test the real resolved graph instead of claiming every raw peer range passes. Node meets the reviewed engine floors; Better Auth accepts the selected Drizzle/pg family; AI SDK accepts the selected Zod family. Confirm all together in the actual production build.
 
+Setup step 1 uses exact-parent Vite peer-range overrides for the React plugin, bundled Vitest, and bundled mocker. The pinned pnpm 12.16.1 rejects the newer `:peer` selector documented on the live site; supported plain parent/dependency overrides apply to these peer-only entries. Strict checks remain enabled for other peers. `pnpm verify:toolchain` proves the installed alias graph with browser/SSR builds and a React render, and verifies isolated generator CLI/API output with TypeScript 6/7 positive and negative consumers. A version-specific Redocly declaration dependency extension is recorded in the [setup evidence](../implementation/repository_setup_progress.md#compatibility-decisions); no first-party declaration errors are hidden. Re-run these checks for toolchain changes and qualify actual project schemas in step 2.
+
+Setup step 2 qualifies the actual status schema, offline OpenAPI 3.1 generation, and generated fetch client against both compilers. The lockfile includes declaration-only patches for `react-native@0.88.1`, `openapi-fetch@0.17.0`, and Pino's transitive `thread-stream@4.2.0` to address strict native/Node 26 declaration defects. The selected runtime versions and code remain unchanged, and `skipLibCheck` remains false. [Patch details and acceptance evidence](../implementation/repository_setup_progress.md#step-2-declaration-compatibility-patches) govern their retention and requalification. Shared rules/tokens consume no ambient platform types; Zod schemas use the standard URL declarations provided by browser/native runtimes. The separate contracts schema-generation export is forbidden in clients.
+
+Setup step 3 qualifies the composed Hono/Vite development server and deployed production dependency closure, including reader SSR/hydration, request isolation, lazy assets, and the typed status endpoint. Router/Tailwind plugins receive exact-parent Vite peer adjustments; Babel React Compiler's declarations receive a version-specific missing-type dependency extension. Development packing keeps dependencies external so the aliased Vite core resolves its native bindings correctly. The final runtime excludes development tooling. [Step 3 acceptance evidence](../implementation/repository_setup_progress.md#step-3-verification) records the executed gates; data services, native builds, and public deployment remain later qualifications.
+
+Setup step 4 adds the selected PostgreSQL, SeaweedFS, Mailpit, and pg-boss foundation. The lockfile retains a declaration-only `pg-boss@12.38.0` patch restoring two interfaces present in its tagged source but omitted by its declaration build; runtime code is unchanged and declaration checking remains enabled. Schema-owner credentials are reserved for bootstrap and acceptance tooling, outside both application processes. Three focused data integration scenarios and the required startup/readiness gates are recorded in [step 4 evidence](../implementation/repository_setup_progress.md#step-4-verification), following the [testing scope guidance](../../AGENTS.md#testing-scope). Domain transaction/Drizzle integration, uploads, and account email remain their later workstreams.
+
 AI SDK currently depends on Gateway provider `4.0.132`. Using its exported `gateway`/`createGateway` does not require a second direct package. Install a provider subpackage only if code actually imports a capability not exported by the selected core.
 
 Mapbox package versions were rechecked against the [web registry metadata](https://registry.npmjs.org/mapbox-gl/latest) and [native bridge metadata](https://registry.npmjs.org/@rnmapbox/maps/latest). The bridge declares an optional web-only `mapbox-gl` peer of `^2.9.0`, which does not match our current web package. Use direct GL JS in the web workspace and the bridge only in the native workspace. Do not use its web shim, auto-install that optional peer, downgrade web GL JS, or suppress all peer checks. The [selection metadata](../research/architecture/mapbox_selection_versions.json) records these constraints.
@@ -773,8 +784,11 @@ Use `expo install` and `expo-doctor` against the adopted SDK. The [shipped SDK m
 |---|---|---|
 | `expo`, `react-native` | `58.0.22`, `0.88.1` | Mobile foundation. |
 | Mobile `react` | `19.3.0` | SDK/template pin; intentionally differs from web. |
+| Mobile transitive navigation peers | `react-dom@19.3.0`, `@expo/metro-runtime@58.0.16` | Required by the installed Router/Radix graph during foundation; this does not select a mobile web application. |
 | Mobile `typescript` | `~6.0.3` template baseline | Keep until current mobile tools pass with the latest compiler. This is an explicit SDK exception. |
-| `expo-dev-client` | SDK 58-supported selection through `expo install`; freeze exact resolution in the lockfile | Local Android/iOS development builds without an EAS requirement. |
+| Mobile development tooling | `@babel/core@7.29.7`, `babel-preset-expo@58.0.23`, `react-refresh@0.14.2`, `@react-native/metro-config@0.88.1`, `expo-doctor@1.21.5` | SDK-matched Babel preset and its explicit refresh peer; matching Metro config supplies Worklets' required peer. Keep Expo Metro defaults. |
+| `expo-dev-client` | `58.0.18`, selected through `expo install` | Local Android/iOS development builds without an EAS requirement. |
+| Foundation display/type peers | `expo-font@58.0.11`, `expo-symbols@58.0.4`, `expo-system-ui@58.0.7` | Router's published native-tab declarations require Symbols and its font peer; System UI applies the selected light native appearance. No additional UI framework or icon system is introduced. |
 | `expo-router` | `~58.0.29` | Navigation/deep links. |
 | `react-native-unistyles` | `3.7.0` | Mobile foundation; confirmed native styling layer, themes, variants, and responsive styles. Requires New Architecture and the Babel integration. |
 | `react-native-nitro-modules` | `0.37.1` exact | Mobile foundation; meets Unistyles 3.4+ minimum. Pin explicitly; do not float independently of Unistyles. |
@@ -797,6 +811,10 @@ Use `expo install` and `expo-doctor` against the adopted SDK. The [shipped SDK m
 
 Unistyles/Nitro pins and peer observations are recorded in the [Unistyles compatibility evidence](../research/repository-setup/unistyles_compatibility.json). Unistyles requires React Native 0.81+, React 19+, Expo SDK 54+ when using Expo, and Xcode 16.4+ for Nitro; the actual adopted SDK may impose higher toolchain floors. Reanimated and `react-native-edge-to-edge` are optional peers in Unistyles 3.7.0. Keep Reanimated at its existing feature-driven stage unless navigation needs it earlier. Expo already enables Android edge-to-edge; do not add the deprecated edge-to-edge package just to satisfy an optional peer. [Upstream compatibility table](https://github.com/jpudysz/react-native-unistyles#installation).
 
+The actual foundation graph requires Reanimated and Gesture Handler through `expo-router@58.0.29` → `react-native-drawer-layout@4.2.12`, so the selected Reanimated/Worklets/Gesture Handler set enters in setup step 1 under that navigation exception. Native build/runtime verification remains required.
+
+The styled shell initializes Unistyles before Router and uses the generated status client with TanStack Query. Its native-only TypeScript environment uses ES libraries, real React Native globals, and RN 0.88's `react-native-legacy-deep-imports` declaration condition for existing Router/Safe Area type imports. Strict declaration checking and exact optional properties remain enabled. Version-specific declaration-only patches for Router 58.0.29, Unistyles 3.7.0, and Expo Server 58.0.6 correct published declaration defects without changing runtime code or fabricating DOM globals. SDK 58 requires New Architecture by default; its app schema rejects the older `newArchEnabled` configuration field. See the [mobile setup evidence](../implementation/repository_setup_progress.md#step-5-hostdevice-integration--in-progress) for actual native qualification status.
+
 NativeWind is excluded from this project. Wider media-library scanning, an additional UI framework, FlashList, and push services still require a selected requirement/integration before becoming application dependencies. Agent skills for future workstreams are installed now under `.agents/skills`; having that guidance available does not install its example libraries or change this dependency register. System capture durability still requires actual files/device tests; metadata compatibility is not runtime evidence.
 
 ### 14.4 Services, binaries, and external model routes
@@ -815,6 +833,9 @@ NativeWind is excluded from this project. Wider media-library scanning, an addit
 | Database recovery | pgBackRest `2.60.0` | Base backups and WAL/PITR. [Release](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.60.0). |
 | Object-data recovery | restic `0.19.1` | Encrypt/copy verified consistent object-store snapshot/export output off the VPS. [Release](https://github.com/restic/restic/releases/tag/v0.19.1). |
 | Development email | Mailpit `1.33.0` | Development-only SMTP sink/UI, not a production MTA. [Release](https://github.com/axllent/mailpit/releases/tag/v1.33.0). |
+| iOS development toolchain | Xcode `26.5` (`17F42`), iOS/Simulator SDK `26.5`, CocoaPods `1.16.2` | Observed on the user's Intel Mac after reinstall. Native Pod resolution is owned in `apps/mobile/native-locks/ios/Podfile.lock`; normal builds enforce it with deployment mode. Runtime/device results remain in setup progress. |
+| Native device video utility | Windows Gyan.FFmpeg `9.0.2`, with `libx264` | Installed for T3 Android emulator video; executable SHA-256 `589e50b766d251afdf181dd664d40bd94407e200b019989fd7468c7d118a28d0`. Host setup/acceptance evidence is in `docs/implementation/repository_setup_progress.md`. This host installation does not qualify the media worker codec build. |
+| Windows native build utility | Ninja `1.13.2`, used by SDK CMake `3.22.1` | The bundled Ninja 1.10.2 misreads long pnpm-generated paths. The Windows host uses the checksum-verified replacement and enabled OS long-path policy, with the original binary and registry value backed up; doctor/build guard both prerequisites. Linux builds do not require this host repair. [Release](https://github.com/ninja-build/ninja/releases/tag/v1.13.2), [Windows path fix](https://github.com/ninja-build/ninja/issues/1900). |
 | Production email | Resend SMTP | Verified sender, TLS, stable mail-event idempotency key. No Resend SDK needed. [SMTP](https://resend.com/docs/send-with-smtp). |
 | Basemap and satellite | Mapbox Styles/Maps services | External licensed delivery through the selected SDKs. Standard in 2D by default, Standard Satellite on user selection. No separately installed imagery library. |
 | AI gateway | Vercel AI Gateway | External network gateway, called from the VPS with restricted server credentials. |

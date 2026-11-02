@@ -1,0 +1,45 @@
+{
+  "name": "@kairn/backend",
+  "version": "0.0.0",
+  "private": true,
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./database": {
+      "types": "./dist/database.d.ts",
+      "import": "./dist/database.js"
+    },
+    "./queue": {
+      "types": "./dist/queue.d.ts",
+      "import": "./dist/queue.js"
+    }
+  },
+  "scripts": {
+    "build": "vp pack",
+    "check": "tsc --noEmit",
+    "queue:bootstrap": "node --enable-source-maps dist/bootstrap.js"
+  },
+  "dependencies": {
+    "@kairn/contracts": "workspace:*",
+    "@kairn/shared": "workspace:*",
+    "@kairn/sync-protocol": "workspace:*",
+    "@opentelemetry/api": "1.10.0",
+    "pg": "8.23.1",
+    "pg-boss": "12.38.0",
+    "pino": "10.4.0",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.6",
+    "@types/pg": "8.23.1",
+    "typescript": "7.0.2"
+  }
+}

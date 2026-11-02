@@ -18,7 +18,9 @@ Start with the product plan and requirements. Use the implementation plans for t
 ## Implementation plans
 
 - [Repository setup](implementation/repository_setup_plan.md) — the next implementation milestone
+- [Repository setup progress](implementation/repository_setup_progress.md) — implemented batches, compatibility decisions, and executed checks
 - [Local mobile development](implementation/mobile_development_plan.md) — hosts, testing, and distribution constraints
+- [Native host setup](implementation/native_host_setup.md) — configured Windows/Mac checkouts, local tools, Metro/API routes, and remaining native prerequisites
 - [Development skills](implementation/development_skills.md) — installed project skills, source provenance, and how to apply them to Kairn
 
 ## Research

@@ -1,0 +1,29 @@
+diff --git a/lib/typescript/src/core/withUnistyles/withUnistyles.d.ts b/lib/typescript/src/core/withUnistyles/withUnistyles.d.ts
+index 582a5d2ff69ec653ed8af7715c40ffe255f2b18f..4e6cff23ac27f79f233b079e95b35921c1835675 100644
+--- a/lib/typescript/src/core/withUnistyles/withUnistyles.d.ts
++++ b/lib/typescript/src/core/withUnistyles/withUnistyles.d.ts
+@@ -1,8 +1,8 @@
+ import React, { type ComponentProps, type ComponentRef, type Ref } from 'react';
+ import type { Mappings } from './types';
+-type GenericComponentProps<T> = ComponentProps<T>;
+-type GenericComponentRef<T> = ComponentRef<T>;
+-export declare const withUnistyles: <TComponent, TMappings extends GenericComponentProps<TComponent>>(Component: TComponent, mappings?: Mappings<TMappings>) => ({ ref, ...props }: (Partial<React.ComponentProps<TComponent>> & {
++type GenericComponentProps<T extends React.ElementType> = ComponentProps<T>;
++type GenericComponentRef<T extends React.ElementType> = ComponentRef<T>;
++export declare const withUnistyles: <TComponent extends React.ElementType, TMappings extends GenericComponentProps<TComponent>>(Component: TComponent, mappings?: Mappings<TMappings>) => ({ ref, ...props }: (Partial<React.ComponentProps<TComponent>> & {
+     uniProps?: Mappings<React.ComponentProps<TComponent>>;
+ }) & {
+     ref?: Ref<GenericComponentRef<TComponent>>;
+diff --git a/lib/typescript/src/server/hydrateServerUnistyles.d.ts b/lib/typescript/src/server/hydrateServerUnistyles.d.ts
+index 6cd5052c3accb6835b47ec71843515aa82dbcac5..39095d9c3a34baa75d97dc690dfdf629d1882e93 100644
+--- a/lib/typescript/src/server/hydrateServerUnistyles.d.ts
++++ b/lib/typescript/src/server/hydrateServerUnistyles.d.ts
+@@ -1,6 +1,7 @@
++type HydrateState = Array<[string, Array<[string, Array<[string, any]>]>]>;
+ declare global {
+     interface Window {
+-        __UNISTYLES_STATE__: ReturnType<typeof UnistylesWeb.registry.css.getState>;
++        __UNISTYLES_STATE__: { mainState: HydrateState; mqState: HydrateState; config: import("../specs/StyleSheet").UnistylesConfig };
+     }
+ }
+ export declare const hydrateServerUnistyles: () => void;

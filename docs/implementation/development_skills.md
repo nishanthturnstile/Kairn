@@ -1,6 +1,6 @@
 # Installed development skills
 
-Date: 1 November 2026. Scope: this repository, under `.agents/skills/`. All 38 upstream skills and three Kairn-specific skills below are installed now, including guidance for later workstreams. This inventory replaces the earlier recommendation to defer installing future-workstream skills. The application remains unscaffolded; installing guidance does not install application packages or qualify native integrations.
+Date: 1 November 2026. Scope: this repository, under `.agents/skills/`. All 38 upstream skills and three Kairn-specific skills below are installed now, including guidance for later workstreams. This inventory replaces the earlier recommendation to defer installing future-workstream skills. [Setup progress](repository_setup_progress.md) records application package implementation; installing guidance alone does not install application packages or qualify native integrations.
 
 ## Inventory and provenance
 
