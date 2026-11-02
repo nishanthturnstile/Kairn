@@ -31,13 +31,12 @@ PostgreSQL and SeaweedFS data/metadata use named volumes retained by ordinary `d
 Use `docker compose up --build --watch` (or `pnpm dev`) for edits. Compose Watch synchronizes web source for Vite HMR, synchronizes server source and restarts its process, and rebuilds shared-package/dependency/config changes. Container dependencies stay separate from host dependencies. See [local environment inputs](infra/compose/.env.example); changing the port also requires a matching `KAIRN_PUBLIC_ORIGIN`. Recreate the stack after changing Compose, Caddy, or environment configuration.
 
 ```sh
-docker compose --profile tools build tooling
-docker compose --profile tools run --rm tooling pnpm check
-docker compose --profile tools run --rm tooling pnpm test
-docker compose --profile tools run --rm tooling pnpm test:integration
+docker compose --profile tools run --build --rm tooling pnpm check
+docker compose --profile tools run --build --rm tooling pnpm test
+docker compose --profile tools run --build --rm tooling pnpm test:integration
 ```
 
-Integration checks require the application stack running. The tooling image includes the pinned Chromium runtime, requires no Docker socket, and builds its own compiled-package prerequisites. `pnpm verify:web` is a host wrapper that builds isolated development and final-runtime stacks, runs their HTTP/browser checks, verifies the production dependency closure, and removes its own containers/networks. The final-runtime override is for local image qualification; public deployment/TLS is later work.
+The `--build` flag makes each command use the current checkout rather than a stale cached source image. Integration checks require the application stack running. The tooling image includes the pinned Chromium runtime, requires no Docker socket, and builds its own compiled-package prerequisites. `pnpm verify:web` is a host wrapper that builds isolated development and final-runtime stacks, runs their HTTP/browser checks, verifies the production dependency closure, and removes its own containers/networks. The final-runtime override is for local image qualification; public deployment/TLS is later work.
 
 Run `pnpm verify:data` for the critical data acceptance check. It owns an isolated project and disposable volumes, checks the migration failure gate, stops/recreates its database and storage, verifies queued-work and object persistence, tests the local SMTP sink, and reuses the existing web integration suite. Its resources are removed afterward. It does not reset development volumes. Test coverage stays focused on mandatory and critical scenarios as recorded in [AGENTS.md](AGENTS.md#testing-scope).
 
@@ -71,4 +70,4 @@ Vite+ owns web/server tooling. Web/shared TypeScript is 7.0.2; mobile and the is
 
 Keep a separate checkout, dependency installation, and generated native output on each OS: WSL for Compose, Windows native for Android/Metro, and Mac for iOS/Metro. Local development requires no EAS subscription or paid Apple membership.
 
-`verify:toolchain` checks pinned tool compatibility. `verify:shared` checks package boundaries, compiled declarations under TypeScript 7 and mobile TypeScript 6, and a browser bundle of the shared exports/client. Actual client builds also reject Node/server modules and seeded secret markers. `test` exercises wire validation, client transport, sync envelopes, logging, HTTP factories, and boundaries through `vite-plus/test`. Native behavior has its own later gates. [Setup evidence and compatibility notes](docs/implementation/repository_setup_progress.md) record the qualification limits and declaration patches retained by the lockfile.
+`verify:toolchain` checks pinned tool compatibility. `verify:shared` checks package boundaries, compiled declarations under TypeScript 7 and mobile TypeScript 6, and a browser bundle of the shared exports/client. Actual client builds also reject Node/server modules and seeded secret markers. `test` exercises wire validation, client transport, sync envelopes, logging, HTTP factories, and boundaries through `vite-plus/test`. Native runtime acceptance is recorded separately and repeated for affected input changes. [Setup evidence and compatibility notes](docs/implementation/repository_setup_progress.md) record the qualification limits and declaration patches retained by the lockfile.
