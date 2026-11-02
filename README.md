@@ -10,7 +10,7 @@ Windows Android and Mac iOS checkouts now have separate local tools, dependencie
 
 `pnpm dev:android` and `pnpm dev:ios` are human-invoked local build/install/Metro commands for the Windows and Mac checkouts respectively; pass Expo CLI options such as `--device` when needed. Do not start them over an existing Metro process. Agents use T3's bound device command for launches and UI checks. `pnpm verify:ios` records native build inputs/results but deliberately leaves runtime and physical-device evidence separate. `pnpm start:worker` starts the compiled worker with its runtime database URL.
 
-The [repository setup workflow](.github/workflows/repository-setup.yml) runs Quality and Android on pull requests, `main`, and `development`. Its final `Repository setup required` status succeeds only when both jobs pass. Workflow files and local validation do not establish a hosted pass or branch protection; those require the reviewed foundation to be pushed and run.
+The [repository setup workflow](.github/workflows/repository-setup.yml) runs Quality and Android on pull requests, `main`, and `development`. Its final `Repository setup required` status succeeds only when both jobs pass. All three checks passed on `58d258c`; `main` requires that final GitHub Actions status and an up-to-date branch, including for administrators. Hardware iPad acceptance remains open in the [current checkpoint](docs/implementation/repository_setup_progress.md#current-checkpoint).
 
 Start the local web app with Docker; host Node is not required for these services:
 
