@@ -294,7 +294,7 @@ Cache the pnpm store and appropriate Gradle/download caches using toolchain, OS/
 
 ## 9. Implementation sequence and acceptance gates
 
-Steps 1–4 passed their recorded WSL acceptance, and step 5 passed Windows Android native/UI/API acceptance. Step 6 has passed iOS export, locked Pods, simulator compilation, and focused simulator runtime acceptance; current hardware testing targets the connected iPad, while the user has deferred the unavailable physical iPhone and uses its simulator meanwhile. Step 7 commands/workflows are implemented; completion still requires local verification and actual hosted CI results. See the [current checkpoint](repository_setup_progress.md#current-checkpoint), [executed checks and compatibility decisions](repository_setup_progress.md), and [host setup](native_host_setup.md).
+Steps 1–4 passed their recorded WSL acceptance, and step 5 passed Windows Android native/UI/API acceptance. Step 6 has passed iOS export, locked Pods, simulator compilation/runtime, and signed iPad build/install checks; the user has deferred physical iPhone checks. Full local verification and all three hosted checks passed on `58d258c`, and `main` now requires the final GitHub Actions status. Overall completion remains open for physical iPad runtime acceptance. See the [current checkpoint](repository_setup_progress.md#current-checkpoint), [executed checks and compatibility decisions](repository_setup_progress.md), and [host setup](native_host_setup.md).
 
 | Step | Changes | Completion gate |
 |---|---|---|
@@ -318,12 +318,12 @@ Foundation acceptance requires Android and iOS simulator launch/status/reload pl
 
 | Item | State | Required action or timing |
 |---|---|---|
-| GitHub Actions | Repository confirmed: `nishanthturnstile/Kairn`, default branch `main`; native work uses `development` | Implement workflows for pull requests and both branches; record actual hosted results after the reviewed foundation is pushed, then configure the final required status in branch protection. |
+| GitHub Actions | Quality, Android, and final status passed on `58d258c`; `main` requires the GitHub Actions final status with strict checks and administrator enforcement | Keep hosted results tied to their revision; preserve separate local iOS acceptance evidence. |
 | OpenAPI generator compiler API | TypeScript 6.0.3 passed CLI/API generation; TypeScript 7 failed | Use generator-local TypeScript 6 and record its tested peer exception. Qualify actual project schemas during implementation. |
 | Vite alias peer range | Known supported exception | Preserve the narrow current convention and prove the real resolved plugin/build graph. |
 | Android prerequisites | Windows native is the selected host | Inspect/install selected tools on Windows. No Mac Android SDK installation is needed. |
 | Mac iOS compatibility | Previously tested and confirmed by the user | Proceed to an actual iOS app build; record installed tool versions. Recheck compatibility only for a concrete failure or toolchain change. |
-| iPhone/iPad | iPad Air connected and available to Xcode; physical iPhone deferred by user in favor of the simulator for now | Configure Personal Team signing and verify the iPad install/status and hardware behavior. Complete physical iPhone checks when it is available. |
+| iPhone/iPad | Signed arm64 iPad build, profile/signature validation, and install passed on `58d258c`; physical iPhone deferred by user | Verify the iPad's launch/status and hardware behavior. Renew/reinstall after the current Personal Team profile expires November 9, 2026. Complete physical iPhone checks when it is available. |
 | T3 native devices | Agent access enabled; Windows Android control qualified; Mac iOS host configured | Discover/open the required device in each new session and use the returned bound command. Record iOS runtime and separate physical-device results; do not reopen historical access-disabled or Xcode-selection blockers. |
 | Windows capacity | User confirms 32 GB RAM; other hardware unverified | Check CPU/architecture, Windows version, virtualization, GPU, and SSD before qualifying emulator performance. |
 | Docker Compose | Confirmed for application runtime; development host is Windows/WSL | Implement app/data containers, overrides, health gates, persistent volumes, bounded memory/concurrency, and tooling commands. Verify private ingress from every client. |
