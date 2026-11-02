@@ -1,0 +1,41 @@
+{
+  "name": "@kairn/web",
+  "version": "0.0.0",
+  "private": true,
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    "./reader": {
+      "types": "./dist/types/reader/entry-server.d.ts",
+      "import": "./dist/server/reader.js"
+    }
+  },
+  "scripts": {
+    "build": "vp build && vp build --ssr src/reader/entry-server.tsx && tsc -p tsconfig.reader.json",
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@kairn/contracts": "workspace:*",
+    "@kairn/design-tokens": "workspace:*",
+    "@kairn/shared": "workspace:*",
+    "@kairn/sync-protocol": "workspace:*",
+    "@tanstack/react-query": "5.105.1",
+    "@tanstack/react-router": "1.170.46",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "4.3.3",
+    "@tanstack/router-plugin": "1.168.48",
+    "@types/node": "26.6.6",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.2",
+    "tailwindcss": "4.3.3",
+    "typescript": "7.0.2",
+    "vite": "npm:@voidzero-dev/vite-plus-core@1.4.0"
+  }
+}

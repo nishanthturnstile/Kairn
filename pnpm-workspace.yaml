@@ -1,0 +1,53 @@
+packages:
+  - apps/*
+  - packages/*
+  - tools/*
+
+nodeLinker: isolated
+sharedWorkspaceLockfile: true
+autoInstallPeers: false
+dedupePeerDependents: false
+resolvePeersFromWorkspaceRoot: false
+strictPeerDependencies: true
+engineStrict: true
+saveExact: true
+
+# Vite+ owns the Vite core and bundled test runner.
+overrides:
+  vite@*: npm:@voidzero-dev/vite-plus-core@1.4.0
+  vitest@*: 5.0.5
+  # The alias has its own version identity; qualify the real plugin build.
+  "@vitejs/plugin-react@6.1.2>vite": ^8.0.0 || 1.4.0
+  "@tanstack/router-plugin@1.168.48>vite": ">=5.0.0 || >=6.0.0 || >=7.0.0 || >=8.0.0 || 1.4.0"
+  "@tailwindcss/vite@4.3.3>vite": ^5.2.0 || ^6 || ^7 || ^8 || 1.4.0
+  "vitest@5.0.5>vite": ^6.4.0 || ^7.0.0 || ^8.0.0 || 1.4.0
+  "@vitest/mocker@5.0.5>vite": ^6.0.0 || ^7.0.0 || ^8.0.0 || 1.4.0
+  # Tested compiler API exception, confined to this generator version.
+  "openapi-typescript@7.13.0>typescript": ^5.x || 6.0.3
+
+# Published declarations import these packages, but Redocly lists them as dev-only.
+packageExtensions:
+  "babel-plugin-react-compiler@1.0.0":
+    dependencies:
+      "@types/babel__core": 7.20.5
+      "@types/babel__traverse": 7.28.0
+  "@redocly/openapi-core@1.34.22":
+    dependencies:
+      "@types/js-yaml": 4.0.9
+      json-schema-to-ts: 3.1.1
+
+# Add approvals only after inspecting the selected dependency's build script.
+allowBuilds: {}
+strictDepBuilds: true
+minimumReleaseAgeExclude:
+  - hono@4.13.16
+  - "@tanstack/query-core@5.105.1"
+  - "@tanstack/react-query@5.105.1"
+patchedDependencies:
+  expo-router@58.0.29: patches/expo-router@58.0.29.patch
+  expo-server@58.0.6: patches/expo-server@58.0.6.patch
+  openapi-fetch@0.17.0: patches/openapi-fetch@0.17.0.patch
+  pg-boss@12.38.0: patches/pg-boss@12.38.0.patch
+  react-native-unistyles@3.7.0: patches/react-native-unistyles@3.7.0.patch
+  react-native@0.88.1: patches/react-native@0.88.1.patch
+  thread-stream@4.2.0: patches/thread-stream@4.2.0.patch

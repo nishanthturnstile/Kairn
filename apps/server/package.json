@@ -1,0 +1,38 @@
+{
+  "name": "@kairn/server",
+  "version": "0.0.0",
+  "private": true,
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    "./app": {
+      "types": "./dist/app.d.ts",
+      "import": "./dist/app.js"
+    }
+  },
+  "scripts": {
+    "build": "vp pack",
+    "check": "tsc --noEmit",
+    "dev": "vp pack src/dev.ts --out-dir dist-dev && node --enable-source-maps dist-dev/dev.js",
+    "start": "node --enable-source-maps dist/index.js"
+  },
+  "dependencies": {
+    "@hono/node-server": "2.1.5",
+    "@hono/zod-openapi": "1.6.3",
+    "@kairn/backend": "workspace:*",
+    "@kairn/contracts": "workspace:*",
+    "@kairn/design-tokens": "workspace:*",
+    "@kairn/shared": "workspace:*",
+    "@kairn/sync-protocol": "workspace:*",
+    "@kairn/web": "workspace:*",
+    "hono": "4.13.16",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.6",
+    "typescript": "7.0.2",
+    "vite": "npm:@voidzero-dev/vite-plus-core@1.4.0"
+  }
+}

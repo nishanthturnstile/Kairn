@@ -1,0 +1,16 @@
+diff --git a/build/cjs/ImmutableRequest.d.ts b/build/cjs/ImmutableRequest.d.ts
+index 46af91da3f45ec1043ddba797cb2b28bec565c5e..d256751e8bc3130f94546448bce09de921a745dc 100644
+--- a/build/cjs/ImmutableRequest.d.ts
++++ b/build/cjs/ImmutableRequest.d.ts
+@@ -1,3 +1,11 @@
++// Fetch option types are module-local so native consumers need no DOM globals.
++type HeadersInit = ConstructorParameters<typeof Headers>[0];
++type RequestCache = "default" | "force-cache" | "no-cache" | "no-store" | "only-if-cached" | "reload";
++type RequestCredentials = "omit" | "same-origin" | "include";
++type RequestDestination = "" | "audio" | "audioworklet" | "document" | "embed" | "fencedframe" | "font" | "frame" | "iframe" | "image" | "json" | "manifest" | "object" | "paintworklet" | "report" | "script" | "serviceworker" | "sharedworker" | "style" | "track" | "video" | "webidentity" | "worker" | "xslt";
++type RequestMode = "cors" | "navigate" | "no-cors" | "same-origin";
++type RequestRedirect = "error" | "follow" | "manual";
++type ReferrerPolicy = "" | "no-referrer" | "no-referrer-when-downgrade" | "origin" | "origin-when-cross-origin" | "same-origin" | "strict-origin" | "strict-origin-when-cross-origin" | "unsafe-url";
+ /**
+  * Copyright © 2025 650 Industries.
+  *

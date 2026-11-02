@@ -1,0 +1,19 @@
+{
+  "name": "@kairn/api-generation",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "verify:compiler": "node verify-compiler.mjs",
+    "generate": "node src/generate.mjs",
+    "check": "node src/generate.mjs --check"
+  },
+  "dependencies": {
+    "@kairn/contracts": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.6",
+    "openapi-typescript": "7.13.0",
+    "typescript": "6.0.3"
+  }
+}

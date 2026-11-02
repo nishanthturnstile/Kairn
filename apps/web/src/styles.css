@@ -1,0 +1,66 @@
+@import "tailwindcss";
+@import "@kairn/design-tokens/tokens.css";
+
+:root {
+  color: var(--kairn-color-ink950);
+  background: var(--kairn-color-paper50);
+  font-family: var(--kairn-typography-family-interface), system-ui, sans-serif;
+  font-synthesis: none;
+}
+body {
+  margin: 0;
+}
+main {
+  max-width: var(--kairn-layout-reading-max);
+  margin: 4rem auto;
+  padding: 0 var(--kairn-spacing-xl);
+}
+header {
+  border-bottom: 1px solid var(--kairn-color-line200);
+  padding-bottom: var(--kairn-spacing-xl);
+  margin-bottom: var(--kairn-spacing-xxl);
+}
+h1 {
+  font-family: var(--kairn-typography-family-editorial), Georgia, serif;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  line-height: 1.1;
+}
+p {
+  line-height: 1.6;
+}
+a {
+  color: var(--kairn-color-forest800);
+  text-underline-offset: 0.2em;
+}
+button {
+  font: inherit;
+  border: 0;
+  border-radius: var(--kairn-radius-medium);
+  padding: 0.75rem 1rem;
+  background: var(--kairn-color-forest800);
+  color: var(--kairn-color-white);
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+:focus-visible {
+  outline: var(--kairn-focus-width) solid var(--kairn-color-clay500);
+  outline-offset: var(--kairn-focus-offset);
+}
+.eyebrow {
+  color: var(--kairn-color-ink700);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.8125rem;
+}
+.surface {
+  background: var(--kairn-color-paper0);
+  border: 1px solid var(--kairn-color-line200);
+  border-radius: var(--kairn-radius-large);
+  padding: var(--kairn-spacing-xl);
+}
+.marker {
+  overflow-wrap: anywhere;
+}

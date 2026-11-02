@@ -1,0 +1,28 @@
+{
+  "name": "@kairn/worker",
+  "version": "0.0.0",
+  "private": true,
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    "./runtime": {
+      "types": "./dist/runtime.d.ts",
+      "import": "./dist/runtime.js"
+    }
+  },
+  "scripts": {
+    "build": "vp pack",
+    "check": "tsc --noEmit",
+    "start": "node --enable-source-maps dist/index.js",
+    "dev": "vp pack && node --enable-source-maps dist/index.js"
+  },
+  "dependencies": {
+    "@kairn/backend": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.6",
+    "typescript": "7.0.2"
+  }
+}

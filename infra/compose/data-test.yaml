@@ -1,0 +1,11 @@
+# Final runtime images with the development mail sink for the isolated data acceptance check.
+services:
+  mailpit:
+    extends:
+      file: compose.override.yaml
+      service: mailpit
+    ports: !reset []
+  tooling:
+    environment:
+      TEST_MAILPIT_URL: http://mailpit:8025
+      TEST_SMTP_HOST: mailpit

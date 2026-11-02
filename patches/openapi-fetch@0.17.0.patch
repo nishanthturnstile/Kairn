@@ -1,0 +1,39 @@
+diff --git a/dist/index.d.cts b/dist/index.d.cts
+index bfd34224ce42901a4eef99c2fb2318a64aa4c51c..649954013579bc64f384f7c80dc78d50e963ef10 100644
+--- a/dist/index.d.cts
++++ b/dist/index.d.cts	
+@@ -62,7 +62,7 @@ type BodyType<T = unknown> = {
+   text: Awaited<ReturnType<Response["text"]>>;
+   blob: Awaited<ReturnType<Response["blob"]>>;
+   arrayBuffer: Awaited<ReturnType<Response["arrayBuffer"]>>;
+-  stream: Response["body"];
++  stream: Response extends { readonly body: infer TBody } ? TBody : never;
+ };
+ type ParseAs = keyof BodyType;
+ type ParseAsResponse<T, Options> = Options extends {
+diff --git a/dist/index.d.mts b/dist/index.d.mts
+index d34e1a26b850ac6f3521cac305bc3ef0e7ed609b..e7d1bd277ee5bc64253bcc4f9aac5aff9c8b65ea 100644
+--- a/dist/index.d.mts
++++ b/dist/index.d.mts	
+@@ -62,7 +62,7 @@ type BodyType<T = unknown> = {
+   text: Awaited<ReturnType<Response["text"]>>;
+   blob: Awaited<ReturnType<Response["blob"]>>;
+   arrayBuffer: Awaited<ReturnType<Response["arrayBuffer"]>>;
+-  stream: Response["body"];
++  stream: Response extends { readonly body: infer TBody } ? TBody : never;
+ };
+ type ParseAs = keyof BodyType;
+ type ParseAsResponse<T, Options> = Options extends {
+diff --git a/dist/index.d.ts b/dist/index.d.ts
+index bfd34224ce42901a4eef99c2fb2318a64aa4c51c..649954013579bc64f384f7c80dc78d50e963ef10 100644
+--- a/dist/index.d.ts
++++ b/dist/index.d.ts	
+@@ -62,7 +62,7 @@ type BodyType<T = unknown> = {
+   text: Awaited<ReturnType<Response["text"]>>;
+   blob: Awaited<ReturnType<Response["blob"]>>;
+   arrayBuffer: Awaited<ReturnType<Response["arrayBuffer"]>>;
+-  stream: Response["body"];
++  stream: Response extends { readonly body: infer TBody } ? TBody : never;
+ };
+ type ParseAs = keyof BodyType;
+ type ParseAsResponse<T, Options> = Options extends {

@@ -1,0 +1,39 @@
+diff --git a/types_generated/Libraries/Animated/nodes/AnimatedProps.d.ts b/types_generated/Libraries/Animated/nodes/AnimatedProps.d.ts
+index 568d06b4f0a95fdd76cd9e4374645a9cb32b47db..53204c15123b0af31445b1b6c17f0f036320609c 100644
+--- a/types_generated/Libraries/Animated/nodes/AnimatedProps.d.ts
++++ b/types_generated/Libraries/Animated/nodes/AnimatedProps.d.ts	
+@@ -17,7 +17,7 @@ import type { AnimatedStyleAllowlist } from "./AnimatedStyle";
+ import AnimatedNode from "./AnimatedNode";
+ export type AnimatedPropsAllowlist = Readonly<{
+   style?: AnimatedStyleAllowlist | undefined;
+-  [key: string]: true | AnimatedStyleAllowlist;
++  [key: string]: true | AnimatedStyleAllowlist | undefined;
+ }>;
+ type TargetViewInstance = React.ComponentRef<React.ElementType>;
+ declare class AnimatedProps extends AnimatedNode {
+diff --git a/types_generated/Libraries/Lists/VirtualizedList.d.ts b/types_generated/Libraries/Lists/VirtualizedList.d.ts
+index a2b18cb1bff1b694fa22f66e62778353037c52f7..9070f95bc374356fad7d0680fecaeb726cec2245 100644
+--- a/types_generated/Libraries/Lists/VirtualizedList.d.ts
++++ b/types_generated/Libraries/Lists/VirtualizedList.d.ts	
+@@ -14,7 +14,7 @@ import VirtualizedLists from "@react-native/virtualized-lists";
+ import * as React from "react";
+ type VirtualizedListType = typeof VirtualizedLists.VirtualizedList;
+ declare const VirtualizedListComponent: VirtualizedListType;
+-export type VirtualizedListInstance = React.ComponentRef<VirtualizedListType>;
++export type VirtualizedListInstance = InstanceType<VirtualizedListType>;
+ export type { ListRenderItemInfo, ListRenderItem, ListViewToken, Separators, VirtualizedListProps } from "@react-native/virtualized-lists";
+ declare const $$VirtualizedList: typeof VirtualizedListComponent;
+ declare type $$VirtualizedList = typeof $$VirtualizedList;
+diff --git a/types_generated/src/private/webapis/dom/nodes/ReadOnlyNode.d.ts b/types_generated/src/private/webapis/dom/nodes/ReadOnlyNode.d.ts
+index 613a42ac36f11f6b7e13f47a8245e83455fe8188..40c16f517e89d0f76098a18564549973411e5ff6 100644
+--- a/types_generated/src/private/webapis/dom/nodes/ReadOnlyNode.d.ts
++++ b/types_generated/src/private/webapis/dom/nodes/ReadOnlyNode.d.ts	
+@@ -42,7 +42,7 @@ declare class ReadOnlyNode extends ReadOnlyNodeBase {
+   /**
+    * @abstract
+    */
+-  get textContent(): string;
++  get textContent(): string | null;
+   compareDocumentPosition(otherNode: ReadOnlyNode): number;
+   contains(otherNode: ReadOnlyNode): boolean;
+   getRootNode(): ReadOnlyNode;

@@ -1,6 +1,6 @@
 # Local mobile development and distribution plan
 
-Date: 1 November 2026. Status: confirmed development and spending constraints, ready for repository implementation. No application has been scaffolded or tested by this plan.
+Date: 2 November 2026. Status: foundation implementation and native host setup in progress. Actual checks and outstanding native gates are recorded in [repository setup progress](repository_setup_progress.md) and [native host setup](native_host_setup.md).
 
 The [product requirements](../core/product_requirements.md#12-platform-and-capability-baseline) own functional scope. [Architecture section 14](../core/architecture.md#14-canonical-stack-and-dependency-register) owns dependencies and versions. This document owns local host allocation, mobile verification, and the boundary between development and store distribution. The [repository setup plan](repository_setup_plan.md) implements the foundation commands and acceptance gates.
 
@@ -39,7 +39,7 @@ On Windows, bound WSL/Docker memory, container concurrency, and later media-proc
 
 Use separate per-OS installs, caches, generated native directories, and build outputs. Keep the WSL checkout in its Linux filesystem and Windows native builds in a Windows-local checkout. Never share `node_modules`, Pods, generated `android/` or `ios/`, or Gradle caches across hosts. Commit app configuration, config plugins, owned native modules, and the single pnpm dependency lockfile. Preserve the reviewed iOS Podfile.lock snapshot outside ignored `ios/` as specified in the setup plan; restore and enforce it after native generation. Native generation must use the pinned inputs from that plan.
 
-Use Git to move reviewed changes between checkouts. A remote destination is still needed before push/pull synchronization works. Edit mobile code in the checkout serving that platform's Metro; unsaved WSL edits do not appear automatically in Windows or Mac Metro. Changes to contracts and native inputs must reach each host at the same commit before verification. Record the commit and native generation inputs with device evidence.
+Use Git to move reviewed changes between checkouts. The remote is `https://github.com/nishanthturnstile/Kairn.git`; native checkouts use `development`. Edit mobile code in the checkout serving that platform's Metro; unsaved WSL edits do not appear automatically in Windows or Mac Metro. The initial host setup copied a recorded uncommitted source snapshot because the foundation is not yet committed remotely. That one-time transfer does not establish live synchronization or release evidence. Changes to contracts and native inputs must reach each host at the same reviewed commit before acceptance. See [host paths and commands](native_host_setup.md).
 
 Publish one private development API HTTPS address from the Windows/WSL stack through Tailscale. Select and verify the ingress route during setup: a Windows Tailscale endpoint proxying a WSL-forwarded port or a WSL tailnet endpoint are possible implementations, not already-working assumptions. Verify host forwarding, DNS, TLS, firewall, and app requests from the Mac, Android emulator, iPhone, and iPad. Phones need their own tailnet route or another deliberately configured route. `localhost` refers to the client device; Android emulator `10.0.2.2` reaches Windows, not automatically a WSL container. Container service names are internal.
 
@@ -47,7 +47,7 @@ Keep Metro local to each native build host initially. Verify JavaScript bundles,
 
 ## 4. Local builds and free Apple signing
 
-Install SDK-compatible `expo-dev-client` through `expo install` and freeze the resulting resolution in the lockfile. Generate native projects from the committed pinned configuration. Platform wrappers then use Expo CLI/native tools to build and install, with shared-package prerequisites already built. The setup plan defines the public root commands; they do not exist yet.
+Install SDK-compatible `expo-dev-client` through `expo install` and freeze the resulting resolution in the lockfile. Generate native projects from the committed pinned configuration. Platform wrappers then use Expo CLI/native tools with shared-package prerequisites already built. Android build/lint and iOS generation/Pod-lock/simulator-build commands are implemented; [host setup](native_host_setup.md) distinguishes executed results from pending native/device gates.
 
 After a development build is installed, use Metro with the development client for ordinary JavaScript/TypeScript changes. Rebuild when native modules, native configuration, or generation inputs change. Keep release-mode checks in the platform verification work; JavaScript export alone is not a native build. [Expo development builds](https://docs.expo.dev/guides/local-app-development/).
 
@@ -61,7 +61,15 @@ App Store and TestFlight distribution, distribution signing, and capabilities re
 
 T3 exposes `device_list`, `device_open`, and device screenshot tools. Opening a configured device provides a device-pinned `agent-device` command for UI inspection and interactions. The agent can inspect accessibility state, exercise flows, and collect evidence. `agent-device` operates the installed app; it is not an application module or an EAS dependency. [Expo agent-device guide](https://docs.expo.dev/agents/agent-device/).
 
-The latest attempted discovery in this conversation returned: "Agent device access is turned off for this environment." Enable **Settings → Integrations → Devices → Agent device access**. The tool says this applies when the agent session next starts. Configure/select the native device hosts and rerun discovery in that session. Existing T3/Tailscale machine connections alone do not establish device discovery. No simulator, emulator, or physical-device automation has been qualified here. Confirm physical-device support for the actual host/tool configuration before relying on it; physical hardware checks can also be run directly through Xcode.
+**Device support** and **Agent device access** are enabled. Windows T3 has working local Android control and the configured **Mac iOS** SSH device host. Android's native UI and real HTTPS acceptance passed on 2 November 2026. The Mac's full-Xcode system selection and simulator build also passed; current simulator-runtime results are recorded in [setup progress](repository_setup_progress.md#current-checkpoint).
+
+Use a Windows-environment thread for its local emulator. Device tools act in their calling thread's environment; selecting another desktop project or linking environments does not move a device into that thread. Linked environments provide access to the existing WSL and Mac environments, while the configured Mac device host provides the simulator route. Keep each OS's dependency installation, Metro process, and native output local.
+
+For each new acceptance session, call `device_list`, then `device_open` with the exact host/device identifiers, and use its returned command for app launch, deep links, input, alerts, settings, screenshots, and recordings. Follow a failed tool's recovery advice once and report a persistent failure. Let T3 own integration startup and recovery; do not reuse or close another session. Historical discovery, DNS, and Xcode failures remain in the progress record rather than the current instructions.
+
+Personal Team provisioning and physical iPhone/iPad acceptance remain separate gates. Confirm physical-device support for the actual host/tool configuration before relying on automation; the user can also perform hardware checks locally through Xcode. An unavailable platform is reported without a shell UI bypass.
+
+Current hardware scope, 2 November 2026: the user has connected the iPad and deferred the unavailable physical iPhone, using the iPhone simulator meanwhile. The simulator's focused runtime checks passed. The connected iPad still needs a selected Personal Team/development signing identity before installation; keep its subsequent hardware results separate from simulator evidence.
 
 This setting is a prerequisite for agent-driven native interaction, not a reason to stop repository scaffolding or non-device checks. Use the built-in integration first; do not install a competing automation stack or use paid hosted devices as a workaround.
 

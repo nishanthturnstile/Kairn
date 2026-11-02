@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "Kairn Dev",
+    "slug": "kairn-dev",
+    "version": "0.0.0",
+    "scheme": "kairn-dev",
+    "platforms": ["android", "ios"],
+    "orientation": "default",
+    "userInterfaceStyle": "light",
+    "android": {
+      "package": "dev.kairn.app"
+    },
+    "ios": {
+      "bundleIdentifier": "dev.kairn.app",
+      "supportsTablet": true
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-dev-client",
+        {
+          "launchMode": "most-recent"
+        }
+      ],
+      "expo-font"
+    ]
+  }
+}

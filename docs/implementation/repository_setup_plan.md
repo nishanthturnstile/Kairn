@@ -4,7 +4,7 @@ Date: 1 November 2026. Status: revised for Android and iOS local development wit
 
 Establish one pnpm workspace containing the web application, one Expo Android/iOS application, Hono server, Node worker, and five shared packages. Keep the stack selected in [architecture version 1.6](../core/architecture.md#14-canonical-stack-and-dependency-register), including Unistyles v3 for mobile styling. The [mobile development plan](mobile_development_plan.md) owns host allocation, free provisioning, T3 device setup, and deferred distribution. Repository setup is the first engineering milestone within the complete R1 build. It does not replace the [product delivery sequence](../core/product_requirements.md#182-dependency-aware-implementation-sequence).
 
-The repository currently contains planning documents, research utilities, and project-local agent skills with a source manifest. It has no application manifests, application dependency lockfile, application source, build configuration, application tests, workflows, or Git remote. Commands below describe the interface to implement. They are not available yet. The [development skills inventory](development_skills.md) records guidance installed for both current and future workstreams; skill installation does not scaffold the application.
+The repository began with planning documents, research utilities, and project-local agent skills with a source manifest. Steps 1–5 now have recorded acceptance results; iOS runtime/physical-device checks and final CI qualification remain. The [progress record](repository_setup_progress.md#current-checkpoint) owns current completion status and executed checks. Commands below define the milestone interface. The [development skills inventory](development_skills.md) records guidance installed for both current and future workstreams; skill installation alone does not qualify an application integration.
 
 ## 1. Result of this milestone
 
@@ -222,7 +222,7 @@ Keep root aliases stable. CI and local development use the same scripts. Task na
 | `pnpm start:worker` | Run staged production worker JavaScript with `node` |
 | `pnpm verify` | Host orchestration of Compose config checks, tooling checks/builds, final images, and composed integration tests |
 | `pnpm verify:android` | Run native-specific checks, APK build, and Gradle lint |
-| `pnpm verify:ios` | Run native checks and simulator build on Mac; record commit/tool/native inputs and verify launch, API status, and reload; report Personal Team device checks separately |
+| `pnpm verify:ios` | Run native checks and locked simulator build on Mac; record commit/tool/native inputs and build result. Accompany it with T3 launch/API/reload evidence and separate Personal Team device results. |
 
 Tooling-container scripts do not invoke Docker recursively or require a Docker socket. Host wrappers own Compose lifecycle; in-container tests use the test stack's explicit internal URLs. `build` excludes SDK-dependent native compilation. GitHub's native job requires `verify:android` separately; local Mac `verify:ios` and device evidence are required for native acceptance. Do not report `verify` alone as full iOS verification. The direct Docker commands work without host Node for the app services; native development needs Node/pnpm on Windows and Mac. Use explicit `pnpm run doctor` because pnpm also has its own built-in diagnostic.
 
@@ -265,7 +265,7 @@ Use Windows-native Android Studio, JDK, SDK/NDK, Gradle, Node/pnpm, emulator, an
 
 Mobile edits should occur in the checkout serving that platform's Metro: Windows for Android, Mac for iOS. Git synchronizes committed changes; it does not live-sync unsaved WSL or Mac edits. A Git remote and matching commits are needed for cross-host changes, especially shared contracts and native inputs. Keep Metro local to each native platform initially and verify bundles, assets, and Fast Refresh on actual devices. Remote Metro is a later workflow change requiring an explicit reachable URL and HTTP/WebSocket qualification.
 
-All clients use the verified private Windows/WSL API ingress. The emulator's `10.0.2.2` address is useful for Windows-local Metro but does not prove WSL forwarding. A physical phone needs its own route, such as Tailscale installed on the phone. Do not expose ADB publicly. Tailscale provides connectivity; native agent control requires T3 device-host configuration. The current T3 device discovery attempt reports Agent device access disabled; enable it in Settings → Integrations → Devices and begin a fresh agent session before discovery. This is separate from application scaffolding. [Current mobile policy](mobile_development_plan.md), [historical Windows findings](../research/repository-setup/findings_windows_android.md).
+All clients use the verified private Windows/WSL API ingress. The emulator's `10.0.2.2` address is useful for Windows-local Metro but does not prove WSL forwarding. A physical phone needs its own route, such as Tailscale installed on the phone. Do not expose ADB publicly. Tailscale provides connectivity; native agent control requires T3 device-host configuration. Windows T3 has working local Android control and an SSH device host for the Mac. Use a Windows-environment session for its emulator and the configured Mac host for iOS. [Current integration status](mobile_development_plan.md#5-t3-native-device-integration), [host setup](native_host_setup.md), [historical Windows findings](../research/repository-setup/findings_windows_android.md).
 
 ### 8.2 Mac iOS development and local verification
 
@@ -273,7 +273,7 @@ Accept the user's prior Mac compatibility test. Use its native Xcode/CocoaPods/N
 
 Build and install locally through Expo CLI/native tools without EAS. Pair the user's iPhone/iPad with Xcode and use free Personal Team provisioning for hardware checks. This requires local account/signing setup but no paid Apple enrollment. Record the seven-day provisioning expiry and repeatable reinstall/recovery procedure. Prefer physical devices and serial Mac builds, with one simulator when automation needs it. Keep application containers on WSL. T3 remote control does not remove Mac compilation memory use. [Build/signing/test policy](mobile_development_plan.md#4-local-builds-and-free-apple-signing).
 
-`verify:ios` records the commit, Xcode/macOS versions, native inputs, build result, simulator launch/API/reload evidence, and separate physical-device results. An unavailable device or disabled agent integration is reported as missing evidence, not a passing check. Platform-native tools can perform the runtime checks while T3 discovery is being configured.
+`verify:ios` records the commit/worktree, Xcode/macOS/CocoaPods versions, native inputs, and simulator build result under `.kairn/verification/ios-build.json`. Its simulator-runtime and physical-device fields remain `not_run`; the accompanying acceptance record must separately establish launch/API/reload/style and hardware results. An unavailable device or disabled agent integration is reported as missing evidence, not a passing check. Platform-native tools can build and install while T3 discovery is being configured. Agent app launch and UI checks use `device_list` → `device_open` and its returned device-bound command; report missing access when the required host is unavailable. A direct SSH UI workflow requires an explicit user request.
 
 ### 8.3 CI and review evidence
 
@@ -294,6 +294,8 @@ Cache the pnpm store and appropriate Gradle/download caches using toolchain, OS/
 
 ## 9. Implementation sequence and acceptance gates
 
+Steps 1–4 passed their recorded WSL acceptance, and step 5 passed Windows Android native/UI/API acceptance. Step 6 has passed iOS export, locked Pods, simulator compilation, and focused simulator runtime acceptance; current hardware testing targets the connected iPad, while the user has deferred the unavailable physical iPhone and uses its simulator meanwhile. Step 7 commands/workflows are implemented; completion still requires local verification and actual hosted CI results. See the [current checkpoint](repository_setup_progress.md#current-checkpoint), [executed checks and compatibility decisions](repository_setup_progress.md), and [host setup](native_host_setup.md).
+
 | Step | Changes | Completion gate |
 |---|---|---|
 | 1. Lock the toolchain | Root metadata, workspace manifests, Vite+ overrides, generator/compiler isolation, peer/build settings, strict TypeScript configs, ignore rules, doctor | Frozen reinstall works; package set is exact; Vite compatibility is proved; generator uses its supported compiler API; no unrelated peer failures are suppressed |
@@ -308,19 +310,21 @@ These are reviewable implementation batches, not separate product releases. Reso
 
 The initial test set proves integration boundaries: generated contract drift, actual schema validation, forbidden imports, production HTTP/SSR delivery, request isolation, worker persistence/shutdown, mobile dependency resolution, and negative type-check coverage. Do not write tests that merely assert a config file contains the values just written.
 
+Keep coverage limited to mandatory acceptance gates and critical failure or durability scenarios. Prefer a small real integration scenario that proves the boundary; avoid duplicate mocked cases and tests for routine reversible changes. The [repository guidance](../../AGENTS.md#testing-scope) records this user preference for future batches.
+
 Foundation acceptance requires Android and iOS simulator launch/status/reload plus Personal Team install/status checks on the available iPhone/iPad. Include a token-backed Unistyles control/screen in that evidence: verify initialization before route loading, responsive resizing/orientation, larger text, safe areas, and styles surviving Fast Refresh and a full relaunch on both platforms. Nitro autolinking and clean native builds must pass; Expo Go is not a foundation verification path. CI compilation proves the Android artifact builds; JavaScript export proves neither platform's native runtime. Capture process-death, grants, revocation, media processing, accessibility, and restore checks enter on both platforms with their production capabilities. T3 device discovery/UI control is verified separately once agent device access is enabled; no device success is claimed by this document.
 
 ## 10. Issues and open decisions
 
 | Item | State | Required action or timing |
 |---|---|---|
-| GitHub Actions | Confirmed by user | Create workflows during setup. Git remote/repository creation and branch protection require a repository destination. Local work can proceed. |
+| GitHub Actions | Repository confirmed: `nishanthturnstile/Kairn`, default branch `main`; native work uses `development` | Implement workflows for pull requests and both branches; record actual hosted results after the reviewed foundation is pushed, then configure the final required status in branch protection. |
 | OpenAPI generator compiler API | TypeScript 6.0.3 passed CLI/API generation; TypeScript 7 failed | Use generator-local TypeScript 6 and record its tested peer exception. Qualify actual project schemas during implementation. |
 | Vite alias peer range | Known supported exception | Preserve the narrow current convention and prove the real resolved plugin/build graph. |
 | Android prerequisites | Windows native is the selected host | Inspect/install selected tools on Windows. No Mac Android SDK installation is needed. |
 | Mac iOS compatibility | Previously tested and confirmed by the user | Proceed to an actual iOS app build; record installed tool versions. Recheck compatibility only for a concrete failure or toolchain change. |
-| iPhone/iPad | Both available according to the user | Pair/trust devices, configure Personal Team signing locally, and verify install/status and later hardware behavior. |
-| T3 native devices | Integration tools exist; attempted discovery reports access disabled | Enable Agent device access in Settings → Integrations → Devices; discover/configure hosts in a fresh agent session and prove control. Scaffolding proceeds independently. |
+| iPhone/iPad | iPad Air connected and available to Xcode; physical iPhone deferred by user in favor of the simulator for now | Configure Personal Team signing and verify the iPad install/status and hardware behavior. Complete physical iPhone checks when it is available. |
+| T3 native devices | Agent access enabled; Windows Android control qualified; Mac iOS host configured | Discover/open the required device in each new session and use the returned bound command. Record iOS runtime and separate physical-device results; do not reopen historical access-disabled or Xcode-selection blockers. |
 | Windows capacity | User confirms 32 GB RAM; other hardware unverified | Check CPU/architecture, Windows version, virtualization, GPU, and SSD before qualifying emulator performance. |
 | Docker Compose | Confirmed for application runtime; development host is Windows/WSL | Implement app/data containers, overrides, health gates, persistent volumes, bounded memory/concurrency, and tooling commands. Verify private ingress from every client. |
 | Store/service spending | No paid Apple membership or EAS subscription during development; Play registration accepted | Use local builds and Personal Team provisioning now. Play's US$25 registration is one-time; defer Apple's annual enrollment and distribution until the later decision. |
@@ -329,7 +333,7 @@ Foundation acceptance requires Android and iOS simulator launch/status/reload pl
 | VPS and backup/journal destination | Open in existing architecture | Required before infrastructure configuration and shared-data deployment. Not a local repository setup blocker. |
 | Provider credentials and approved AI routes | Later integration inputs | Not needed for repository checks or debug Android builds. Current selected Mapbox bridge no longer requires a secret SDK download token; verify again when adding maps. A runtime public map token remains an integration input. |
 
-No additional product decision blocks writing the foundation. The setup compatibility gates require engineering evidence. The permanent distribution identity and GitHub repository destination remain user inputs at the stages above.
+No additional product decision blocks completing the foundation. The setup compatibility gates require engineering evidence. The GitHub repository destination is established; permanent distribution identity remains a later user decision.
 
 ## 11. Research and verification record
 

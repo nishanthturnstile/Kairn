@@ -2,7 +2,13 @@
 
 Read `docs/README.md` for the documentation map. Requirements in `docs/core/product_requirements.md` govern functional scope. `docs/core/architecture.md` section 14 is the canonical dependency register; `docs/core/application_design.md` governs design. The setup/mobile plans under `docs/implementation/` govern the foundation and host workflow. Dated research can contain superseded alternatives.
 
+## Testing scope
+
+Keep tests focused on mandatory acceptance gates and critical failure or durability scenarios. Prefer a small integration test against the real boundary over many mocked cases. Do not add tests for routine reversible edits, configuration values, or behavior already proved by another check. Record the chosen coverage and executed results in the relevant implementation progress document; expand coverage when a concrete requirement or regression warrants it.
+
 ## Skills
+
+The configured native checkouts and commands are recorded in `docs/implementation/native_host_setup.md`. In the Windows checkout, activate `. .\.kairn\env.ps1` in PowerShell before Node/pnpm/Android commands; on the Mac, use `. .kairn/env.sh`. These ignored host-local files select the project's pinned tools without changing global defaults. Keep Compose in WSL and native dependencies/Metro/build output on their owning OS. T3 device tools act in the agent thread's environment; use a Windows agent for its local Android emulator.
 
 Project skills live in `.agents/skills/`. Read `docs/implementation/development_skills.md` for the inventory and `.agents/skills-manifest.json` for upstream source commits. Skills for later workstreams are installed now; select only the skills relevant to the current task. The `kairn-architecture`, `kairn-capture-sync`, and `kairn-publication-access` skills carry project-specific guidance.
 
