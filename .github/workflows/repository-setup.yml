@@ -117,16 +117,17 @@ jobs:
         uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
         with:
           path: |
-            ${{ steps.android-sdk.outputs.path }}/platforms/android-37
+            ${{ steps.android-sdk.outputs.path }}/platforms/android-37.0
             ${{ steps.android-sdk.outputs.path }}/build-tools/37.0.0
             ${{ steps.android-sdk.outputs.path }}/ndk/27.1.12297006
             ${{ steps.android-sdk.outputs.path }}/cmake/3.22.1
-          key: ${{ runner.os }}-${{ runner.arch }}-android-37-build-37.0.0-ndk-27.1.12297006-cmake-3.22.1-${{ hashFiles('apps/mobile/app.json', 'scripts/mobile.mjs') }}
+          key: ${{ runner.os }}-${{ runner.arch }}-android-37.0-build-37.0.0-ndk-27.1.12297006-cmake-3.22.1-${{ hashFiles('apps/mobile/app.json', 'scripts/mobile.mjs') }}
       - name: Install the selected Android SDK components
         run: |
+          mkdir -p .kairn/ci
           "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --install \
-            "platform-tools" "platforms;android-37" "build-tools;37.0.0" \
-            "ndk;27.1.12297006" "cmake;3.22.1"
+            "platform-tools" "platforms;android-37.0" "build-tools;37.0.0" \
+            "ndk;27.1.12297006" "cmake;3.22.1" 2>&1 | tee .kairn/ci/android-sdk-install.log
       - name: Reproduce the dependency graph
         run: |
           mkdir -p .kairn/ci
