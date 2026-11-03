@@ -19,6 +19,10 @@ export type Action =
 export function initialState(scenario = "first-run") {
   const data = clone(seed);
   const first = scenario === "first-run";
+  if (scenario === "withdrawn-source" || scenario === "native-highlights-withdrawn") {
+    data.moments[17]!.scope = "only-me";
+    data.moments[17]!.withdrawn = true;
+  }
   if (scenario === "review-moment-19" || scenario === "capture-and-contribute")
     data.moments[18]!.scope = "journey-review";
   if (scenario === "published-v1" || scenario === "native-highlights-v1") {
