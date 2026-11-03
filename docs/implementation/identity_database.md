@@ -1,15 +1,15 @@
 # Identity database foundation
 
-This is the identity portion of B02, built from the selected account/journey plan. Journey, grant, audit, mail, restriction and producer migrations remain to implement. No authentication endpoint or account-deletion endpoint is enabled by this foundation.
+This covers the identity and enqueue-only producer portions of B02, built from the selected account/journey plan. Journey, grant, audit, durable mail and restriction records remain to implement. No authentication endpoint or account-deletion endpoint is enabled by this foundation.
 
 ## Ownership and policy graph
 
 | Principal | Current identity authority |
 | --- | --- |
 | `kairn_migrator` | Owns schemas/tables and runs reviewed migrations. Explicit maintenance RLS policies apply. Only this controlled role can assume the provisioning owner. |
-| `kairn_auth` | Library-required DML in `authn`; EXECUTE on the provisioning function. No direct private-profile reads or domain writes. |
+| `kairn_auth` | Library-required DML in `authn`; EXECUTE on the provisioning function; enqueue-only email partition access. No direct private-profile reads or domain writes. |
 | `kairn_identity` | NOLOGIN, non-owner, no BYPASSRLS. Owns only the fixed provisioning function and must pass FORCE RLS. Can read/lock the required auth-user columns and provision the subject's account/profile. |
-| `kairn_server` | Read the active context account's permitted columns and private profile; update only its display name, bio and advancing profile revision. No auth-table access or provisioning EXECUTE. |
+| `kairn_server` | Read the active context account's permitted columns and private profile; update only its display name, bio and advancing profile revision. Enqueue-only access to the four approved product partitions. No auth-table access or provisioning EXECUTE. |
 | `kairn_worker` | No identity-data authority yet. Can inspect the migration ledger/catalog for readiness; queue authority remains separately controlled. |
 
 The API policy graph is `profile → account → transaction-local account UUID`. The provisioning graph is `profile → account → function-local verified subject`; the retired-subject lookup uses the same subject. Neither graph recurses into a protected membership table. The function has an empty `search_path`, qualified relations, restricted EXECUTE and a fixed local subject setting. The auth/API/worker roles cannot assume its owner.
@@ -50,6 +50,20 @@ Declaring the function-local custom setting needs PostgreSQL's narrow [SET param
 ## Pool budget and qualification scope
 
 The current API pool has four connections. The worker has four pg-boss connections plus one readiness connection. The migration unit has one identity/DDL connection and one pg-boss bootstrap connection, so the configured maximum with all three units overlapping is eleven. The future auth runtime/producer pools are not instantiated; their bounds must be added before B04 activation. PostgreSQL administrative/recovery and test connections require separate headroom. Readiness uses the same supported identity/queue checks in both application processes.
+
+## Enqueue-only product queue boundary
+
+Controlled bootstrap pre-creates `kairn.email.v1`, `kairn.restriction.confirm.v1`, `kairn.lifecycle.cleanup.v1` and `kairn.identity.avatar.v1`, each using standard policy, a dedicated partition and polling (`notify: false`). It resolves the actual table name from pg-boss metadata and quotes it as an identifier. Queue creation is idempotent; incompatible existing policy/partition/notification settings fail. ACL installation uses one checked-out connection/transaction after creation; a failed phase blocks startup and can be repeated.
+
+The API role receives INSERT and SELECT of `id` only on the four approved partition tables. Auth receives the same rights on email only. Both may read queue/version metadata and execute `pgboss.job_now()`, as required by pinned `pg-boss@12.38.0`'s real insert SQL. Neither receives payload reads, job UPDATE/DELETE, sequence rights, worker functions, queue administration or shared/unapproved table inserts. Worker permissions remain separate. Readiness checks the complete producer ACL boundary, actual partition-parent relationship and required queue configuration; missing and excess rights fail closed.
+
+`startJobProducer` accepts one caller-owned bounded metadata pool and returns four named enqueue methods plus shutdown. Configure a single one-connection metadata pool shared by process callers; do not create it per request or send. Migration, supervision, scheduling, instance registration, persisted warnings/statistics, reindex and LISTEN/NOTIFY are disabled. The factory handles idle metadata errors while active and leaves pool shutdown to its owner. No application entry instantiates it yet, so this slice does not increase the current eleven-connection maximum. The planned integrated allocation remains API domain four, auth two, shared producer metadata one, worker domain two and queue four: thirteen runtime connections, or fifteen including the one-shot migration overlap, plus explicit operator/test headroom. The current one-connection worker readiness pool is part of the future two-connection worker domain allocation.
+
+Every send uses `fromDrizzle(transaction, sql)` on the supplied real domain/auth transaction; the factory never dispatches a write through the metadata pool. Payloads contain only a stable event UUID reference; no recipients, tokens, mail bodies or account impersonation context. The same UUID is the job ID. A duplicate returns `inserted: false`, which is not proof of an equal command payload or current authority. B03 must resolve durable command/event identity and atomically add audit/notices/generations before using this boundary. Handlers, live event authorization, secret delivery storage, auth-library callback failure semantics and independent restriction confirmation remain unimplemented.
+
+`pnpm verify:identity` now includes two producer scenarios on its own disposable PostgreSQL volume after the five identity scenarios. They exercise actual API/auth transactions, allowed sends, denied enqueue rollback, payload/consume/admin/unapproved-partition denials, ID deduplication, excess-grant readiness rejection and restart/consumption through the actual worker role. This is the producer portion of G08; it does not close the later command/audit/event/mail-callback acceptance gate.
+
+## Declaration and production packaging
 
 Drizzle's strict declaration graph reaches other dialect declarations. The exact `gel@2.2.1` and `mysql2@3.24.6` development peers satisfy those published type imports; neither is a selected runtime database driver. Declaration-only Drizzle/Gel patches retain strict checking and Node-only globals. The compiled transaction consumer includes negative checks for invalid profile revisions and invented credential fields. Preserve and requalify these repairs with upgrades.
 

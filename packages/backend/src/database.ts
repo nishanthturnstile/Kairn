@@ -1,6 +1,8 @@
-import { Pool } from "pg";
+import { Pool, type PoolClient } from "pg";
+import { drizzle } from "drizzle-orm/node-postgres";
 import { z } from "zod";
 import { checkIdentityDatabase } from "./migrations.js";
+import { checkJobProducerDatabase } from "./job-producer.js";
 
 const DatabaseUrlSchema = z.url().refine((value) => {
   const url = new URL(value);
@@ -25,9 +27,15 @@ export function createDatabasePool(connectionString: string, applicationName: st
   });
 }
 
+/** Backend/auth integration only; the supplied role still owns its SQL authorization. */
+export function createDatabase(connection: Pool | PoolClient) {
+  return drizzle(connection);
+}
+
 export async function checkDatabase(pool: Pool): Promise<void> {
   // Also fails when controlled queue bootstrap has not completed.
   const result = await pool.query("SELECT version FROM pgboss.version");
   if (result.rowCount !== 1) throw new Error("Queue schema is not ready.");
   await checkIdentityDatabase(pool);
+  await checkJobProducerDatabase(pool);
 }

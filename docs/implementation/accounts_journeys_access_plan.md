@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Date / version | 3 November 2026 / 1.2 — implementation baseline selected |
-| Status | B00 reconciled; B01 contracts/web specimens and the first B02 identity migration/provisioning slice implemented. Both batches remain in progress; integrated account/journey acceptance is pending. See the [execution record](accounts_journeys_access_progress.md). |
+| Status | B00 reconciled; B01 contracts/web specimens and B02 identity migration/provisioning plus enqueue-only producer boundaries implemented. Both batches remain in progress; integrated account/journey acceptance is pending. See the [execution record](accounts_journeys_access_progress.md). |
 | Scope | Delivery step 1 of the complete R1 product: contracts, accounts, canonical journey identity, memberships, capabilities, source/export-grant foundations, audit and restriction recovery. |
 | Baseline inspected | `84d339e734dfe85e9ea12e356f650d59991ab32e`; completed setup/native foundation, product status shells. |
 | Governing sources | [Requirements](../core/product_requirements.md), [architecture](../core/architecture.md), [application design](../core/application_design.md). |
@@ -292,7 +292,7 @@ Do not create future editorial/publication/map/search tables merely to fill an E
 
 Membership/capability RLS can recurse if it reads its own protected table. B02 must include a policy dependency graph. Prefer nonrecursive policies; any narrow SECURITY DEFINER helper needs a non-login owner, fixed search_path, explicit schema qualification, restricted EXECUTE and a documented visibility boundary. Do not solve recursion by disabling RLS or giving runtime BYPASSRLS. Auth tables use their reviewed library-specific privilege strategy.
 
-The existing bootstrap gives `kairn_server` only queue-version SELECT, while the worker has queue DML/EXECUTE. B02/S06 must add a reviewed, enqueue-only producer path for API/auth-owned transactions on their actual connection, including the exact SQL privileges used by pinned pg-boss. Do not guess that a table INSERT alone is sufficient, copy all worker privileges, or switch to a separate connection that loses atomicity. Qualify any restricted producer function/adapter against `fromDrizzle` and approved queue names. Producer initialization must not attempt worker registration, supervision, scheduling, migrations or queue maintenance. G08 runs as the actual producer and worker roles, with fetch/complete/delete/queue administration denied to the producer. A denied enqueue must roll back domain/audit/event writes together, not leave a committed change without its job.
+The starting bootstrap gave `kairn_server` only queue-version SELECT, while the worker had queue DML/EXECUTE. The [B02/S06 producer foundation](identity_database.md#enqueue-only-product-queue-boundary) now qualifies the enqueue-only API/auth path on its actual transaction against pinned pg-boss. Do not guess that a table INSERT alone is sufficient, copy all worker privileges, or switch to a separate connection that loses atomicity. Qualify any restricted producer function/adapter against `fromDrizzle` and approved queue names. Producer initialization must not attempt worker registration, supervision, scheduling, migrations or queue maintenance. G08 runs as the actual producer and worker roles, with fetch/complete/delete/queue administration denied to the producer. The remaining integrated command/audit/event boundary must roll back those records together on denied enqueue, not leave a committed change without its job.
 
 Review USING and WITH CHECK for reads and writes. RLS alone does not prevent returning private fields in an otherwise visible row or authorize publishing/raw-original export. Maintain explicit safe projections and service checks. Recalculate the total connection budget when separate auth/domain/queue pools are introduced; the current pool cap is not permission to multiply unbounded pools.
 
@@ -533,7 +533,7 @@ The Better Auth 1.7.15 guide is version-matched to the auth library, but its exa
 
 ### 8.5 Selected producer implementation contract
 
-Read-only inspection of the actually installed `pg-boss@12.38.0` implementation established that `send` reads cached queue metadata, then inserts through `plans.insertJobs` into that queue's selected table. The statement reads `pgboss.queue`, calls `pgboss.job_now()` and returns the inserted ID. `fromDrizzle` executes it through the provided transaction. This selects a concrete starting design; SQL privilege and Drizzle compatibility remain real-DB acceptance, not inferred success.
+Read-only inspection of the actually installed `pg-boss@12.38.0` implementation established that `send` reads cached queue metadata, then inserts through `plans.insertJobs` into that queue's selected table. The statement reads `pgboss.queue`, calls `pgboss.job_now()` and returns the inserted ID. `fromDrizzle` executes it through the provided transaction. The [execution record](accounts_journeys_access_progress.md#next-b02-activity-enqueue-only-producers) now qualifies this producer foundation against real PostgreSQL and actual API/auth/worker roles; integrated command/audit/event/mail acceptance remains open.
 
 - Bootstrap pre-creates fixed `kairn.email.v1`, `kairn.restriction.confirm.v1`, `kairn.lifecycle.cleanup.v1` and `kairn.identity.avatar.v1` queues using standard policy, dedicated queue partitions (`partition: true`) and polling (`notify: false`). No user-supplied queue name or runtime queue creation.
 - Resolve each actual partition/table name from the bootstrap queue metadata and quote identifiers safely; do not hardcode a guessed hash name. The API producer can enqueue only the queues it needs; the auth producer only email. Keep new-queue grants explicit when future workstreams arrive.
@@ -567,7 +567,7 @@ The actual independent journal drill is mandatory before enabling shared data an
 
 ## 10. Ordered implementation batches
 
-Current execution status lives in [implementation progress](accounts_journeys_access_progress.md): B00 is verified, B01–B02 are in progress and B03–B09 are not started. The identity database slice does not close the full journey/grant/producer foundation. Each batch should be a reviewable change with its own acceptance evidence. Confirm the actual main/PR state at implementation time; setup PR checks do not qualify later application changes.
+Current execution status lives in [implementation progress](accounts_journeys_access_progress.md): B00 is verified, B01–B02 are in progress and B03–B09 are not started. The identity and producer boundaries do not close the full journey/grant/operation schema foundation or integrated G08. Each batch should be a reviewable change with its own acceptance evidence. Confirm the actual main/PR state at implementation time; setup PR checks do not qualify later application changes.
 
 | Batch | Deliverables | Depends on | Exit condition |
 | --- | --- | --- | --- |

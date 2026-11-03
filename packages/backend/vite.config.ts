@@ -6,6 +6,7 @@ export default defineConfig({
       index: "src/index.ts",
       database: "src/database.ts",
       queue: "src/queue.ts",
+      "job-producer": "src/job-producer.ts",
       bootstrap: "src/bootstrap.ts",
       migrations: "src/migrations.ts",
       identity: "src/identity/context.ts",

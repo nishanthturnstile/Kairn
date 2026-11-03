@@ -1,16 +1,30 @@
 import { randomUUID, createHash } from "node:crypto";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
 import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { pathToFileURL } from "node:url";
-import { afterAll, describe, expect, it } from "vite-plus/test";
-import { createDatabasePool, readDatabaseUrl } from "@kairn/backend/database";
+import { fileURLToPath, pathToFileURL } from "node:url";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
+import {
+  checkDatabase,
+  createDatabase,
+  createDatabasePool,
+  readDatabaseUrl,
+} from "@kairn/backend/database";
 import {
   checkIdentityDatabase,
   migrateIdentity,
   readIdentityMigrations,
 } from "@kairn/backend/migrations";
 import { provisionVerifiedAccount, runAsAccount } from "@kairn/backend/identity";
+import {
+  checkJobProducerDatabase,
+  productQueues,
+  startJobProducer,
+} from "@kairn/backend/job-producer";
+import { createJobQueue } from "@kairn/backend/queue";
+import { user } from "../../packages/backend/src/identity/auth-schema.js";
 
 if (!process.env.TEST_IDENTITY_ISOLATED)
   throw new Error(
@@ -291,5 +305,180 @@ describe("controlled identity migration and non-owner boundary", () => {
         )
       ).rows[0].count,
     ).toBe(1);
+  });
+});
+
+describe("enqueue-only producer on actual API/auth transactions", () => {
+  const metadata = createDatabasePool(
+    readDatabaseUrl(process.env.TEST_SERVER_DATABASE_URL),
+    "producer-metadata-test",
+    1,
+  );
+  const authMetadata = createDatabasePool(
+    readDatabaseUrl(process.env.TEST_AUTH_DATABASE_URL),
+    "auth-producer-metadata-test",
+    1,
+  );
+  let producer: Awaited<ReturnType<typeof startJobProducer>>;
+  let authProducer: Awaited<ReturnType<typeof startJobProducer>>;
+  const startupErrors: string[] = [];
+  beforeAll(async () => {
+    const bootstrap = fileURLToPath(
+      new URL("../../packages/backend/dist/bootstrap.js", import.meta.url),
+    );
+    await promisify(execFile)(process.execPath, [bootstrap], {
+      env: { ...process.env, MIGRATION_DATABASE_URL: process.env.TEST_MIGRATION_DATABASE_URL },
+    });
+    await checkDatabase(server);
+    await checkDatabase(worker);
+    producer = await startJobProducer(metadata, () => startupErrors.push("api_metadata_error"));
+    authProducer = await startJobProducer(authMetadata, () =>
+      startupErrors.push("auth_metadata_error"),
+    );
+  });
+  afterAll(async () => {
+    await Promise.all([producer?.stop(), authProducer?.stop()]);
+    await Promise.all([metadata.end(), authMetadata.end()]);
+  });
+
+  it("commits with real roles, deduplicates stable job IDs and survives a worker restart", async () => {
+    const actor = await provisionVerifiedAccount(auth, await authUser(), "Producer profile");
+    const jobs = {
+      email: randomUUID(),
+      restriction: randomUUID(),
+      cleanup: randomUUID(),
+      avatar: randomUUID(),
+    };
+    const stopped = createJobQueue(readDatabaseUrl(process.env.TEST_WORKER_DATABASE_URL));
+    stopped.on("error", () => {});
+    await stopped.start();
+    await stopped.stop({ graceful: false });
+    await runAsAccount(server, actor, async (tx) => {
+      await tx.execute(
+        "UPDATE identity.profile SET bio = 'Committed with jobs', revision = revision + 1",
+      );
+      for (const kind of ["email", "restriction", "cleanup", "avatar"] as const)
+        expect(await producer[kind](tx, jobs[kind])).toEqual({ id: jobs[kind], inserted: true });
+      expect(await producer.email(tx, jobs.email)).toEqual({ id: jobs.email, inserted: false });
+    });
+    const authSubject = randomUUID();
+    const authEvent = randomUUID();
+    await createDatabase(auth).transaction(async (tx) => {
+      await tx.insert(user).values({
+        id: authSubject,
+        name: "Auth mail fixture",
+        email: `${authSubject}@kairn.invalid`,
+      });
+      expect(await authProducer.email(tx, authEvent)).toEqual({ id: authEvent, inserted: true });
+    });
+    const consumer = createJobQueue(readDatabaseUrl(process.env.TEST_WORKER_DATABASE_URL));
+    consumer.on("error", () => {});
+    try {
+      await consumer.start();
+      for (const kind of ["email", "restriction", "cleanup", "avatar"] as const) {
+        const fetched = await consumer.fetch<{ eventId: string }>(productQueues[kind], {
+          batchSize: 10,
+        });
+        expect(fetched.map((job) => job.id).sort()).toEqual(
+          (kind === "email" ? [jobs.email, authEvent] : [jobs[kind]]).sort(),
+        );
+        for (const job of fetched) {
+          expect(job.data).toEqual({ eventId: job.id });
+          await consumer.complete(productQueues[kind], job.id);
+          expect((await consumer.getJobById(productQueues[kind], job.id))?.state).toBe("completed");
+        }
+      }
+    } finally {
+      await consumer.stop({ graceful: false });
+    }
+    expect(
+      (await runAsAccount(server, actor, (tx) => tx.execute("SELECT bio FROM identity.profile")))
+        .rows,
+    ).toEqual([{ bio: "Committed with jobs" }]);
+    expect(startupErrors).toEqual([]);
+  });
+
+  it("denies payload reads/consumption/admin and rolls back writes when enqueue lacks permission", async () => {
+    const control = createJobQueue(readDatabaseUrl(process.env.TEST_MIGRATION_DATABASE_URL));
+    control.on("error", () => {});
+    let unapprovedTable: string;
+    try {
+      await control.start();
+      await control.createQueue("kairn.test.unapproved", { partition: true, notify: false });
+      const queue = await control.getQueue("kairn.test.unapproved");
+      if (!queue?.table) throw new Error("Unapproved partition fixture is missing.");
+      unapprovedTable = `pgboss."${queue.table.replaceAll('"', '""')}"`;
+    } finally {
+      await control.stop({ graceful: false });
+    }
+    const partitions = (
+      await owner.query("SELECT name, table_name FROM pgboss.queue WHERE name = ANY($1::text[])", [
+        Object.values(productQueues),
+      ])
+    ).rows;
+    const emailTable = partitions.find((row) => row.name === productQueues.email)!.table_name;
+    const cleanupTable = partitions.find((row) => row.name === productQueues.cleanup)!.table_name;
+    const quotedEmail = `pgboss."${String(emailTable).replaceAll('"', '""')}"`;
+    const quotedCleanup = `pgboss."${String(cleanupTable).replaceAll('"', '""')}"`;
+    for (const pool of [server, auth]) {
+      for (const statement of [
+        `SELECT data FROM ${quotedEmail}`,
+        "SELECT * FROM pgboss.job",
+        `UPDATE ${quotedEmail} SET state = 'active' RETURNING id`,
+        `UPDATE ${quotedEmail} SET state = 'completed' RETURNING id`,
+        `DELETE FROM ${quotedEmail}`,
+        "INSERT INTO pgboss.schedule (name) VALUES ('unapproved')",
+        "SELECT pgboss.create_queue('unapproved', '{}'::jsonb)",
+        "INSERT INTO pgboss.job (name) VALUES ('unapproved')",
+        `INSERT INTO ${unapprovedTable} (name) VALUES ('kairn.test.unapproved')`,
+      ])
+        await expect(pool.query(statement)).rejects.toMatchObject({ code: "42501" });
+    }
+    const subject = randomUUID();
+    await expect(
+      createDatabase(auth).transaction(async (tx) => {
+        await tx
+          .insert(user)
+          .values({ id: subject, name: "Must roll back", email: `${subject}@kairn.invalid` });
+        await authProducer.restriction(tx, randomUUID());
+      }),
+    ).rejects.toMatchObject({ cause: { code: "42501" } });
+    expect((await auth.query('SELECT id FROM authn."user" WHERE id = $1', [subject])).rows).toEqual(
+      [],
+    );
+
+    const actor = await provisionVerifiedAccount(auth, await authUser(), "Denied enqueue");
+    const event = randomUUID();
+    await owner.query(`REVOKE INSERT ON ${quotedCleanup} FROM kairn_server`);
+    try {
+      await expect(checkDatabase(server)).rejects.toThrow("producer privileges");
+      await expect(
+        runAsAccount(server, actor, async (tx) => {
+          await tx.execute(
+            "UPDATE identity.profile SET bio = 'Must roll back', revision = revision + 1",
+          );
+          await producer.cleanup(tx, event);
+        }),
+      ).rejects.toMatchObject({ cause: { code: "42501" } });
+    } finally {
+      await owner.query(`GRANT INSERT ON ${quotedCleanup} TO kairn_server`);
+    }
+    expect(
+      (
+        await runAsAccount(server, actor, (tx) =>
+          tx.execute("SELECT bio, revision FROM identity.profile"),
+        )
+      ).rows,
+    ).toEqual([{ bio: null, revision: "1" }]);
+    expect(
+      (await owner.query(`SELECT id FROM ${quotedCleanup} WHERE id = $1`, [event])).rows,
+    ).toEqual([]);
+    await owner.query(`GRANT SELECT (data) ON ${quotedEmail} TO kairn_auth`);
+    try {
+      await expect(checkJobProducerDatabase(worker)).rejects.toThrow("producer privileges");
+    } finally {
+      await owner.query(`REVOKE SELECT (data) ON ${quotedEmail} FROM kairn_auth`);
+    }
+    await checkDatabase(worker);
   });
 });

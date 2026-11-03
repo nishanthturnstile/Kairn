@@ -51,7 +51,9 @@ try {
     "pnpm",
     "test:identity",
   ]);
-  console.log("PASS isolated identity migrations, provisioning and RLS boundary.");
+  console.log(
+    "PASS isolated identity migrations, provisioning, RLS and enqueue-only producer boundary.",
+  );
 } finally {
   docker(["--profile", "tools", "down", "--volumes", "--remove-orphans"]);
 }

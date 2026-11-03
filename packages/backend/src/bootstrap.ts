@@ -1,6 +1,7 @@
 import { PgBoss } from "pg-boss";
 import { createDatabasePool, readDatabaseUrl } from "./database.js";
 import { migrateIdentity } from "./migrations.js";
+import { provisionProductQueues } from "./queue-provisioning.js";
 
 // This entry runs only in the one-shot migrate service, with its schema-owner credentials.
 const connectionString = readDatabaseUrl(process.env.MIGRATION_DATABASE_URL);
@@ -35,6 +36,7 @@ try {
     ALTER DEFAULT PRIVILEGES IN SCHEMA pgboss REVOKE EXECUTE ON FUNCTIONS FROM PUBLIC;
     ALTER DEFAULT PRIVILEGES IN SCHEMA pgboss GRANT EXECUTE ON FUNCTIONS TO kairn_worker;
   `);
+  await provisionProductQueues(pool, boss);
   console.log("Queue schema bootstrap complete.");
 } catch {
   console.error("Database schema bootstrap failed; application startup is blocked.");

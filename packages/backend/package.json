@@ -21,6 +21,10 @@
       "types": "./dist/queue.d.ts",
       "import": "./dist/queue.js"
     },
+    "./job-producer": {
+      "types": "./dist/job-producer.d.ts",
+      "import": "./dist/job-producer.js"
+    },
     "./migrations": {
       "types": "./dist/migrations.d.ts",
       "import": "./dist/migrations.js"
