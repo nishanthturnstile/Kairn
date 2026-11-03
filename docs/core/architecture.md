@@ -972,6 +972,8 @@ Retention durations, total account quota, global AI concurrency, and public-read
 
 Build all workstreams in the same production application. This order follows dependencies and does not introduce an MVP, separate trial service, or preliminary proof-of-concept gate.
 
+The user-requested [web and mobile interaction prototype](../implementation/prototype_plan.md) precedes the next product coding batch as a bounded design activity in the existing apps. Its isolated review branch uses explicit sample state; selected reusable code returns through a reviewed integration change that excludes prototype entry points and fixtures. Simulated interactions do not qualify this section's production evidence or change the complete R1 dependency order.
+
 | Order | Production capability | Evidence required before complete R1 release |
 |---|---|---|
 | 1 | Contracts, accounts, canonical identity, membership, capabilities, source/export grants, and audit. | The requirements capability matrix governs review, editing, publication, and export. Repeated joins retain one history reference. Account recovery and independent restriction-journal confirmation work. |

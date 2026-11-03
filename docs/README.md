@@ -24,6 +24,7 @@ Start with the product plan and requirements. Use the implementation plans for t
 - [Branch and checkout workflow](implementation/checkout_workflow.md) — development/main promotion, authoring-host choice, protected checkpoint synchronization and recovery
 - [Checkout reconciliation record](implementation/checkout_reconciliation_progress.md) — preserved pending files, branch-history backups and initial host alignment
 - [Development skills](implementation/development_skills.md) — installed project skills, source provenance, and how to apply them to Kairn
+- [Web and mobile experience prototype](implementation/prototype_plan.md) — connected sample workflows, screen coverage, branch isolation, delivery batches, verification and production handoff before the next product coding batch
 - [Accounts, journeys and access implementation](implementation/accounts_journeys_access_plan.md) — final plan 1.2: modules, data/migrations, APIs, permissions, delivery order, and acceptance gates; ready to start local implementation
 - [Accounts and journey experience handoff](implementation/accounts_journeys_access_design.md) — consumer workflows, screen/route inventory, components, responsive behavior, and UI/UX acceptance
 - [Selected account/journey decisions](implementation/accounts_journeys_access_decisions.md) — chosen authority/lifecycle policy, field limits, expiry, retention targets, asset inputs, and external activation gates
@@ -35,6 +36,7 @@ Start with the product plan and requirements. Use the implementation plans for t
 - [Repository setup research](research/repository-setup/) — toolchain, native builds, Compose, compatibility probes, and host observations
 - [Accounts and journey-access research](research/accounts-journey-access/analysis_2026-11-03.md) — current-code gaps, functional analysis, version-matched integration findings, and design/accessibility research for the next milestone
 - [Independent plan review](research/accounts-journey-access/review_2026-11-03.md) — OpenCode/DeepSeek V4.1 Flash findings, parent assessment, plan corrections, and remaining activation/verification gates
+- [Prototype plan review](research/prototype/review_2026-11-03.md) — independent model findings, Codex dispositions, final OpenCode Go Argon 4 review and planning verification
 
 [Setup execution history](research/repository-setup/repository_setup_progress_2026-11-02.md) and [native host history](research/repository-setup/native_host_setup_2026-11-02.md) preserve archived attempts and detailed qualification. Current status stays in the implementation documents.
 
