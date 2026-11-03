@@ -752,7 +752,7 @@ Observed on 1 November 2026. Exact direct pins and the resolved lockfile are req
 | Durable worker | `pg-boss` | `12.38.0` | First asynchronous domain work; direct `fromDrizzle` transaction adapter. |
 | Queue peer | `@opentelemetry/api` | `1.10.0` | Required pg-boss peer at foundation; no tracing backend is introduced. |
 | PostgreSQL declarations | `@types/pg` | `8.23.1` | Backend development types for the selected driver. |
-| Portable object storage | `@aws-sdk/client-s3` | `3.1161.0` | Development-only foundation storage acceptance, then server-only source uploads/media adapter. Future R2/AWS S3 endpoint configuration stays behind that adapter. |
+| Portable object storage | `@aws-sdk/client-s3` | `3.1161.0` | Foundation storage acceptance and the B03 server-only private identity-media adapter; later source uploads use the same boundary. Future R2/AWS S3 endpoint configuration stays behind that adapter. |
 | AI tasks | `ai` | `7.0.159` | Transcription/embedding/generation workstream. Gateway provider is exported from this package. |
 | SMTP | `nodemailer` | `10.3.1` | Account email/invitations; same transport for both environments. |
 | Logs | `pino` | `10.4.0` | Server/worker foundation, with redaction. |

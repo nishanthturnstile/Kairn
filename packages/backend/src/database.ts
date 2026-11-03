@@ -17,7 +17,7 @@ export function readDatabaseUrl(value: string | undefined): string {
 }
 
 export function createDatabasePool(connectionString: string, applicationName: string, max = 4) {
-  return new Pool({
+  const pool = new Pool({
     connectionString,
     application_name: applicationName,
     max,
@@ -25,6 +25,14 @@ export function createDatabasePool(connectionString: string, applicationName: st
     idleTimeoutMillis: 30_000,
     statement_timeout: 5_000,
   });
+  // pg-pool removes its idle error listener while a client is checked out. A
+  // disconnect between transaction/readiness queries must not crash the process.
+  // Queries still reject, and pg-pool discards failed clients on release. Idle
+  // errors continue through the caller's pool-level diagnostic handler.
+  pool.on("connect", (client) => {
+    client.on("error", () => {});
+  });
+  return pool;
 }
 
 /** Backend/auth integration only; the supplied role still owns its SQL authorization. */

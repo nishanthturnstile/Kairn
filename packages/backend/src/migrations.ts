@@ -4,6 +4,7 @@ import type { Pool, PoolClient } from "pg";
 import { z } from "zod";
 import { assertFoundationStructure } from "./foundation/readiness.js";
 import { assertJourneyStructure } from "./journeys/readiness.js";
+import { assertCommandStructure, domainBoundaryHash } from "./operations/readiness.js";
 
 const ManifestSchema = z.strictObject({
   version: z.literal(1),
@@ -65,9 +66,9 @@ export async function migrateIdentity(pool: Pool, folder?: URL) {
     await client.query("SELECT pg_catalog.pg_advisory_lock(1667328366, 1)");
     locked = true;
     const roles = await client.query(
-      "SELECT rolname FROM pg_catalog.pg_roles WHERE rolname IN ('kairn_auth', 'kairn_identity', 'kairn_journey_policy', 'kairn_access_policy') AND NOT rolsuper AND NOT rolbypassrls AND NOT rolcreatedb AND NOT rolcreaterole AND NOT rolreplication AND (rolname = 'kairn_auth' OR NOT rolcanlogin)",
+      "SELECT rolname FROM pg_catalog.pg_roles WHERE rolname IN ('kairn_auth', 'kairn_identity', 'kairn_journey_policy', 'kairn_access_policy', 'kairn_command') AND NOT rolsuper AND NOT rolbypassrls AND NOT rolcreatedb AND NOT rolcreaterole AND NOT rolreplication AND (rolname = 'kairn_auth' OR NOT rolcanlogin)",
     );
-    if (roles.rowCount !== 4)
+    if (roles.rowCount !== 5)
       throw new Error("Controlled identity principal bootstrap is required.");
     await client.query("BEGIN");
     await client.query("SET LOCAL search_path = pg_catalog");
@@ -89,6 +90,7 @@ export async function migrateIdentity(pool: Pool, folder?: URL) {
       migrations,
     );
     if (applied > 0) await assertIdentityPolicies(client, applied - 1);
+    if (applied > 8) await assertCommandStructure(client);
     for (let index = applied; index < migrations.length; index++) {
       const migration = migrations[index];
       if (!migration) throw new Error("Missing ordered migration.");
@@ -101,6 +103,12 @@ export async function migrateIdentity(pool: Pool, folder?: URL) {
     await assertIdentityStructure(client);
     if (migrations.length > 2) await assertJourneyStructure(client);
     if (migrations.length > 4) await assertFoundationStructure(client);
+    if (migrations.length > 8 && applied < migrations.length)
+      await client.query(
+        "UPDATE kairn_migrations.identity_release SET boundary_sha256=$1 WHERE position=$2",
+        [await domainBoundaryHash(client), migrations.length - 1],
+      );
+    if (migrations.length > 8) await assertCommandStructure(client);
     if (applied < migrations.length)
       await client.query(
         "UPDATE kairn_migrations.identity_release SET policies_sha256 = $1 WHERE position = $2",
@@ -149,7 +157,13 @@ async function assertIdentityStructure(client: Pool | PoolClient) {
   const policies =
     await client.query(`SELECT policyname FROM pg_catalog.pg_policies WHERE schemaname = 'identity'
     AND policyname IN ('account_owner_read', 'profile_owner_read', 'profile_owner_update', 'account_provision_read', 'account_provision_insert', 'profile_provision_read', 'profile_provision_insert', 'retired_provision_read')`);
-  if (tables.rowCount !== 3 || policies.rowCount !== 8)
+  const hasCommands =
+    (
+      await client.query(
+        "SELECT EXISTS(SELECT FROM pg_catalog.pg_proc p JOIN pg_catalog.pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname='operations' AND p.proname='execute_command') AS installed",
+      )
+    ).rows[0]?.installed === true;
+  if (tables.rowCount !== 3 || policies.rowCount !== (hasCommands ? 7 : 8))
     throw new Error("Identity policies are incomplete.");
   // Resolve catalog OIDs without requiring the worker to gain identity-schema USAGE.
   const privileges = await client.query(`WITH objects AS (
@@ -174,9 +188,9 @@ async function assertIdentityStructure(client: Pool | PoolClient) {
         OR pg_catalog.has_schema_privilege(r.oid, o.identity_id, 'CREATE')
         OR pg_catalog.has_schema_privilege(r.oid, o.authn_id, 'CREATE')))
     AND pg_catalog.has_table_privilege('kairn_server', o.profile_id, 'SELECT')
-    AND pg_catalog.has_column_privilege('kairn_server', o.profile_id, 'display_name', 'UPDATE')
-    AND pg_catalog.has_column_privilege('kairn_server', o.profile_id, 'bio', 'UPDATE')
-    AND pg_catalog.has_column_privilege('kairn_server', o.profile_id, 'revision', 'UPDATE')
+    AND pg_catalog.has_column_privilege('kairn_server', o.profile_id, 'display_name', 'UPDATE') = ${!hasCommands}
+    AND pg_catalog.has_column_privilege('kairn_server', o.profile_id, 'bio', 'UPDATE') = ${!hasCommands}
+    AND pg_catalog.has_column_privilege('kairn_server', o.profile_id, 'revision', 'UPDATE') = ${!hasCommands}
     AND NOT pg_catalog.has_column_privilege('kairn_server', o.account_id, 'auth_subject_id', 'SELECT')
     AND NOT pg_catalog.has_table_privilege('kairn_auth', o.profile_id, 'SELECT,INSERT,UPDATE,DELETE')
     AND NOT pg_catalog.has_schema_privilege('kairn_server', o.authn_id, 'USAGE')
@@ -210,6 +224,7 @@ export async function checkIdentityDatabase(pool: Pool) {
     await assertIdentityStructure(client);
     if (migrations.length > 2) await assertJourneyStructure(client);
     if (migrations.length > 4) await assertFoundationStructure(client);
+    if (migrations.length > 8) await assertCommandStructure(client);
     await assertIdentityPolicies(client, applied - 1);
     await client.query("COMMIT");
   } catch (error) {

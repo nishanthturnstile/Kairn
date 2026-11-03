@@ -46,6 +46,21 @@ export const domainAccount = identitySchema
     ],
   )
   .enableRLS();
+// Retain only opaque allocation identity after avatar byte/manifest purge. Old jobs
+// and restored checkpoints cannot attach to a new upload that reuses the same UUID.
+export const retiredAvatar = identitySchema
+  .table(
+    "retired_avatar",
+    {
+      id: uuid("id").primaryKey(),
+      ownerAccountId: uuid("owner_account_id")
+        .notNull()
+        .references(() => domainAccount.id, { onDelete: "restrict" }),
+      retiredAt: timestamp("retired_at", { withTimezone: true }).notNull().defaultNow(),
+    },
+    (t) => [index("retired_avatar_owner_idx").on(t.ownerAccountId)],
+  )
+  .enableRLS();
 export const profileAvatar = identitySchema
   .table(
     "profile_avatar",
@@ -73,6 +88,8 @@ export const profileAvatar = identitySchema
       height: integer("height"),
       createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
       uploadExpiresAt: timestamp("upload_expires_at", { withTimezone: true }).notNull(),
+      quarantinePurgedAt: timestamp("quarantine_purged_at", { withTimezone: true }),
+      uploadedAt: timestamp("uploaded_at", { withTimezone: true }),
       deletedAt: timestamp("deleted_at", { withTimezone: true }),
     },
     (t) => [

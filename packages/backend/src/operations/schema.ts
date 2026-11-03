@@ -630,3 +630,48 @@ export const abuseCounter = operationsSchema
     ],
   )
   .enableRLS();
+
+// Recovery barriers survive replay even when the restored checkpoint predates a resource.
+// These are operator-owned opaque deny records, never a source of application authority.
+export const recoveryBarrier = operationsSchema
+  .table(
+    "recovery_barrier",
+    {
+      resourceKind: text("resource_kind").notNull(),
+      resourceId: uuid("resource_id").notNull(),
+      generation: bigint("generation", { mode: "number" }).notNull(),
+      sequence: bigint("sequence", { mode: "number" }).notNull(),
+      checkpointSha256: text("checkpoint_sha256").notNull(),
+    },
+    (t) => [
+      primaryKey({ columns: [t.resourceKind, t.resourceId] }),
+      finite("recovery_barrier_kind", t.resourceKind, [
+        "account",
+        "journey",
+        "membership",
+        "invitation",
+        "transfer",
+        "source",
+        "source_grant",
+        "export_grant",
+        "avatar",
+      ]),
+      positive("recovery_barrier_versions", t.generation, t.sequence),
+      digest("recovery_barrier_hash", t.checkpointSha256),
+    ],
+  )
+  .enableRLS();
+export const recoveryCheckpoint = operationsSchema
+  .table(
+    "recovery_checkpoint",
+    {
+      id: integer("id").primaryKey(),
+      sequence: bigint("sequence", { mode: "number" }).notNull(),
+      checkpointSha256: text("checkpoint_sha256").notNull(),
+    },
+    (t) => [
+      check("recovery_checkpoint_singleton", sql`${t.id}=1 AND ${t.sequence}>=0`),
+      digest("recovery_checkpoint_hash", t.checkpointSha256),
+    ],
+  )
+  .enableRLS();

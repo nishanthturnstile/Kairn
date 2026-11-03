@@ -17,7 +17,11 @@ import {
   migrateIdentity,
   readIdentityMigrations,
 } from "@kairn/backend/migrations";
-import { provisionVerifiedAccount, runAsAccount } from "@kairn/backend/identity";
+import {
+  provisionVerifiedAccount,
+  runAsAccount,
+  type AccountTransaction,
+} from "@kairn/backend/identity";
 import {
   checkJobProducerDatabase,
   productQueues,
@@ -61,6 +65,12 @@ async function authUser(verified = true, email = `${randomUUID()}@kairn.invalid`
     [subject, "Auth mirror", email, verified],
   );
   return subject;
+}
+async function profileCommand(tx: AccountTransaction, displayName: string, bio: string | null) {
+  const payload = JSON.stringify({ displayName, bio, revision: 1 }).replace(/'/g, "''");
+  return tx.execute(
+    `SELECT operations.execute_command('${randomUUID()}'::uuid,'profile.update','${payload}'::jsonb)`,
+  );
 }
 
 describe("controlled identity migration and non-owner boundary", () => {
@@ -245,9 +255,7 @@ describe("controlled identity migration and non-owner boundary", () => {
     await expect(server.query("SET ROLE kairn_identity")).rejects.toMatchObject({ code: "42501" });
     const account = actors[0]!;
     await runAsAccount(server, account, async (tx) => {
-      await tx.execute(
-        "UPDATE identity.profile SET display_name = 'Domain profile', revision = revision + 1",
-      );
+      await profileCommand(tx, "Domain profile", null);
     });
     await provisionVerifiedAccount(auth, subject, "Changed auth mirror");
     const profile = await runAsAccount(server, account, (tx) =>
@@ -264,12 +272,7 @@ describe("controlled identity migration and non-owner boundary", () => {
       tx.execute("SELECT display_name FROM identity.profile"),
     );
     expect(aliceRows.rows.map((row) => row.display_name)).toEqual(["Alice private"]);
-    const aliceUpdate = await runAsAccount(server, alice, (tx) =>
-      tx.execute(
-        "UPDATE identity.profile SET bio = 'Alice only', revision = revision + 1 RETURNING account_id",
-      ),
-    );
-    expect(aliceUpdate.rows.map((row) => row.account_id)).toEqual([alice.accountId]);
+    await runAsAccount(server, alice, (tx) => profileCommand(tx, "Alice private", "Alice only"));
     await expect(
       runAsAccount(server, alice, (tx) => tx.execute("SELECT 1 / 0")),
     ).rejects.toMatchObject({ cause: { code: "22012" } });
@@ -283,7 +286,7 @@ describe("controlled identity migration and non-owner boundary", () => {
       runAsAccount(server, bob, (tx) =>
         tx.execute("UPDATE identity.profile SET revision = revision"),
       ),
-    ).rejects.toMatchObject({ cause: { code: "23514" } });
+    ).rejects.toMatchObject({ cause: { code: "42501" } });
     await expect(
       server.query("SELECT auth_subject_id FROM identity.account"),
     ).rejects.toMatchObject({ code: "42501" });
@@ -294,9 +297,7 @@ describe("controlled identity migration and non-owner boundary", () => {
     await expect(
       runAsAccount(server, actor, async (tx) => {
         await tx.transaction(async (nested) => {
-          await nested.execute(
-            "UPDATE identity.profile SET bio = 'Must roll back', revision = revision + 1",
-          );
+          await profileCommand(nested, "Atomic profile", "Must roll back");
         });
         throw new Error("Later command step failed.");
       }),
@@ -405,9 +406,7 @@ describe("enqueue-only producer on actual API/auth transactions", () => {
     await stopped.start();
     await stopped.stop({ graceful: false });
     await runAsAccount(server, actor, async (tx) => {
-      await tx.execute(
-        "UPDATE identity.profile SET bio = 'Committed with jobs', revision = revision + 1",
-      );
+      await profileCommand(tx, "Producer profile", "Committed with jobs");
       for (const kind of ["email", "restriction", "cleanup", "avatar"] as const)
         expect(await producer[kind](tx, jobs[kind])).toEqual({ id: jobs[kind], inserted: true });
       expect(await producer.email(tx, jobs.email)).toEqual({ id: jobs.email, inserted: false });
@@ -505,9 +504,7 @@ describe("enqueue-only producer on actual API/auth transactions", () => {
       await expect(checkDatabase(server)).rejects.toThrow("producer privileges");
       await expect(
         runAsAccount(server, actor, async (tx) => {
-          await tx.execute(
-            "UPDATE identity.profile SET bio = 'Must roll back', revision = revision + 1",
-          );
+          await profileCommand(tx, "Denied enqueue", "Must roll back");
           await producer.cleanup(tx, event);
         }),
       ).rejects.toMatchObject({ cause: { code: "42501" } });

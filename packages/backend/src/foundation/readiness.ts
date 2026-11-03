@@ -271,7 +271,7 @@ export async function assertFoundationStructure(client: PoolClient) {
       AND (pg_catalog.pg_has_role(r.oid, 'kairn_access_policy', 'SET') OR pg_catalog.pg_has_role(r.oid, 'kairn_access_policy', 'USAGE')))
     AND NOT EXISTS (SELECT FROM pg_catalog.pg_namespace AS n CROSS JOIN pg_catalog.pg_roles AS r
       WHERE n.nspname IN ('identity', 'journeys', 'sources', 'operations') AND r.rolname IN ('kairn_auth', 'kairn_server', 'kairn_worker', 'kairn_access_policy')
-      AND (pg_catalog.has_schema_privilege(r.oid, n.oid, 'CREATE') OR (n.nspname IN ('sources', 'operations') AND r.rolname IN ('kairn_auth', 'kairn_worker') AND pg_catalog.has_schema_privilege(r.oid, n.oid, 'USAGE'))))
+      AND (pg_catalog.has_schema_privilege(r.oid, n.oid, 'CREATE')))
     AND NOT EXISTS (SELECT FROM objects AS o JOIN pg_catalog.pg_attribute AS a ON a.attrelid = o.oid AND a.attnum > 0 AND NOT a.attisdropped
       WHERE pg_catalog.has_column_privilege('kairn_server', o.oid, a.attname, 'SELECT') IS DISTINCT FROM (o.columns IS NULL OR a.attname = ANY(o.columns))
         OR pg_catalog.has_column_privilege('kairn_server', o.oid, a.attname, 'INSERT') IS DISTINCT FROM (o.schema = 'operations' AND o."table" IN ('audit_event', 'domain_change', 'restriction_event'))
