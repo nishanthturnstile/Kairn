@@ -9,3 +9,4 @@ REVOKE ALL ON DATABASE kairn FROM PUBLIC;
 GRANT CONNECT ON DATABASE kairn TO kairn_migrator, kairn_server, kairn_worker;
 REVOKE ALL ON SCHEMA public FROM PUBLIC;
 CREATE SCHEMA pgboss AUTHORIZATION kairn_migrator;
+\ir /etc/kairn-postgres/identity-principals.sql

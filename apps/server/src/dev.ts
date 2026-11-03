@@ -39,6 +39,7 @@ const vite = await createViteServer({
 });
 const RenderedSchema = z.strictObject({ html: z.string(), title: z.string() });
 const app = createApp({
+  designSpecimens: true,
   checkReady: () => checkDatabase(database),
   publicOrigin: environment.publicOrigin,
   onError: (error) => {

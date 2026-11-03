@@ -1,6 +1,6 @@
 # Accounts and journey access: experience handoff
 
-Date: 3 November 2026. Status: detailed planning handoff; compositions and components are not implemented or visually accepted. Read with the [implementation plan](accounts_journeys_access_plan.md) and [research](../research/accounts-journey-access/analysis_2026-11-03.md).
+Date: 3 November 2026. Status: detailed experience handoff; the first B01 web forms, empty/no-cover, powers and restriction specimens are implemented. Full compositions, native components and integrated acceptance remain pending; see [execution progress](accounts_journeys_access_progress.md). Read with the [implementation plan](accounts_journeys_access_plan.md) and [research](../research/accounts-journey-access/analysis_2026-11-03.md).
 
 Independent-review reconciliation: [findings and dispositions](../research/accounts-journey-access/review_2026-11-03.md). The [selected baseline](accounts_journeys_access_decisions.md) now fixes authority, lifecycle, limits and asset inputs for implementation plan 1.2. Real rendering/API/device acceptance remains required.
 

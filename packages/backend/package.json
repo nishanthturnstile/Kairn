@@ -20,18 +20,32 @@
     "./queue": {
       "types": "./dist/queue.d.ts",
       "import": "./dist/queue.js"
+    },
+    "./migrations": {
+      "types": "./dist/migrations.d.ts",
+      "import": "./dist/migrations.js"
+    },
+    "./identity": {
+      "types": "./dist/identity.d.ts",
+      "import": "./dist/identity.js"
+    },
+    "./auth-options": {
+      "types": "./dist/auth-options.d.ts",
+      "import": "./dist/auth-options.js"
     }
   },
   "scripts": {
-    "build": "vp pack",
+    "build": "vp pack && node scripts/copy-migrations.mjs",
     "check": "tsc --noEmit",
-    "queue:bootstrap": "node --enable-source-maps dist/bootstrap.js"
+    "queue:bootstrap": "node --enable-source-maps dist/bootstrap.js",
+    "db:manifest": "node scripts/migration-manifest.mjs"
   },
   "dependencies": {
     "@kairn/contracts": "workspace:*",
     "@kairn/shared": "workspace:*",
     "@kairn/sync-protocol": "workspace:*",
     "@opentelemetry/api": "1.10.0",
+    "drizzle-orm": "0.45.4",
     "pg": "8.23.1",
     "pg-boss": "12.38.0",
     "pino": "10.4.0",
@@ -40,6 +54,8 @@
   "devDependencies": {
     "@types/node": "26.6.6",
     "@types/pg": "8.23.1",
+    "gel": "2.2.1",
+    "mysql2": "3.24.6",
     "typescript": "7.0.2"
   }
 }

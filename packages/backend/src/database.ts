@@ -1,5 +1,6 @@
 import { Pool } from "pg";
 import { z } from "zod";
+import { checkIdentityDatabase } from "./migrations.js";
 
 const DatabaseUrlSchema = z.url().refine((value) => {
   const url = new URL(value);
@@ -13,11 +14,11 @@ export function readDatabaseUrl(value: string | undefined): string {
   return result.data;
 }
 
-export function createDatabasePool(connectionString: string, applicationName: string) {
+export function createDatabasePool(connectionString: string, applicationName: string, max = 4) {
   return new Pool({
     connectionString,
     application_name: applicationName,
-    max: 4,
+    max,
     connectionTimeoutMillis: 3_000,
     idleTimeoutMillis: 30_000,
     statement_timeout: 5_000,
@@ -28,4 +29,5 @@ export async function checkDatabase(pool: Pool): Promise<void> {
   // Also fails when controlled queue bootstrap has not completed.
   const result = await pool.query("SELECT version FROM pgboss.version");
   if (result.rowCount !== 1) throw new Error("Queue schema is not ready.");
+  await checkIdentityDatabase(pool);
 }

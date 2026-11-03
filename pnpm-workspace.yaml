@@ -37,15 +37,21 @@ packageExtensions:
       json-schema-to-ts: 3.1.1
 
 # Add approvals only after inspecting the selected dependency's build script.
-allowBuilds: {}
+allowBuilds:
+  # Reviewed generator-only binary checks/installers; Vite+ remains the application toolchain.
+  esbuild@0.18.20: true
+  esbuild@0.25.12: true
+  esbuild@0.28.2: true
 strictDepBuilds: true
 minimumReleaseAgeExclude:
   - hono@4.13.16
   - "@tanstack/query-core@5.105.1"
   - "@tanstack/react-query@5.105.1"
 patchedDependencies:
+  drizzle-orm@0.45.4: patches/drizzle-orm@0.45.4.patch
   expo-router@58.0.29: patches/expo-router@58.0.29.patch
   expo-server@58.0.6: patches/expo-server@58.0.6.patch
+  gel@2.2.1: patches/gel@2.2.1.patch
   openapi-fetch@0.17.0: patches/openapi-fetch@0.17.0.patch
   pg-boss@12.38.0: patches/pg-boss@12.38.0.patch
   react-native-unistyles@3.7.0: patches/react-native-unistyles@3.7.0.patch

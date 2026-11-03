@@ -176,8 +176,11 @@ try {
     `
     import assert from 'node:assert/strict';
     import { existsSync } from 'node:fs';
+    import { createRequire } from 'node:module';
     await import('@kairn/backend/queue');
     for (const name of ['vite-plus', 'typescript', '@playwright/test']) assert.throws(() => import.meta.resolve(name));
+    const backendRequire = createRequire(import.meta.resolve('@kairn/backend/queue'));
+    for (const name of ['drizzle-kit', 'auth', '@kairn/identity-generation', 'gel', 'mysql2']) assert.throws(() => backendRequire.resolve(name));
     for (const path of ['src', 'apps', 'packages', 'tools', '.env']) assert.equal(existsSync(path), false);
     assert.notEqual(process.getuid(), 0);
     assert.equal(process.env.MIGRATION_DATABASE_URL, undefined);

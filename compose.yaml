@@ -88,9 +88,11 @@ services:
       KAIRN_MIGRATOR_PASSWORD: ${KAIRN_MIGRATOR_PASSWORD:-kairn-migrator-local}
       KAIRN_SERVER_DB_PASSWORD: ${KAIRN_SERVER_DB_PASSWORD:-kairn-server-local}
       KAIRN_WORKER_DB_PASSWORD: ${KAIRN_WORKER_DB_PASSWORD:-kairn-worker-local}
+      KAIRN_AUTH_DB_PASSWORD: ${KAIRN_AUTH_DB_PASSWORD:-kairn-auth-local}
     volumes:
       - postgres-data:/var/lib/postgresql
       - ./infra/postgres/initialize.sql:/docker-entrypoint-initdb.d/01-kairn.sql:ro
+      - ./infra/postgres/identity-principals.sql:/etc/kairn-postgres/identity-principals.sql:ro
     networks: [data]
     healthcheck:
       test: [CMD-SHELL, "pg_isready -h 127.0.0.1 -U postgres -d kairn"]

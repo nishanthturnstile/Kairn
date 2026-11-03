@@ -20,6 +20,7 @@ COPY --chown=node:node packages/shared/package.json ./packages/shared/package.js
 COPY --chown=node:node packages/sync-protocol/package.json ./packages/sync-protocol/package.json
 COPY --chown=node:node packages/design-tokens/package.json ./packages/design-tokens/package.json
 COPY --chown=node:node tools/api-generation/package.json ./tools/api-generation/package.json
+COPY --chown=node:node tools/identity-generation/package.json ./tools/identity-generation/package.json
 RUN --mount=type=cache,id=kairn-pnpm,target=/home/node/.local/share/pnpm/store,uid=1000,gid=1000 pnpm install --frozen-lockfile
 
 FROM dependencies AS source
@@ -50,10 +51,13 @@ COPY --chown=node:node . .
 CMD ["pnpm", "check"]
 
 FROM source AS build
-RUN --mount=type=cache,id=kairn-pnpm,target=/home/node/.local/share/pnpm/store,uid=1000,gid=1000 pnpm build:server && pnpm --filter @kairn/server deploy --prod /app/.runtime
+# pnpm 12.16.1's dedicated deploy lock retains a pruned patched Gel peer in Drizzle's
+# identity. Legacy frozen deploy uses the checked workspace lock. Only absent dev/native
+# patches may be unused; included patch hashes and application stay strictly checked.
+RUN --mount=type=cache,id=kairn-pnpm,target=/home/node/.local/share/pnpm/store,uid=1000,gid=1000 pnpm build:server && pnpm --filter @kairn/server deploy --legacy --prod --frozen-lockfile --config.allowUnusedPatches=true /app/.runtime
 
 FROM source AS worker-build
-RUN --mount=type=cache,id=kairn-pnpm,target=/home/node/.local/share/pnpm/store,uid=1000,gid=1000 pnpm build:worker && pnpm --filter @kairn/worker deploy --prod /app/.worker && pnpm --filter @kairn/backend deploy --prod /app/.migrate
+RUN --mount=type=cache,id=kairn-pnpm,target=/home/node/.local/share/pnpm/store,uid=1000,gid=1000 pnpm build:worker && pnpm --filter @kairn/worker deploy --legacy --prod --frozen-lockfile --config.allowUnusedPatches=true /app/.worker && pnpm --filter @kairn/backend deploy --legacy --prod --frozen-lockfile --config.allowUnusedPatches=true /app/.migrate
 
 FROM node:26.13.0-bookworm-slim@sha256:bc0a2afd3b74ce12222fc8bab99271e66257f021078f5f4a5d687a77d280c1d9 AS worker-runtime
 WORKDIR /app

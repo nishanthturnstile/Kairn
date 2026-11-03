@@ -13,6 +13,7 @@ export function createApp(options: {
   publicOrigin: string;
   onError?: (error: Error) => void;
   checkReady?: () => Promise<void>;
+  designSpecimens?: boolean;
 }): OpenAPIHono {
   const app = new OpenAPIHono();
   app.use("*", async (context, next) => {
@@ -66,6 +67,14 @@ export function createApp(options: {
     context.header("X-Robots-Tag", "noindex, nofollow");
     return context.html(await options.web.reader({ marker }, context.req.url));
   });
+  if (options.designSpecimens) {
+    app.get("/setup/accounts", async (context) => {
+      context.header("Cache-Control", "no-store");
+      context.header("X-Robots-Tag", "noindex, nofollow");
+      context.header("Referrer-Policy", "no-referrer");
+      return context.html(await options.web.creator(context.req.url));
+    });
+  }
   for (const path of ["/", "/setup/status"]) {
     app.get(path, async (context) => {
       context.header("Cache-Control", "no-store");

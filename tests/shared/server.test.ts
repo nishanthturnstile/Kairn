@@ -52,8 +52,23 @@ describe("HTTP factory without a listener", () => {
   });
   it("keeps public journeys and source paths unavailable", async () => {
     const app = createApp({ web, publicOrigin });
-    for (const path of ["/journeys/private-id", "/src/app.ts", "/.env", "/package.json"])
+    for (const path of [
+      "/journeys/private-id",
+      "/src/app.ts",
+      "/.env",
+      "/package.json",
+      "/setup/accounts",
+      "/api/v1/me",
+      "/api/v1/journeys",
+    ])
       expect((await app.request(path)).status).toBe(404);
+  });
+  it("serves labeled specimens only when the development entry enables them", async () => {
+    const app = createApp({ web, publicOrigin, designSpecimens: true });
+    const response = await app.request("/setup/accounts");
+    expect(response.status).toBe(200);
+    expect(response.headers.get("Cache-Control")).toBe("no-store");
+    expect(response.headers.get("X-Robots-Tag")).toBe("noindex, nofollow");
   });
   it("returns safe error bytes when rendering fails", async () => {
     const app = createApp({

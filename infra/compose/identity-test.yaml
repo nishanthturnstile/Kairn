@@ -1,0 +1,5 @@
+# Identity SQL acceptance uses the current dependency/source image without browser tooling.
+services:
+  tooling:
+    build:
+      target: source

@@ -135,6 +135,7 @@ try {
   }
   // Existing wrappers own isolated application projects, durability checks, and cleanup.
   await run(process.execPath, [join(root, "scripts/verify-web.mjs")]);
+  await run(process.execPath, [join(root, "scripts/verify-identity.mjs")]);
   await run(process.execPath, [join(root, "scripts/verify-data.mjs")]);
   result.status = "passed";
   console.log(

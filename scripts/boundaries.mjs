@@ -18,6 +18,7 @@ export const allowedDependencies = {
   "@kairn/server": [...universal, "@kairn/backend", "@kairn/web"],
   "@kairn/worker": [...universal, "@kairn/backend"],
   "@kairn/api-generation": ["@kairn/contracts"],
+  "@kairn/identity-generation": ["@kairn/backend"],
 };
 
 /** @typedef {{name: string, directory: string, dependencies?: Record<string, string>, devDependencies?: Record<string, string>, exports?: Record<string, unknown>}} Workspace */

@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SetupAccountsRouteImport } from './routes/setup.accounts'
 import { Route as SetupStatusRouteImport } from './routes/setup.status'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SetupAccountsRoute = SetupAccountsRouteImport.update({
+  id: '/setup/accounts',
+  path: '/setup/accounts',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SetupStatusRoute = SetupStatusRouteImport.update({
@@ -25,27 +31,31 @@ const SetupStatusRoute = SetupStatusRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/setup/accounts': typeof SetupAccountsRoute
   '/setup/status': typeof SetupStatusRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/setup/accounts': typeof SetupAccountsRoute
   '/setup/status': typeof SetupStatusRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/setup/accounts': typeof SetupAccountsRoute
   '/setup/status': typeof SetupStatusRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/setup/status'
+  fullPaths: '/' | '/setup/accounts' | '/setup/status'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/setup/status'
-  id: '__root__' | '/' | '/setup/status'
+  to: '/' | '/setup/accounts' | '/setup/status'
+  id: '__root__' | '/' | '/setup/accounts' | '/setup/status'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SetupAccountsRoute: typeof SetupAccountsRoute
   SetupStatusRoute: typeof SetupStatusRoute
 }
 
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/setup/accounts': {
+      id: '/setup/accounts'
+      path: '/setup/accounts'
+      fullPath: '/setup/accounts'
+      preLoaderRoute: typeof SetupAccountsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/setup/status': {
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SetupAccountsRoute: SetupAccountsRoute,
   SetupStatusRoute: SetupStatusRoute,
 }
 export const routeTree = rootRouteImport

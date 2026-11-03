@@ -9,7 +9,7 @@
     "doctor": "node scripts/doctor.mjs",
     "format": "vp fmt --write .",
     "format:check": "vp fmt --check .",
-    "check:tooling": "vp check --no-fmt scripts config tools vite.config.ts && tsc --noEmit && pnpm --filter @kairn/api-generation exec tsc --noEmit",
+    "check:tooling": "vp check --no-fmt scripts config tools vite.config.ts && tsc --noEmit && pnpm --filter @kairn/api-generation exec tsc --noEmit && pnpm --filter @kairn/identity-generation typecheck && pnpm auth:schema:check",
     "verify:toolchain": "node scripts/verify-toolchain.mjs",
     "api:generate": "pnpm --filter @kairn/contracts run build:schema && pnpm --filter @kairn/api-generation run generate",
     "api:check": "pnpm --filter @kairn/contracts run build:schema && pnpm --filter @kairn/api-generation run check",
@@ -44,10 +44,16 @@
     "ios:pods:update": "pnpm build:packages && node scripts/mobile.mjs ios-pods-update",
     "build:ios:simulator": "pnpm build:packages && node scripts/mobile.mjs ios-simulator",
     "verify:ios": "pnpm check:mobile && node scripts/mobile.mjs verify-ios",
-    "check:mobile:host": "pnpm build:packages && node scripts/check-mobile-host.mjs"
+    "check:mobile:host": "pnpm build:packages && node scripts/check-mobile-host.mjs",
+    "test:identity": "pnpm build:packages && vp test run --config config/integration/vite.identity.config.ts",
+    "verify:identity": "node scripts/verify-identity.mjs",
+    "auth:schema:generate": "pnpm build:packages && pnpm --filter @kairn/identity-generation generate",
+    "auth:schema:check": "pnpm build:packages && pnpm --filter @kairn/identity-generation check",
+    "db:generate": "pnpm --filter @kairn/identity-generation db:generate"
   },
   "devDependencies": {
     "@aws-sdk/client-s3": "3.1161.0",
+    "@axe-core/playwright": "4.14.0",
     "@kairn/backend": "workspace:*",
     "@kairn/contracts": "workspace:*",
     "@kairn/design-tokens": "workspace:*",
@@ -57,6 +63,7 @@
     "@kairn/worker": "workspace:*",
     "@playwright/test": "1.64.1",
     "@types/node": "26.6.6",
+    "playwright-core": "1.64.1",
     "typescript": "7.0.2",
     "vite-plus": "1.4.0"
   },

@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "migrations": [
+    {
+      "file": "0000_identity_auth_foundation.sql",
+      "sha256": "2650102af8abfdcdcf16e60248c2ab4e3eb3ad677d4ade4b9a7d03efa3fac3af"
+    },
+    {
+      "file": "0001_identity_access.sql",
+      "sha256": "c676b377e68f550966503a575b4c18d3764630042a678b162177035163216f7e"
+    }
+  ]
+}

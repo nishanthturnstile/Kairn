@@ -735,6 +735,8 @@ Observed on 1 November 2026. Exact direct pins and the resolved lockfile are req
 | Web/native forms | `@tanstack/react-form` | `1.33.5` | Journey, details, rights, and publication forms. |
 | Web batch review | `@tanstack/react-table` | `9.3.1` | Import/moderation workspace; no native table adapter. |
 | Web component generation | `shadcn` CLI | `4.23.0` | Generate only selected components; owned source, not a runtime umbrella library. |
+| Owned web primitive support | `cn`, `class-variance-authority` | `0.5.2`, `0.7.1` | B01 selected shadcn source utilities; no component-explorer or second styling framework. |
+| Web primitive base | `@radix-ui/react-slot`, `@radix-ui/react-label`, `@radix-ui/react-separator` | `1.5.0`, `2.1.17`, `1.2.0` | B01 generated button/field support, narrowed to the three used primitives instead of the full `radix-ui` entry. |
 | Web styles | `tailwindcss`, `@tailwindcss/vite` | `4.3.3` | Design foundation. |
 | Icons | `lucide-react`, `lucide-react-native` | `1.66.0` | Design foundation with the native SVG peer below. |
 | Web recovery | `dexie` | `4.4.7` | Unsent web edits/outbox; distinct from Query caching. |
@@ -744,6 +746,9 @@ Observed on 1 November 2026. Exact direct pins and the resolved lockfile are req
 | Generator compiler | `typescript` in `tools/api-generation` | `6.0.3` exact | Development-only compiler API exception for `openapi-typescript@7.13.0`; its declared `^5.x` peer is extended only for this exact tested pair. Root/shared remain on TypeScript 7; contracts never depend on this tool. |
 | Database access | `drizzle-orm`, `drizzle-kit`, `pg` | `0.45.4`, `0.31.11`, `8.23.1` | Reviewed data schema/migrations, raw spatial/retrieval SQL where needed. |
 | Authentication | `better-auth`, `@better-auth/expo` | `1.7.15` | Accounts, sessions, recovery, native integration. |
+| Auth schema generation | `auth` CLI | `1.7.15` | Development-only in `tools/identity-generation`, matched to Better Auth; no runtime CLI. |
+| Auth generator peers | `@better-fetch/fetch`, `better-call`, `jose`, `kysely`, `nanostores`, `@types/bun` | `1.3.3`, `1.4.4`, `6.2.15`, `0.29.8`, `1.5.5`, `1.4.4` | Explicit strict peer/declaration graph in the isolated auth generator. No Bun runtime or second backend is selected. |
+| Drizzle declaration peers | `gel`, `mysql2` | `2.2.1`, `3.24.6` | Development-only published dialect declaration dependencies; PostgreSQL remains the runtime database. |
 | Durable worker | `pg-boss` | `12.38.0` | First asynchronous domain work; direct `fromDrizzle` transaction adapter. |
 | Queue peer | `@opentelemetry/api` | `1.10.0` | Required pg-boss peer at foundation; no tracing backend is introduced. |
 | PostgreSQL declarations | `@types/pg` | `8.23.1` | Backend development types for the selected driver. |
@@ -759,6 +764,7 @@ Observed on 1 November 2026. Exact direct pins and the resolved lockfile are req
 | Native maps | `@rnmapbox/maps` | `10.3.16` | Community bridge with Expo config plugin. Separate native workspace and development builds; actual Android and local iOS qualification required. |
 | Web behavior tests | `@testing-library/react` | `16.3.3` | Add with meaningful component behavior. |
 | Web acceptance | `@playwright/test`, `@axe-core/playwright` | `1.64.1`, `4.14.0` | Integrated web/accessibility qualification; no separate browser app service. |
+| Accessibility test peer | `playwright-core` | `1.64.1` | Explicit `@axe-core/playwright` peer; matches the existing Playwright browser/test version. Development-only. |
 
 Vite+ bundles Vite `8.3.5`, Rolldown `1.2.15`, Vitest `5.0.5`, Oxlint `1.89.0`, Oxfmt `0.74.0`, and tsdown `0.23.1`. Those are bundled observations, not additional direct selections. Preserve the supported pnpm overrides for `vite@*` to the single Vite+ core and `vitest@*` to the bundled runner version. Use `vite-plus` config APIs and `vite-plus/test` test APIs. No standalone Biome, ESLint, Prettier, Vitest, or Turbo stack is added. [Vite+ local setup](https://viteplus.dev/guide/local-cli), [shipped-tool evidence](../research/architecture/revision_toolchain_ai_email.md).
 
@@ -771,6 +777,8 @@ Setup step 2 qualifies the actual status schema, offline OpenAPI 3.1 generation,
 Setup step 3 qualifies the composed Hono/Vite development server and deployed production dependency closure, including reader SSR/hydration, request isolation, lazy assets, and the typed status endpoint. Router/Tailwind plugins receive exact-parent Vite peer adjustments; Babel React Compiler's declarations receive a version-specific missing-type dependency extension. Development packing keeps dependencies external so the aliased Vite core resolves its native bindings correctly. The final runtime excludes development tooling. [Step 3 acceptance evidence](../research/repository-setup/repository_setup_progress_2026-11-02.md#step-3-verification) records the executed gates; data services and native foundation acceptance were qualified in subsequent setup steps; public deployment remains later work.
 
 Setup step 4 adds the selected PostgreSQL, SeaweedFS, Mailpit, and pg-boss foundation. The lockfile retains a declaration-only `pg-boss@12.38.0` patch restoring two interfaces present in its tagged source but omitted by its declaration build; runtime code is unchanged and declaration checking remains enabled. Schema-owner credentials are reserved for bootstrap and acceptance tooling, outside both application processes. Three focused data integration scenarios and the required startup/readiness gates are recorded in [step 4 evidence](../research/repository-setup/repository_setup_progress_2026-11-02.md#step-4-verification), following the [testing scope guidance](../../AGENTS.md#testing-scope). Domain transaction/Drizzle integration, uploads, and account email remain their later workstreams.
+
+The first account B02 slice adds strict declaration-only repairs for Drizzle/Gel and isolates auth generation from runtime. Its [identity boundary guide](../implementation/identity_database.md) records roles, the pool budget and the version-specific frozen legacy deployment workaround for pnpm's patched development-peer pruning. The normal frozen source install and final dependency-closure probes remain mandatory. [Account implementation progress](../implementation/accounts_journeys_access_progress.md) owns the current evidence; foundation acceptance above does not qualify these changed inputs.
 
 AI SDK currently depends on Gateway provider `4.0.132`. Using its exported `gateway`/`createGateway` does not require a second direct package. Install a provider subpackage only if code actually imports a capability not exported by the selected core.
 
