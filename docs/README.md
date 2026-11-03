@@ -25,8 +25,8 @@ Start with the product plan and requirements. Use the implementation plans for t
 - [Checkout reconciliation record](implementation/checkout_reconciliation_progress.md) — preserved pending files, branch-history backups and initial host alignment
 - [Development skills](implementation/development_skills.md) — installed project skills, source provenance, and how to apply them to Kairn
 - [Accounts, journeys and access implementation](implementation/accounts_journeys_access_plan.md) — plan 1.2: modules, data/migrations, APIs, permissions, delivery order, and acceptance gates
-- [Accounts/journeys implementation progress](implementation/accounts_journeys_access_progress.md) — starting checkpoint, B01 contracts/web specimens, B02 identity/journey/producer boundaries, review corrections, executed checks and remaining batches
-- [Identity database foundation](implementation/identity_database.md) — B02 identity/journey roles and policy graph, migrations, enqueue-only producer grants, existing-volume upgrade and pool budget
+- [Accounts/journeys implementation progress](implementation/accounts_journeys_access_progress.md) — starting checkpoint, B01 contracts/web specimens, complete B02 database foundation, review corrections, executed checks and remaining batches
+- [Identity database foundation](implementation/identity_database.md) — B02 identity/journey/source/operation models and policy graph, migrations, enqueue-only producer grants, existing-volume upgrade and pool budget
 - [Accounts and journey experience handoff](implementation/accounts_journeys_access_design.md) — consumer workflows, screen/route inventory, components, responsive behavior, and UI/UX acceptance
 - [Selected account/journey decisions](implementation/accounts_journeys_access_decisions.md) — chosen authority/lifecycle policy, field limits, expiry, retention targets, asset inputs, and external activation gates
 - [How account/journey implementation starts](implementation/accounts_journeys_access_start.md) — first coding batch, visible checkpoints, user/developer responsibilities, existing checks, and current branch dependency

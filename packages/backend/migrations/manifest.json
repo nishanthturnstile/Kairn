@@ -16,6 +16,14 @@
     {
       "file": "0003_journeys_access.sql",
       "sha256": "7dcfc3775f32d104232b7979415ce0ec18d44dce787b824ba0836ca8dd8440f6"
+    },
+    {
+      "file": "0004_complete_domain_foundation.sql",
+      "sha256": "157ddcd497c71938d74090aa96966870268f83dc6e2afd0dcb8beea2c0815cc7"
+    },
+    {
+      "file": "0005_complete_domain_access.sql",
+      "sha256": "f026253e5aa8fba9f551b1a7203a6620d2b60ff0241f05e9969d29bd95422b26"
     }
   ]
 }

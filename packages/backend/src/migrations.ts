@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import type { Pool, PoolClient } from "pg";
 import { z } from "zod";
+import { assertFoundationStructure } from "./foundation/readiness.js";
 import { assertJourneyStructure } from "./journeys/readiness.js";
 
 const ManifestSchema = z.strictObject({
@@ -64,9 +65,9 @@ export async function migrateIdentity(pool: Pool, folder?: URL) {
     await client.query("SELECT pg_catalog.pg_advisory_lock(1667328366, 1)");
     locked = true;
     const roles = await client.query(
-      "SELECT rolname FROM pg_catalog.pg_roles WHERE rolname IN ('kairn_auth', 'kairn_identity', 'kairn_journey_policy') AND NOT rolsuper AND NOT rolbypassrls AND NOT rolcreatedb AND NOT rolcreaterole AND NOT rolreplication AND (rolname = 'kairn_auth' OR NOT rolcanlogin)",
+      "SELECT rolname FROM pg_catalog.pg_roles WHERE rolname IN ('kairn_auth', 'kairn_identity', 'kairn_journey_policy', 'kairn_access_policy') AND NOT rolsuper AND NOT rolbypassrls AND NOT rolcreatedb AND NOT rolcreaterole AND NOT rolreplication AND (rolname = 'kairn_auth' OR NOT rolcanlogin)",
     );
-    if (roles.rowCount !== 3)
+    if (roles.rowCount !== 4)
       throw new Error("Controlled identity principal bootstrap is required.");
     await client.query("BEGIN");
     await client.query("SET LOCAL search_path = pg_catalog");
@@ -99,6 +100,7 @@ export async function migrateIdentity(pool: Pool, folder?: URL) {
     }
     await assertIdentityStructure(client);
     if (migrations.length > 2) await assertJourneyStructure(client);
+    if (migrations.length > 4) await assertFoundationStructure(client);
     if (applied < migrations.length)
       await client.query(
         "UPDATE kairn_migrations.identity_release SET policies_sha256 = $1 WHERE position = $2",
@@ -127,8 +129,8 @@ async function identityPoliciesHash(client: PoolClient, position: number) {
     'command', cmd, 'using', qual, 'check', with_check
   ) || CASE WHEN schemaname = 'identity' THEN '{}'::jsonb ELSE jsonb_build_object('schema', schemaname) END
   ORDER BY schemaname, tablename, policyname), '[]'::jsonb)::text AS definition
-  FROM pg_catalog.pg_policies WHERE schemaname = 'identity' OR ($1 AND schemaname = 'journeys')`,
-    [position >= 2],
+  FROM pg_catalog.pg_policies WHERE schemaname = 'identity' OR ($1 AND schemaname = 'journeys') OR ($2 AND schemaname IN ('sources', 'operations'))`,
+    [position >= 2, position >= 4],
   );
   return createHash("sha256").update(z.string().parse(result.rows[0]?.definition)).digest("hex");
 }
@@ -207,6 +209,7 @@ export async function checkIdentityDatabase(pool: Pool) {
     if (applied !== migrations.length) throw new Error("Identity schema is not ready.");
     await assertIdentityStructure(client);
     if (migrations.length > 2) await assertJourneyStructure(client);
+    if (migrations.length > 4) await assertFoundationStructure(client);
     await assertIdentityPolicies(client, applied - 1);
     await client.query("COMMIT");
   } catch (error) {

@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Date / version | 3 November 2026 / 1.2 — implementation baseline selected |
-| Status | B00 reconciled; B01 contracts/web specimens and B02 identity migration/provisioning, enqueue-only producer and canonical journey/membership read boundaries implemented. Both batches remain in progress; integrated account/journey acceptance is pending. See the [execution record](accounts_journeys_access_progress.md). |
+| Status | B00 reconciled; B01 contracts/web specimens implemented and still in progress. B02 S01–S06 schema/migration/privilege foundation is complete with real PostgreSQL G03/core isolation evidence. Integrated account/journey acceptance remains pending. See the [execution record](accounts_journeys_access_progress.md). |
 | Scope | Delivery step 1 of the complete R1 product: contracts, accounts, canonical journey identity, memberships, capabilities, source/export-grant foundations, audit and restriction recovery. |
 | Baseline inspected | `84d339e734dfe85e9ea12e356f650d59991ab32e`; completed setup/native foundation, product status shells. |
 | Governing sources | [Requirements](../core/product_requirements.md), [architecture](../core/architecture.md), [application design](../core/application_design.md). |
@@ -234,7 +234,7 @@ Names below describe proposed interfaces, not existing exported functions. A ser
 
 ## 4. Proposed relational model and invariants
 
-This is a design-level schema inventory, not reviewed DDL. Freeze names/types/constraints in B02 after B01 decisions. Keep SQL/auth schemas private; wire types are projections. Use UUIDs for domain/offline identities and operation IDs, timezone-aware server timestamps and explicit local-time context. The auth generator owns its actual identifier types.
+This inventory defines schema responsibilities. B02 now supplies the reviewed [models, migrations, policy graph and evidence](identity_database.md#complete-s02s06-database-boundary); its source names/types/constraints are frozen at that checkpoint. Keep SQL/auth schemas private; wire types are projections. Use UUIDs for domain/offline identities and operation IDs, timezone-aware server timestamps and explicit local-time context. The auth generator owns its actual identifier types.
 
 ### 4.1 Tables and key relationships
 
@@ -568,7 +568,7 @@ The actual independent journal drill is mandatory before enabling shared data an
 
 ## 10. Ordered implementation batches
 
-Current execution status lives in [implementation progress](accounts_journeys_access_progress.md): B00 is verified, B01–B02 are in progress and B03–B09 are not started. The identity and producer boundaries do not close the full journey/grant/operation schema foundation or integrated G08. Each batch should be a reviewable change with its own acceptance evidence. Confirm the actual main/PR state at implementation time; setup PR checks do not qualify later application changes.
+Current execution status lives in [implementation progress](accounts_journeys_access_progress.md): B00 is verified, B01 is in progress, B02 is complete and B03–B09 are not started. B02 closes G03 and the core schema/FK/unique/RLS foundation; integrated command/audit/job G08 remains B03 work. Each batch should be a reviewable change with its own acceptance evidence. Confirm the actual main/PR state at implementation time; setup PR checks do not qualify later application changes.
 
 | Batch | Deliverables | Depends on | Exit condition |
 | --- | --- | --- | --- |

@@ -29,6 +29,20 @@
       "when": 1793708580553,
       "tag": "0003_journeys_access",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1793713741833,
+      "tag": "0004_complete_domain_foundation",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1793713742817,
+      "tag": "0005_complete_domain_access",
+      "breakpoints": true
     }
   ]
 }
