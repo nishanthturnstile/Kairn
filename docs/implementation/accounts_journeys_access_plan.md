@@ -568,7 +568,7 @@ The actual independent journal drill is mandatory before enabling shared data an
 
 ## 10. Ordered implementation batches
 
-Current execution status lives in [implementation progress](accounts_journeys_access_progress.md): B00 is verified, B01 is in progress, B02 and the B03 local boundary are complete, and B04–B09 are not started. B02 closes G03 and the core schema/FK/unique/RLS foundation; B03 qualifies checked command/audit/job G08 and controlled recovery failures. Actual independent-host G09 qualification remains required before shared-data activation. Progress records the separate online Expo compatibility warning for the unchanged native pins. Each batch should be a reviewable change with its own acceptance evidence. Confirm the actual main/PR state at implementation time; setup PR checks do not qualify later application changes.
+Current execution status lives in [implementation progress](accounts_journeys_access_progress.md): B00 is verified, B01 is in progress, B02 and the B03 local boundary are complete, and B04–B09 are not started. B02 closes G03 and the core schema/FK/unique/RLS foundation; B03 qualifies checked command/audit/job G08 and controlled recovery failures. Actual independent-host G09 qualification remains required before shared-data activation. The [SDK patch refresh](expo_sdk_refresh_progress.md) resolves the former online compatibility warning and records the new full verification. Each batch should be a reviewable change with its own acceptance evidence. Confirm the actual main/PR state at implementation time; setup PR checks do not qualify later application changes.
 
 | Batch | Deliverables | Depends on | Exit condition |
 | --- | --- | --- | --- |

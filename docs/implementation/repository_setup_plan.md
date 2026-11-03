@@ -6,6 +6,8 @@ The implemented pnpm workspace contains the web application, one Expo Android/iO
 
 Steps 1–7 have recorded acceptance results for the agreed scope. The foundation was merged in [PR #1](https://github.com/nishanthturnstile/Kairn/pull/1) from source `58d258c`; merged `main` revision `6057607` passed [hosted CI run 41474006988](https://github.com/nishanthturnstile/Kairn/actions/runs/41474006988). The follow-up documentation PR requires its own checks; prior runs do not qualify a later head. The [progress record](repository_setup_progress.md#current-checkpoint) owns current completion status, operational follow-up, and executed evidence. Commands below define the implemented milestone interface. The [development skills inventory](development_skills.md) records guidance installed for both current and future workstreams; skill installation alone does not qualify an application integration.
 
+The [SDK 58 patch refresh](expo_sdk_refresh_progress.md) records the subsequent dependency update and its new local verification. The foundation results above remain source-specific; native compilation, installed-device behavior and hosted CI retain their separate evidence.
+
 ## 1. Result of this milestone
 
 A fresh WSL checkout can start the application and data services with `docker compose up --build` and run checks and JavaScript builds in the tooling container. Platform-local checkouts build an Android debug APK on Windows and an iOS simulator app on the Mac, with Personal Team build/install/status acceptance completed on the available iPad. Physical iPhone checks remain deferred. A small status request proves that web and both native platforms consume the generated API contract. A real PostgreSQL job proves that the worker is a separate durable process.

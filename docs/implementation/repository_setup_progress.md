@@ -14,6 +14,8 @@ Date: 3 November 2026. All seven foundation implementation and local acceptance 
 | T3 iOS control | Revalidated in this handoff: discovery, open, supported XCTest snapshot, input/refetch, and screenshot passed on the iPhone simulator. The owned session was closed. The physical iPad was not listed by this tool configuration. |
 | Combined host capacity | Current stack + Android emulator + Windows Metro + containerized `pnpm check` measured successfully; all six services remained healthy. Scope and sampled limits are below. |
 
+The [SDK 58 patch refresh](expo_sdk_refresh_progress.md) follows the accepted foundation with new SDK dependencies and a passing full online verification on `189fe4935231a580469ec5005c1da97af08344b1`. It records affected Android/iOS compilation separately; prior simulator/iPad interaction evidence is not reassigned to a new binary. Shared-data activation still depends on the later independent recovery gate.
+
 ## Publication and source handoff
 
 The foundation merged in [PR #1](https://github.com/nishanthturnstile/Kairn/pull/1) at source `58d258c036db6f0428bdced710259798630566ad`. Merged `main` at `605760723ab4c91e2bd7b2d059dd6b67d0b14b39` passed [CI run 41474006988](https://github.com/nishanthturnstile/Kairn/actions/runs/41474006988). The final GitHub Actions status is required on `main`, with strict up-to-date checks and administrator enforcement.

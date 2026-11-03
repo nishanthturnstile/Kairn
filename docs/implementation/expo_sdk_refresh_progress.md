@@ -22,14 +22,31 @@ The package manager recorded exact-version release-age exceptions for the 22 new
 
 Expo's [upgrade guidance](https://docs.expo.dev/workflow/upgrading-expo-sdk-walkthrough/) calls for matching dependencies, Doctor and updated native projects. These checks run against the adopted SDK; no Expo Go or cloud build is substituted for native qualification.
 
-## Executed checks and remaining qualification
+## Executed checks and source identity
 
-- Online `expo install --check`: passed, dependencies up to date.
-- Pinned `expo-doctor@1.21.5`: all 20 checks passed.
-- Router patch: all eight files pass a dry run against the actual published package; the patch hash is unchanged.
-- Full current-source Compose `pnpm verify`, updated iOS lock and affected native build results are recorded here as they complete. Earlier binaries/CI results remain historical.
+The dependency correction is commit `1e8e835b6b7320710901ceccf4aace982ebc5218`. The intentional iOS lock refresh was authored on the Mac and committed as `189fe4935231a580469ec5005c1da97af08344b1`. The full verification and native builds below use that exact latter source. Documentation-only closure follows it; it does not change the tested application inputs.
 
-Ignored logs use `.kairn/verification/expo-refresh-*.log`. The Windows primary checkout currently contains unrelated prototype work; its source and packager remain untouched. The Mac primary checkout was clean at `development` commit `605bc61382f2445eb53aea2f64dc6b45c7032641` when inspected.
+| Boundary | Executed result |
+| --- | --- |
+| SDK and package patch | Ordinary online `expo install --check` passed on WSL, Windows and Mac. Pinned `expo-doctor@1.21.5` passed all 20 checks on each host. All eight Router declaration files passed a patch dry run against the published package; the patch bytes/hash are unchanged. |
+| Full aggregate | Normal online `pnpm verify` passed from `2026-11-03T17:46:40.718Z` to `2026-11-03T18:19:00.701Z`. `.kairn/verification/run-pstQ2u/result.json` records clean source `189fe4935231a580469ec5005c1da97af08344b1`, nine retained artifacts and six generated/source comparisons. No offline bypass or version-check exclusion was used. |
+| Shared/tooling | All 50 tests passed, including the filesystem/HTTPS journal boundary. Strict types/lint, auth/OpenAPI generation, universal package/client boundaries, TS6/TS7 consumers and both mobile JavaScript exports passed. |
+| Real database/domain | All 18 identity scenarios and nine B03 command/worker/media/mail/recovery scenarios passed. This includes actual non-owner roles, S3/SMTP, Better Auth callback handling, signed journal replay and writer fencing. The packaged non-root avatar decoder passed. |
+| Web and service recovery | All six web checks passed in each development, production and post-recovery run. Data seed passed three checks; restart passed two, with its seed-only SMTP check intentionally skipped. Real database outage/readiness/reconnect, migration-failure startup gating and packaged non-root worker delivery passed. |
+| Android native | Windows `pnpm verify:android` passed `assembleDebug` and `lintDebug` for `x86_64`: `BUILD SUCCESSFUL in 25m 53s`, zero lint errors and 31 warnings. The APK has 98,822,543 bytes and SHA-256 `d6d7af3168044fffab187afbe3d809ae2b63b34cd7b6c04ad85af8195aa99545`. |
+| iOS native | Mac `pnpm verify:ios` passed canonical-path locked Pod installation (120 dependencies, 119 total pods) and `x86_64` simulator compilation. The clean-source build record was written at `2026-11-03T18:29:11.897Z`: Xcode 26.5 build 17F42, macOS 26.7.2, CocoaPods 1.16.2 and the retained `expo-template-bare-minimum@58.0.30`. |
+
+The 238 application/configuration/native inputs in `.kairn/verification/expo-refresh/inputs.json` have manifest SHA-256 `6ce96e9c2359bca3e7d7429f2ffbb5ce8e3e5dca63513cb715e3a30cf1098818`. All were compared byte-for-byte inside the actual built tooling image, `sha256:17a3642debb64933a2f8db87cfee86b4b3fae4f0c238dee5a113bc4e8a922383`; `image-inputs.json` retains the comparison. Documentation and ignored host/evidence files are outside this application manifest. Released SQL migrations `0000`–`0008` are byte-identical to B03.
+
+The refreshed native lock SHA-256 is `af67b96211728a2722f73fdfe7cba7abf05dc81afa5a9476be9f99d615e0c2ef`. Its changes follow the Expo/safe-area dependency update; React Native, Nitro and Unistyles remain pinned. An attempted Mac worktree at another absolute path failed the locked Expo prebuilt Core podspec checksum: that generated podspec includes the local archive's absolute `file://` URL and preparation path. The same package at the configured canonical checkout passed locked installation. This diagnostic does not justify changing Core or relaxing locked mode; a checkout relocation requires an intentional reviewed native-lock refresh.
+
+WSL verification uses the isolated authoring worktree `/home/dev/dev/projects - WSL/nishanth/Kairn-sdk-refresh`. Windows consumes the committed checkpoint in `C:\dev\kairn-sdk-refresh`; its qualified APK is under `apps/mobile/android/app/build/outputs/apk/debug/app-debug.apk`. The Mac uses `/Users/nishanth/projects/nishanth/kairn` and the configured two-job Xcode simulator build. The original WSL and Windows checkouts contain unrelated prototype work; their source and packager were preserved. Each host installed its own frozen dependencies; source and the Mac-authored lock moved through Git.
+
+The iOS simulator app is `.kairn/ios-build/Build/Products/Debug-iphonesimulator/KairnDev.app`: 161 files, 141,694,327 bytes and tree SHA-256 `badf73e8be303cb6be42afd6f7e6a0b84de9ad5d07545ca727f3c14cfd21776f`. The tree digest covers sorted relative-file entries with their size/content hash or symlink target, serialized as compact JSON with sorted object keys. The main code library `KairnDev.debug.dylib` has SHA-256 `128cfb0ad2286fac30f2c92f1e749aa3a4cac8fcd4906f22ad709936e992ce5f`. Mac `.kairn/verification/ios-build.json` and `sdk-refresh-ios-artifact.json` retain the build record and full artifact manifest; the WSL metadata copy is `.kairn/verification/expo-refresh/ios-evidence.json`.
+
+Ignored logs use `.kairn/verification/expo-refresh-*.log`; the Android fingerprint is retained in `.kairn/verification/expo-refresh/android-evidence.log`. These are build and local integration results. No refreshed native install/device/UI result, hosted CI, deployment or independent failure-domain qualification is claimed. Earlier device/binary evidence remains tied to its original source. T3 device discovery in this WSL environment exposed neither platform, so there was no new device interaction.
+
+Coverage uses the existing aggregate and owning-host native gates; no tests were added for dependency values or documentation. Final formatting/diff checks passed, all 238 frozen application inputs remained unchanged, and the six Mac build-input hashes matched the WSL source.
 
 ## Recovery deployment decision
 

@@ -20,6 +20,8 @@ Use the Unistyles/Nitro pins in architecture section 14 with New Architecture en
 
 These are store/build-service costs, not a zero-cost promise for hosting, maps, AI, or other providers. [Google registration](https://support.google.com/googleplay/android-developer/answer/6112435?hl=en), [Apple enrollment](https://developer.apple.com/programs/enroll/).
 
+The [SDK 58 patch refresh](expo_sdk_refresh_progress.md) records the later dependency update, full online verification and affected native compilation. Earlier simulator/iPad interaction evidence remains tied to its original source and installed binaries; refreshed native builds do not by themselves claim new device/UI acceptance.
+
 ## 2. Host allocation and memory
 
 | Host | Responsibilities |
