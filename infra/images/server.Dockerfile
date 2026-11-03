@@ -42,6 +42,10 @@ RUN pnpm exec playwright install --with-deps chromium
 USER node
 
 FROM browser-tools AS tooling
+USER root
+# Checkout safety tests use real disposable Git repositories; production stages omit Git.
+RUN apt-get update && apt-get install -y --no-install-recommends git && rm -rf /var/lib/apt/lists/*
+USER node
 COPY --chown=node:node . .
 CMD ["pnpm", "check"]
 

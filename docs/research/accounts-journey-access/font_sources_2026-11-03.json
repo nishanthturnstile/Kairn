@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-03",
+  "status": "Downloaded planning inputs verified by SHA-256; fonts are not yet bundled or visually qualified",
+  "sourceRepository": "https://github.com/google/fonts",
+  "families": [
+    {
+      "family": "Newsreader",
+      "repositoryCommit": "8b0a1d0f5983c89bc2b93f1b5fb55f9e252744b5",
+      "roles": ["editorial display"],
+      "selectedAxes": { "wght": [500, 600], "opsz": 16 },
+      "font": {
+        "file": "Newsreader[opsz,wght].ttf",
+        "url": "https://raw.githubusercontent.com/google/fonts/8b0a1d0f5983c89bc2b93f1b5fb55f9e252744b5/ofl/newsreader/Newsreader%5Bopsz%2Cwght%5D.ttf",
+        "sha256": "8a08d13f8a6c0d51be379a60af84f945f65369a67e509ee3c3bdcc421254d7c1",
+        "bytes": 451664
+      },
+      "license": {
+        "id": "OFL-1.1",
+        "url": "https://raw.githubusercontent.com/google/fonts/8b0a1d0f5983c89bc2b93f1b5fb55f9e252744b5/ofl/newsreader/OFL.txt",
+        "sha256": "fdfad38143ec470553cae82a1e45320bdd1b9ec70415d37bd0171051d8a4ded8"
+      },
+      "metadata": {
+        "url": "https://raw.githubusercontent.com/google/fonts/8b0a1d0f5983c89bc2b93f1b5fb55f9e252744b5/ofl/newsreader/METADATA.pb",
+        "sha256": "dc0bcb264c09d663c9a4f559e4f5392fd7d9f62139ad9cbba39253ec43aa315b"
+      }
+    },
+    {
+      "family": "Instrument Sans",
+      "repositoryCommit": "0b58fb370093f9a9f4ff785d94405710b79de67c",
+      "roles": ["interface", "body"],
+      "selectedAxes": { "wght": [400, 500, 600, 700], "wdth": 100 },
+      "font": {
+        "file": "InstrumentSans[wdth,wght].ttf",
+        "url": "https://raw.githubusercontent.com/google/fonts/0b58fb370093f9a9f4ff785d94405710b79de67c/ofl/instrumentsans/InstrumentSans%5Bwdth%2Cwght%5D.ttf",
+        "sha256": "b24f1812584816958afcf22e22d08e44318c5e51651e25d2438efdde389b33b1",
+        "bytes": 194336
+      },
+      "license": {
+        "id": "OFL-1.1",
+        "url": "https://raw.githubusercontent.com/google/fonts/0b58fb370093f9a9f4ff785d94405710b79de67c/ofl/instrumentsans/OFL.txt",
+        "sha256": "9e27a72ed30eb49a08678f6a5d6ed98ec7ba5368f541637ee0683ec9134ef966"
+      },
+      "metadata": {
+        "url": "https://raw.githubusercontent.com/google/fonts/0b58fb370093f9a9f4ff785d94405710b79de67c/ofl/instrumentsans/METADATA.pb",
+        "sha256": "111191daf841919d5d09b88ca7a17fb691c4b835c61ca81c958f334c40c11535"
+      }
+    }
+  ]
+}

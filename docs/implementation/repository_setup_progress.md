@@ -20,6 +20,8 @@ The foundation merged in [PR #1](https://github.com/nishanthturnstile/Kairn/pull
 
 Two documentation commits were pushed to the old review branch after that PR merged; they were not part of the merge and never triggered PR CI. This follow-up starts from merged `main`, carries those records forward, and reconciles all active plans. Its publication uses a new PR and its own check results. A local commit or push is not evidence that an already-merged PR ran again.
 
+Subsequent handoff: setup PR #2 merged at main 7db6595. The authorized [checkout reconciliation](checkout_reconciliation_progress.md) fast-forwarded the old development branch without losing unique commits and established the [development/main and multi-host workflow](checkout_workflow.md). That workflow now governs new feature branches; the main-based setup publication above is historical provenance.
+
 Use Git to synchronize the reviewed branch and commit across the three owning-OS checkouts. Preserve ignored host tools, dependencies, native output, environment files, and user signing settings. The earlier source snapshot is historical transfer evidence, not the current synchronization mechanism.
 
 ## Qualified compatibility decisions

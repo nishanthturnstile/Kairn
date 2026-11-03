@@ -4,6 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "checkout:status": "node scripts/checkouts.mjs status",
+    "checkout:sync": "node scripts/checkouts.mjs sync",
     "doctor": "node scripts/doctor.mjs",
     "format": "vp fmt --write .",
     "format:check": "vp fmt --check .",
