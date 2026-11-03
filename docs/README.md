@@ -30,9 +30,9 @@ Start with the product plan and requirements. Use the implementation plans for t
 - [Selected account/journey decisions](implementation/accounts_journeys_access_decisions.md) — chosen authority/lifecycle policy, field limits, expiry, retention targets, asset inputs, and external activation gates
 - [How account/journey implementation starts](implementation/accounts_journeys_access_start.md) — first coding batch, visible checkpoints, user/developer responsibilities, existing checks, and current branch dependency
 
-## Research
+- [Prototype progress](implementation/prototype_progress.md) — P00–P02 implementation, executed checks, visual checkpoint and platform gaps
 
-Prototype implementation evidence and current P00–P02 status: [prototype progress](implementation/prototype_progress.md).
+## Research
 
 - [Architecture research](research/architecture/) — stack, maps, providers, and the [map cost comparison](research/architecture/map_cost_comparison.md)
 - [Repository setup research](research/repository-setup/) — toolchain, native builds, Compose, compatibility probes, and host observations
