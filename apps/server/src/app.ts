@@ -66,7 +66,7 @@ export function createApp(options: {
     context.header("X-Robots-Tag", "noindex, nofollow");
     return context.html(await options.web.reader({ marker }, context.req.url));
   });
-  for (const path of ["/", "/setup/status"]) {
+  for (const path of ["/", "/setup/status", "/prototype", "/prototype/*"]) {
     app.get(path, async (context) => {
       context.header("Cache-Control", "no-store");
       return context.html(await options.web.creator(context.req.url));
