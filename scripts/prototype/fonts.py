@@ -27,4 +27,4 @@ for source in sources["families"]:
             font.flavor = None if extension == "ttf" else "woff2"
             font.save(target / name)
             records.append({"file": name, "sha256": hashlib.sha256((target / name).read_bytes()).hexdigest(), "axes": axes, "sourceSha256": source["font"]["sha256"]})
-(target / "derived-fonts.json").write_text(json.dumps({"tool": "fonttools 4.61.1; brotli 1.2.0", "files": records}, indent=2) + "\n")
+(target / "derived-fonts.json").write_text(json.dumps({"tool": "fonttools 4.61.1; brotli 1.2.0", "files": records}, indent=2) + "\n", newline="\n")
