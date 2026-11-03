@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Date / version | 3 November 2026 / 1.2 — implementation baseline selected |
-| Status | B00 reconciled; B01 contracts/web specimens and B02 identity migration/provisioning plus enqueue-only producer boundaries implemented. Both batches remain in progress; integrated account/journey acceptance is pending. See the [execution record](accounts_journeys_access_progress.md). |
+| Status | B00 reconciled; B01 contracts/web specimens and B02 identity migration/provisioning, enqueue-only producer and canonical journey/membership read boundaries implemented. Both batches remain in progress; integrated account/journey acceptance is pending. See the [execution record](accounts_journeys_access_progress.md). |
 | Scope | Delivery step 1 of the complete R1 product: contracts, accounts, canonical journey identity, memberships, capabilities, source/export-grant foundations, audit and restriction recovery. |
 | Baseline inspected | `84d339e734dfe85e9ea12e356f650d59991ab32e`; completed setup/native foundation, product status shells. |
 | Governing sources | [Requirements](../core/product_requirements.md), [architecture](../core/architecture.md), [application design](../core/application_design.md). |

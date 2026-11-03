@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import type { Pool, PoolClient } from "pg";
 import { z } from "zod";
+import { assertJourneyStructure } from "./journeys/readiness.js";
 
 const ManifestSchema = z.strictObject({
   version: z.literal(1),
@@ -63,9 +64,9 @@ export async function migrateIdentity(pool: Pool, folder?: URL) {
     await client.query("SELECT pg_catalog.pg_advisory_lock(1667328366, 1)");
     locked = true;
     const roles = await client.query(
-      "SELECT rolname FROM pg_catalog.pg_roles WHERE rolname IN ('kairn_auth', 'kairn_identity') AND NOT rolsuper AND NOT rolbypassrls AND NOT rolcreatedb AND NOT rolcreaterole AND NOT rolreplication AND (rolname <> 'kairn_identity' OR NOT rolcanlogin)",
+      "SELECT rolname FROM pg_catalog.pg_roles WHERE rolname IN ('kairn_auth', 'kairn_identity', 'kairn_journey_policy') AND NOT rolsuper AND NOT rolbypassrls AND NOT rolcreatedb AND NOT rolcreaterole AND NOT rolreplication AND (rolname = 'kairn_auth' OR NOT rolcanlogin)",
     );
-    if (roles.rowCount !== 2)
+    if (roles.rowCount !== 3)
       throw new Error("Controlled identity principal bootstrap is required.");
     await client.query("BEGIN");
     await client.query("SET LOCAL search_path = pg_catalog");
@@ -97,10 +98,11 @@ export async function migrateIdentity(pool: Pool, folder?: URL) {
       );
     }
     await assertIdentityStructure(client);
+    if (migrations.length > 2) await assertJourneyStructure(client);
     if (applied < migrations.length)
       await client.query(
         "UPDATE kairn_migrations.identity_release SET policies_sha256 = $1 WHERE position = $2",
-        [await identityPoliciesHash(client), migrations.length - 1],
+        [await identityPoliciesHash(client, migrations.length - 1), migrations.length - 1],
       );
     await client.query("COMMIT");
   } catch (error) {
@@ -118,12 +120,16 @@ export async function migrateIdentity(pool: Pool, folder?: URL) {
 }
 // Deparse under the transaction's fixed search_path so equivalent role connections get the
 // same schema qualification. Capture only after reviewed DDL; never adopt drift on a repeat.
-async function identityPoliciesHash(client: PoolClient) {
-  const result = await client.query(`SELECT coalesce(jsonb_agg(jsonb_build_object(
+async function identityPoliciesHash(client: PoolClient, position: number) {
+  const result = await client.query(
+    `SELECT coalesce(jsonb_agg(jsonb_build_object(
     'table', tablename, 'name', policyname, 'permissive', permissive, 'roles', roles,
     'command', cmd, 'using', qual, 'check', with_check
-  ) ORDER BY tablename, policyname), '[]'::jsonb)::text AS definition
-  FROM pg_catalog.pg_policies WHERE schemaname = 'identity'`);
+  ) || CASE WHEN schemaname = 'identity' THEN '{}'::jsonb ELSE jsonb_build_object('schema', schemaname) END
+  ORDER BY schemaname, tablename, policyname), '[]'::jsonb)::text AS definition
+  FROM pg_catalog.pg_policies WHERE schemaname = 'identity' OR ($1 AND schemaname = 'journeys')`,
+    [position >= 2],
+  );
   return createHash("sha256").update(z.string().parse(result.rows[0]?.definition)).digest("hex");
 }
 async function assertIdentityPolicies(client: PoolClient, position: number) {
@@ -131,7 +137,7 @@ async function assertIdentityPolicies(client: PoolClient, position: number) {
     "SELECT policies_sha256 FROM kairn_migrations.identity_release WHERE position = $1",
     [position],
   );
-  if (result.rows[0]?.policies_sha256 !== (await identityPoliciesHash(client)))
+  if (result.rows[0]?.policies_sha256 !== (await identityPoliciesHash(client, position)))
     throw new Error("Identity policies differ from the applied release.");
 }
 async function assertIdentityStructure(client: Pool | PoolClient) {
@@ -200,6 +206,7 @@ export async function checkIdentityDatabase(pool: Pool) {
     );
     if (applied !== migrations.length) throw new Error("Identity schema is not ready.");
     await assertIdentityStructure(client);
+    if (migrations.length > 2) await assertJourneyStructure(client);
     await assertIdentityPolicies(client, applied - 1);
     await client.query("COMMIT");
   } catch (error) {

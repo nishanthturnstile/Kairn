@@ -5,6 +5,7 @@ export default defineConfig({
   schema: [
     "../../packages/backend/src/identity/auth-schema.ts",
     "../../packages/backend/src/identity/schema.ts",
+    "../../packages/backend/src/journeys/schema.ts",
   ],
   out: "../../packages/backend/migrations",
   strict: true,

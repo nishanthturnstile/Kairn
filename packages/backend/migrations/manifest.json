@@ -8,6 +8,14 @@
     {
       "file": "0001_identity_access.sql",
       "sha256": "c676b377e68f550966503a575b4c18d3764630042a678b162177035163216f7e"
+    },
+    {
+      "file": "0002_journeys_foundation.sql",
+      "sha256": "32da9a6502f90bf0a193aa68217a88196298b8c037612b7d1661ff508f9289ff"
+    },
+    {
+      "file": "0003_journeys_access.sql",
+      "sha256": "7dcfc3775f32d104232b7979415ce0ec18d44dce787b824ba0836ca8dd8440f6"
     }
   ]
 }

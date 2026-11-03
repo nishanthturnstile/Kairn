@@ -64,7 +64,7 @@ async function authUser(verified = true, email = `${randomUUID()}@kairn.invalid`
 }
 
 describe("controlled identity migration and non-owner boundary", () => {
-  it("rolls back a failed release, applies fresh schema atomically, rejects tampering and repeats safely", async () => {
+  it("rolls back a failed release, upgrades preserved identity data atomically and rejects drift", async () => {
     await expect(checkIdentityDatabase(server)).rejects.toThrow();
     const temporary = await mkdtemp(join(tmpdir(), "kairn-migration-failure-"));
     const migrations = await readIdentityMigrations();
@@ -88,7 +88,26 @@ describe("controlled identity migration and non-owner boundary", () => {
       expect(
         (await owner.query("SELECT to_regclass('authn.user') AS relation")).rows[0].relation,
       ).toBeNull();
+      // Preserve and upgrade an already-applied two-migration identity checkpoint.
+      await writeFile(
+        join(temporary, "manifest.json"),
+        JSON.stringify({
+          version: 1,
+          migrations: migrations.slice(0, 2).map(({ file, sha256 }) => ({ file, sha256 })),
+        }),
+      );
+      await migrateIdentity(owner, pathToFileURL(`${temporary}/`));
+      const retained = await provisionVerifiedAccount(
+        auth,
+        await authUser(),
+        "Preserved before journey migration",
+      );
+      await expect(checkIdentityDatabase(server)).rejects.toThrow("not ready");
       await Promise.all([migrateIdentity(owner), migrateIdentity(owner)]);
+      const retainedProfile = await runAsAccount(server, retained, (tx) =>
+        tx.execute("SELECT display_name FROM identity.profile"),
+      );
+      expect(retainedProfile.rows[0]?.display_name).toBe("Preserved before journey migration");
       await migrateIdentity(owner);
       await checkIdentityDatabase(server);
       await checkIdentityDatabase(worker);
@@ -480,5 +499,307 @@ describe("enqueue-only producer on actual API/auth transactions", () => {
       await owner.query(`REVOKE SELECT (data) ON ${quotedEmail} FROM kairn_auth`);
     }
     await checkDatabase(worker);
+  });
+});
+
+const connectMigration = () => owner.connect();
+
+async function migrationTransaction(
+  action: (client: Awaited<ReturnType<typeof connectMigration>>) => Promise<void>,
+) {
+  const client = await connectMigration();
+  try {
+    await client.query("BEGIN");
+    await action(client);
+    await client.query("COMMIT");
+  } catch (error) {
+    await client.query("ROLLBACK");
+    throw error;
+  } finally {
+    client.release();
+  }
+}
+
+async function journeyFixture(
+  actors: Awaited<ReturnType<typeof provisionVerifiedAccount>>[],
+  powers: string[][],
+) {
+  const journeyId = randomUUID();
+  const memberships = actors.map(() => randomUUID());
+  await migrationTransaction(async (client) => {
+    await client.query(
+      `INSERT INTO journeys.journey (id, creator_account_id, title, time_zone, start_local, start_at, start_offset_minutes)
+       VALUES ($1, $2, 'Private journey', 'UTC', '2026-11-03T09:00', '2026-11-03T09:00Z', 0)`,
+      [journeyId, actors[0]!.accountId],
+    );
+    for (const [index, actor] of actors.entries()) {
+      await client.query(
+        "INSERT INTO journeys.membership (id, journey_id, account_id) VALUES ($1, $2, $3)",
+        [memberships[index], journeyId, actor.accountId],
+      );
+      for (const capability of powers[index] ?? []) {
+        await client.query(
+          `INSERT INTO journeys.member_capability (membership_id, journey_id, membership_epoch, capability, assigned_by)
+           VALUES ($1, $2, 1, $3, $4)`,
+          [memberships[index], journeyId, capability, actors[0]!.accountId],
+        );
+      }
+    }
+  });
+  return { journeyId, memberships };
+}
+
+async function endMembership(journeyId: string, membershipId: string, actorId: string) {
+  await migrationTransaction(async (client) => {
+    await client.query("SELECT id FROM journeys.journey WHERE id = $1 FOR UPDATE", [journeyId]);
+    await client.query(
+      "UPDATE journeys.membership SET state = 'left', ended_at = now(), end_reason = 'left', revision = revision + 1 WHERE id = $1",
+      [membershipId],
+    );
+    await client.query(
+      "UPDATE journeys.member_capability SET state = 'revoked', revoked_at = now(), revoked_by = $2, revision = revision + 1 WHERE membership_id = $1 AND state = 'active'",
+      [membershipId, actorId],
+    );
+  });
+}
+
+describe("canonical journey and membership foundation under real roles", () => {
+  it("scopes current reads, a minimal roster and former history without leaking private profiles", async () => {
+    const actors = await Promise.all(
+      ["Administrator", "Participant", "Coauthor", "Publisher", "Former", "Outsider"].map(
+        async (name) => provisionVerifiedAccount(auth, await authUser(), name),
+      ),
+    );
+    const [admin, participant, , , former, outsider] = actors;
+    const fixture = await journeyFixture(actors.slice(0, 5), [
+      ["administrator", "coauthor", "publisher"],
+      [],
+      ["coauthor"],
+      ["publisher"],
+      ["coauthor"],
+    ]);
+    const elsewhere = await journeyFixture([outsider!], [["administrator"]]);
+    await endMembership(fixture.journeyId, fixture.memberships[4]!, admin!.accountId);
+    for (const [index, actor] of actors.entries()) {
+      const rows = await runAsAccount(server, actor, async (tx) => ({
+        journeys: (await tx.execute("SELECT id FROM journeys.journey")).rows.map((row) => row.id),
+        memberships: (await tx.execute("SELECT id FROM journeys.membership")).rows.map(
+          (row) => row.id,
+        ),
+        capabilities: (
+          await tx.execute("SELECT membership_id, state FROM journeys.member_capability")
+        ).rows,
+        profiles: (await tx.execute("SELECT account_id FROM identity.profile")).rows,
+      }));
+      expect(rows.journeys).toEqual(
+        index < 4 ? [fixture.journeyId] : index === 5 ? [elsewhere.journeyId] : [],
+      );
+      const visible =
+        index === 0
+          ? fixture.memberships.slice(0, 4)
+          : index < 4
+            ? [fixture.memberships[0], fixture.memberships[index]]
+            : [index === 4 ? fixture.memberships[4] : elsewhere.memberships[0]];
+      expect(new Set(rows.memberships)).toEqual(new Set(visible));
+      expect(rows.capabilities.every((row) => visible.some((id) => id === row.membership_id))).toBe(
+        true,
+      );
+      expect(rows.profiles).toEqual([{ account_id: actor.accountId }]);
+      if (actor === former)
+        expect(rows.capabilities).toEqual([
+          { membership_id: fixture.memberships[4], state: "revoked" },
+        ]);
+    }
+    expect((await server.query("SELECT id FROM journeys.journey")).rows).toEqual([]);
+    expect((await server.query("SELECT id FROM journeys.membership")).rows).toEqual([]);
+    for (const pool of [auth, worker]) {
+      await expect(pool.query("SELECT id FROM journeys.journey")).rejects.toMatchObject({
+        code: "42501",
+      });
+    }
+    for (const table of ["journey", "membership", "member_capability"]) {
+      await expect(server.query(`DELETE FROM journeys.${table}`)).rejects.toMatchObject({
+        code: "42501",
+      });
+    }
+    await expect(server.query("SET ROLE kairn_journey_policy")).rejects.toMatchObject({
+      code: "42501",
+    });
+    await expect(server.query("SELECT title FROM journeys.journey")).resolves.toMatchObject({
+      rows: [],
+    });
+    // An account's existing rows are not authority after account restriction.
+    await owner.query(
+      "UPDATE identity.account SET state = 'deleting', deleted_at = now(), revision = revision + 1, policy_generation = policy_generation + 1 WHERE id = $1",
+      [participant!.accountId],
+    );
+    await expect(
+      runAsAccount(server, participant!, (tx) => tx.execute("SELECT id FROM journeys.journey")),
+    ).rejects.toThrow();
+    await checkIdentityDatabase(worker);
+  });
+
+  it("keeps stable membership identity, rejects old capability epochs and enforces administrator/freeze transitions", async () => {
+    const admin = await provisionVerifiedAccount(auth, await authUser(), "Epoch admin");
+    const member = await provisionVerifiedAccount(auth, await authUser(), "Epoch member");
+    const fixture = await journeyFixture(
+      [admin, member],
+      [["administrator"], ["coauthor", "publisher"]],
+    );
+    const [adminMembership, memberMembership] = fixture.memberships;
+    const other = await journeyFixture([admin], [["administrator"]]);
+    await expect(
+      owner.query("INSERT INTO journeys.membership (journey_id, account_id) VALUES ($1, $2)", [
+        fixture.journeyId,
+        member.accountId,
+      ]),
+    ).rejects.toMatchObject({ code: "23505" });
+    await expect(
+      owner.query(
+        "INSERT INTO journeys.member_capability (membership_id, journey_id, membership_epoch, capability, assigned_by) VALUES ($1, $2, 2, 'coauthor', $3)",
+        [memberMembership, other.journeyId, admin.accountId],
+      ),
+    ).rejects.toMatchObject({ code: "23503" });
+    await expect(
+      owner.query(
+        "INSERT INTO journeys.member_capability (membership_id, journey_id, membership_epoch, capability, assigned_by) VALUES ($1, $2, 1, 'administrator', $3)",
+        [memberMembership, fixture.journeyId, admin.accountId],
+      ),
+    ).rejects.toMatchObject({ code: "23505" });
+    await expect(
+      endMembership(fixture.journeyId, adminMembership!, admin.accountId),
+    ).rejects.toMatchObject({ code: "23514" });
+    await endMembership(fixture.journeyId, memberMembership!, member.accountId);
+    expect(
+      (
+        await owner.query(
+          "SELECT epoch, previous_coauthor, previous_publisher FROM journeys.membership WHERE id = $1",
+          [memberMembership],
+        )
+      ).rows,
+    ).toEqual([{ epoch: "1", previous_coauthor: true, previous_publisher: true }]);
+    await expect(
+      owner.query(
+        "UPDATE journeys.membership SET state = 'active', ended_at = NULL, end_reason = NULL, joined_at = now(), revision = revision + 1 WHERE id = $1",
+        [memberMembership],
+      ),
+    ).rejects.toMatchObject({ code: "23514" });
+    await owner.query(
+      "UPDATE journeys.membership SET state = 'active', epoch = epoch + 1, ended_at = NULL, end_reason = NULL, joined_at = now(), revision = revision + 1 WHERE id = $1",
+      [memberMembership],
+    );
+    await expect(
+      owner.query(
+        "UPDATE journeys.member_capability SET state = 'active', revoked_at = NULL, revoked_by = NULL, assigned_at = now(), revision = revision + 1 WHERE membership_id = $1",
+        [memberMembership],
+      ),
+    ).rejects.toMatchObject({ code: "23514" });
+    const afterRejoin = await runAsAccount(server, member, (tx) =>
+      tx.execute("SELECT capability, state, membership_epoch FROM journeys.member_capability"),
+    );
+    expect(afterRejoin.rows).toHaveLength(3); // Own two revoked powers plus the visible current administrator.
+    expect(
+      afterRejoin.rows
+        .filter((row) => row.capability !== "administrator")
+        .every((row) => row.state === "revoked" && row.membership_epoch === "1"),
+    ).toBe(true);
+    await owner.query(
+      "INSERT INTO journeys.member_capability (membership_id, journey_id, membership_epoch, capability, assigned_by) VALUES ($1, $2, 2, 'coauthor', $3)",
+      [memberMembership, fixture.journeyId, admin.accountId],
+    );
+    await migrationTransaction(async (client) => {
+      await client.query(
+        "UPDATE journeys.journey SET administration = 'frozen', revision = revision + 1, policy_generation = policy_generation + 1 WHERE id = $1",
+        [fixture.journeyId],
+      );
+      await client.query(
+        "UPDATE journeys.membership SET state = 'left', ended_at = now(), end_reason = 'left', revision = revision + 1 WHERE id = $1",
+        [adminMembership],
+      );
+      await client.query(
+        "UPDATE journeys.member_capability SET state = 'revoked', revoked_at = now(), revoked_by = $2, revision = revision + 1 WHERE membership_id = $1 AND state = 'active'",
+        [adminMembership, admin.accountId],
+      );
+    });
+    await expect(
+      owner.query(
+        "UPDATE journeys.journey SET administration = 'assigned', revision = revision + 1, policy_generation = policy_generation + 1 WHERE id = $1",
+        [fixture.journeyId],
+      ),
+    ).rejects.toMatchObject({ code: "23514" });
+    const permitted = await runAsAccount(server, member, (tx) =>
+      tx.execute("SELECT administration FROM journeys.journey"),
+    );
+    expect(permitted.rows).toEqual([{ administration: "frozen" }]);
+  });
+
+  it("checks local time/instant pairs, terminal tombstones and readiness drift", async () => {
+    const admin = await provisionVerifiedAccount(auth, await authUser(), "Tombstone admin");
+    const fixture = await journeyFixture([admin], [["administrator"]]);
+    await expect(
+      owner.query(
+        "UPDATE journeys.journey SET start_local = '2026-03-08T02:30', start_at = '2026-03-08T07:30Z', time_zone = 'America/New_York', start_offset_minutes = -300, revision = revision + 1 WHERE id = $1",
+        [fixture.journeyId],
+      ),
+    ).rejects.toMatchObject({ code: "23514" });
+    await owner.query(
+      "UPDATE journeys.journey SET start_local = '2026-11-01T01:30', start_at = '2026-11-01T06:30Z', time_zone = 'America/New_York', start_offset_minutes = -300, revision = revision + 1 WHERE id = $1",
+      [fixture.journeyId],
+    );
+    await expect(
+      owner.query(
+        "UPDATE journeys.journey SET end_local = '2026-11-01T01:00', end_at = '2026-11-01T06:00Z', end_offset_minutes = -300, revision = revision + 1 WHERE id = $1",
+        [fixture.journeyId],
+      ),
+    ).rejects.toMatchObject({ code: "23514" });
+    await migrationTransaction(async (client) => {
+      await client.query(
+        "UPDATE journeys.journey SET lifecycle = 'deleted', deleted_at = now(), title = NULL, time_zone = NULL, start_local = NULL, start_at = NULL, start_offset_minutes = NULL, revision = revision + 1, policy_generation = policy_generation + 1 WHERE id = $1",
+        [fixture.journeyId],
+      );
+      await client.query(
+        "UPDATE journeys.membership SET state = 'removed', ended_at = now(), end_reason = 'journey_deleted', revision = revision + 1 WHERE id = $1",
+        [fixture.memberships[0]],
+      );
+      await client.query(
+        "UPDATE journeys.member_capability SET state = 'revoked', revoked_at = now(), revoked_by = $2, revision = revision + 1 WHERE journey_id = $1",
+        [fixture.journeyId, admin.accountId],
+      );
+    });
+    const rows = await runAsAccount(server, admin, async (tx) => ({
+      journeys: (await tx.execute("SELECT * FROM journeys.journey")).rows,
+      history: (await tx.execute("SELECT journey_id, end_reason FROM journeys.membership")).rows,
+    }));
+    expect(rows.journeys).toEqual([]);
+    expect(rows.history).toEqual([
+      { journey_id: fixture.journeyId, end_reason: "journey_deleted" },
+    ]);
+    await expect(
+      owner.query(
+        "UPDATE journeys.journey SET lifecycle = 'active', deleted_at = NULL, revision = revision + 1, policy_generation = policy_generation + 1 WHERE id = $1",
+        [fixture.journeyId],
+      ),
+    ).rejects.toMatchObject({ code: "23514" });
+    await owner.query("ALTER TABLE journeys.membership DISABLE TRIGGER membership_graph");
+    try {
+      await expect(checkIdentityDatabase(server)).rejects.toThrow("integrity guards");
+    } finally {
+      await owner.query("ALTER TABLE journeys.membership ENABLE TRIGGER membership_graph");
+    }
+    await owner.query("ALTER POLICY journey_current_read ON journeys.journey USING (true)");
+    try {
+      await expect(checkIdentityDatabase(worker)).rejects.toThrow("policies");
+    } finally {
+      await owner.query(
+        "ALTER POLICY journey_current_read ON journeys.journey USING (journeys.actor_can_read_journey(id))",
+      );
+    }
+    await owner.query("GRANT SELECT (title) ON journeys.journey TO kairn_journey_policy");
+    try {
+      await expect(checkIdentityDatabase(server)).rejects.toThrow("privileges");
+    } finally {
+      await owner.query("REVOKE SELECT (title) ON journeys.journey FROM kairn_journey_policy");
+    }
+    await checkIdentityDatabase(server);
   });
 });
