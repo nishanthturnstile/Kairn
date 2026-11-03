@@ -15,6 +15,8 @@ import {
   ResolveInvitationSchema,
   ResolvedInvitationSchema,
   RestrictionResultSchema,
+  RestrictionPendingSchema,
+  RestrictionCompleteSchema,
 } from "@kairn/contracts";
 import { createApiClient } from "@kairn/contracts/client";
 
@@ -51,6 +53,7 @@ describe("account/journey wire safety", () => {
       recipientMembershipId: journeyId,
       recipientMembershipEpoch: 1,
       revision: 1,
+      etag: '"export-grant-1"',
       state: "active",
       assets: [asset],
       issuedAt: "2026-11-03T00:00:00Z",
@@ -150,7 +153,14 @@ describe("account/journey wire safety", () => {
     ).toBe(false);
     const self = {
       identity: { accountId: commandId, displayName: "Dev fixture" },
-      membership: { membershipId: commandId, revision: 1, epoch: 1, state: "active", powers },
+      membership: {
+        membershipId: commandId,
+        revision: 1,
+        etag: '"member-1"',
+        epoch: 1,
+        state: "active",
+        powers,
+      },
     };
     expect(
       PeopleSchema.safeParse({ view: "self", self, administrator: null, items: [self] }).success,
@@ -177,6 +187,27 @@ describe("account/journey wire safety", () => {
       retryAfterSeconds: 5,
     };
     expect(RestrictionResultSchema.safeParse(pending).success).toBe(true);
+    expect(RestrictionPendingSchema.safeParse(pending).success).toBe(true);
+    expect(
+      RestrictionPendingSchema.safeParse({
+        ...pending,
+        statusLocation: `/api/v1/operations/${journeyId}`,
+      }).success,
+    ).toBe(false);
+    const complete = {
+      operationId: commandId,
+      statusLocation: `/api/v1/operations/${commandId}`,
+      status: "restriction_complete",
+      access: "denied",
+      recoveryConfirmation: "confirmed",
+    };
+    expect(RestrictionCompleteSchema.safeParse(complete).success).toBe(true);
+    expect(
+      RestrictionCompleteSchema.safeParse({
+        ...complete,
+        statusLocation: `/api/v1/operations/${journeyId}`,
+      }).success,
+    ).toBe(false);
     expect(
       RestrictionResultSchema.safeParse({ ...pending, recoveryConfirmation: "confirmed" }).success,
     ).toBe(false);
@@ -213,5 +244,50 @@ describe("account/journey wire safety", () => {
       "/api/v1/journeys",
       `/api/v1/journeys/${journeyId}`,
     ]);
+  });
+
+  it("uses the selected member's opaque tag rather than the collection tag for an edit", async () => {
+    const people = PeopleSchema.parse({
+      view: "administration",
+      items: [
+        {
+          identity: { accountId: commandId, displayName: "Managed member" },
+          membership: {
+            membershipId: commandId,
+            revision: 3,
+            etag: '"opaque-member-token"',
+            epoch: 1,
+            state: "active",
+            powers,
+          },
+        },
+      ],
+      nextCursor: null,
+    });
+    const requests: Request[] = [];
+    const client = createApiClient({
+      baseUrl: "https://api.example.test",
+      fetch: async (request) => {
+        requests.push(request.clone());
+        return request.method === "GET"
+          ? Response.json(people, { headers: { ETag: '"different-collection-token"' } })
+          : Response.json({ code: "unavailable" }, { status: 404 });
+      },
+    });
+    const response = await client.GET("/api/v1/journeys/{id}/people", {
+      params: { path: { id: journeyId } },
+    });
+    if (response.data?.view !== "administration")
+      throw new Error("Missing administration fixture.");
+    const member = response.data.items[0]!.membership;
+    await client.PUT("/api/v1/journeys/{id}/members/{memberId}/capabilities", {
+      params: {
+        path: { id: journeyId, memberId: member.membershipId },
+        header: { "if-match": member.etag },
+      },
+      body: { commandId, impactToken: "a".repeat(43), powers: { coauthor: true, publisher: true } },
+    });
+    expect(requests[1]?.headers.get("If-Match")).toBe('"opaque-member-token"');
+    expect(response.response.headers.get("ETag")).toBe('"different-collection-token"');
   });
 });

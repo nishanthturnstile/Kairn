@@ -84,6 +84,7 @@ export const failures = {
   412: failure,
   413: failure,
   429: failure,
+  500: failure,
   503: failure,
 };
 export function readResponses<S extends z.ZodType>(schema: S, name?: string) {

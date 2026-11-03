@@ -5,6 +5,7 @@ import {
   boundedText,
   CommandSchema,
   DomainIdSchema,
+  EntityTagSchema,
   GenerationSchema,
   PageQuerySchema,
   RevisionSchema,
@@ -111,6 +112,7 @@ export const UpdateJourneySchema = z.strictObject({
 export const MyMembershipSchema = z.strictObject({
   membershipId: DomainIdSchema,
   revision: RevisionSchema,
+  etag: EntityTagSchema,
   epoch: GenerationSchema,
   state: z.literal("active"),
   powers: MemberPowersSchema,
@@ -119,6 +121,7 @@ export const JourneySummarySchema = z
   .strictObject({
     journeyId: DomainIdSchema,
     revision: RevisionSchema,
+    etag: EntityTagSchema,
     policyGeneration: GenerationSchema,
     details: JourneyDetailsSchema,
     lifecycle: z.enum(["active", "archived"]),

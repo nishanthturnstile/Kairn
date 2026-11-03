@@ -28,7 +28,7 @@ export const EntityTagSchema = z
   .string()
   .regex(/^"[A-Za-z0-9_-]{1,128}"$/)
   .describe(
-    "One opaque strong ETag. Send the current value as If-Match; weak tags, lists and * are invalid.",
+    "Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid.",
   );
 export const RevisionHeadersSchema = z.object({ "if-match": EntityTagSchema });
 
@@ -86,23 +86,28 @@ const OperationReferenceSchema = z.strictObject({
   operationId: DomainIdSchema,
   statusLocation: z.string().regex(/^\/api\/v1\/operations\/[0-9a-f-]{36}$/i),
 });
+function statusLocationMatches(value: z.infer<typeof OperationReferenceSchema>) {
+  return value.statusLocation === `/api/v1/operations/${value.operationId}`;
+}
+const statusLocationRule = {
+  message: "Status location must identify this operation.",
+  path: ["statusLocation"],
+};
 export const RestrictionPendingSchema = OperationReferenceSchema.extend({
   status: z.literal("restricted_pending_confirmation"),
   access: z.literal("denied"),
   recoveryConfirmation: z.literal("pending"),
   retryAfterSeconds: z.number().int().min(5).max(30),
-});
+}).refine(statusLocationMatches, statusLocationRule);
 export const RestrictionCompleteSchema = OperationReferenceSchema.extend({
   status: z.literal("restriction_complete"),
   access: z.literal("denied"),
   recoveryConfirmation: z.literal("confirmed"),
-});
-export const RestrictionResultSchema = z
-  .discriminatedUnion("status", [RestrictionPendingSchema, RestrictionCompleteSchema])
-  .refine((value) => value.statusLocation === `/api/v1/operations/${value.operationId}`, {
-    message: "Status location must identify this operation.",
-    path: ["statusLocation"],
-  });
+}).refine(statusLocationMatches, statusLocationRule);
+export const RestrictionResultSchema = z.discriminatedUnion("status", [
+  RestrictionPendingSchema,
+  RestrictionCompleteSchema,
+]);
 
 // A post-deletion receipt reads this minimal projection outside account guards. It grants no writes.
 export const OperationStatusSchema = z

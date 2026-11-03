@@ -4,6 +4,7 @@ import { ImpactReferenceSchema, LifecycleCommandSchema } from "./access.js";
 import {
   CommandSchema,
   DomainIdSchema,
+  EntityTagSchema,
   GenerationSchema,
   PageQuerySchema,
   RevisionSchema,
@@ -15,6 +16,7 @@ export const TransferSchema = z
     transferId: DomainIdSchema,
     journeyId: DomainIdSchema,
     revision: RevisionSchema,
+    etag: EntityTagSchema,
     state: z.enum(["offered", "accepted", "declined", "cancelled", "expired", "invalidated"]),
     offeringAdministrator: DisplayIdentitySchema,
     target: DisplayIdentitySchema,

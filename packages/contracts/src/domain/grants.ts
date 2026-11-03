@@ -3,6 +3,7 @@ import { DisplayIdentitySchema } from "./accounts.js";
 import {
   CommandSchema,
   DomainIdSchema,
+  EntityTagSchema,
   GenerationSchema,
   PageQuerySchema,
   RevisionSchema,
@@ -16,6 +17,7 @@ export const SourceGrantSchema = z
     ownerAccountId: DomainIdSchema,
     journeyId: DomainIdSchema,
     revision: RevisionSchema,
+    etag: EntityTagSchema,
     scope: SourceScopeSchema,
   })
   .describe(
@@ -53,6 +55,7 @@ export const ExportRequestSchema = z.strictObject({
   requesterMembershipId: DomainIdSchema,
   requesterMembershipEpoch: GenerationSchema,
   revision: RevisionSchema,
+  etag: EntityTagSchema,
   state: z.enum(["requested", "approved", "declined", "expired", "invalidated"]),
   assets: ExactExportAssetsSchema,
   expiresAt: ServerTimestampSchema,
@@ -73,6 +76,7 @@ export const ExportGrantSchema = z
     recipientMembershipId: DomainIdSchema,
     recipientMembershipEpoch: GenerationSchema,
     revision: RevisionSchema,
+    etag: EntityTagSchema,
     state: z.enum(["active", "revoked", "expired", "invalidated"]),
     assets: ExactExportAssetsSchema,
     issuedAt: ServerTimestampSchema,

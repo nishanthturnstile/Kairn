@@ -39,3 +39,13 @@ export const confirmedSourceRestriction: SourceGrantMutation = {
   access: "denied",
   recoveryConfirmation: "confirmed",
 };
+
+type InternalFailure =
+  paths["/api/v1/me"]["get"]["responses"][500]["content"]["application/problem+json"];
+export const internalFailure: InternalFailure = {
+  type: "https://api.example.test/problems/internal-error",
+  title: "The request could not be completed.",
+  status: 500,
+  code: "internal_error",
+  requestId: "b039656c-f32c-4eec-8756-328de4feb8c0",
+};

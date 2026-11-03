@@ -3,6 +3,7 @@ import { DisplayIdentitySchema } from "./accounts.js";
 import {
   CommandSchema,
   DomainIdSchema,
+  EntityTagSchema,
   GenerationSchema,
   RevisionSchema,
   ServerTimestampSchema,
@@ -31,6 +32,7 @@ export const InvitationSchema = z
   .strictObject({
     invitationId: DomainIdSchema,
     revision: RevisionSchema,
+    etag: EntityTagSchema,
     state: InvitationStateSchema,
     powers: EditablePowersSchema,
     expiresAt: ServerTimestampSchema,
@@ -89,6 +91,7 @@ export const MutationResultSchema = z.strictObject({
   commandId: DomainIdSchema,
   resourceId: DomainIdSchema,
   revision: RevisionSchema,
+  etag: EntityTagSchema,
 });
 export const ImpactActionSchema = z.enum([
   "leave",

@@ -702,12 +702,16 @@ export interface components {
                 accountRevision: number;
                 /** @enum {boolean} */
                 emailVerified: true;
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
+                etag: string;
                 /** Format: email */
                 privateEmail: string;
                 profile: {
                     bio: string | null;
                     /** @description 1–80 Unicode scalars after trimming surrounding whitespace; never derived from email. */
                     displayName: string;
+                    /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
+                    etag: string;
                     revision: number;
                 };
                 /** @enum {string} */
@@ -733,6 +737,8 @@ export interface components {
                 avatarId: string;
                 /** @enum {string} */
                 contentType: "image/jpeg" | "image/png";
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
+                etag: string;
                 height: number;
                 /** @enum {string} */
                 managedPath: "/api/v1/me/avatar";
@@ -791,6 +797,8 @@ export interface components {
             avatarId: string;
             /** @enum {string} */
             contentType: "image/jpeg" | "image/png";
+            /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
+            etag: string;
             height: number;
             /** @enum {string} */
             managedPath: "/api/v1/me/avatar";
@@ -881,6 +889,8 @@ export interface components {
                 /** Format: uuid */
                 sourceId: string;
             }[];
+            /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
+            etag: string;
             /** Format: date-time */
             expiresAt: string;
             /** Format: uuid */
@@ -913,6 +923,8 @@ export interface components {
                     /** Format: uuid */
                     sourceId: string;
                 }[];
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
+                etag: string;
                 /** Format: date-time */
                 expiresAt: string;
                 /** Format: uuid */
@@ -946,6 +958,8 @@ export interface components {
                 /** Format: uuid */
                 sourceId: string;
             }[];
+            /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
+            etag: string;
             /** Format: date-time */
             expiresAt: string;
             /** Format: uuid */
@@ -984,6 +998,8 @@ export interface components {
                     /** Format: uuid */
                     sourceId: string;
                 }[];
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
+                etag: string;
                 /** Format: date-time */
                 expiresAt: string;
                 /** Format: uuid */
@@ -1015,6 +1031,8 @@ export interface components {
         Invitation: {
             /** @enum {string} */
             delivery: "queued" | "smtp_accepted" | "failed" | "expired";
+            /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
+            etag: string;
             /** Format: date-time */
             expiresAt: string;
             /** Format: uuid */
@@ -1031,6 +1049,8 @@ export interface components {
             items: {
                 /** @enum {string} */
                 delivery: "queued" | "smtp_accepted" | "failed" | "expired";
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
+                etag: string;
                 /** Format: date-time */
                 expiresAt: string;
                 /** Format: uuid */
@@ -1085,12 +1105,16 @@ export interface components {
                         /** @description 1–160 Unicode scalars after trimming surrounding whitespace. */
                         title: string;
                     };
+                    /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
+                    etag: string;
                     /** Format: uuid */
                     journeyId: string;
                     /** @enum {string} */
                     lifecycle: "active" | "archived";
                     membership: {
                         epoch: number;
+                        /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
+                        etag: string;
                         /** Format: uuid */
                         membershipId: string;
                         powers: {
@@ -1172,12 +1196,16 @@ export interface components {
                 /** @description 1–160 Unicode scalars after trimming surrounding whitespace. */
                 title: string;
             };
+            /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
+            etag: string;
             /** Format: uuid */
             journeyId: string;
             /** @enum {string} */
             lifecycle: "active" | "archived";
             membership: {
                 epoch: number;
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
+                etag: string;
                 /** Format: uuid */
                 membershipId: string;
                 powers: {
@@ -1204,12 +1232,16 @@ export interface components {
             accountRevision: number;
             /** @enum {boolean} */
             emailVerified: true;
+            /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
+            etag: string;
             /** Format: email */
             privateEmail: string;
             profile: {
                 bio: string | null;
                 /** @description 1–80 Unicode scalars after trimming surrounding whitespace; never derived from email. */
                 displayName: string;
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
+                etag: string;
                 revision: number;
             };
             /** @enum {string} */
@@ -1278,6 +1310,8 @@ export interface components {
                 };
                 membership: {
                     epoch: number;
+                    /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
+                    etag: string;
                     /** Format: uuid */
                     membershipId: string;
                     powers: {
@@ -1309,6 +1343,8 @@ export interface components {
                 };
                 membership: {
                     epoch: number;
+                    /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
+                    etag: string;
                     /** Format: uuid */
                     membershipId: string;
                     powers: {
@@ -1348,6 +1384,8 @@ export interface components {
             bio: string | null;
             /** @description 1–80 Unicode scalars after trimming surrounding whitespace; never derived from email. */
             displayName: string;
+            /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
+            etag: string;
             revision: number;
         };
         /** @description 32-byte base64url domain secret. Redacted POST body only; never URL query, logs or Query keys. */
@@ -1384,6 +1422,8 @@ export interface components {
             invitation: {
                 /** @enum {string} */
                 delivery: "queued" | "smtp_accepted" | "failed" | "expired";
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
+                etag: string;
                 /** Format: date-time */
                 expiresAt: string;
                 /** Format: uuid */
@@ -1432,6 +1472,8 @@ export interface components {
         };
         /** @description Only me means no active journey grant. Publication reuse never grants original-file export. */
         SourceGrant: {
+            /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
+            etag: string;
             /** Format: uuid */
             journeyId: string;
             /** Format: uuid */
@@ -1443,6 +1485,8 @@ export interface components {
             sourceId: string;
         };
         SourceGrantMutation: {
+            /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
+            etag: string;
             /** Format: uuid */
             journeyId: string;
             /** Format: uuid */
@@ -1455,6 +1499,8 @@ export interface components {
         } | {
             /** Format: uuid */
             commandId: string;
+            /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
+            etag: string;
             /** Format: uuid */
             resourceId: string;
             revision: number;
@@ -1480,6 +1526,8 @@ export interface components {
         };
         /** @description One current offer to an existing active coauthor; accepting moves administration only. */
         Transfer: {
+            /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
+            etag: string;
             /** Format: date-time */
             expiresAt: string;
             /** Format: uuid */
@@ -1508,6 +1556,8 @@ export interface components {
         };
         TransferPage: {
             items: {
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
+                etag: string;
                 /** Format: date-time */
                 expiresAt: string;
                 /** Format: uuid */
@@ -1681,6 +1731,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -1696,7 +1756,7 @@ export interface operations {
         parameters: {
             query?: never;
             header: {
-                /** @description One opaque strong ETag. Send the current value as If-Match; weak tags, lists and * are invalid. */
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
                 "if-match": string;
             };
             path: {
@@ -1803,6 +1863,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -1818,7 +1888,7 @@ export interface operations {
         parameters: {
             query?: never;
             header: {
-                /** @description One opaque strong ETag. Send the current value as If-Match; weak tags, lists and * are invalid. */
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
                 "if-match": string;
             };
             path: {
@@ -1925,6 +1995,16 @@ export interface operations {
             };
             /** @description Safe RFC 9457 domain failure. */
             429: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
+            500: {
                 headers: {
                     "Cache-Control"?: "no-store";
                     [name: string]: unknown;
@@ -2063,6 +2143,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -2178,6 +2268,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -2193,7 +2293,7 @@ export interface operations {
         parameters: {
             query?: never;
             header: {
-                /** @description One opaque strong ETag. Send the current value as If-Match; weak tags, lists and * are invalid. */
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
                 "if-match": string;
             };
             path: {
@@ -2291,6 +2391,16 @@ export interface operations {
             };
             /** @description Safe RFC 9457 domain failure. */
             429: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
+            500: {
                 headers: {
                     "Cache-Control"?: "no-store";
                     [name: string]: unknown;
@@ -2415,6 +2525,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -2430,7 +2550,7 @@ export interface operations {
         parameters: {
             query?: never;
             header: {
-                /** @description One opaque strong ETag. Send the current value as If-Match; weak tags, lists and * are invalid. */
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
                 "if-match": string;
             };
             path: {
@@ -2546,6 +2666,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -2561,7 +2691,7 @@ export interface operations {
         parameters: {
             query?: never;
             header: {
-                /** @description One opaque strong ETag. Send the current value as If-Match; weak tags, lists and * are invalid. */
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
                 "if-match": string;
             };
             path: {
@@ -2668,6 +2798,16 @@ export interface operations {
             };
             /** @description Safe RFC 9457 domain failure. */
             429: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
+            500: {
                 headers: {
                     "Cache-Control"?: "no-store";
                     [name: string]: unknown;
@@ -2796,6 +2936,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -2811,7 +2961,7 @@ export interface operations {
         parameters: {
             query?: never;
             header: {
-                /** @description One opaque strong ETag. Send the current value as If-Match; weak tags, lists and * are invalid. */
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
                 "if-match": string;
             };
             path: {
@@ -2918,6 +3068,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -2933,7 +3093,7 @@ export interface operations {
         parameters: {
             query?: never;
             header: {
-                /** @description One opaque strong ETag. Send the current value as If-Match; weak tags, lists and * are invalid. */
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
                 "if-match": string;
             };
             path: {
@@ -3041,6 +3201,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -3056,7 +3226,7 @@ export interface operations {
         parameters: {
             query?: never;
             header: {
-                /** @description One opaque strong ETag. Send the current value as If-Match; weak tags, lists and * are invalid. */
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
                 "if-match": string;
             };
             path: {
@@ -3173,6 +3343,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -3188,7 +3368,7 @@ export interface operations {
         parameters: {
             query?: never;
             header: {
-                /** @description One opaque strong ETag. Send the current value as If-Match; weak tags, lists and * are invalid. */
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
                 "if-match": string;
             };
             path: {
@@ -3304,6 +3484,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -3319,7 +3509,7 @@ export interface operations {
         parameters: {
             query?: never;
             header: {
-                /** @description One opaque strong ETag. Send the current value as If-Match; weak tags, lists and * are invalid. */
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
                 "if-match": string;
             };
             path: {
@@ -3426,6 +3616,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -3441,7 +3641,7 @@ export interface operations {
         parameters: {
             query?: never;
             header: {
-                /** @description One opaque strong ETag. Send the current value as If-Match; weak tags, lists and * are invalid. */
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
                 "if-match": string;
             };
             path: {
@@ -3468,6 +3668,8 @@ export interface operations {
                     "application/json": {
                         /** Format: uuid */
                         commandId: string;
+                        /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
+                        etag: string;
                         /** Format: uuid */
                         resourceId: string;
                         revision: number;
@@ -3578,6 +3780,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -3593,7 +3805,7 @@ export interface operations {
         parameters: {
             query?: never;
             header: {
-                /** @description One opaque strong ETag. Send the current value as If-Match; weak tags, lists and * are invalid. */
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
                 "if-match": string;
             };
             path: {
@@ -3701,6 +3913,16 @@ export interface operations {
             };
             /** @description Safe RFC 9457 domain failure. */
             429: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
+            500: {
                 headers: {
                     "Cache-Control"?: "no-store";
                     [name: string]: unknown;
@@ -3820,6 +4042,16 @@ export interface operations {
             };
             /** @description Safe RFC 9457 domain failure. */
             429: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
+            500: {
                 headers: {
                     "Cache-Control"?: "no-store";
                     [name: string]: unknown;
@@ -3966,6 +4198,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -4076,6 +4318,16 @@ export interface operations {
             };
             /** @description Safe RFC 9457 domain failure. */
             429: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
+            500: {
                 headers: {
                     "Cache-Control"?: "no-store";
                     [name: string]: unknown;
@@ -4204,6 +4456,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -4219,7 +4481,7 @@ export interface operations {
         parameters: {
             query?: never;
             header: {
-                /** @description One opaque strong ETag. Send the current value as If-Match; weak tags, lists and * are invalid. */
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
                 "if-match": string;
             };
             path: {
@@ -4334,6 +4596,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -4349,7 +4621,7 @@ export interface operations {
         parameters: {
             query?: never;
             header: {
-                /** @description One opaque strong ETag. Send the current value as If-Match; weak tags, lists and * are invalid. */
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
                 "if-match": string;
             };
             path: {
@@ -4466,6 +4738,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -4481,7 +4763,7 @@ export interface operations {
         parameters: {
             query?: never;
             header: {
-                /** @description One opaque strong ETag. Send the current value as If-Match; weak tags, lists and * are invalid. */
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
                 "if-match": string;
             };
             path: {
@@ -4589,6 +4871,16 @@ export interface operations {
             };
             /** @description Safe RFC 9457 domain failure. */
             429: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
+            500: {
                 headers: {
                     "Cache-Control"?: "no-store";
                     [name: string]: unknown;
@@ -4613,7 +4905,7 @@ export interface operations {
         parameters: {
             query?: never;
             header: {
-                /** @description One opaque strong ETag. Send the current value as If-Match; weak tags, lists and * are invalid. */
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
                 "if-match": string;
             };
             path: {
@@ -4721,6 +5013,16 @@ export interface operations {
             };
             /** @description Safe RFC 9457 domain failure. */
             429: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
+            500: {
                 headers: {
                     "Cache-Control"?: "no-store";
                     [name: string]: unknown;
@@ -4843,6 +5145,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -4955,6 +5267,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -4970,7 +5292,7 @@ export interface operations {
         parameters: {
             query?: never;
             header: {
-                /** @description One opaque strong ETag. Send the current value as If-Match; weak tags, lists and * are invalid. */
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
                 "if-match": string;
             };
             path?: never;
@@ -5075,6 +5397,16 @@ export interface operations {
             };
             /** @description Safe RFC 9457 domain failure. */
             429: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
+            500: {
                 headers: {
                     "Cache-Control"?: "no-store";
                     [name: string]: unknown;
@@ -5208,6 +5540,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -5247,6 +5589,8 @@ export interface operations {
                     "application/json": {
                         /** Format: uuid */
                         commandId: string;
+                        /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
+                        etag: string;
                         /** Format: uuid */
                         resourceId: string;
                         revision: number;
@@ -5327,6 +5671,16 @@ export interface operations {
             };
             /** @description Safe RFC 9457 domain failure. */
             429: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
+            500: {
                 headers: {
                     "Cache-Control"?: "no-store";
                     [name: string]: unknown;
@@ -5455,6 +5809,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -5470,7 +5834,7 @@ export interface operations {
         parameters: {
             query?: never;
             header: {
-                /** @description One opaque strong ETag. Send the current value as If-Match; weak tags, lists and * are invalid. */
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
                 "if-match": string;
             };
             path?: never;
@@ -5592,6 +5956,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -5611,7 +5985,7 @@ export interface operations {
                 limit?: number;
             };
             header: {
-                /** @description One opaque strong ETag. Send the current value as If-Match; weak tags, lists and * are invalid. */
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
                 "if-match": string;
             };
             path?: never;
@@ -5707,6 +6081,16 @@ export interface operations {
             };
             /** @description Safe RFC 9457 domain failure. */
             429: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
+            500: {
                 headers: {
                     "Cache-Control"?: "no-store";
                     [name: string]: unknown;
@@ -5820,6 +6204,16 @@ export interface operations {
             };
             /** @description Safe RFC 9457 domain failure. */
             429: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
+            500: {
                 headers: {
                     "Cache-Control"?: "no-store";
                     [name: string]: unknown;
@@ -5950,6 +6344,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -6067,6 +6471,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -6105,6 +6519,8 @@ export interface operations {
                     "application/json": {
                         /** Format: uuid */
                         commandId: string;
+                        /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
+                        etag: string;
                         /** Format: uuid */
                         resourceId: string;
                         revision: number;
@@ -6185,6 +6601,16 @@ export interface operations {
             };
             /** @description Safe RFC 9457 domain failure. */
             429: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
+            500: {
                 headers: {
                     "Cache-Control"?: "no-store";
                     [name: string]: unknown;
@@ -6311,6 +6737,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -6326,7 +6762,7 @@ export interface operations {
         parameters: {
             query?: never;
             header: {
-                /** @description One opaque strong ETag. Send the current value as If-Match; weak tags, lists and * are invalid. */
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
                 "if-match": string;
             };
             path?: never;
@@ -6422,6 +6858,16 @@ export interface operations {
             };
             /** @description Safe RFC 9457 domain failure. */
             429: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
+            500: {
                 headers: {
                     "Cache-Control"?: "no-store";
                     [name: string]: unknown;
@@ -6537,6 +6983,16 @@ export interface operations {
             };
             /** @description Safe RFC 9457 domain failure. */
             429: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
+            500: {
                 headers: {
                     "Cache-Control"?: "no-store";
                     [name: string]: unknown;
@@ -6674,6 +7130,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -6689,7 +7155,7 @@ export interface operations {
         parameters: {
             query?: never;
             header: {
-                /** @description One opaque strong ETag. Send the current value as If-Match; weak tags, lists and * are invalid. */
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
                 "if-match": string;
             };
             path: {
@@ -6805,6 +7271,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -6820,7 +7296,7 @@ export interface operations {
         parameters: {
             query?: never;
             header: {
-                /** @description One opaque strong ETag. Send the current value as If-Match; weak tags, lists and * are invalid. */
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
                 "if-match": string;
             };
             path: {
@@ -6945,6 +7421,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -6960,7 +7446,7 @@ export interface operations {
         parameters: {
             query?: never;
             header: {
-                /** @description One opaque strong ETag. Send the current value as If-Match; weak tags, lists and * are invalid. */
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
                 "if-match": string;
             };
             path: {
@@ -6986,6 +7472,8 @@ export interface operations {
                     "application/json": {
                         /** Format: uuid */
                         commandId: string;
+                        /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
+                        etag: string;
                         /** Format: uuid */
                         resourceId: string;
                         revision: number;
@@ -7066,6 +7554,16 @@ export interface operations {
             };
             /** @description Safe RFC 9457 domain failure. */
             429: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
+            500: {
                 headers: {
                     "Cache-Control"?: "no-store";
                     [name: string]: unknown;
@@ -7191,6 +7689,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -7206,7 +7714,7 @@ export interface operations {
         parameters: {
             query?: never;
             header: {
-                /** @description One opaque strong ETag. Send the current value as If-Match; weak tags, lists and * are invalid. */
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
                 "if-match": string;
             };
             path: {
@@ -7330,6 +7838,16 @@ export interface operations {
                 };
             };
             /** @description Safe RFC 9457 domain failure. */
+            500: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
             503: {
                 headers: {
                     "Cache-Control"?: "no-store";
@@ -7345,7 +7863,7 @@ export interface operations {
         parameters: {
             query?: never;
             header: {
-                /** @description One opaque strong ETag. Send the current value as If-Match; weak tags, lists and * are invalid. */
+                /** @description Server-supplied opaque strong ETag. Send the target entity's etag as If-Match, including for nested collection items; never construct it from revision or substitute a collection tag. Weak tags, lists and * are invalid. */
                 "if-match": string;
             };
             path: {
@@ -7453,6 +7971,16 @@ export interface operations {
             };
             /** @description Safe RFC 9457 domain failure. */
             429: {
+                headers: {
+                    "Cache-Control"?: "no-store";
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Safe RFC 9457 domain failure. */
+            500: {
                 headers: {
                     "Cache-Control"?: "no-store";
                     [name: string]: unknown;

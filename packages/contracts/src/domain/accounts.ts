@@ -4,6 +4,7 @@ import {
   boundedText,
   CommandSchema,
   DomainIdSchema,
+  EntityTagSchema,
   RevisionSchema,
   ServerTimestampSchema,
 } from "./common.js";
@@ -24,11 +25,15 @@ export const ProfileFieldsSchema = z.strictObject({
   bio: BioSchema.nullable(),
 });
 export const UpdateProfileSchema = ProfileFieldsSchema.extend(CommandSchema.shape);
-export const ProfileSchema = ProfileFieldsSchema.extend({ revision: RevisionSchema });
+export const ProfileSchema = ProfileFieldsSchema.extend({
+  revision: RevisionSchema,
+  etag: EntityTagSchema,
+});
 export const MyAccountSchema = z
   .strictObject({
     accountId: DomainIdSchema,
     accountRevision: RevisionSchema,
+    etag: EntityTagSchema,
     state: z.literal("active"),
     emailVerified: z.literal(true),
     privateEmail: z.email().max(320),
@@ -79,6 +84,7 @@ export const AvatarStatusSchema = z.discriminatedUnion("state", [
     state: z.literal("available"),
     avatarId: DomainIdSchema,
     revision: RevisionSchema,
+    etag: EntityTagSchema,
     contentType: z.enum(["image/jpeg", "image/png"]),
     width: z.number().int().min(1).max(512),
     height: z.number().int().min(1).max(512),
