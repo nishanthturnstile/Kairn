@@ -20,6 +20,7 @@ Start with the product plan and requirements. Use the implementation plans for t
 - [Repository setup](implementation/repository_setup_plan.md) — completed foundation interface, acceptance gates, and constraints on later changes
 - [Repository setup progress](implementation/repository_setup_progress.md) — implemented batches, compatibility decisions, and executed checks
 - [Local mobile development](implementation/mobile_development_plan.md) — hosts, testing, and distribution constraints
+- [SDK 58 patch refresh](implementation/expo_sdk_refresh_progress.md) — dependency corrections, full online verification and affected native qualification
 - [Native host setup](implementation/native_host_setup.md) — current Windows/Mac commands, Metro/API routes, signing renewal, and device workflow
 - [Branch and checkout workflow](implementation/checkout_workflow.md) — development/main promotion, authoring-host choice, protected checkpoint synchronization and recovery
 - [Checkout reconciliation record](implementation/checkout_reconciliation_progress.md) — preserved pending files, branch-history backups and initial host alignment

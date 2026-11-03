@@ -786,30 +786,30 @@ Mapbox package versions were rechecked against the [web registry metadata](https
 
 ### 14.3 Expo-supported direct modules and peers
 
-Use `expo install` and `expo-doctor` against the adopted SDK. The [shipped SDK matrix](https://unpkg.com/expo@58.0.22/bundledNativeModules.json), [template metadata](https://registry.npmjs.org/expo-template-default/58.0.31), and native builds govern mobile compatibility. The lockfile records actual resolutions; do not independently maximize every SDK peer. The locked Unistyles/Nitro foundation pins passed Android and iOS build/runtime qualification with the adopted SDK. Requalify the affected combination when those native inputs change.
+Use `expo install` and `expo-doctor` against the adopted SDK. The [shipped SDK matrix](https://unpkg.com/expo@58.0.23/bundledNativeModules.json), [template metadata](https://registry.npmjs.org/expo-template-default/58.0.31), and native builds govern mobile compatibility. The lockfile records actual resolutions; do not independently maximize every SDK peer. The locked Unistyles/Nitro foundation pins passed Android and iOS build/runtime qualification with the adopted SDK. Requalify the affected combination when those native inputs change. The [SDK 58 patch refresh](../implementation/expo_sdk_refresh_progress.md) records the current dependency update and its new verification; the earlier foundation build does not qualify the refreshed graph.
 
 | Package/group | SDK-supported selection | Reason / stage |
 |---|---|---|
-| `expo`, `react-native` | `58.0.22`, `0.88.1` | Mobile foundation. |
+| `expo`, `react-native` | `58.0.23`, `0.88.1` | Mobile foundation. |
 | Mobile `react` | `19.3.0` | SDK/template pin; intentionally differs from web. |
-| Mobile transitive navigation peers | `react-dom@19.3.0`, `@expo/metro-runtime@58.0.16` | Required by the installed Router/Radix graph during foundation; this does not select a mobile web application. |
+| Mobile transitive navigation peers | `react-dom@19.3.0`, `@expo/metro-runtime@58.0.17` | Required by the installed Router/Radix graph during foundation; this does not select a mobile web application. |
 | Mobile `typescript` | `~6.0.3` template baseline | Keep until current mobile tools pass with the latest compiler. This is an explicit SDK exception. |
-| Mobile development tooling | `@babel/core@7.29.7`, `babel-preset-expo@58.0.23`, `react-refresh@0.14.2`, `@react-native/metro-config@0.88.1`, `expo-doctor@1.21.5` | SDK-matched Babel preset and its explicit refresh peer; matching Metro config supplies Worklets' required peer. Keep Expo Metro defaults. |
+| Mobile development tooling | `@babel/core@7.29.7`, `babel-preset-expo@58.0.24`, `react-refresh@0.14.2`, `@react-native/metro-config@0.88.1`, `expo-doctor@1.21.5` | SDK-matched Babel preset and its explicit refresh peer; matching Metro config supplies Worklets' required peer. Keep Expo Metro defaults. |
 | `expo-dev-client` | `58.0.18`, selected through `expo install` | Local Android/iOS development builds without an EAS requirement. |
 | Foundation display/type peers | `expo-font@58.0.11`, `expo-symbols@58.0.4`, `expo-system-ui@58.0.7` | Router's published native-tab declarations require Symbols and its font peer; System UI applies the selected light native appearance. No additional UI framework or icon system is introduced. |
-| `expo-router` | `~58.0.29` | Navigation/deep links. |
+| `expo-router` | `~58.0.30` | Navigation/deep links. |
 | `react-native-unistyles` | `3.7.0` | Mobile foundation; confirmed native styling layer, themes, variants, and responsive styles. Requires New Architecture and the Babel integration. |
 | `react-native-nitro-modules` | `0.37.1` exact | Mobile foundation; meets Unistyles 3.4+ minimum. Pin explicitly; do not float independently of Unistyles. |
 | `@react-native/normalize-colors` | Exact installed React Native version (`0.88.1` baseline) | Required Unistyles peer; explicitly declare in mobile and verify against the actual SDK graph. |
-| `react-native-screens`, `react-native-safe-area-context` | `~4.30.1`, `~5.10.1` | Navigation/display peers selected with the Expo router. |
+| `react-native-screens`, `react-native-safe-area-context` | `~4.30.1`, `~5.11.1` | Navigation/display peers selected with the Expo router. |
 | `expo-sqlite`, `expo-file-system` | `~58.0.15`, `~58.0.13` | Durable moments, unsent commands, uploads, files. |
 | `expo-camera` | `~58.0.14` | Photo and bounded video capture. |
 | `expo-audio`, `expo-video` | `~58.0.11`, `~58.0.13` | Voice capture and user-started playback. |
 | `expo-image-picker`, `expo-document-picker` | `~58.0.10`, `~58.0.4` | Explicit media/audio/GPX/FIT selection. |
 | `expo-location` | `~58.0.20` | Bounded foreground capture location. |
 | `expo-secure-store` | `~58.0.2` | Native session material. |
-| `expo-network`, `expo-web-browser`, `expo-constants` | `~58.0.4`, `~58.0.7`, `~58.0.14` | Required Expo/auth integration peers, not an extra authentication system. |
-| `expo-sharing`, `expo-linking` | `~58.0.21`, `~58.0.15` | Native sharing/deep-link behavior. |
+| `expo-network`, `expo-web-browser`, `expo-constants` | `~58.0.4`, `~58.0.7`, `~58.0.15` | Required Expo/auth integration peers, not an extra authentication system. |
+| `expo-sharing`, `expo-linking` | `~58.0.21`, `~58.0.16` | Native sharing/deep-link behavior. |
 | `expo-haptics` | `~58.0.7` | Capture-stage feedback after the completed durable local save, as specified by the application design. |
 | `expo-background-task` | `~58.0.12` | Opportunistic deferred sync; no immediate-after-force-stop promise. |
 | `expo-image` | `~58.0.18` | Image presentation/cache controls. |

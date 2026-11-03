@@ -2,6 +2,8 @@
 
 This is the B03 code/runbook boundary, not evidence of a deployed independent journal. The current executed evidence is in [accounts/journeys progress](accounts_journeys_access_progress.md). The actual independent failure domain, provider credentials, backup inventory/key recovery and deployment identifiers must qualify before shared-data activation. Local directories, local HTTPS fixtures and a database clone prove controlled behavior only.
 
+On 3 November 2026 the user confirmed that a separate Linux server exists and explicitly deferred deploying to it. Continue local module and product development with the shared-data gate closed. The independent-host drill remains a pre-activation requirement; it is not a prerequisite for local account implementation.
+
 ## Independent journal
 
 The reference service provides idempotent append by event ID, fsync before acknowledgement, ordered SHA-256 checkpoints, Ed25519 receipts, a nonce-bound signed current head, and a durable appender fence. Application workers receive raw **public** verification keys; private signing seeds remain on the independent host. Operator read/fence credentials and application append credentials are different. No HTTP delete, rewrite or truncate operation exists.
