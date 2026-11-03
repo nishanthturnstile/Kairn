@@ -6,6 +6,14 @@ Read `docs/README.md` for the documentation map. Requirements in `docs/core/prod
 
 Keep tests focused on mandatory acceptance gates and critical failure or durability scenarios. Prefer a small integration test against the real boundary over many mocked cases. Do not add tests for routine reversible edits, configuration values, or behavior already proved by another check. Record the chosen coverage and executed results in the relevant implementation progress document; expand coverage when a concrete requirement or regression warrants it.
 
+## Verification records and publication
+
+Use the current checkpoint in `docs/implementation/repository_setup_progress.md` as the setup status source. Historical execution snapshots under `docs/research/repository-setup/` preserve provenance; resolved failures and old source-transfer notes are not current prerequisites. Keep the setup plan, mobile plan, host guide, and checkpoint consistent when acceptance closes, and distinguish completed foundation work from future product/release gates.
+
+Check the actual PR state before publishing a follow-up. Changes made after a PR merges need a new branch/PR based on current `main`; pushing to the former review branch does not rerun a closed PR. Tie CI and native evidence to their actual inputs rather than assuming an earlier green run qualifies a later head. Preserve local signing settings and owning-OS output during checkout synchronization.
+
+Direct Compose tooling runs must build the current checkout into the image (`run --build` or an immediately preceding explicit build). A cached tooling image can contain an older source snapshot even when the host checkout is current; verify the actual container inputs when recording capacity or acceptance evidence.
+
 ## Skills
 
 The configured native checkouts and commands are recorded in `docs/implementation/native_host_setup.md`. In the Windows checkout, activate `. .\.kairn\env.ps1` in PowerShell before Node/pnpm/Android commands; on the Mac, use `. .kairn/env.sh`. These ignored host-local files select the project's pinned tools without changing global defaults. Keep Compose in WSL and native dependencies/Metro/build output on their owning OS. T3 device tools act in the agent thread's environment; use a Windows agent for its local Android emulator.

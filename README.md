@@ -2,15 +2,15 @@
 
 Shared journey capture, composition, and reading. Start with the [documentation map](docs/README.md).
 
-Repository setup follows the [setup plan](docs/implementation/repository_setup_plan.md#9-implementation-sequence-and-acceptance-gates). Toolchain, shared packages, generated contracts, composed services, and Android native/UI/API acceptance have passed their recorded checks. The iOS simulator build and runtime checks are recorded separately from Personal Team iPhone/iPad acceptance and actual hosted CI results in the [current checkpoint](docs/implementation/repository_setup_progress.md#current-checkpoint).
+Repository setup follows the [setup plan](docs/implementation/repository_setup_plan.md#9-implementation-sequence-and-acceptance-gates). Toolchain, shared packages, generated contracts, composed services, Android, iPhone simulator, and physical iPad acceptance have passed for the agreed scope. Physical iPhone checks are deferred by the user. Evidence and revision-specific hosted CI results are in the [current checkpoint](docs/implementation/repository_setup_progress.md#current-checkpoint).
 
-Windows Android and Mac iOS checkouts now have separate local tools, dependencies, and Metro. See [native host setup](docs/implementation/native_host_setup.md) for your paths, environment activation, build commands, source synchronization, and pending Xcode/device gates. `check:mobile`, `build:mobile`, `verify:android`, `prebuild:ios`, `ios:pods:update`, `build:ios:simulator`, and `verify:ios` build shared prerequisites. `check:mobile:host` checks the real API and running host Metro; it does not establish device acceptance.
+Windows Android and Mac iOS checkouts have separate local tools, dependencies, and Metro. See [native host setup](docs/implementation/native_host_setup.md) for paths, environment activation, build commands, source synchronization, device evidence, and Personal Team renewal. `check:mobile`, `build:mobile`, `verify:android`, `prebuild:ios`, `ios:pods:update`, `build:ios:simulator`, and `verify:ios` build shared prerequisites. `check:mobile:host` checks the real API and running host Metro; it does not establish device acceptance.
 
 `pnpm build` builds every JavaScript application and both mobile exports without a native SDK. On WSL/Linux, `pnpm verify` validates Compose, builds frozen tooling, runs checks/tests/exports, qualifies final images, and exercises real HTTP, queue, and storage boundaries in isolated projects. It retains logs, exports, manifests, and generated-input comparisons under ignored `.kairn/verification/`. Container build contexts exclude `.kairn/` and host mobile exports.
 
 `pnpm dev:android` and `pnpm dev:ios` are human-invoked local build/install/Metro commands for the Windows and Mac checkouts respectively; pass Expo CLI options such as `--device` when needed. Do not start them over an existing Metro process. Agents use T3's bound device command for launches and UI checks. `pnpm verify:ios` records native build inputs/results but deliberately leaves runtime and physical-device evidence separate. `pnpm start:worker` starts the compiled worker with its runtime database URL.
 
-The [repository setup workflow](.github/workflows/repository-setup.yml) runs Quality and Android on pull requests, `main`, and `development`. Its final `Repository setup required` status succeeds only when both jobs pass. Workflow files and local validation do not establish a hosted pass or branch protection; those require the reviewed foundation to be pushed and run.
+The [repository setup workflow](.github/workflows/repository-setup.yml) runs Quality and Android on pull requests, `main`, and `development`. Its final `Repository setup required` status succeeds only when both jobs pass. All three checks passed on the application inputs at `58d258c`; `main` requires that final GitHub Actions status and an up-to-date branch, including for administrators. Documentation updates also run CI and retain their own PR results.
 
 Start the local web app with Docker; host Node is not required for these services:
 
@@ -31,13 +31,12 @@ PostgreSQL and SeaweedFS data/metadata use named volumes retained by ordinary `d
 Use `docker compose up --build --watch` (or `pnpm dev`) for edits. Compose Watch synchronizes web source for Vite HMR, synchronizes server source and restarts its process, and rebuilds shared-package/dependency/config changes. Container dependencies stay separate from host dependencies. See [local environment inputs](infra/compose/.env.example); changing the port also requires a matching `KAIRN_PUBLIC_ORIGIN`. Recreate the stack after changing Compose, Caddy, or environment configuration.
 
 ```sh
-docker compose --profile tools build tooling
-docker compose --profile tools run --rm tooling pnpm check
-docker compose --profile tools run --rm tooling pnpm test
-docker compose --profile tools run --rm tooling pnpm test:integration
+docker compose --profile tools run --build --rm tooling pnpm check
+docker compose --profile tools run --build --rm tooling pnpm test
+docker compose --profile tools run --build --rm tooling pnpm test:integration
 ```
 
-Integration checks require the application stack running. The tooling image includes the pinned Chromium runtime, requires no Docker socket, and builds its own compiled-package prerequisites. `pnpm verify:web` is a host wrapper that builds isolated development and final-runtime stacks, runs their HTTP/browser checks, verifies the production dependency closure, and removes its own containers/networks. The final-runtime override is for local image qualification; public deployment/TLS is later work.
+The `--build` flag makes each command use the current checkout rather than a stale cached source image. Integration checks require the application stack running. The tooling image includes the pinned Chromium runtime, requires no Docker socket, and builds its own compiled-package prerequisites. `pnpm verify:web` is a host wrapper that builds isolated development and final-runtime stacks, runs their HTTP/browser checks, verifies the production dependency closure, and removes its own containers/networks. The final-runtime override is for local image qualification; public deployment/TLS is later work.
 
 Run `pnpm verify:data` for the critical data acceptance check. It owns an isolated project and disposable volumes, checks the migration failure gate, stops/recreates its database and storage, verifies queued-work and object persistence, tests the local SMTP sink, and reuses the existing web integration suite. Its resources are removed afterward. It does not reset development volumes. Test coverage stays focused on mandatory and critical scenarios as recorded in [AGENTS.md](AGENTS.md#testing-scope).
 
@@ -71,4 +70,4 @@ Vite+ owns web/server tooling. Web/shared TypeScript is 7.0.2; mobile and the is
 
 Keep a separate checkout, dependency installation, and generated native output on each OS: WSL for Compose, Windows native for Android/Metro, and Mac for iOS/Metro. Local development requires no EAS subscription or paid Apple membership.
 
-`verify:toolchain` checks pinned tool compatibility. `verify:shared` checks package boundaries, compiled declarations under TypeScript 7 and mobile TypeScript 6, and a browser bundle of the shared exports/client. Actual client builds also reject Node/server modules and seeded secret markers. `test` exercises wire validation, client transport, sync envelopes, logging, HTTP factories, and boundaries through `vite-plus/test`. Native behavior has its own later gates. [Setup evidence and compatibility notes](docs/implementation/repository_setup_progress.md) record the qualification limits and declaration patches retained by the lockfile.
+`verify:toolchain` checks pinned tool compatibility. `verify:shared` checks package boundaries, compiled declarations under TypeScript 7 and mobile TypeScript 6, and a browser bundle of the shared exports/client. Actual client builds also reject Node/server modules and seeded secret markers. `test` exercises wire validation, client transport, sync envelopes, logging, HTTP factories, and boundaries through `vite-plus/test`. Native runtime acceptance is recorded separately and repeated for affected input changes. [Setup evidence and compatibility notes](docs/implementation/repository_setup_progress.md) record the qualification limits and declaration patches retained by the lockfile.
