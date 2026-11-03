@@ -69,12 +69,12 @@ export function JournalField({
       <Text style={styles.label}>{label}</Text>
       <TextInput
         accessibilityLabel={label}
-        accessibilityHint={error ?? hint}
+        accessibilityHint={error || hint}
         style={[styles.input, error && styles.errorBorder]}
         {...props}
       />
       <Text accessibilityLiveRegion="polite" style={[styles.hint, error && styles.errorText]}>
-        {error ?? hint}
+        {error || hint}
       </Text>
     </View>
   );

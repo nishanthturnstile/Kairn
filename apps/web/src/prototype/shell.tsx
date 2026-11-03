@@ -36,9 +36,9 @@ function ShellContent() {
             <span>Experience workshop</span>
             <span>Seed {seed.version}</span>
           </header>
-          <div id="sample-content" className="sample-content">
+          <main id="sample-content" className="sample-content">
             <Outlet />
-          </div>
+          </main>
         </div>
         <aside className="sample-panel" aria-label="Sample controls">
           <h2>Sample controls</h2>

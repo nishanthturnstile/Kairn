@@ -32,6 +32,8 @@ Start with the product plan and requirements. Use the implementation plans for t
 
 ## Research
 
+Prototype implementation evidence and current P00–P02 status: [prototype progress](implementation/prototype_progress.md).
+
 - [Architecture research](research/architecture/) — stack, maps, providers, and the [map cost comparison](research/architecture/map_cost_comparison.md)
 - [Repository setup research](research/repository-setup/) — toolchain, native builds, Compose, compatibility probes, and host observations
 - [Accounts and journey-access research](research/accounts-journey-access/analysis_2026-11-03.md) — current-code gaps, functional analysis, version-matched integration findings, and design/accessibility research for the next milestone

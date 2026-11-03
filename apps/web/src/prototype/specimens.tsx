@@ -30,7 +30,7 @@ export function Specimens() {
         <h2>Actions & feedback</h2>
         <div className="sample-inline">
           <Button disabled={pending} aria-busy={pending} onClick={() => setPending(true)}>
-            {pending ? "Saving sample…" : "Save sample"}
+            Save sample
           </Button>
           <Button variant="secondary" onClick={() => setPending(false)}>
             Clear pending example
@@ -81,6 +81,33 @@ export function Specimens() {
           <Status tone="review">Review only</Status>
         </div>
         <p>Saving, uploading, contributing and permitting publication are separate steps.</p>
+      </section>
+      <section className="sample-specimen">
+        <h2>Chapter & practical detail</h2>
+        <article className="sample-note">
+          <h3>A day without a track</h3>
+          <p>
+            We stayed in town while the ridge disappeared into cloud. A gap in the record stays a
+            gap.
+          </p>
+          <Status tone="review">Day 2 · rest stage · location unknown</Status>
+          <p className="sample-muted">
+            Prepared chapter specimen · source: sample-moment-8 · not an assembled story
+          </p>
+        </article>
+        <div className="sample-row">
+          <div>
+            <strong>Tea stop · LKR 600 per group of 4</strong>
+            <p className="sample-muted">
+              Observed 12 July 2026 · Leo Martin · source: sample-moment-5
+            </p>
+          </div>
+          <Status tone="review">Reported · sample cost</Status>
+        </div>
+        <p className="sample-muted">
+          A dated observation, not a current price. Chapter editing and source navigation follow in
+          P04.
+        </p>
       </section>
       <section className="sample-specimen">
         <h2>Impact confirmation</h2>

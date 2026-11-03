@@ -255,11 +255,7 @@ export function NativeSpecimens() {
       </View>
       <View style={styles.section}>
         <JournalText title>Actions & feedback</JournalText>
-        <JournalButton
-          label={pending ? "Saving sample…" : "Save sample"}
-          pending={pending}
-          onPress={() => setPending(true)}
-        />
+        <JournalButton label="Save sample" pending={pending} onPress={() => setPending(true)} />
         <JournalButton secondary label="Clear pending example" onPress={() => setPending(false)} />
         <JournalButton secondary label="Publish unavailable" disabled onPress={() => {}} />
         <View accessibilityLiveRegion="polite">
@@ -289,6 +285,25 @@ export function NativeSpecimens() {
         <JournalStatus review>Review only</JournalStatus>
         <JournalText>
           Saving, uploading, contributing and permitting publication are separate steps.
+        </JournalText>
+      </View>
+      <View style={styles.section}>
+        <JournalText title>Chapter & practical detail</JournalText>
+        <JournalText editorial>A day without a track</JournalText>
+        <JournalText>
+          We stayed in town while the ridge disappeared into cloud. A gap in the record stays a gap.
+        </JournalText>
+        <JournalStatus review>Day 2 · rest stage · location unknown</JournalStatus>
+        <JournalText muted>
+          Prepared chapter specimen · source: sample-moment-8 · not an assembled story
+        </JournalText>
+        <JournalText>Tea stop · LKR 600 per group of 4</JournalText>
+        <JournalText muted>
+          Observed 12 July 2026 · Leo Martin · source: sample-moment-5
+        </JournalText>
+        <JournalStatus review>Reported · sample cost</JournalStatus>
+        <JournalText muted>
+          A dated observation, not a current price. Editing and source navigation follow in P04.
         </JournalText>
       </View>
       <View style={styles.section}>
