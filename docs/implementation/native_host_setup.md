@@ -10,7 +10,7 @@ Date: 3 November 2026. Current operating instructions for the configured hosts. 
 | Windows | `C:\Users\Nishanth Murugan\projects\projects - WIN\Kairn` | Android builds, emulator, Metro, local T3 |
 | Mac | `/Users/nishanth/projects/nishanth/kairn` | Xcode/Pods, iOS builds, Metro, simulator/device checks |
 
-Origin is `https://github.com/nishanthturnstile/Kairn.git`. Synchronize the reviewed branch and commit recorded in the handoff; do not assume a fixed development branch or a live file sync. Check for local changes before pulling. Keep dependencies, caches, generated native output, and ignored environment/signing files on their owning OS. The application inputs were accepted at `58d258c`; PR #1 merged and merged `main` at `6057607` passed CI. Post-merge documentation requires a separate PR.
+Origin is `https://github.com/nishanthturnstile/Kairn.git`. Follow [the current checkout workflow](checkout_workflow.md): idle hosts use `development`, feature PRs target it, and checked integration checkpoints promote to `main`. Use `pnpm checkout:status` and `pnpm checkout:sync --branch NAME --commit FULL_SHA` on clean hosts; the helper refuses divergence/overwrites and preserves local settings. Choose one authoring checkout per task; no live folder sync. Keep dependencies, caches, generated native output and ignored environment/signing files on their owning OS. The original application inputs were accepted at `58d258c`; later source/CI/native evidence remains tied to actual commits.
 
 ## Windows
 
