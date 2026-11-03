@@ -19,10 +19,9 @@ export type Action =
 export function initialState(scenario = "first-run") {
   const data = clone(seed);
   const first = scenario === "first-run";
-  if (scenario === "review-moment-19") data.moments[18]!.scope = "journey-review";
-  if (scenario === "native-highlights-v1") scenario = "published-v1";
-  if (scenario === "native-highlights-withdrawn") scenario = "withdrawn-source";
-  if (scenario === "published-v1") {
+  if (scenario === "review-moment-19" || scenario === "capture-and-contribute")
+    data.moments[18]!.scope = "journey-review";
+  if (scenario === "published-v1" || scenario === "native-highlights-v1") {
     data.highlights = [{ id: "highlight-1", sourceId: "sample-moment-3" }];
     data.answers = [
       {
@@ -34,7 +33,12 @@ export function initialState(scenario = "first-run") {
   }
   return {
     scenario,
-    actorId: "mira",
+    actorId:
+      scenario === "review-moment-19" || scenario === "capture-and-contribute"
+        ? "dev"
+        : scenario === "withdrawn-source" || scenario === "native-highlights-withdrawn"
+          ? "eli"
+          : "mira",
     joined: !first,
     journeyId: first ? null : (seed.journey.id as string | null),
     title: seed.journey.title,

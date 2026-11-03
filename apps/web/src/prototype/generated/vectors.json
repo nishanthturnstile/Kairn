@@ -103,6 +103,10 @@
     "scenario": "review-moment-19",
     "actions": [
       {
+        "type": "actor",
+        "id": "mira"
+      },
+      {
         "type": "scope",
         "scope": "publication"
       }

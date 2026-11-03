@@ -47,4 +47,22 @@ describe("canonical sample transitions on both app boundaries", () => {
       });
     }
   });
+  test("all forward and reverse checkpoints match the manifest", () => {
+    for (const checkpoint of manifest) {
+      for (const start of [webInitial(checkpoint.web), nativeInitial(checkpoint.native)]) {
+        const source = start.data.moments.find((item) => item.id === checkpoint.sourceId)!;
+        const actor = start.data.actors.find((item) => item.id === start.actorId)!;
+        expect(start.data.version).toBe(checkpoint.fixtureVersion);
+        expect(start.journeyId).toBe(checkpoint.journeyId);
+        expect(actor.id).toBe(checkpoint.actor);
+        expect({
+          admin: actor.admin,
+          coauthor: actor.coauthor,
+          publisher: actor.publisher,
+        }).toEqual(checkpoint.powers);
+        expect(source).toMatchObject({ content: checkpoint.content, scope: checkpoint.scope });
+        expect(start.data.approved.revision).toBe(checkpoint.approvedRevision);
+      }
+    }
+  });
 });
