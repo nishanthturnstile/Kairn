@@ -10,42 +10,109 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PrototypeRouteImport } from './routes/prototype'
+import { Route as PrototypeIndexRouteImport } from './routes/prototype.index'
+import { Route as PrototypeComponentsRouteImport } from './routes/prototype.components'
+import { Route as PrototypeReaderRouteImport } from './routes/prototype.reader'
 import { Route as SetupStatusRouteImport } from './routes/setup.status'
+import { Route as PrototypeJourneyJourneyIdRouteImport } from './routes/prototype.journey.$journeyId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrototypeRoute = PrototypeRouteImport.update({
+  id: '/prototype',
+  path: '/prototype',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrototypeIndexRoute = PrototypeIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PrototypeRoute,
+} as any)
+const PrototypeComponentsRoute = PrototypeComponentsRouteImport.update({
+  id: '/components',
+  path: '/components',
+  getParentRoute: () => PrototypeRoute,
+} as any)
+const PrototypeReaderRoute = PrototypeReaderRouteImport.update({
+  id: '/reader',
+  path: '/reader',
+  getParentRoute: () => PrototypeRoute,
+} as any)
 const SetupStatusRoute = SetupStatusRouteImport.update({
   id: '/setup/status',
   path: '/setup/status',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrototypeJourneyJourneyIdRoute =
+  PrototypeJourneyJourneyIdRouteImport.update({
+    id: '/journey/$journeyId',
+    path: '/journey/$journeyId',
+    getParentRoute: () => PrototypeRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/prototype': typeof PrototypeRouteWithChildren
+  '/prototype/components': typeof PrototypeComponentsRoute
+  '/prototype/reader': typeof PrototypeReaderRoute
   '/setup/status': typeof SetupStatusRoute
+  '/prototype/': typeof PrototypeIndexRoute
+  '/prototype/journey/$journeyId': typeof PrototypeJourneyJourneyIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/prototype/components': typeof PrototypeComponentsRoute
+  '/prototype/reader': typeof PrototypeReaderRoute
   '/setup/status': typeof SetupStatusRoute
+  '/prototype': typeof PrototypeIndexRoute
+  '/prototype/journey/$journeyId': typeof PrototypeJourneyJourneyIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/prototype': typeof PrototypeRouteWithChildren
+  '/prototype/components': typeof PrototypeComponentsRoute
+  '/prototype/reader': typeof PrototypeReaderRoute
   '/setup/status': typeof SetupStatusRoute
+  '/prototype/': typeof PrototypeIndexRoute
+  '/prototype/journey/$journeyId': typeof PrototypeJourneyJourneyIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/setup/status'
+  fullPaths:
+    | '/'
+    | '/prototype'
+    | '/prototype/components'
+    | '/prototype/reader'
+    | '/setup/status'
+    | '/prototype/'
+    | '/prototype/journey/$journeyId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/setup/status'
-  id: '__root__' | '/' | '/setup/status'
+  to:
+    | '/'
+    | '/prototype/components'
+    | '/prototype/reader'
+    | '/setup/status'
+    | '/prototype'
+    | '/prototype/journey/$journeyId'
+  id:
+    | '__root__'
+    | '/'
+    | '/prototype'
+    | '/prototype/components'
+    | '/prototype/reader'
+    | '/setup/status'
+    | '/prototype/'
+    | '/prototype/journey/$journeyId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PrototypeRoute: typeof PrototypeRouteWithChildren
   SetupStatusRoute: typeof SetupStatusRoute
 }
 
@@ -58,6 +125,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/prototype': {
+      id: '/prototype'
+      path: '/prototype'
+      fullPath: '/prototype'
+      preLoaderRoute: typeof PrototypeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prototype/': {
+      id: '/prototype/'
+      path: '/'
+      fullPath: '/prototype/'
+      preLoaderRoute: typeof PrototypeIndexRouteImport
+      parentRoute: typeof PrototypeRoute
+    }
+    '/prototype/components': {
+      id: '/prototype/components'
+      path: '/components'
+      fullPath: '/prototype/components'
+      preLoaderRoute: typeof PrototypeComponentsRouteImport
+      parentRoute: typeof PrototypeRoute
+    }
+    '/prototype/reader': {
+      id: '/prototype/reader'
+      path: '/reader'
+      fullPath: '/prototype/reader'
+      preLoaderRoute: typeof PrototypeReaderRouteImport
+      parentRoute: typeof PrototypeRoute
+    }
     '/setup/status': {
       id: '/setup/status'
       path: '/setup/status'
@@ -65,11 +160,37 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SetupStatusRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/prototype/journey/$journeyId': {
+      id: '/prototype/journey/$journeyId'
+      path: '/journey/$journeyId'
+      fullPath: '/prototype/journey/$journeyId'
+      preLoaderRoute: typeof PrototypeJourneyJourneyIdRouteImport
+      parentRoute: typeof PrototypeRoute
+    }
   }
 }
 
+interface PrototypeRouteChildren {
+  PrototypeComponentsRoute: typeof PrototypeComponentsRoute
+  PrototypeReaderRoute: typeof PrototypeReaderRoute
+  PrototypeIndexRoute: typeof PrototypeIndexRoute
+  PrototypeJourneyJourneyIdRoute: typeof PrototypeJourneyJourneyIdRoute
+}
+
+const PrototypeRouteChildren: PrototypeRouteChildren = {
+  PrototypeComponentsRoute: PrototypeComponentsRoute,
+  PrototypeReaderRoute: PrototypeReaderRoute,
+  PrototypeIndexRoute: PrototypeIndexRoute,
+  PrototypeJourneyJourneyIdRoute: PrototypeJourneyJourneyIdRoute,
+}
+
+const PrototypeRouteWithChildren = PrototypeRoute._addFileChildren(
+  PrototypeRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PrototypeRoute: PrototypeRouteWithChildren,
   SetupStatusRoute: SetupStatusRoute,
 }
 export const routeTree = rootRouteImport

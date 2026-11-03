@@ -1,0 +1,567 @@
+{
+  "version": "p02.1",
+  "journey": {
+    "id": "sample-journey-01",
+    "title": "The long way to the ridge",
+    "place": "Hill country · fictional journey",
+    "start": "11 July 2026",
+    "end": "14 July 2026",
+    "cover": null
+  },
+  "actors": [
+    {
+      "id": "mira",
+      "name": "Mira Sen",
+      "admin": true,
+      "coauthor": true,
+      "publisher": true,
+      "member": true
+    },
+    {
+      "id": "dev",
+      "name": "Dev Raman",
+      "admin": false,
+      "coauthor": false,
+      "publisher": false,
+      "member": true
+    },
+    {
+      "id": "asha",
+      "name": "Asha Fernando",
+      "admin": false,
+      "coauthor": false,
+      "publisher": false,
+      "member": true
+    },
+    {
+      "id": "leo",
+      "name": "Leo Martin",
+      "admin": false,
+      "coauthor": true,
+      "publisher": false,
+      "member": true
+    },
+    {
+      "id": "noor",
+      "name": "Noor Jayasinghe",
+      "admin": false,
+      "coauthor": false,
+      "publisher": true,
+      "member": true
+    },
+    {
+      "id": "eli",
+      "name": "Eli Perera",
+      "admin": false,
+      "coauthor": false,
+      "publisher": false,
+      "member": false
+    }
+  ],
+  "stages": [
+    {
+      "id": "stage-1",
+      "title": "Departure",
+      "evidence": "recorded",
+      "day": 1,
+      "noGps": false
+    },
+    {
+      "id": "stage-2",
+      "title": "Ridge walk",
+      "evidence": "reported",
+      "day": 1,
+      "noGps": false
+    },
+    {
+      "id": "stage-3",
+      "title": "Rest in town",
+      "evidence": "unknown",
+      "day": 2,
+      "noGps": true
+    },
+    {
+      "id": "stage-4",
+      "title": "Dev’s bus branch",
+      "evidence": "reported",
+      "day": 2,
+      "noGps": false
+    },
+    {
+      "id": "stage-5",
+      "title": "The connection",
+      "evidence": "estimated",
+      "day": 3,
+      "noGps": false
+    },
+    {
+      "id": "stage-6",
+      "title": "Homeward",
+      "evidence": "unknown",
+      "day": 3,
+      "noGps": false
+    }
+  ],
+  "moments": [
+    {
+      "id": "sample-moment-1",
+      "title": "Leaving home",
+      "owner": "mira",
+      "kind": "photo",
+      "stage": "stage-1",
+      "scope": "only-me",
+      "withdrawn": false,
+      "attribution": "Sample contributor",
+      "capturedAt": "2026-07-11T10:30:00",
+      "enteredAt": "2026-07-15T12:00:00Z",
+      "uploadedAt": "2026-07-15T12:05:00Z",
+      "timezone": "Asia/Colombo",
+      "content": "Fictional field note: leaving home.",
+      "rights": false,
+      "redaction": null,
+      "importState": "ready"
+    },
+    {
+      "id": "sample-moment-2",
+      "title": "The train east",
+      "owner": "leo",
+      "kind": "note",
+      "stage": "stage-1",
+      "scope": "journey-review",
+      "withdrawn": false,
+      "attribution": "Sample contributor",
+      "capturedAt": "2026-07-11T10:30:00",
+      "enteredAt": "2026-07-15T12:00:00Z",
+      "uploadedAt": "2026-07-15T12:05:00Z",
+      "timezone": "Asia/Colombo",
+      "content": "Fictional field note: the train east.",
+      "rights": false,
+      "redaction": null,
+      "importState": "ready"
+    },
+    {
+      "id": "sample-moment-3",
+      "title": "Ridge in the rain",
+      "owner": "mira",
+      "kind": "video",
+      "stage": "stage-1",
+      "scope": "publication",
+      "withdrawn": false,
+      "attribution": "Sample contributor",
+      "capturedAt": "2026-07-11T10:30:00",
+      "enteredAt": "2026-07-15T12:00:00Z",
+      "uploadedAt": "2026-07-15T12:05:00Z",
+      "timezone": "Asia/Colombo",
+      "content": "Fictional field note: ridge in the rain.",
+      "rights": true,
+      "redaction": null,
+      "importState": "ready"
+    },
+    {
+      "id": "sample-moment-4",
+      "title": "Tea at the bend",
+      "owner": "leo",
+      "kind": "photo",
+      "stage": "stage-2",
+      "scope": "only-me",
+      "withdrawn": false,
+      "attribution": "Sample contributor",
+      "capturedAt": "2026-07-11T10:30:00",
+      "enteredAt": "2026-07-15T12:00:00Z",
+      "uploadedAt": "2026-07-15T12:05:00Z",
+      "timezone": "Asia/Colombo",
+      "content": "Fictional field note: tea at the bend.",
+      "rights": false,
+      "redaction": null,
+      "importState": "ready"
+    },
+    {
+      "id": "sample-moment-5",
+      "title": "A remembered shortcut",
+      "owner": "mira",
+      "kind": "remembered",
+      "stage": "stage-2",
+      "scope": "journey-review",
+      "withdrawn": false,
+      "attribution": "Sample contributor",
+      "capturedAt": "2026-07-11T10:30:00",
+      "enteredAt": "2026-07-15T12:00:00Z",
+      "uploadedAt": "2026-07-15T12:05:00Z",
+      "timezone": "Asia/Colombo",
+      "content": "Fictional field note: a remembered shortcut.",
+      "rights": false,
+      "redaction": null,
+      "importState": "ready"
+    },
+    {
+      "id": "sample-moment-6",
+      "title": "The guesthouse ledger",
+      "owner": "leo",
+      "kind": "voice",
+      "stage": "stage-2",
+      "scope": "publication",
+      "withdrawn": false,
+      "attribution": "Sample contributor",
+      "capturedAt": "2026-07-12T10:30:00",
+      "enteredAt": "2026-07-15T12:00:00Z",
+      "uploadedAt": "2026-07-15T12:05:00Z",
+      "timezone": "Asia/Colombo",
+      "content": "Fictional field note: the guesthouse ledger.",
+      "rights": true,
+      "redaction": null,
+      "importState": "ready"
+    },
+    {
+      "id": "sample-moment-7",
+      "title": "Rain on the roof",
+      "owner": "mira",
+      "kind": "photo",
+      "stage": "stage-3",
+      "scope": "only-me",
+      "withdrawn": false,
+      "attribution": "Sample contributor",
+      "capturedAt": "2026-07-12T10:30:00",
+      "enteredAt": "2026-07-15T12:00:00Z",
+      "uploadedAt": "2026-07-15T12:05:00Z",
+      "timezone": "Asia/Colombo",
+      "content": "Fictional field note: rain on the roof.",
+      "rights": false,
+      "redaction": null,
+      "importState": "ready"
+    },
+    {
+      "id": "sample-moment-8",
+      "title": "Rest day, no GPS",
+      "owner": "leo",
+      "kind": "note",
+      "stage": "stage-3",
+      "scope": "journey-review",
+      "withdrawn": false,
+      "attribution": "Sample contributor",
+      "capturedAt": "2026-07-12T10:30:00",
+      "enteredAt": "2026-07-15T12:00:00Z",
+      "uploadedAt": "2026-07-15T12:05:00Z",
+      "timezone": "Asia/Colombo",
+      "content": "Fictional field note: rest day, no gps.",
+      "rights": false,
+      "redaction": null,
+      "importState": "ready"
+    },
+    {
+      "id": "sample-moment-9",
+      "title": "A quiet courtyard",
+      "owner": "mira",
+      "kind": "note",
+      "stage": "stage-3",
+      "scope": "publication",
+      "withdrawn": false,
+      "attribution": "Sample contributor",
+      "capturedAt": "2026-07-12T10:30:00",
+      "enteredAt": "2026-07-15T12:00:00Z",
+      "uploadedAt": "2026-07-15T12:05:00Z",
+      "timezone": "Asia/Colombo",
+      "content": "Fictional field note: a quiet courtyard.",
+      "rights": true,
+      "redaction": "Sensitive contact and exact place removed",
+      "importState": "ready"
+    },
+    {
+      "id": "sample-moment-10",
+      "title": "Dev takes the bus",
+      "owner": "leo",
+      "kind": "photo",
+      "stage": "stage-4",
+      "scope": "only-me",
+      "withdrawn": false,
+      "attribution": "Sample contributor",
+      "capturedAt": "2026-07-12T10:30:00",
+      "enteredAt": "2026-07-15T12:00:00Z",
+      "uploadedAt": "2026-07-15T12:05:00Z",
+      "timezone": "Asia/Colombo",
+      "content": "Fictional field note: dev takes the bus.",
+      "rights": false,
+      "redaction": null,
+      "importState": "ready"
+    },
+    {
+      "id": "sample-moment-11",
+      "title": "The river crossing",
+      "owner": "mira",
+      "kind": "note",
+      "stage": "stage-4",
+      "scope": "journey-review",
+      "withdrawn": false,
+      "attribution": "Sample contributor",
+      "capturedAt": "2026-07-13T10:30:00",
+      "enteredAt": "2026-07-15T12:00:00Z",
+      "uploadedAt": "2026-07-15T12:05:00Z",
+      "timezone": "Asia/Colombo",
+      "content": "Fictional field note: the river crossing.",
+      "rights": false,
+      "redaction": null,
+      "importState": "ready"
+    },
+    {
+      "id": "sample-moment-12",
+      "title": "A gap in the record",
+      "owner": "leo",
+      "kind": "note",
+      "stage": "stage-4",
+      "scope": "publication",
+      "withdrawn": false,
+      "attribution": "Sample contributor",
+      "capturedAt": "2026-07-13T10:30:00",
+      "enteredAt": "2026-07-15T12:00:00Z",
+      "uploadedAt": "2026-07-15T12:05:00Z",
+      "timezone": "Asia/Colombo",
+      "content": "Fictional field note: a gap in the record.",
+      "rights": true,
+      "redaction": null,
+      "importState": "ready"
+    },
+    {
+      "id": "sample-moment-13",
+      "title": "Back on the trail",
+      "owner": "mira",
+      "kind": "photo",
+      "stage": "stage-5",
+      "scope": "only-me",
+      "withdrawn": false,
+      "attribution": "Sample contributor",
+      "capturedAt": "2026-07-13T10:30:00",
+      "enteredAt": "2026-07-15T12:00:00Z",
+      "uploadedAt": "2026-07-15T12:05:00Z",
+      "timezone": "Asia/Colombo",
+      "content": "Fictional field note: back on the trail.",
+      "rights": false,
+      "redaction": null,
+      "importState": "ready"
+    },
+    {
+      "id": "sample-moment-14",
+      "title": "A voice from the ridge",
+      "owner": "leo",
+      "kind": "voice",
+      "stage": "stage-5",
+      "scope": "journey-review",
+      "withdrawn": false,
+      "attribution": "Sample contributor",
+      "capturedAt": "2026-07-13T10:30:00",
+      "enteredAt": "2026-07-15T12:00:00Z",
+      "uploadedAt": "2026-07-15T12:05:00Z",
+      "timezone": "Asia/Colombo",
+      "content": "Fictional field note: a voice from the ridge.",
+      "rights": false,
+      "redaction": null,
+      "importState": "ready"
+    },
+    {
+      "id": "sample-moment-15",
+      "title": "An uncertain arrival",
+      "owner": "mira",
+      "kind": "note",
+      "stage": "stage-5",
+      "scope": "publication",
+      "withdrawn": false,
+      "attribution": "Sample contributor",
+      "capturedAt": "2026-07-13T10:30:00",
+      "enteredAt": "2026-07-15T12:00:00Z",
+      "uploadedAt": "2026-07-15T12:05:00Z",
+      "timezone": null,
+      "content": "Fictional field note: an uncertain arrival.",
+      "rights": true,
+      "redaction": null,
+      "importState": "ready"
+    },
+    {
+      "id": "sample-moment-16",
+      "title": "Last morning",
+      "owner": "leo",
+      "kind": "photo",
+      "stage": "stage-6",
+      "scope": "only-me",
+      "withdrawn": false,
+      "attribution": "Sample contributor",
+      "capturedAt": "2026-07-14T10:30:00",
+      "enteredAt": "2026-07-15T12:00:00Z",
+      "uploadedAt": "2026-07-15T12:05:00Z",
+      "timezone": "Asia/Colombo",
+      "content": "Fictional field note: last morning.",
+      "rights": false,
+      "redaction": null,
+      "importState": "failed"
+    },
+    {
+      "id": "sample-moment-17",
+      "title": "The journey home",
+      "owner": "mira",
+      "kind": "note",
+      "stage": "stage-6",
+      "scope": "journey-review",
+      "withdrawn": false,
+      "attribution": "Sample contributor",
+      "capturedAt": "2026-07-14T10:30:00",
+      "enteredAt": "2026-07-15T12:00:00Z",
+      "uploadedAt": "2026-07-15T12:05:00Z",
+      "timezone": "Asia/Colombo",
+      "content": "Fictional field note: the journey home.",
+      "rights": false,
+      "redaction": null,
+      "importState": "ready"
+    },
+    {
+      "id": "sample-moment-18",
+      "title": "A withdrawn photograph",
+      "owner": "eli",
+      "kind": "note",
+      "stage": "stage-6",
+      "scope": "publication",
+      "withdrawn": true,
+      "attribution": "Sample contributor",
+      "capturedAt": "2026-07-14T10:30:00",
+      "enteredAt": "2026-07-15T12:00:00Z",
+      "uploadedAt": "2026-07-15T12:05:00Z",
+      "timezone": "Asia/Colombo",
+      "content": "Fictional field note: a withdrawn photograph.",
+      "rights": true,
+      "redaction": null,
+      "importState": "ready"
+    },
+    {
+      "id": "sample-moment-19",
+      "title": "Rain at the tea stop",
+      "owner": "dev",
+      "kind": "photo",
+      "stage": "stage-6",
+      "scope": "only-me",
+      "withdrawn": false,
+      "attribution": "Dev Raman",
+      "capturedAt": "2026-07-14T10:30:00",
+      "enteredAt": "2026-07-15T12:00:00Z",
+      "uploadedAt": null,
+      "timezone": "Asia/Colombo",
+      "content": "We waited out the rain over tea. The ridge disappeared into cloud.",
+      "rights": false,
+      "redaction": null,
+      "importState": "ready"
+    }
+  ],
+  "practical": [
+    {
+      "id": "detail-1",
+      "title": "Tea stop",
+      "currency": "LKR",
+      "amount": 600,
+      "unit": "per group",
+      "groupSize": 4,
+      "observedAt": "2026-07-12",
+      "contributor": "Leo Martin",
+      "sourceId": "sample-moment-5"
+    },
+    {
+      "id": "detail-2",
+      "title": "Guesthouse",
+      "currency": "LKR",
+      "amount": 9000,
+      "unit": "per room / night",
+      "groupSize": 2,
+      "observedAt": "2026-07-12",
+      "contributor": "Leo Martin",
+      "sourceId": "sample-moment-6"
+    },
+    {
+      "id": "detail-3",
+      "title": "Bus fare",
+      "currency": "LKR",
+      "amount": 250,
+      "unit": "per person",
+      "groupSize": 1,
+      "observedAt": "2026-07-12",
+      "contributor": "Leo Martin",
+      "sourceId": "sample-moment-7"
+    },
+    {
+      "id": "detail-4",
+      "title": "Current ridge fee",
+      "currency": null,
+      "amount": null,
+      "unit": "unknown current price",
+      "groupSize": null,
+      "observedAt": "2026-07-12",
+      "contributor": "Leo Martin",
+      "sourceId": "sample-moment-8"
+    }
+  ],
+  "draft": {
+    "revision": 2,
+    "caption": "We waited for the cloud to lift.",
+    "sourceIds": [
+      "sample-moment-3"
+    ],
+    "acceptedCorrection": "The rest day was in town, not on the ridge."
+  },
+  "approved": {
+    "revision": 1,
+    "caption": "An afternoon on the ridge.",
+    "sourceIds": [
+      "sample-moment-3"
+    ]
+  },
+  "staleCandidate": {
+    "baseRevision": 1,
+    "caption": "A clear view all afternoon."
+  },
+  "highlights": [
+    {
+      "id": "highlight-1",
+      "sourceId": "sample-moment-18"
+    }
+  ],
+  "answers": [
+    {
+      "id": "answer-1",
+      "sourceIds": [
+        "sample-moment-18"
+      ],
+      "text": "Prepared example, invalid after withdrawal."
+    }
+  ],
+  "exportGrant": {
+    "owner": "eli",
+    "recipient": "mira",
+    "sourceIds": [
+      "sample-moment-18"
+    ],
+    "expiresAt": "2026-07-16T12:00:00Z"
+  },
+  "suggestions": [
+    {
+      "id": "suggestion-1",
+      "sourceId": "sample-moment-6",
+      "uncertainty": "Reported from transcript",
+      "text": "Tea cost LKR 600 for four people.",
+      "operations": [
+        "accept",
+        "edit",
+        "dismiss",
+        "merge",
+        "split",
+        "reject"
+      ]
+    }
+  ],
+  "scenarios": [
+    "first-run",
+    "prepared-trip",
+    "editing",
+    "publication-blocked",
+    "published-v1",
+    "edited-draft",
+    "withdrawn-source",
+    "unavailable",
+    "restriction-pending",
+    "review-moment-19",
+    "native-highlights-v1",
+    "native-highlights-withdrawn"
+  ]
+}

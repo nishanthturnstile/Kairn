@@ -1,8 +1,15 @@
-import { createRootRouteWithContext, Link, Outlet } from "@tanstack/react-router";
+import { createRootRouteWithContext, Link, Outlet, useLocation } from "@tanstack/react-router";
 import type { QueryClient } from "@tanstack/react-query";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  component: () => (
+  component: Root,
+  notFoundComponent: () => <p>This page is not available.</p>,
+  errorComponent: () => <p role="alert">This page could not be loaded.</p>,
+});
+function Root() {
+  const path = useLocation({ select: (location) => location.pathname });
+  if (path.startsWith("/prototype")) return <Outlet />;
+  return (
     <main>
       <header>
         <a href="/">Kairn</a>
@@ -13,7 +20,5 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       </header>
       <Outlet />
     </main>
-  ),
-  notFoundComponent: () => <p>This page is not available.</p>,
-  errorComponent: () => <p role="alert">This page could not be loaded.</p>,
-});
+  );
+}

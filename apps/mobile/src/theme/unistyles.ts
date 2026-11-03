@@ -12,11 +12,14 @@ export const theme = {
     primaryText: tokens.color.white,
     successSurface: tokens.color.forest100,
     error: tokens.color.danger800,
+    controlBorder: tokens.color.ink500,
+    reviewSurface: tokens.color.clay100,
+    reviewText: tokens.color.clay800,
   },
   spacing: tokens.spacing,
   radius: tokens.radius,
   typography: tokens.typography.mobile,
-  // System fonts until the approved font files and licensing are delivered.
+  // Prototype routes load the approved named font files through Expo Font.
 };
 type AppThemes = { light: typeof theme };
 type AppBreakpoints = typeof tokens.layout.breakpoint;
