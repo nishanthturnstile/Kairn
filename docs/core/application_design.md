@@ -644,9 +644,9 @@ Public page content has a maximum width of 1280 px. The main Story reading colum
 
 | Token | Value | Use |
 |---|---|---|
-| Radius small | 8 px | Tags, compact inputs, and thumbnails |
-| Radius medium | 14 px | Buttons, cards, and panels |
-| Radius large | 22 px | Sheets, cover cards, and major map containers |
+| Radius small | 6 px | Tags, compact inputs, and thumbnails |
+| Radius medium | 12 px | Buttons, cards, and panels |
+| Radius large | 16 px | Sheets, cover cards, and major map containers |
 | Radius round | 999 px | Chips, avatars, and segmented controls only |
 | Border | 1 px Line 200 | Default surface separation |
 | Raised shadow | `0 12px 32px rgba(23, 32, 25, 0.10)` | Floating sheets, menus, and map panels |
