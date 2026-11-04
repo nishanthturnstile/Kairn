@@ -192,7 +192,8 @@ function ConfiguredAccount({ origin }: { origin: string }) {
           resetToken.current = null;
           await SecureStore.deleteItemAsync("kairn-intent.reset");
           form.reset();
-          clearPrivateAccount(client);
+          clearPrivateAccount(client, true);
+          await nativeAuthRequest("sign-out", {});
           setMode("sign-in");
           setMessage("Password updated. Sign in again.");
         } else if (mode === "verify") {
@@ -297,14 +298,14 @@ function ConfiguredAccount({ origin }: { origin: string }) {
     >
       <Text style={styles.kicker}>KAIRN / YOUR PRIVATE ACCOUNT</Text>
       <Text style={styles.heading}>
-        {query.data
-          ? "Your account"
-          : mode === "create"
-            ? "A place for your journeys."
-            : mode === "recover"
-              ? "Recover access"
-              : mode === "reset"
-                ? "Choose a new password"
+        {mode === "reset"
+          ? "Choose a new password"
+          : query.data
+            ? "Your account"
+            : mode === "create"
+              ? "A place for your journeys."
+              : mode === "recover"
+                ? "Recover access"
                 : mode === "verify"
                   ? "Verify your email"
                   : "Welcome back."}

@@ -321,6 +321,27 @@ it("completes real secure-cookie creation, verification, profile/export, session
     await page.getByRole("button", { name: "Save new password" }).click();
     await browserExpect(page.getByRole("status")).toContainText("Password updated");
     expect(page.url()).toBe(`${origin}/reset-password`);
+    // A warm reset for another account also ends the current client's session.
+    await page.goto(`${origin}/sign-in`);
+    await page.getByLabel("Email", { exact: true }).fill(email);
+    await page.getByLabel("Password", { exact: true }).fill(replacement);
+    await page.getByRole("button", { name: "Sign in", exact: true }).click();
+    await browserExpect(
+      page.getByRole("heading", { name: "Private profile", exact: true }),
+    ).toBeVisible();
+    await pools.owner.query("DELETE FROM operations.abuse_counter WHERE operation='auth_mail'");
+    const warmReset = await context.request.post(`${origin}/api/auth/request-password-reset`, {
+      headers: { Origin: origin },
+      data: { email: secondEmail, redirectTo: `${origin}/reset-password` },
+    });
+    expect(warmReset.ok()).toBe(true);
+    await page.goto(await mailLink(secondEmail, "password_reset"));
+    await page
+      .getByLabel("New password", { exact: true })
+      .fill(`Warm field phrase ${randomUUID()}`);
+    await page.getByRole("button", { name: "Save new password" }).click();
+    await browserExpect(page.getByRole("status")).toContainText("Password updated");
+    expect((await context.request.get(`${origin}/api/v1/me`)).status()).toBe(401);
     expect(errors).toEqual([]);
   } finally {
     await context.close();

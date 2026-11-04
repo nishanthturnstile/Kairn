@@ -146,7 +146,13 @@ export function AccountPage({ mode }: { mode: Mode }) {
           });
           token.current = null;
           form.reset();
-          changed();
+          changed(true);
+          try {
+            await authRequest("sign-out", {});
+          } catch {
+            setMessage("Password updated. Sign out could not be confirmed. Sign in again.");
+            return;
+          }
           setMessage("Password updated. Sign in with your new password.");
         } else if (mode === "verify-email") {
           await authRequest("send-verification-email", {
