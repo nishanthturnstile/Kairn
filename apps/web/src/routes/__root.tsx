@@ -7,9 +7,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     <main className="creator-shell">
       <header className="creator-header">
         <a href="/">Kairn</a>
-        <nav className="mt-4 flex gap-6" aria-label="Setup">
+        <nav className="mt-4 flex gap-6" aria-label="Navigation">
           <Link to="/">Home</Link>
-          <Link to="/setup/status">Service status</Link>
+          <Link to="/setup/status">Connection status</Link>
+          {typeof document !== "undefined" &&
+          document.documentElement.dataset.accountsEnabled === "true" ? (
+            <Link to="/account">Your account</Link>
+          ) : null}
           {import.meta.env.DEV ? <Link to="/setup/accounts">Account specimens</Link> : null}
         </nav>
       </header>

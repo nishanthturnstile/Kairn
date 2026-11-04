@@ -54,6 +54,8 @@ import {
 import { cleanupAvatars } from "@kairn/backend/workers";
 import { registerDomainWorkers } from "@kairn/backend/workers";
 import { createJobQueue } from "@kairn/backend/queue";
+import { createAccountAuth, createAccountServices } from "@kairn/server/accounts-auth";
+import { createApp } from "@kairn/server/app";
 import { user } from "../../packages/backend/src/identity/auth-schema.js";
 
 if (process.env.TEST_DOMAIN_ISOLATED !== "1")
@@ -137,7 +139,7 @@ afterAll(async () => {
   await admin.end();
   transport.close();
   s3.destroy();
-  await rm(directory, { recursive: true, force: true });
+  if (directory) await rm(directory, { recursive: true, force: true });
 });
 async function account(name = "Domain actor", verified = true) {
   const subject = randomUUID();
@@ -262,6 +264,520 @@ async function impacted(
 }
 
 describe("B03 real role command, media and delivery boundaries", () => {
+  it("runs verified HTTP accounts through real auth, durable Mailpit links, reset revocation and private projections", async () => {
+    const auth = createAccountAuth({
+      authPool: pools.auth,
+      accountPool: pools.server,
+      producer: authProducer,
+      origin: "https://kairn.invalid",
+      secret: randomBytes(32).toString("base64url"),
+      abuseKey: randomBytes(32),
+      mail: { keyId: "v1", key: mailKey, recipientKey },
+    });
+    const services = createAccountServices({
+      auth,
+      pool: pools.server,
+      producer,
+      storage,
+      origin: "https://kairn.invalid",
+      abuseKey: randomBytes(32),
+    });
+    const app = createApp({
+      publicOrigin: "https://kairn.invalid",
+      web: { creator: async () => "", reader: async () => "", asset: async () => null },
+      accounts: {
+        handleAuth: (request) => auth.handle(request, "192.0.2.1"),
+        getMyAccount: auth.getMyAccount,
+        handleDomain: services.handle,
+      },
+    });
+    const post = (path: string, body: unknown, cookie = "") =>
+      app.request(`https://kairn.invalid/api/auth/${path}`, {
+        method: "POST",
+        headers: { origin: "https://kairn.invalid", "content-type": "application/json", cookie },
+        body: JSON.stringify(body),
+      });
+    const me = (cookie = "") =>
+      app.request("https://kairn.invalid/api/v1/me", { headers: { cookie } });
+    const email = `${randomUUID()}@kairn.invalid`;
+    const password = `  🏕️ a private phrase ${randomUUID()}  `;
+    const signup = await post("sign-up/email", {
+      name: "  Account One  ",
+      email,
+      password,
+      callbackURL: "https://kairn.invalid/verify-email",
+    });
+    expect(signup.status).toBe(200);
+    expect(signup.headers.get("set-cookie") ?? "").not.toContain("session_token");
+    expect((await me()).status).toBe(401);
+    expect((await post("sign-in/email", { email, password })).status).toBe(403);
+    const subject = (await pools.auth.query('SELECT id FROM authn."user" WHERE email=$1', [email]))
+      .rows[0].id;
+    const sendAndRead = async (purpose: string, targetSubject = subject, targetEmail = email) => {
+      const delivery = (
+        await pools.owner.query(
+          "SELECT id FROM operations.email_delivery WHERE auth_subject_id=$1 AND purpose=$2 ORDER BY created_at DESC LIMIT 1",
+          [targetSubject, purpose],
+        )
+      ).rows[0];
+      await deliverEmail(pools.worker, delivery.id, mailOptions);
+      const inbox = await (await fetch(`${process.env.TEST_MAILPIT_URL}/api/v1/messages`)).json();
+      const message = inbox.messages.find((m: { To: { Address: string }[] }) =>
+        m.To.some((to) => to.Address === targetEmail),
+      );
+      const contents = await (
+        await fetch(`${process.env.TEST_MAILPIT_URL}/api/v1/message/${message.ID}`)
+      ).json();
+      return new URL(contents.Text.match(/https:\/\/[^\s]+/)[0]);
+    };
+    const restoreVerification = async (row: Record<string, unknown>) => {
+      // The pinned library may clean expired records during lookup. Restore the
+      // fixture row, not just its timestamp, before testing a valid token.
+      await pools.auth.query(
+        "INSERT INTO authn.verification(id,identifier,value,expires_at,created_at,updated_at) VALUES($1,$2,$3,$4,$5,$6) ON CONFLICT(id) DO UPDATE SET expires_at=EXCLUDED.expires_at",
+        [row.id, row.identifier, row.value, row.expires_at, row.created_at, row.updated_at],
+      );
+    };
+    const verification = await sendAndRead("verification");
+    const verificationRow = (
+      await pools.auth.query(
+        "SELECT * FROM authn.verification WHERE value=$1 AND identifier LIKE 'kairn-email:%'",
+        [subject],
+      )
+    ).rows[0];
+    await pools.auth.query(
+      "UPDATE authn.verification SET expires_at=now()-interval '1 minute' WHERE value=$1 AND identifier LIKE 'kairn-email:%'",
+      [subject],
+    );
+    expect((await app.request(verification.href)).status).toBe(400);
+    await restoreVerification(verificationRow);
+    expect((await app.request(verification.href)).status).toBe(302);
+    expect((await app.request(verification.href)).status).toBe(400);
+    const signedIn = await post("sign-in/email", { email, password });
+    expect(signedIn.status).toBe(200);
+    expect((await signedIn.json()).token).toBeNull();
+    expect((await post("sign-in/email", { email, password: password.trim() })).status).toBe(401);
+    const cookies = signedIn.headers.getSetCookie();
+    expect(cookies.some((cookie) => cookie.includes("HttpOnly") && cookie.includes("Secure"))).toBe(
+      true,
+    );
+    const cookie = cookies.map((value) => value.split(";")[0]).join("; ");
+    const ownResponse = await me(cookie);
+    expect(ownResponse.status).toBe(200);
+    expect(ownResponse.headers.get("cache-control")).toBe("no-store");
+    const own = await ownResponse.json();
+    expect(own).toMatchObject({
+      privateEmail: email,
+      profile: { displayName: "Account One", bio: null },
+    });
+    expect(JSON.stringify(own)).not.toContain(subject);
+    // Two real sessions interleave through reused pools without cross-account fields.
+    const secondEmail = `${randomUUID()}@kairn.invalid`;
+    const secondPassword = `Another phrase ${randomUUID()}`;
+    expect(
+      (
+        await post("sign-up/email", {
+          name: "Account Two",
+          email: secondEmail,
+          password: secondPassword,
+        })
+      ).status,
+    ).toBe(200);
+    const secondSubject = (
+      await pools.auth.query('SELECT id FROM authn."user" WHERE email=$1', [secondEmail])
+    ).rows[0].id;
+    const secondVerification = await sendAndRead("verification", secondSubject, secondEmail);
+    expect((await app.request(secondVerification.href)).status).toBe(302);
+    const secondSignIn = await post("sign-in/email", {
+      email: secondEmail,
+      password: secondPassword,
+    });
+    expect(secondSignIn.status).toBe(200);
+    const secondCookie = secondSignIn.headers
+      .getSetCookie()
+      .map((value) => value.split(";")[0])
+      .join("; ");
+    const privateReads = await Promise.all(
+      Array.from({ length: 8 }, async (_, index) => {
+        const response = await me(index % 2 ? secondCookie : cookie);
+        expect(response.status).toBe(200);
+        return response.json();
+      }),
+    );
+    for (const [index, read] of privateReads.entries()) {
+      expect(read.privateEmail).toBe(index % 2 ? secondEmail : email);
+      expect(read.accountId === own.accountId).toBe(index % 2 === 0);
+    }
+    // The domain profile remains authoritative after the library mirror changes.
+    await pools.auth.query('UPDATE authn."user" SET name=$1 WHERE id=$2', ["Auth mirror", subject]);
+    expect((await auth.getMyAccount(new Headers({ cookie })))?.profile.displayName).toBe(
+      "Account One",
+    );
+    // Cooldown counters are intentionally durable; advance only this test fixture.
+    await pools.owner.query("DELETE FROM operations.abuse_counter WHERE operation='auth_mail'");
+    expect(
+      (
+        await post("request-password-reset", {
+          email,
+          redirectTo: "https://kairn.invalid/reset-password",
+        })
+      ).status,
+    ).toBe(200);
+    const reset = await sendAndRead("password_reset");
+    const resetRedirect = await app.request(reset.href);
+    const token = new URL(resetRedirect.headers.get("location")!).searchParams.get("token");
+    expect(token).toBeTruthy();
+    const resetRow = (
+      await pools.auth.query("SELECT * FROM authn.verification WHERE identifier=$1", [
+        `reset-password:${token}`,
+      ])
+    ).rows[0];
+    await pools.auth.query(
+      "UPDATE authn.verification SET expires_at=now()-interval '1 minute' WHERE identifier=$1",
+      [`reset-password:${token}`],
+    );
+    expect(
+      (await post("reset-password", { token, newPassword: `Valid replacement ${randomUUID()}` }))
+        .status,
+    ).toBe(400);
+    await restoreVerification(resetRow);
+    expect(
+      (await post("reset-password", { token, newPassword: "correct horse battery staple" })).status,
+    ).toBe(400);
+    const replacement = `A new phrase ${randomUUID()}`;
+    expect((await post("reset-password", { token, newPassword: replacement })).status).toBe(200);
+    expect((await me(cookie)).status).toBe(401);
+    expect((await post("reset-password", { token, newPassword: replacement })).status).toBe(400);
+    expect((await post("sign-in/email", { email, password })).status).toBe(401);
+    const fresh = await post("sign-in/email", { email, password: replacement });
+    expect(fresh.status).toBe(200);
+    const freshCookie = fresh.headers
+      .getSetCookie()
+      .map((value) => value.split(";")[0])
+      .join("; ");
+    expect(
+      (
+        await post(
+          "change-password",
+          { currentPassword: replacement, newPassword: `${"😀".repeat(128)}x` },
+          freshCookie,
+        )
+      ).status,
+    ).toBe(400);
+    const domain = (
+      path: string,
+      method = "GET",
+      body?: unknown,
+      etag?: string,
+      sessionCookie = freshCookie,
+    ) =>
+      app.request(`https://kairn.invalid/api/v1/me${path}`, {
+        method,
+        headers: {
+          cookie: sessionCookie,
+          origin: "https://kairn.invalid",
+          "content-type": "application/json",
+          ...(etag ? { "if-match": etag } : {}),
+        },
+        ...(body === undefined ? {} : { body: JSON.stringify(body) }),
+      });
+    const profileCommand = {
+      commandId: randomUUID(),
+      displayName: "Private profile",
+      bio: "A field note",
+    };
+    expect((await domain("/profile", "PATCH", profileCommand)).status).toBe(412);
+    const updated = await domain("/profile", "PATCH", profileCommand, own.profile.etag);
+    expect(updated.status).toBe(200);
+    expect(await updated.json()).toMatchObject({ displayName: "Private profile", revision: 2 });
+    expect((await domain("/profile", "PATCH", profileCommand, own.profile.etag)).status).toBe(200);
+    expect(
+      (
+        await domain(
+          "/profile",
+          "PATCH",
+          { ...profileCommand, commandId: randomUUID() },
+          own.profile.etag,
+        )
+      ).status,
+    ).toBe(412);
+    expect(
+      (await domain("/profile", "PATCH", { ...profileCommand, bio: "Changed" }, own.profile.etag))
+        .status,
+    ).toBe(409);
+    const exported = await domain("/export");
+    expect(exported.status).toBe(200);
+    expect(await exported.json()).toMatchObject({
+      account: { privateEmail: email, profile: { displayName: "Private profile" } },
+      avatar: { state: "absent" },
+    });
+    expect((await domain("/export", "GET", undefined, undefined, secondCookie)).status).toBe(200);
+    const inputBytes = await readFile(
+      new URL("../fixtures/identity/avatar-metadata.png", import.meta.url),
+    );
+    const uploadId = randomUUID().toUpperCase();
+    const allocation = await domain("/avatar/uploads", "POST", {
+      commandId: randomUUID(),
+      uploadId,
+      contentType: "image/png",
+      byteLength: inputBytes.length,
+      sha256: sha256(inputBytes),
+    });
+    expect(allocation.status).toBe(201);
+    const descriptor = await allocation.json();
+    const byteWrite = (sessionCookie: string) =>
+      app.request(`https://kairn.invalid${descriptor.uploadPath}`, {
+        method: "PUT",
+        headers: {
+          cookie: sessionCookie,
+          origin: "https://kairn.invalid",
+          "content-type": "image/png",
+        },
+        body: new Uint8Array(inputBytes),
+      });
+    expect((await byteWrite(secondCookie)).status).not.toBe(200);
+    expect((await byteWrite(freshCookie)).status).toBe(200);
+    const complete = await domain(`/avatar/uploads/${uploadId}/complete`, "POST", {
+      commandId: randomUUID(),
+    });
+    expect(complete.status).toBe(200);
+    expect(await complete.json()).toEqual({
+      state: "processing",
+      uploadId: uploadId.toLowerCase(),
+    });
+    await processAvatar(pools.worker, uploadId, storage);
+    const withAvatar = await (await domain("/export")).json();
+    expect(withAvatar.avatar).toMatchObject({
+      state: "available",
+      avatarId: uploadId.toLowerCase(),
+    });
+    expect(JSON.stringify(withAvatar)).not.toMatch(
+      /quarantine|representation_key|bucket|session_token/,
+    );
+    const managed = await domain("/avatar");
+    expect(managed.status).toBe(200);
+    expect(managed.headers.get("cache-control")).toContain("no-store");
+    expect(Buffer.from(await managed.arrayBuffer()).includes(Buffer.from("Private Place"))).toBe(
+      false,
+    );
+    expect((await domain("/avatar", "GET", undefined, undefined, secondCookie)).status).toBe(404);
+    const removeAvatar = { commandId: randomUUID() };
+    const removed = await domain("/avatar", "DELETE", removeAvatar, withAvatar.avatar.etag);
+    expect(removed.status).toBe(202);
+    const restriction = await removed.json();
+    const poll = await app.request(`https://kairn.invalid${restriction.statusLocation}`, {
+      headers: { cookie: freshCookie },
+    });
+    expect(poll.status).toBe(200);
+    expect(await poll.json()).toMatchObject({ restriction: { recoveryConfirmation: "pending" } });
+    expect(
+      (
+        await app.request(`https://kairn.invalid${restriction.statusLocation}`, {
+          headers: { cookie: secondCookie },
+        })
+      ).status,
+    ).toBe(404);
+    expect((await domain("/avatar")).status).toBe(404);
+    expect((await domain("/avatar", "DELETE", removeAvatar, withAvatar.avatar.etag)).status).toBe(
+      202,
+    );
+    const sessionList = await post(
+      "revoke-session",
+      { token: "caller-must-not-supply-bearers" },
+      freshCookie,
+    );
+    expect(sessionList.status).toBe(400);
+    const sessions = await (
+      await app.request("https://kairn.invalid/api/auth/list-sessions", {
+        headers: { cookie: freshCookie },
+      })
+    ).json();
+    expect(sessions).toHaveLength(1);
+    expect(sessions[0].current).toBe(true);
+    expect(JSON.stringify(sessions)).not.toMatch(/token|userId|email/);
+    const anotherSignIn = await auth.handle(
+      new Request("https://kairn.invalid/api/auth/sign-in/email", {
+        method: "POST",
+        headers: { origin: "https://kairn.invalid", "content-type": "application/json" },
+        body: JSON.stringify({ email, password: replacement }),
+      }),
+      "192.0.2.44",
+    );
+    expect(anotherSignIn.status).toBe(200);
+    const anotherCookie = anotherSignIn.headers
+      .getSetCookie()
+      .map((value) => value.split(";")[0])
+      .join("; ");
+    const twoSessions = await (
+      await app.request("https://kairn.invalid/api/auth/list-sessions", {
+        headers: { cookie: freshCookie },
+      })
+    ).json();
+    const otherSession = twoSessions.find((session: { current: boolean }) => !session.current);
+    expect((await post("revoke-session", { sessionId: otherSession.id }, freshCookie)).status).toBe(
+      200,
+    );
+    expect((await me(anotherCookie)).status).toBe(401);
+    // Successful authentication releases only its in-flight reservation: repeated
+    // valid sign-ins must not consume the five-failure allowance.
+    for (let index = 0; index < 6; index++)
+      expect((await post("sign-in/email", { email, password: replacement })).status).toBe(200);
+
+    expect((await post("sign-out", {}, secondCookie)).status).toBe(200);
+    expect((await me(secondCookie)).status).toBe(401);
+    const resolved = await auth.resolve(new Headers({ cookie: freshCookie }));
+    expect(resolved?.fresh).toBe(true);
+    const impact = await previewImpact(pools.server, resolved!.actor, {
+      action: "delete_account",
+      journeyId: null,
+      targetId: own.accountId,
+    });
+    await command(resolved!.actor, {
+      type: "account.delete",
+      revision: 1,
+      generation: 1,
+      confirmDelete: "delete",
+      statusReceiptHash: newStatusReceipt().hash,
+      previewId: impact.previewId,
+      previewSecretHash: impact.previewSecretHash,
+    });
+    expect((await me(freshCookie)).status).toBe(401);
+    // A still-correct password cannot create a new session for a retired subject.
+    const retiredSignIn = await auth.handle(
+      new Request("https://kairn.invalid/api/auth/sign-in/email", {
+        method: "POST",
+        headers: { origin: "https://kairn.invalid", "content-type": "application/json" },
+        body: JSON.stringify({ email, password: replacement }),
+      }),
+      "192.0.2.2",
+    );
+    expect(retiredSignIn.status).toBe(403);
+  });
+  it("fails closed on auth input, callback bypass, abuse races and denied mail enqueue", async () => {
+    const settings = {
+      authPool: pools.auth,
+      accountPool: pools.server,
+      producer: authProducer,
+      origin: "https://kairn.invalid",
+      secret: randomBytes(32).toString("base64url"),
+      abuseKey: randomBytes(32),
+      mail: { keyId: "v1", key: mailKey, recipientKey },
+    };
+    const auth = createAccountAuth(settings);
+    const post = (
+      path: string,
+      body: unknown,
+      origin = "https://kairn.invalid",
+      ip = "192.0.2.25",
+    ) =>
+      auth.handle(
+        new Request(`https://kairn.invalid/api/auth/${path}`, {
+          method: "POST",
+          headers: { "content-type": "application/json", origin },
+          body: JSON.stringify(body),
+        }),
+        ip,
+      );
+    expect((await post("delete-user", {})).status).toBe(404);
+    expect((await post("sign-in/email", {}, "https://attacker.invalid")).status).toBe(403);
+    expect((await post("sign-in/email", {}, "https://kairn.invalid", "")).status).toBe(503);
+    expect((await post("sign-up/email", { text: "x".repeat(65537) })).status).toBe(413);
+    const invalid = {
+      name: "Policy",
+      email: `${randomUUID()}@kairn.invalid`,
+      password: "passwordpassword",
+      callbackURL: "https://kairn.invalid/verify-email",
+    };
+    expect((await post("sign-up/email", invalid)).status).toBe(400);
+    expect(
+      (
+        await post("sign-up/email", {
+          ...invalid,
+          email: `${randomUUID()}@kairn.invalid`,
+          password: `Valid ${randomUUID()}`,
+          callbackURL: "https://kairn.invalid/api/auth/delete-user",
+        })
+      ).status,
+    ).toBe(400);
+    const table = (
+      await pools.owner.query("SELECT table_name FROM pgboss.queue WHERE name=$1", [
+        productQueues.email,
+      ])
+    ).rows[0].table_name;
+    const email = `${randomUUID()}@kairn.invalid`;
+    try {
+      await pools.owner.query(`REVOKE INSERT ON pgboss."${table}" FROM kairn_auth`);
+      expect(
+        (await post("sign-up/email", { ...invalid, email, password: `Valid ${randomUUID()}` }))
+          .status,
+      ).toBe(503);
+      expect(
+        (await pools.auth.query('SELECT id FROM authn."user" WHERE email=$1', [email])).rowCount,
+      ).toBe(0);
+    } finally {
+      await pools.owner.query(`GRANT INSERT ON pgboss."${table}" TO kairn_auth`);
+    }
+    // An unverified registration can disappear before link use. Email reuse must
+    // not let that old subject's JWT verify the replacement identity.
+    const reuseEmail = `${randomUUID()}@kairn.invalid`;
+    expect(
+      (
+        await post(
+          "sign-up/email",
+          { name: "Original", email: reuseEmail, password: `Valid phrase ${randomUUID()}` },
+          "https://kairn.invalid",
+          "192.0.2.26",
+        )
+      ).status,
+    ).toBe(200);
+    const oldSubject = (
+      await pools.auth.query('SELECT id FROM authn."user" WHERE email=$1', [reuseEmail])
+    ).rows[0].id;
+    const delivery = (
+      await pools.owner.query("SELECT id FROM operations.email_delivery WHERE auth_subject_id=$1", [
+        oldSubject,
+      ])
+    ).rows[0].id;
+    await deliverEmail(pools.worker, delivery, mailOptions);
+    const inbox = await (await fetch(`${process.env.TEST_MAILPIT_URL}/api/v1/messages`)).json();
+    const message = inbox.messages.find((m: { To: { Address: string }[] }) =>
+      m.To.some((to) => to.Address === reuseEmail),
+    );
+    const contents = await (
+      await fetch(`${process.env.TEST_MAILPIT_URL}/api/v1/message/${message.ID}`)
+    ).json();
+    const oldLink = contents.Text.match(/https:\/\/[^\s]+/)[0];
+    // Model retention having removed the terminal mail FK before auth-row purge.
+    await pools.owner.query("DELETE FROM operations.email_delivery WHERE auth_subject_id=$1", [
+      oldSubject,
+    ]);
+    await pools.auth.query('DELETE FROM authn."user" WHERE id=$1', [oldSubject]);
+    const replacementSubject = randomUUID();
+    await pools.auth.query(
+      'INSERT INTO authn."user"(id,name,email,email_verified) VALUES($1,$2,$3,false)',
+      [replacementSubject, "Replacement", reuseEmail],
+    );
+    expect((await auth.handle(new Request(oldLink), "192.0.2.26")).status).toBe(400);
+    expect(
+      (
+        await pools.auth.query('SELECT email_verified FROM authn."user" WHERE id=$1', [
+          replacementSubject,
+        ])
+      ).rows[0].email_verified,
+    ).toBe(false);
+    // Attempts survive auth rollback, and simultaneous submissions cannot all pass.
+    const attempts = await Promise.all(
+      Array.from({ length: 8 }, () =>
+        post(
+          "sign-up/email",
+          { ...invalid, email: `${randomUUID()}@kairn.invalid` },
+          "https://kairn.invalid",
+          "192.0.2.123",
+        ),
+      ),
+    );
+    expect(attempts.filter((response) => response.status === 429)).toHaveLength(3);
+  });
   it("continues late recovery after the deletion receipt expires without reopening status or account access", async () => {
     const actor = randomUUID();
     const cmd = randomUUID();
@@ -336,6 +852,10 @@ describe("B03 real role command, media and delivery boundaries", () => {
     );
   });
   it("resumes durable restrictions after restart and queue loss despite a separate avatar cleanup failure", async () => {
+    const queuedEmailIds = (
+      await pools.owner.query("SELECT id FROM operations.email_delivery WHERE state='queued'")
+    ).rows.map((row: { id: string }) => row.id);
+    expect(queuedEmailIds).toHaveLength(2);
     const actor = await account();
     const j = await journey([actor], [["administrator"]]);
     const queue = createJobQueue(urls.worker);
@@ -397,7 +917,8 @@ describe("B03 real role command, media and delivery boundaries", () => {
             Number(
               (
                 await pools.owner.query(
-                  "SELECT count(*) n FROM operations.email_delivery WHERE state='smtp_accepted'",
+                  "SELECT count(*) n FROM operations.email_delivery WHERE state='smtp_accepted' AND id=ANY($1::uuid[])",
+                  [queuedEmailIds],
                 )
               ).rows[0].n,
             ),

@@ -74,6 +74,12 @@ const grantResponses = {
 export const extendedAccountJourneyRoutes = [
   createRoute({
     method: "get",
+    path: "/api/v1/me/avatar/status",
+    operationId: "getMyAvatarStatus",
+    responses: readResponses(AvatarStatusSchema, "AvatarStatus"),
+  }),
+  createRoute({
+    method: "get",
     path: "/api/v1/me/export",
     operationId: "exportMyAccountData",
     responses: readResponses(AccountDataExportSchema, "AccountDataExport"),
@@ -87,7 +93,7 @@ export const extendedAccountJourneyRoutes = [
       201: {
         description: "Bounded authenticated upload reserved.",
         content: json(AvatarUploadResultSchema, "AvatarUpload"),
-        headers: privateHeaders,
+        headers: versionedHeaders,
       },
       ...failures,
     },

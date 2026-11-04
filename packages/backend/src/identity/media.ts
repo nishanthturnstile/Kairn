@@ -234,7 +234,9 @@ export async function uploadAvatar(
   });
 }
 export async function processAvatar(pool: Pool, avatarId: string, storage: PrivateIdentityStorage) {
-  const id = z.uuid().parse(avatarId);
+  // PostgreSQL returns canonical UUIDs; keep object keys canonical for callers
+  // that supplied an otherwise valid uppercase UUID (including restored jobs).
+  const id = z.uuid().parse(avatarId).toLowerCase();
   const rows = await pool.query("SELECT operations.avatar_target($1,'process') AS avatar", [id]);
   if (!rows.rows[0]?.avatar) return;
   const avatar = AvatarSchema.parse(rows.rows[0].avatar);

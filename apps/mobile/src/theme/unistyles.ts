@@ -8,6 +8,7 @@ export const theme = {
     text: tokens.color.ink950,
     secondaryText: tokens.color.ink700,
     border: tokens.color.line200,
+    controlBorder: tokens.color.ink500,
     primary: tokens.color.forest800,
     primaryText: tokens.color.white,
     successSurface: tokens.color.forest100,
@@ -16,7 +17,7 @@ export const theme = {
   spacing: tokens.spacing,
   radius: tokens.radius,
   typography: tokens.typography.mobile,
-  // System fonts until the approved font files and licensing are delivered.
+  // Account screens use the bundled, named static weights loaded by the root layout.
 };
 type AppThemes = { light: typeof theme };
 type AppBreakpoints = typeof tokens.layout.breakpoint;

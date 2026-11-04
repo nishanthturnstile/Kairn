@@ -72,6 +72,10 @@
     "./auth-adapter": {
       "types": "./dist/auth-adapter.d.ts",
       "import": "./dist/auth-adapter.js"
+    },
+    "./password-policy": {
+      "types": "./dist/password-policy.d.ts",
+      "import": "./dist/password-policy.js"
     }
   },
   "scripts": {

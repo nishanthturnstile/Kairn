@@ -114,7 +114,9 @@ const writerRoles = ["kairn_server", "kairn_auth", "kairn_worker"] as const;
 export async function fenceDatabaseWriters(admin: Pool) {
   for (const role of writerRoles) await admin.query(`ALTER ROLE ${role} NOLOGIN`);
   await admin.query(
-    "SELECT pg_catalog.pg_terminate_backend(pid) FROM pg_catalog.pg_stat_activity WHERE usename=ANY($1::text[]) AND pid<>pg_catalog.pg_backend_pid()",
+    // A zero timeout acknowledges only signal delivery. Await actual process exit
+    // before the independent no-writer check, including under connection churn.
+    "SELECT pg_catalog.pg_terminate_backend(pid, 3000) FROM pg_catalog.pg_stat_activity WHERE usename=ANY($1::text[]) AND pid<>pg_catalog.pg_backend_pid()",
     [writerRoles],
   );
   const remaining = await admin.query(

@@ -26,7 +26,9 @@ Start with the product plan and requirements. Use the implementation plans for t
 - [Checkout reconciliation record](implementation/checkout_reconciliation_progress.md) — preserved pending files, branch-history backups and initial host alignment
 - [Development skills](implementation/development_skills.md) — installed project skills, source provenance, and how to apply them to Kairn
 - [Accounts, journeys and access implementation](implementation/accounts_journeys_access_plan.md) — plan 1.2: modules, data/migrations, APIs, permissions, delivery order, and acceptance gates
-- [Accounts/journeys implementation progress](implementation/accounts_journeys_access_progress.md) — starting checkpoint, B01 contracts/web specimens, complete B02 database and B03 local boundaries, executed checks, resolved Expo compatibility and remaining batches
+- [Local account runtime](implementation/accounts_runtime.md) — private paired config, isolated Mailpit/S3 activation, trusted ingress and native handoff
+- [B04 account delivery plan](implementation/accounts_b04_plan.md) — reviewed B01–B03 baseline, ordered account/backend/web/native slices and acceptance boundaries
+- [Accounts/journeys implementation progress](implementation/accounts_journeys_access_progress.md) — starting checkpoint, B01 contracts/web specimens, complete B02 database and B03 local boundaries, B04 auth/account services in progress, executed checks, resolved Expo compatibility and remaining batches
 - [Domain transactions and bounded workers](implementation/domain_transaction_boundary.md) — B03 checked commands, atomic jobs, sealed mail/auth callback guard, private identity media and retention
 - [Restriction recovery runbook](implementation/restriction_recovery_runbook.md) — independent journal protocol, concrete operator fence/replay/credential sequence and actual deployment gate
 - [Identity database foundation](implementation/identity_database.md) — B02 identity/journey/source/operation models and policy graph, migrations, enqueue-only producer grants, existing-volume upgrade and pool budget

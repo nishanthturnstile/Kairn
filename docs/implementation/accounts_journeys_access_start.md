@@ -4,6 +4,8 @@ Date: 3 November 2026. Read with the [final implementation plan](accounts_journe
 
 The planning gaps from the independent review now have concrete designs, selected policies, work owners and acceptance checks. We can begin local implementation. Actual schema, auth, device and independent restore evidence still needs to be produced; “ready to implement” does not mean the feature or deployment is complete.
 
+Current execution (4 November): B02 and B03 local boundaries are complete; B01 remains in progress and B04 has started. Use the [execution record](accounts_journeys_access_progress.md) and [B04 delivery plan](accounts_b04_plan.md) for the live checkpoint. The original starting sequence and dated branch observations below preserve the initial handoff.
+
 ## 1. What you will see first
 
 The first usable feature is: create an account, receive verification/recovery mail locally, sign in, manage a private profile/session, and reach a polished Your journeys empty state. Next, create one private journey and invite another test account into that exact same journey with clear powers. The later capture/import/publishing product still follows the main R1 order.

@@ -40,6 +40,10 @@
     {
       "file": "0009_recovery_identity_guards.sql",
       "sha256": "8391995dbc0220c6563e2f38e72e93081264e2f3854071de57bb75be95bf8096"
+    },
+    {
+      "file": "0010_auth_attempt_reservations.sql",
+      "sha256": "533072e48f7da5614a1e282892fd7a2cfecf41599c3d93aaea34bf74df915169"
     }
   ]
 }

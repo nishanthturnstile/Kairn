@@ -6,7 +6,7 @@ import { PrivateIdentityStorage } from "../identity/media.js";
 import { createMailTransport } from "./mail.js";
 
 /** Server-only secret file, mounted read-only. No defaults enable production domain workers. */
-async function readDomainWorkerConfig(path: string) {
+async function readDomainWorkerConfig(path: string, accountOnly = false) {
   const info = await stat(path);
   if (!info.isFile() || (info.mode & 0o077) !== 0 || info.size > 32768)
     throw new Error("Domain worker configuration requires a private bounded file.");
@@ -17,16 +17,18 @@ async function readDomainWorkerConfig(path: string) {
     .transform((value) => Buffer.from(value, "base64url"));
   const config = z
     .strictObject({
-      journal: z.strictObject({
-        endpoint: z.url(),
-        token: secret,
-        keys: z.record(z.string().min(1).max(64), key),
-      }),
+      journal: z
+        .strictObject({
+          endpoint: z.url(),
+          token: secret,
+          keys: z.record(z.string().min(1).max(64), key),
+        })
+        .optional(),
       storage: z.strictObject({
         endpoint: z.url(),
         bucket: z.string(),
-        accessKey: secret,
-        secretKey: secret,
+        accessKey: accountOnly ? z.string().min(1) : secret,
+        secretKey: accountOnly ? z.string().min(1) : secret,
       }),
       mail: z.strictObject({
         origin: z.url(),
@@ -35,12 +37,16 @@ async function readDomainWorkerConfig(path: string) {
         port: z.number().int().min(1).max(65535),
         secure: z.boolean(),
         user: z.string(),
-        password: secret,
+        password: accountOnly ? z.string() : secret,
+        localFixture: z.boolean().default(false),
         keys: z.record(z.string().min(1).max(64), key),
         recipientKey: key,
       }),
     })
     .parse(JSON.parse(await readFile(path, "utf8")));
+  if (!config.journal && !accountOnly) throw new Error("Independent journal required.");
+  if (config.mail.localFixture && !accountOnly)
+    throw new Error("Fixture mail requires local account mode.");
   const origin = new URL(config.mail.origin);
   if (origin.protocol !== "https:") throw new Error("Mail origin requires HTTPS.");
   const client = new S3Client({
@@ -55,11 +61,20 @@ async function readDomainWorkerConfig(path: string) {
   });
   const transport = createMailTransport(config.mail);
   return {
-    journal: new HttpRestrictionJournal(
-      new URL(config.journal.endpoint),
-      config.journal.token,
-      new Map(Object.entries(config.journal.keys)),
-    ),
+    journal: config.journal
+      ? new HttpRestrictionJournal(
+          new URL(config.journal.endpoint),
+          config.journal.token,
+          new Map(Object.entries(config.journal.keys)),
+        )
+      : {
+          append: async () => {
+            throw new Error("Independent recovery is not configured; restriction remains pending.");
+          },
+          read: async () => {
+            throw new Error("Independent recovery is not configured.");
+          },
+        },
     storage: new PrivateIdentityStorage(client, config.storage.bucket),
     mail: {
       origin,
@@ -80,5 +95,13 @@ export async function loadDomainWorkerConfig(path: string) {
     return await readDomainWorkerConfig(path);
   } catch {
     throw new Error("Domain worker configuration is unavailable or invalid.");
+  }
+}
+
+export async function loadAccountWorkerConfig(path: string) {
+  try {
+    return await readDomainWorkerConfig(path, true);
+  } catch {
+    throw new Error("Account worker configuration is unavailable or invalid.");
   }
 }

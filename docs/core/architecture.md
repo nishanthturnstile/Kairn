@@ -732,7 +732,7 @@ Observed on 1 November 2026. Exact direct pins and the resolved lockfile are req
 | Web React | `react`, `react-dom` | `19.3.1` | Matching render/hydration pair. |
 | Web routes | `@tanstack/react-router`, `@tanstack/router-plugin` | `1.170.46`, `1.168.48` | Foundation; compatible release pair, not necessarily equal numbers. |
 | Web/native server state | `@tanstack/react-query` | `5.105.1` | Foundation and processing-status UI. |
-| Web/native forms | `@tanstack/react-form` | `1.33.5` | Journey, details, rights, and publication forms. |
+| Web/native forms | `@tanstack/react-form` | `1.33.5` | B04 account forms; later journey, details, rights, and publication forms. |
 | Web batch review | `@tanstack/react-table` | `9.3.1` | Import/moderation workspace; no native table adapter. |
 | Web component generation | `shadcn` CLI | `4.23.0` | Generate only selected components; owned source, not a runtime umbrella library. |
 | Owned web primitive support | `cn`, `class-variance-authority` | `0.5.2`, `0.7.1` | B01 selected shadcn source utilities; no component-explorer or second styling framework. |
@@ -746,8 +746,9 @@ Observed on 1 November 2026. Exact direct pins and the resolved lockfile are req
 | Generator compiler | `typescript` in `tools/api-generation` | `6.0.3` exact | Development-only compiler API exception for `openapi-typescript@7.13.0`; its declared `^5.x` peer is extended only for this exact tested pair. Root/shared remain on TypeScript 7; contracts never depend on this tool. |
 | Database access | `drizzle-orm`, `drizzle-kit`, `pg` | `0.45.4`, `0.31.11`, `8.23.1` | Reviewed data schema/migrations, raw spatial/retrieval SQL where needed. |
 | Authentication | `better-auth`, `@better-auth/expo` | `1.7.15` | Accounts, sessions, recovery, native integration. |
+| Auth shared core/utilities | `@better-auth/core`, `@better-auth/utils` | `1.7.15`, `0.5.1` | Explicit Expo integration peers in the B04 server/native graph. |
 | Auth schema generation | `auth` CLI | `1.7.15` | Development-only in `tools/identity-generation`, matched to Better Auth; no runtime CLI. |
-| Auth generator peers | `@better-fetch/fetch`, `better-call`, `jose`, `kysely`, `nanostores`, `@types/bun` | `1.3.3`, `1.4.4`, `6.2.15`, `0.29.8`, `1.5.5`, `1.4.4` | Explicit strict peer/declaration graph in the isolated auth generator. No Bun runtime or second backend is selected. |
+| Auth runtime/declaration peers | `@better-fetch/fetch`, `better-call`, `jose`, `kysely`, `nanostores`, `@types/bun` | `1.3.3`, `1.4.4`, `6.2.15`, `0.29.8`, `1.5.5`, `1.4.4` | Explicit strict peer/declaration graph in the isolated auth generator, B04 HTTP server and native client. `@types/bun` stays development-only, loaded only by those two workspaces because the auth declarations import `bun:sqlite`; the backend remains checked with Node-only globals. Native uses a narrow checked adapter over the actual SDK runtime so server-only ambient declarations do not enter its compilation. No Bun runtime or second backend is selected. |
 | Drizzle declaration peers | `gel`, `mysql2` | `2.2.1`, `3.24.6` | Development-only published dialect declaration dependencies; PostgreSQL remains the runtime database. |
 | Durable worker | `pg-boss` | `12.38.0` | First asynchronous domain work; direct `fromDrizzle` transaction adapter. |
 | Queue peer | `@opentelemetry/api` | `1.10.0` | Required pg-boss peer at foundation; no tracing backend is introduced. |
@@ -805,10 +806,11 @@ Use `expo install` and `expo-doctor` against the adopted SDK. The [shipped SDK m
 | `expo-sqlite`, `expo-file-system` | `~58.0.15`, `~58.0.13` | Durable moments, unsent commands, uploads, files. |
 | `expo-camera` | `~58.0.14` | Photo and bounded video capture. |
 | `expo-audio`, `expo-video` | `~58.0.11`, `~58.0.13` | Voice capture and user-started playback. |
-| `expo-image-picker`, `expo-document-picker` | `~58.0.10`, `~58.0.4` | Explicit media/audio/GPX/FIT selection. |
+| `expo-image-picker`, `expo-document-picker` | `58.0.10`, `~58.0.4` | Image Picker activated in B04 for selected private avatars; document/audio/GPX/FIT selection remains later. |
+| `expo-crypto` | `58.0.7` | B04 UUID command identities and SHA-256 avatar declarations; no web crypto polyfill. |
 | `expo-location` | `~58.0.20` | Bounded foreground capture location. |
-| `expo-secure-store` | `~58.0.2` | Native session material. |
-| `expo-network`, `expo-web-browser`, `expo-constants` | `~58.0.4`, `~58.0.7`, `~58.0.15` | Required Expo/auth integration peers, not an extra authentication system. |
+| `expo-secure-store` | `58.0.2` | B04 native session material and bounded recovery intent. |
+| `expo-network`, `expo-web-browser`, `expo-constants` | `58.0.4`, `58.0.7`, `58.0.15` | B04 native online state and required Expo/auth integration peers. |
 | `expo-sharing`, `expo-linking` | `~58.0.21`, `~58.0.16` | Native sharing/deep-link behavior. |
 | `expo-haptics` | `~58.0.7` | Capture-stage feedback after the completed durable local save, as specified by the application design. |
 | `expo-background-task` | `~58.0.12` | Opportunistic deferred sync; no immediate-after-force-stop promise. |

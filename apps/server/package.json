@@ -10,6 +10,10 @@
     "./app": {
       "types": "./dist/app.d.ts",
       "import": "./dist/app.js"
+    },
+    "./accounts-auth": {
+      "types": "./dist/accounts-auth.d.ts",
+      "import": "./dist/accounts-auth.js"
     }
   },
   "scripts": {
@@ -19,6 +23,11 @@
     "start": "node --enable-source-maps dist/index.js"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "3.1161.0",
+    "@better-auth/core": "1.7.15",
+    "@better-auth/expo": "1.7.15",
+    "@better-auth/utils": "0.5.1",
+    "@better-fetch/fetch": "1.3.3",
     "@hono/node-server": "2.1.5",
     "@hono/zod-openapi": "1.6.3",
     "@kairn/backend": "workspace:*",
@@ -27,10 +36,16 @@
     "@kairn/shared": "workspace:*",
     "@kairn/sync-protocol": "workspace:*",
     "@kairn/web": "workspace:*",
+    "better-auth": "1.7.15",
+    "better-call": "1.4.4",
     "hono": "4.13.16",
+    "jose": "6.2.15",
+    "kysely": "0.29.8",
+    "nanostores": "1.5.5",
     "zod": "4.6.7"
   },
   "devDependencies": {
+    "@types/bun": "1.4.4",
     "@types/node": "26.6.6",
     "typescript": "7.0.2",
     "vite": "npm:@voidzero-dev/vite-plus-core@1.4.0"

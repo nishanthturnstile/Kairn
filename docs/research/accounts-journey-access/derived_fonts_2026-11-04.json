@@ -1,0 +1,13 @@
+{
+  "tool": "fontTools 4.60.1",
+  "outputs": {
+    "apps/web/src/assets/fonts/Newsreader.woff2": "52f54c34206c51e23e2907bfda4f04fb11ac6ba7f75f8021b2d0075b091d1308",
+    "apps/mobile/src/assets/fonts/Newsreader500.ttf": "160a7dbad6ea2514a6a5e90466114291a11d595fbd17b87c677b57db8223cc17",
+    "apps/mobile/src/assets/fonts/Newsreader600.ttf": "1871da7cb3ec59e94eb70df3d10ea29b0bc46a37ad3cdebec060642244ae050e",
+    "apps/web/src/assets/fonts/InstrumentSans.woff2": "55ff84a7a3ac3d4b37b1d071f23e6c9403813dc958f073b5e654f48eba690781",
+    "apps/mobile/src/assets/fonts/InstrumentSans400.ttf": "b44afb37f26c13b446942fa4ed511008409d7319c13e04045a956f6de5a0e248",
+    "apps/mobile/src/assets/fonts/InstrumentSans500.ttf": "293443b51c4cc68ea7fd9b1aa843fe4dc95ed6da7d3c785c3110a825cdf55159",
+    "apps/mobile/src/assets/fonts/InstrumentSans600.ttf": "377709a48fe32f20668c027febc66b0e3aba00f21a934d80088f110739c3fd42",
+    "apps/mobile/src/assets/fonts/InstrumentSans700.ttf": "d472b1d26381edfc11535e30f6b40c8211929bfd879ff4af99fc7fc7c0d5cfae"
+  }
+}

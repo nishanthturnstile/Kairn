@@ -10,6 +10,7 @@ export default defineConfig({
       bootstrap: "src/bootstrap.ts",
       migrations: "src/migrations.ts",
       identity: "src/identity/context.ts",
+      "password-policy": "src/identity/password-policy.ts",
       "auth-options": "src/identity/auth-options.ts",
       "auth-adapter": "src/identity/auth-adapter.ts",
       workers: "src/operations/workers.ts",

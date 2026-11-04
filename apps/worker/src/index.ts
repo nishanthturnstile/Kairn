@@ -3,7 +3,7 @@ import { createLogger, readRuntimeConfig } from "@kairn/backend";
 import { checkDatabase, createDatabasePool, readDatabaseUrl } from "@kairn/backend/database";
 import { startWorker } from "./runtime.js";
 import { registerDomainWorkers } from "@kairn/backend/workers";
-import { loadDomainWorkerConfig } from "@kairn/backend/worker-config";
+import { loadDomainWorkerConfig, loadAccountWorkerConfig } from "@kairn/backend/worker-config";
 
 const logger = createLogger("worker", readRuntimeConfig(process.env));
 const readyFile = "/tmp/kairn-worker-ready";
@@ -17,7 +17,9 @@ database.on("error", () =>
 await checkDatabase(database);
 const domainConfig = process.env.KAIRN_DOMAIN_WORKER_CONFIG
   ? await loadDomainWorkerConfig(process.env.KAIRN_DOMAIN_WORKER_CONFIG)
-  : undefined;
+  : process.env.KAIRN_ACCOUNT_WORKER_CONFIG
+    ? await loadAccountWorkerConfig(process.env.KAIRN_ACCOUNT_WORKER_CONFIG)
+    : undefined;
 const domainPool = domainConfig
   ? createDatabasePool(connectionString, "kairn-worker-domain", 2)
   : undefined;

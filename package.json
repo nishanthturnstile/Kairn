@@ -50,10 +50,12 @@
     "auth:schema:generate": "pnpm build:packages && pnpm --filter @kairn/identity-generation generate",
     "auth:schema:check": "pnpm build:packages && pnpm --filter @kairn/identity-generation check",
     "db:generate": "pnpm --filter @kairn/identity-generation db:generate",
-    "test:domain": "pnpm build:packages && vp test run --config config/integration/vite.domain.config.ts",
+    "test:domain": "pnpm build:server && vp test run --config config/integration/vite.domain.config.ts",
     "verify:domain": "node scripts/verify-domain.mjs",
     "recovery": "node scripts/restriction-recovery.mjs",
-    "journal": "node scripts/restriction-journal.mjs"
+    "journal": "node scripts/restriction-journal.mjs",
+    "test:accounts": "pnpm build:server && vp test run --config config/integration/vite.accounts.config.ts",
+    "verify:accounts": "node scripts/verify-accounts.mjs"
   },
   "devDependencies": {
     "@aws-sdk/client-s3": "3.1161.0",

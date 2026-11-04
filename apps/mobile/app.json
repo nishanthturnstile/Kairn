@@ -22,7 +22,17 @@
           "launchMode": "most-recent"
         }
       ],
-      "expo-font"
+      "expo-font",
+      "expo-secure-store",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Choose a photo for your private Kairn avatar.",
+          "cameraPermission": false,
+          "microphonePermission": false
+        }
+      ],
+      "expo-web-browser"
     ]
   }
 }
