@@ -2,6 +2,51 @@
 
 3 November 2026. Scope: P00–P02 only, on `feat/experience-prototype`. P03 is not started. This record distinguishes implementation, agent inspection, founder review and production acceptance.
 
+## Current visual revision — 4 November 2026
+
+The founder rejected the initial visual treatment as insufficiently modern and supplied a travel-app reference. The original execution record below is historical, not visual approval. This revision replaces the text-heavy workshop presentation with a photographic journal composition while preserving P00–P02 behavior and the governing application design. P03 remains unstarted.
+
+Application checkpoint: **8bf85bfd94e515171a874602a96aac5a8b1de997**, on the existing unmerged `feat/experience-prototype` branch. No PR, integration merge or public deployment. Windows remains the authoring checkout; WSL consumes the exact pushed source through `pnpm checkout:sync`. Native code last changed at **bb61e27bf4b79ec8091df7840bc520244fbeef6d**; the following commit changes web ARIA semantics only.
+
+### Design and component changes
+
+- Re-read application design sections 1–6 and the token/component baseline. Used Impeccable, Frontend Design, Emil design engineering, Expo design-system/native guidance and Unistyles guidance. The supplied reference informs composition, rounded surfaces, image prominence and compact controls; no booking, itinerary, weather or AI-planning product features were copied. Official Day One journal-cover and Polarsteps journey presentation references informed the exploration.
+- `DESIGN.md` records the reusable system and component contracts; `PRODUCT.md` is a design-tool index pointing to governing product documents. Existing Paper/Forest/Clay roles, Newsreader/Instrument Sans, spacing and radius tokens remain. No runtime dependency or native build input changed.
+- Web: quiet desktop rail, compact phone navigation, collapsed sample controls, photographic journey card, contributor initials, create/join disclosures with input focus, readable overview and responsive two-column component specimens. Long-title specimen now wraps in a textarea. Reader remains a labelled shell.
+- Native: safe-area header, photographic journey card, persistent navigation for the three available P02 routes, create/join disclosures, grouped specimens, selected-state semantics and editorial heading semantics. Future product destinations remain absent until their batches.
+- Purpose-created `ridge-sample.png` is explicitly fictional AI-generated sample media, never a fallback for a real journey with no cover. Inventory records provenance/use; no third-party artwork copied or media hotlinked. Source SHA-256: `50e7bc4502c112e284a4451eb23ae8b2b1ecdd2abf9427d3c9f0a09c573fe02f`. Bundled PNG is 2,693,736 bytes; production media sizing remains future work. The deliberate no-cover specimen is retained.
+- Fixture version **p02.2**, hash **c483b298ee281f9bce2e0ef2b2315e90a74d54d25c8eed60827205de3240efcf**. Canonical asset copying now includes PNG. Both continuations and generated copies match the new version. Domain controllers are unchanged.
+- Figma plugin discovery found the available integration and installation was user-approved, but installation did not complete/expose Figma tools in this session. No Figma document or Figma review is claimed. The repository implementation and design specification are the delivered artifacts.
+
+### Executed verification
+
+| Check | Actual result |
+| --- | --- |
+| Windows fixture/copy check | Pass: 14 existing critical fixture/controller/continuation tests; no extra tests for reversible styling |
+| Windows mobile compiler/lint and changed-file formatting | Pass, including final native semantics and multiline form changes |
+| WSL current-source tooling image | `docker compose --profile tools run --build --rm --no-deps tooling …` at 8bf85bf: web client/SSR/declarations/server build pass, 14 prototype tests and 9 server/boundary tests pass, six web prototype files pass Vite+ lint/type check, workspace boundary check passes |
+| Android/iOS Hermes JS exports | Pass, explicit process exit 0; image/fonts bundled. Native inputs unchanged, existing compiled dev client reused; no new native binary qualification claimed |
+| Android Pixel_10, Android 17 | Created and reopened the same journey, navigated to design kit, selected Only me, observed checked state, triggered Save sample and observed busy/disabled without label replacement. Current Metro rendered cover/fonts, safe-area header, navigation and long text. Captures include home, overview, audience and pending states. |
+| Final responsive web confirmation | Captured 1440×1000, 390×844 and 820×1180 viewports. Home and component page both report `scrollWidth === innerWidth === 320` at the narrow check. Opened create form: focus moved to INPUT; submitted and opened `/prototype/journey/sample-journey-01`. Component keyboard ArrowDown changed Only me to Journey review; Save sample became busy/disabled; Retry retained the complete long title. Fonts loaded before capture. |
+| Final automated accessibility scan | axe 4.12.1: home 39 passes / 0 violations / 0 incomplete; components 42 passes / 0 violations / 0 incomplete. This does not substitute for screen-reader operation. |
+| Running web input check | Rebuilt/restarted the existing server container from 8bf85bf. In-container journeys/CSS hashes match the final Windows hashes below. One WSL connection timeout recovered on retry. No previous running container's screenshot is borrowed as final evidence. |
+
+Final current-input hashes: web CSS `49f804e42957d57c14193e1e506dd366a27fde4ebe190c470819996533e96a2c`; web journeys `170223817565f5fd01554bd3766bc10f8c7a2921b201fdac4c39cd1e90c9be1e`; native screens `209f0751f544d3398421b348c4a6f43536cdc775eb0879c4ef11f8c16d972483`.
+
+### Findings and platform limits
+
+One grouped visual correction reduced mobile web header space, made the long-title specimen multiline, and moved keyboard focus into opened forms. An automated accessibility scan caught a labelled generic palette element; added image roles to the palette and analogous contributor stack. The initial tag-filtered audit returned zero checks and is excluded from acceptance.
+
+T3 preview loaded and evaluated the page, but two screenshot attempts failed with `Preview automation snapshot timed out after 15000ms`. Switched to installed agent-browser in isolated session `kairn-p02-redesign`, as allowed after two failures. Closed the owned T3 tab, leaving the pre-existing unclaimed user tab intact. Browser screenshot output using a body selector included blank space outside the viewport; final captures use the plain viewport screenshot and are copied unchanged.
+
+Android initially reported `Application Not Responding: com.android.systemui`; one supported alert-dismiss recovery succeeded. An old project Metro process held 8081 (`EADDRINUSE`); stopped the known project process and started current-source Metro. The generated image finished loading after the first immediate capture; later images show the loaded asset. Existing Unistyles package-export fallback warnings remain, with successful runtime rendering and native exports.
+
+Mac remains on separate `feat/accounts-journeys-foundation` work at 189fe493 with its own local commit. Did not switch, reset or overwrite it. **iOS simulator visual verification and physical iPad verification remain unavailable for this checkpoint.** No physical iPad is exposed by device tools. Existing online Expo recommendation mismatch is not resolved by this visual revision. TalkBack/VoiceOver and maximum accessibility scaling remain unverified; checked semantics and existing Android text size are narrower evidence.
+
+Evidence is private under `.kairn/verification/prototype-p02-redesign/` (WSL build/check logs in the matching WSL directory). Review entry remains `http://localhost:8080/prototype`; component entry is `/prototype/components`. Founder acceptance of this replacement is pending; stop here before P03.
+
+Final screenshots: `web-desktop.png`, `web-phone.png`, `web-tablet.png`, `web-kit.png`, `android-home-final.png`, `android-journey.png`, `android-kit.png`, `android-pending.png`. The component/native semantic corrections do not alter the earlier captured overview pixels. Agent-browser was closed after confirmation. Review gallery: `review.html`. Superseded `*-first` images, initial audits and transient tool failures remain private provenance.
+
 ## Baseline and isolation
 
 - Author: Windows checkout, from fetched `origin/development` **605bc61382f2445eb53aea2f64dc6b45c7032641**. The prior `chore/prototype-plan` checkout was at this same base with documentation edits; those exact inputs were preserved in **53473b0** before code authoring. No PR existed for the planning branch at inspection. The prototype branch is not an integration PR and must not merge wholesale into development.
