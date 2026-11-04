@@ -185,7 +185,14 @@
 }
 .atlas-segments {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--kairn-spacing-sm);
+}
+.atlas-workspace {
+  padding-block: var(--kairn-spacing-xl);
+}
+.atlas-workspace > h2 {
+  margin-top: var(--kairn-spacing-xxl);
 }
 .atlas-reading-layout {
   display: grid;

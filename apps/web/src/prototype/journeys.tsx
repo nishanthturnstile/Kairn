@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { JourneyWorkspace } from "./workspace";
 import { Link } from "@tanstack/react-router";
 import { Button, Field, Status } from "../components/prototype-controls";
 import { useSample } from "./context";
@@ -168,10 +169,7 @@ export function JourneyOverview({ journeyId }: { journeyId: string }) {
         <Status>Private sample journal</Status>
       </div>
       <JourneyCover title={state.title} compact />
-      <div className="sample-workspace-tabs">
-        <span aria-current="page">Overview</span>
-        <span>Story, Route, Learn and People follow in later batches</span>
-      </div>
+      <JourneyWorkspace key={state.actorId} />
       <div className="sample-two">
         <section className="sample-note">
           <h2>Your place in this journey</h2>
