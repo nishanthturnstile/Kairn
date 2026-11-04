@@ -26,6 +26,7 @@ import {
   nativeAuthRequest,
   nativeCookie,
   retryNativeStorage,
+  nativeStorageFailed,
 } from "../data/native-auth.mjs";
 import {
   bindNativeAccountClient,
@@ -79,7 +80,11 @@ function ConfiguredAccount({ origin }: { origin: string }) {
   const [mode, setMode] = useState<"sign-in" | "create" | "recover" | "reset" | "verify">(
     params.action === "recover" ? "recover" : "sign-in",
   );
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState(() =>
+    nativeStorageFailed()
+      ? "Secure account storage is unavailable. Retry account access before continuing."
+      : "",
+  );
   const [intentHydrated, setIntentHydrated] = useState(false);
   setNativeInvalidator((reason) => {
     clearPrivateAccount(client, true);
