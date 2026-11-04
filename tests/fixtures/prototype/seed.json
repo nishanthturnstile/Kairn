@@ -1,12 +1,12 @@
 {
-  "version": "p02.1",
+  "version": "p02.2",
   "journey": {
     "id": "sample-journey-01",
     "title": "The long way to the ridge",
     "place": "Hill country · fictional journey",
     "start": "11 July 2026",
     "end": "14 July 2026",
-    "cover": null
+    "cover": "ridge-sample.png"
   },
   "actors": [
     {

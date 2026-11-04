@@ -13,7 +13,7 @@ export default function Layout() {
   if (!loaded) return <Text>Loading sample fonts…</Text>;
   return (
     <SampleProvider>
-      <Stack screenOptions={{ headerTitle: "Kairn · sample", headerBackTitle: "Back" }} />
+      <Stack screenOptions={{ headerShown: false }} />
     </SampleProvider>
   );
 }

@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from "react";
-import { KeyboardAvoidingView, Platform, Pressable, ScrollView, View } from "react-native";
-import { Link } from "expo-router";
+import { KeyboardAvoidingView, Platform, Pressable, ScrollView, Text, View } from "react-native";
+import { Link, usePathname, useRouter } from "expo-router";
 import { StyleSheet } from "react-native-unistyles";
 import {
   JournalButton,
@@ -10,104 +10,183 @@ import {
 } from "../components/journal-controls";
 import { useSample } from "./context";
 import { project, seed, type Scope } from "./controller";
+import { JournalMark, NativeJourneyCover, NativeKitCover } from "./visuals";
 
 export function SamplePage({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
+  const router = useRouter();
+  const { state } = useSample();
+  const actor = state.data.actors.find((item) => item.id === state.actorId)!;
+  const home = pathname === "/prototype" || pathname === "/prototype/";
   return (
     <KeyboardAvoidingView
       style={styles.fill}
       behavior={Platform.OS === "ios" ? "padding" : undefined}
     >
+      <View style={styles.header}>
+        <View style={styles.brand}>
+          <JournalMark />
+          <Text style={styles.brandText}>Kairn</Text>
+        </View>
+        {home ? (
+          <View style={styles.account} accessibilityLabel={actor.name + ", sample account"}>
+            <Text style={styles.accountText}>
+              {actor.name
+                .split(" ")
+                .map((part) => part[0])
+                .join("")}
+            </Text>
+          </View>
+        ) : (
+          <Pressable
+            accessibilityRole="button"
+            onPress={() => (router.canGoBack() ? router.back() : router.replace("/prototype"))}
+            style={styles.back}
+          >
+            <Text style={styles.navLabel}>Back</Text>
+          </Pressable>
+        )}
+      </View>
       <ScrollView keyboardShouldPersistTaps="handled" contentInsetAdjustmentBehavior="automatic">
         <View style={styles.page}>
-          <JournalStatus>Fictional sample · resets on relaunch</JournalStatus>
           {children}
-          <View style={styles.footer}>
-            <Link href="/prototype" style={styles.link}>
-              Journeys
-            </Link>
-            <Link href="/prototype/components" style={styles.link}>
-              Component specimens
-            </Link>
-            <Link href="/prototype/samples" style={styles.link}>
-              Sample controls
-            </Link>
-          </View>
+          <JournalText muted>Fictional prototype · changes reset on relaunch</JournalText>
         </View>
       </ScrollView>
+      <View style={styles.footer}>
+        <Link href="/prototype" replace style={[styles.navLink, home && styles.activeNav]}>
+          Journeys
+        </Link>
+        <Link
+          href="/prototype/components"
+          replace
+          style={[styles.navLink, pathname.endsWith("/components") && styles.activeNav]}
+        >
+          Design kit
+        </Link>
+        <Link
+          href="/prototype/samples"
+          replace
+          style={[styles.navLink, pathname.endsWith("/samples") && styles.activeNav]}
+        >
+          Samples
+        </Link>
+      </View>
     </KeyboardAvoidingView>
   );
 }
 export function NativeJourneys() {
   const { state, dispatch } = useSample();
+  const [form, setForm] = useState<"create" | "join" | null>(null);
   const [title, setTitle] = useState(seed.journey.title);
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
   return (
     <SamplePage>
-      <JournalText title>Your journeys</JournalText>
-      <JournalText muted>A place for what happened along the way.</JournalText>
-      {state.joined ? (
+      <View style={styles.heading}>
+        <Text style={styles.greeting}>Your places. Your people. Your stories.</Text>
+        <Text accessibilityRole="header" style={styles.pageTitle}>
+          Your journeys
+        </Text>
+        <JournalText muted>Keep a little of the way you felt.</JournalText>
+      </View>
+      <View style={styles.quickActions}>
+        <View style={styles.flex}>
+          <JournalButton
+            label="Create journey"
+            onPress={() => setForm(form === "create" ? null : "create")}
+          />
+        </View>
+        <View style={styles.flex}>
+          <JournalButton
+            label="Join with invite"
+            secondary
+            onPress={() => setForm(form === "join" ? null : "join")}
+          />
+        </View>
+      </View>
+      {form && (
         <View style={styles.section}>
-          <JournalText editorial>{state.title}</JournalText>
-          <JournalText>
-            {seed.journey.start} — {seed.journey.end}
+          <JournalText title>
+            {form === "create" ? "Start a shared journal" : "Join your group"}
           </JournalText>
-          <JournalText muted>No cover · {seed.journey.place}</JournalText>
+          {form === "create" ? (
+            <>
+              <JournalField
+                label="Journey title"
+                value={title}
+                onChangeText={setTitle}
+                maxLength={160}
+                error={error}
+                hint="Only a local sample is created."
+              />
+              <JournalButton
+                label="Create sample journey"
+                onPress={() => {
+                  setError(title.trim() ? "" : "Enter a journey title.");
+                  dispatch({ type: "create", title });
+                  if (title.trim()) setForm(null);
+                }}
+              />
+            </>
+          ) : (
+            <>
+              <JournalField
+                label="Sample invitation code"
+                value={code}
+                onChangeText={setCode}
+                autoCapitalize="characters"
+                hint="Use RIDGE. No invitation is sent."
+              />
+              <JournalButton
+                label="Join sample journey"
+                onPress={() => {
+                  dispatch({ type: "join", code });
+                  if (code.trim().toUpperCase() === "RIDGE") setForm(null);
+                }}
+              />
+              <JournalText>{state.notice}</JournalText>
+            </>
+          )}
+          <JournalButton label="Close" secondary onPress={() => setForm(null)} />
+        </View>
+      )}
+      <View style={styles.sectionHeading}>
+        <JournalText title>
+          {state.joined ? "Back to your story" : "A little inspiration"}
+        </JournalText>
+        <Text style={styles.meta}>{state.joined ? "1 journal" : "Sample"}</Text>
+      </View>
+      <NativeJourneyCover title={state.joined ? state.title : seed.journey.title}>
+        {state.joined ? (
           <Link
             href="/prototype/journey"
-            style={styles.link}
+            style={styles.openLink}
             onPress={() => dispatch({ type: "revisit" })}
           >
             Open journey
           </Link>
-        </View>
-      ) : (
-        <View style={styles.section}>
-          <JournalText editorial>Every journey starts with a little space.</JournalText>
-          <JournalText>
-            Create the shared journal, or join your group’s. Your gallery stays private until you
-            choose what to contribute.
+        ) : (
+          <JournalButton
+            label="Explore sample"
+            onPress={() => dispatch({ type: "reset", scenario: "prepared-trip" })}
+          />
+        )}
+      </NativeJourneyCover>
+      <View style={styles.privacy}>
+        <JournalMark />
+        <View style={styles.flex}>
+          <JournalText title>Yours until you share.</JournalText>
+          <JournalText muted>
+            Your gallery stays private. You choose the moments your group can see.
           </JournalText>
-          <JournalText muted>No journeys yet · no cover image needed</JournalText>
-        </View>
-      )}
-      <View style={styles.columns}>
-        <View style={styles.column}>
-          <JournalText title>Create a sample journey</JournalText>
-          <JournalField
-            label="Journey title"
-            value={title}
-            onChangeText={setTitle}
-            maxLength={160}
-            error={error}
-            hint="Only a local sample is created."
-          />
-          <JournalButton
-            label="Create sample journey"
-            onPress={() => {
-              setError(title.trim() ? "" : "Enter a journey title.");
-              dispatch({ type: "create", title });
-            }}
-          />
-        </View>
-        <View style={styles.column}>
-          <JournalText title>Join your group</JournalText>
-          <JournalField
-            label="Sample invitation code"
-            value={code}
-            onChangeText={setCode}
-            autoCapitalize="characters"
-            hint="Use RIDGE. No invitation is sent."
-          />
-          <JournalButton
-            label="Join sample journey"
-            secondary
-            onPress={() => dispatch({ type: "join", code })}
-          />
         </View>
       </View>
+      {!state.joined && (
+        <JournalText muted>No journeys yet. The journal above is a prepared sample.</JournalText>
+      )}
       <View accessibilityLiveRegion="polite">
-        <JournalText>{state.notice}</JournalText>
+        <JournalText muted>{state.notice}</JournalText>
       </View>
     </SamplePage>
   );
@@ -115,6 +194,7 @@ export function NativeJourneys() {
 export function NativeJourney() {
   const { state, dispatch } = useSample();
   const output = project(state);
+  const [continuation, setContinuation] = useState(false);
   if (!state.joined)
     return (
       <SamplePage>
@@ -125,31 +205,40 @@ export function NativeJourney() {
   const actor = state.data.actors.find((item) => item.id === state.actorId)!;
   return (
     <SamplePage>
-      <JournalText title>{state.title}</JournalText>
-      <JournalText>
-        {seed.journey.start} — {seed.journey.end}
-      </JournalText>
-      <JournalStatus>No cover · sample-journey-01</JournalStatus>
-      <JournalText title>Independent powers</JournalText>
-      <JournalText>
-        {actor.name} · {actor.admin ? "Administrator" : "Participant"}
-        {actor.coauthor ? " · Coauthor" : ""}
-        {actor.publisher ? " · Publisher" : ""}
-      </JournalText>
-      <JournalText>
-        {output.canReview
-          ? "You can review the shared draft and contributed sources."
-          : "The shared draft and other people’s review sources are not available to this actor."}
-      </JournalText>
-      <JournalText title>Prepared continuation</JournalText>
-      <JournalText>
-        Load the prepared web continuation. This prototype does not sync devices.
-      </JournalText>
+      <JournalStatus>Private sample journal</JournalStatus>
+      <NativeJourneyCover title={state.title} />
+      <View style={styles.section}>
+        <JournalText title>Your place in this journey</JournalText>
+        <JournalText>{actor.name}</JournalText>
+        <View style={styles.pills}>
+          <JournalStatus>{actor.admin ? "Administrator" : "Participant"}</JournalStatus>
+          {actor.coauthor && <JournalStatus>Coauthor</JournalStatus>}
+          {actor.publisher && <JournalStatus>Publisher</JournalStatus>}
+        </View>
+        <JournalText>
+          {output.canReview
+            ? "You can review the shared draft and contributed sources."
+            : "The shared draft and other people’s review sources are not available to this actor."}
+        </JournalText>
+        <JournalText muted>Private galleries are never a group library.</JournalText>
+      </View>
       <JournalButton
         secondary
-        label="Load review-moment-19"
-        onPress={() => dispatch({ type: "reset", scenario: "review-moment-19" })}
+        label="Prepared continuation"
+        onPress={() => setContinuation(!continuation)}
       />
+      {continuation && (
+        <View style={styles.section}>
+          <JournalText>
+            Load the prepared web continuation. This prototype does not sync devices.
+          </JournalText>
+          <JournalButton
+            secondary
+            label="Load review-moment-19"
+            onPress={() => dispatch({ type: "reset", scenario: "review-moment-19" })}
+          />
+        </View>
+      )}
       {state.scenario === "review-moment-19" && output.canViewContinuation && (
         <View style={styles.section}>
           <JournalText title>Rain at the tea stop</JournalText>
@@ -162,6 +251,7 @@ export function NativeJourney() {
     </SamplePage>
   );
 }
+
 export function NativeSamples() {
   const { state, dispatch } = useSample();
   return (
@@ -216,10 +306,11 @@ export function NativeSpecimens() {
   ] as const;
   return (
     <SamplePage>
-      <JournalText title>The field-journal kit</JournalText>
+      <JournalText editorial>A journal, down to the details.</JournalText>
       <JournalText muted>
         Isolated component examples. No source permissions change here.
       </JournalText>
+      <NativeKitCover />
       <View style={styles.section}>
         <JournalText title>Audience & rights</JournalText>
         <JournalText muted>
@@ -339,19 +430,110 @@ export function NativeSpecimens() {
   );
 }
 const styles = StyleSheet.create((theme, rt) => ({
-  fill: { flex: 1, backgroundColor: theme.colors.background },
+  fill: { flex: 1, backgroundColor: theme.colors.background, paddingTop: rt.insets.top },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+  },
+  brand: { flexDirection: "row", gap: 10, alignItems: "center" },
+  brandText: {
+    fontFamily: "Newsreader500",
+    fontSize: 32,
+    lineHeight: 38,
+    color: theme.colors.primary,
+  },
+  account: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: theme.colors.successSurface,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  accountText: { fontFamily: "InstrumentSans600", fontSize: 13, color: theme.colors.primary },
+  back: { minWidth: 48, minHeight: 48, justifyContent: "center", alignItems: "center" },
+  navLabel: { fontFamily: "InstrumentSans600", fontSize: 14, color: theme.colors.primary },
   page: {
     padding: rt.screen.width >= 768 ? 32 : 16,
-    paddingBottom: Math.max(rt.insets.bottom, 24),
-    gap: 24,
-    maxWidth: 1000,
+    paddingBottom: 32,
+    gap: 20,
+    maxWidth: 900,
     width: "100%",
     alignSelf: "center",
   },
-  section: { borderTopWidth: 1, borderColor: theme.colors.border, paddingTop: 24, gap: 16 },
-  columns: { flexDirection: rt.screen.width >= 768 ? "row" : "column", gap: 32 },
+  heading: { gap: 8, marginBottom: 4 },
+  greeting: {
+    fontFamily: "InstrumentSans",
+    fontSize: 12,
+    lineHeight: 18,
+    color: theme.colors.secondaryText,
+  },
+  pageTitle: {
+    fontFamily: "Newsreader500",
+    fontSize: 40,
+    lineHeight: 44,
+    color: theme.colors.text,
+    letterSpacing: -0.6,
+  },
+  quickActions: { flexDirection: "row", gap: 12 },
+  flex: { flex: 1 },
+  sectionHeading: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 12,
+    marginTop: 8,
+  },
+  meta: { fontFamily: "InstrumentSans", fontSize: 12, color: theme.colors.secondaryText },
+  section: {
+    backgroundColor: theme.colors.surface,
+    borderRadius: theme.radius.medium,
+    padding: 20,
+    gap: 16,
+  },
+  privacy: { flexDirection: "row", gap: 16, padding: 16 },
+  pills: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
+  columns: { flexDirection: rt.screen.width >= 768 ? "row" : "column", gap: 24 },
   column: { flex: 1, gap: 16 },
-  footer: { gap: 8, borderTopWidth: 1, borderColor: theme.colors.border, paddingTop: 16 },
+  footer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    gap: 4,
+    backgroundColor: theme.colors.surface,
+    paddingHorizontal: 12,
+    paddingTop: 8,
+    paddingBottom: Math.max(rt.insets.bottom, 12),
+    borderTopWidth: 1,
+    borderColor: theme.colors.border,
+  },
+  navLink: {
+    fontFamily: "InstrumentSans600",
+    fontSize: 13,
+    lineHeight: 20,
+    color: theme.colors.secondaryText,
+    minHeight: 48,
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    borderRadius: theme.radius.round,
+    textAlign: "center",
+    overflow: "hidden",
+  },
+  activeNav: { backgroundColor: theme.colors.successSurface, color: theme.colors.primary },
+  openLink: {
+    fontFamily: "InstrumentSans600",
+    fontSize: 14,
+    lineHeight: 22,
+    color: theme.colors.primaryText,
+    backgroundColor: theme.colors.primary,
+    minHeight: 48,
+    padding: 13,
+    textAlign: "center",
+    borderRadius: theme.radius.round,
+    overflow: "hidden",
+  },
   link: {
     fontFamily: "InstrumentSans600",
     color: theme.colors.primary,
@@ -366,8 +548,8 @@ const styles = StyleSheet.create((theme, rt) => ({
     alignItems: "flex-start",
     gap: 12,
     minHeight: 64,
-    padding: 12,
-    borderRadius: 8,
+    padding: 14,
+    borderRadius: theme.radius.medium,
     borderWidth: 1,
     borderColor: theme.colors.controlBorder,
     marginVertical: 4,

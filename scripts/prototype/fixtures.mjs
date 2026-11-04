@@ -3,7 +3,9 @@ import { readdir, readFile, mkdir, writeFile } from "node:fs/promises";
 
 const root = new URL("../../", import.meta.url);
 const source = new URL("tests/fixtures/prototype/", root);
-const files = (await readdir(source)).filter((name) => /\.(json|ttf|woff2|txt)$/.test(name)).sort();
+const files = (await readdir(source))
+  .filter((name) => /\.(json|ttf|woff2|txt|png)$/.test(name))
+  .sort();
 const hash = createHash("sha256");
 for (const name of files) hash.update(name).update(await readFile(new URL(name, source)));
 const revision = hash.digest("hex");

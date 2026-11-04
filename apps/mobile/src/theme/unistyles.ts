@@ -15,6 +15,7 @@ export const theme = {
     controlBorder: tokens.color.ink500,
     reviewSurface: tokens.color.clay100,
     reviewText: tokens.color.clay800,
+    riverSurface: tokens.color.river100,
   },
   spacing: tokens.spacing,
   radius: tokens.radius,

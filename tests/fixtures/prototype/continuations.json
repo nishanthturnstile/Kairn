@@ -20,7 +20,7 @@
       "permit journey review"
     ],
     "nextTask": "Inspect the prepared source on creator web",
-    "fixtureVersion": "p02.1"
+    "fixtureVersion": "p02.2"
   },
   {
     "id": "web-published-v1",
@@ -33,7 +33,7 @@
     "attribution": "Sample contributor",
     "approvedRevision": 1,
     "nextTask": "Inspect approved personal highlights",
-    "fixtureVersion": "p02.1",
+    "fixtureVersion": "p02.2",
     "content": "Fictional field note: ridge in the rain.",
     "powers": {
       "admin": true,
@@ -56,7 +56,7 @@
     "attribution": "Sample contributor",
     "approvedRevision": 1,
     "nextTask": "Inspect unavailable highlight",
-    "fixtureVersion": "p02.1",
+    "fixtureVersion": "p02.2",
     "content": "Fictional field note: a withdrawn photograph.",
     "powers": {
       "admin": false,
