@@ -6,7 +6,7 @@
     "scheme": "kairn-dev",
     "platforms": ["android", "ios"],
     "orientation": "default",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "android": {
       "package": "dev.kairn.app"
     },

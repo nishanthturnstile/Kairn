@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { AccessibilityInfo, Modal, Pressable, ScrollView, Text, View } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
 import { Button } from "./button";
+import { useModalFocus } from "./modal-focus";
 
 export type Choice = { value: string; label: string; description?: string; disabled?: boolean };
 export function Checkbox({
@@ -132,9 +133,9 @@ export function Picker({
   const [open, setOpen] = useState(false);
   const trigger = useRef<View>(null);
   const heading = useRef<Text>(null);
+  const restoreFocus = useModalFocus(open, trigger);
   function close() {
     setOpen(false);
-    if (trigger.current) AccessibilityInfo.sendAccessibilityEvent(trigger.current, "focus");
   }
   return (
     <View style={styles.group}>
@@ -146,21 +147,24 @@ export function Picker({
         accessibilityState={{ expanded: open, disabled }}
         onPress={() => setOpen(true)}
         disabled={disabled}
-        style={[styles.choice, styles.picker]}
+        style={({ pressed }) => [
+          styles.choice,
+          styles.picker,
+          pressed && styles.pressed,
+          disabled && styles.disabled,
+        ]}
       >
-        <Text style={styles.label}>
+        <Text style={[styles.label, styles.pickerValue]}>
           {options.find((option) => option.value === value)?.label || "Choose an option"}
         </Text>
-        <Text style={styles.detail}>Change</Text>
+        <Text style={[styles.detail, styles.pickerAction]}>Change</Text>
       </Pressable>
       <Modal
         visible={open}
         transparent
         animationType="none"
         onRequestClose={close}
-        onDismiss={() => {
-          if (trigger.current) AccessibilityInfo.sendAccessibilityEvent(trigger.current, "focus");
-        }}
+        onDismiss={restoreFocus}
         onShow={() => {
           if (heading.current) AccessibilityInfo.sendAccessibilityEvent(heading.current, "focus");
         }}
@@ -205,6 +209,8 @@ const styles = StyleSheet.create((theme, rt) => ({
     justifyContent: "space-between",
   },
   selected: { backgroundColor: theme.colors.selected },
+  pickerValue: { flex: 1 },
+  pickerAction: { flexShrink: 0 },
   pressed: { opacity: 0.78 },
   disabled: { opacity: 0.5 },
   copy: { flex: 1, gap: theme.spacing.xs },

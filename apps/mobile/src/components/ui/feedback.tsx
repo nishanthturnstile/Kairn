@@ -1,4 +1,4 @@
-import { useEffect, useRef, type ReactNode, type RefObject } from "react";
+import { useRef, type ReactNode, type RefObject } from "react";
 import {
   AccessibilityInfo,
   KeyboardAvoidingView,
@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
 import { Button } from "./button";
+import { useModalFocus } from "./modal-focus";
 
 export function Notice({
   children,
@@ -53,15 +54,7 @@ export function Dialog({
   returnFocusRef: RefObject<View | null>;
 }) {
   const cancelRef = useRef<View>(null);
-  function restoreFocus() {
-    if (returnFocusRef.current)
-      AccessibilityInfo.sendAccessibilityEvent(returnFocusRef.current, "focus");
-  }
-  useEffect(() => {
-    if (open) return;
-    const frame = requestAnimationFrame(restoreFocus);
-    return () => cancelAnimationFrame(frame);
-  }, [open, returnFocusRef]);
+  const restoreFocus = useModalFocus(open, returnFocusRef);
   return (
     <Modal
       visible={open}
