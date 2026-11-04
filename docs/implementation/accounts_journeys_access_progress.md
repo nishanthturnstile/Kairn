@@ -466,7 +466,7 @@ The [resumed device evidence](../research/accounts-journey-access/b04_native_202
 - [x] Native session list, individual revoke, bulk revoke and logout passed against real sessions.
 - [x] Delayed real background account response could not repopulate private content after native logout.
 - [x] External API-assisted current-session revoke followed by native denied refresh cleared private content. Actual two-device acceptance remains separate.
-- [x] Both native font/license views and all six weight specimens were inspected; larger-text layout checks passed within the documented screens. Original Large text sizes and iOS Reduce Motion OFF are restored.
+- [x] Both native font/license views and all six font weights were visually inspected, including the otherwise unused 500/700 specimens; larger-text layout checks passed within the documented screens. Original Large text sizes and iOS Reduce Motion OFF are restored.
 - [x] PR7 exact-head Quality/Android/aggregate CI succeeded; the user merged it into development. Evidence-only follow-up starts from that integration SHA.
 - [ ] Android native account flows / two-device revoke: actual 8444 device connection failed despite host readiness 200. Missing documented emulator DNS arguments are observed, not a proven diagnosis. Supported log capture and debug retry both failed `EPERM: operation not permitted, fsync`; further Android commands stopped.
 - [ ] TalkBack/VoiceOver operation and authenticated SecureStore-failure evidence remain unaccepted. This iOS simulator exposes no VoiceOver setting in its Vision controls; no supported authenticated storage-fault control was available.
