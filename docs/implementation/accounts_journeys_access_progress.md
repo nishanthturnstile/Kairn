@@ -453,3 +453,23 @@ Mac task Metro 8082 and its owned ignored development env override remain runnin
 The [branch audit and remaining steps](../research/accounts-journey-access/b04_branch_audit_2026-11-04.md) inventories all seven registered Kairn checkouts on Windows/Mac/WSL. Source was clean; all three repositories have zero unpublished local branch commits after fetching. Only `fix/accounts-b04-native-qualification` needs an independent follow-up PR to development. The old post-merge account tip is patch-equivalent to its storage/signing fix. Old foundation tips are integrated or patch-equivalent. Prototype history is already contained by the explicitly excluded redesign branch/PR6; it was not changed.
 
 Open a draft account follow-up PR for completed fixes/evidence while preserving the deferred native checklist. Android was retried during the audit, but its automation lease is still owned by another session after the supported wait even though the emulator is visible here. It was not destroyed or taken over. The checklist records input/lease recovery, motion restoration, remaining native failure/session/recovery/accessibility/font gates, exact-head CI/review and later integration. No merge/promotion or native acceptance closure is implied.
+
+
+### B04 resumed native validation — 2026-11-04 (current)
+
+The [resumed device evidence](../research/accounts-journey-access/b04_native_2026-11-04.md#resumed-device-validation-after-ownership-release) supersedes the initial open iOS items. Android ownership was released by its owner without destroying the emulator; this thread acquired it and installed the verified APK. No application/dependency/native code changed: runtime `be76325f4c71dd1d161081cb0a61421acf213381` equals the app inputs in merged development `f477db14fcbf45fcaf9558eeb850f136eb6542e0`.
+
+- [x] iOS stale-profile conflict retained draft/base revision; explicit reload accepted the competing profile.
+- [x] iOS real service failure retained fields; retry succeeded after restoring only the task-owned HTTPS proxy.
+- [x] Warm other-account reset ended private access and prioritized reset heading; cold reset survived development-server selection, completed, and the new password signed in successfully.
+- [x] Two-account switch cleared prior fields; second-account authenticated relaunch and warm verification preserved correct identity.
+- [x] Native session list, individual revoke, bulk revoke and logout passed against real sessions.
+- [x] Delayed real background account response could not repopulate private content after native logout.
+- [x] External API-assisted current-session revoke followed by native denied refresh cleared private content. Actual two-device acceptance remains separate.
+- [x] Both native font/license views and all six weight specimens were inspected; larger-text layout checks passed within the documented screens. Original Large text sizes and iOS Reduce Motion OFF are restored.
+- [x] PR7 exact-head Quality/Android/aggregate CI succeeded; the user merged it into development. Evidence-only follow-up starts from that integration SHA.
+- [ ] Android native account flows / two-device revoke: actual 8444 device connection failed despite host readiness 200. Missing documented emulator DNS arguments are observed, not a proven diagnosis. Supported log capture and debug retry both failed `EPERM: operation not permitted, fsync`; further Android commands stopped.
+- [ ] TalkBack/VoiceOver operation and authenticated SecureStore-failure evidence remain unaccepted. This iOS simulator exposes no VoiceOver setting in its Vision controls; no supported authenticated storage-fault control was available.
+- [ ] Physical iPad remains unavailable; physical iPhone deferred. Recovery G09, production sender/origin and shared journeys remain closed.
+
+Task Metros/fault proxy are stopped; the verified task-only Mac env override was removed, preserving the canonical env hash. Private 8444→8086 and unrelated 443/8443 routes remain intact. No further native rebuild was run for these documentation-only changes; acceptance is tied to the precise prior build/runtime inputs above. B04 is not declared complete while the unchecked gates remain.
