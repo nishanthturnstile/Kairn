@@ -105,9 +105,16 @@ async function sendAuthRequest(path, body) {
     );
   return result.data;
 }
+export function nativeStorageFailed() {
+  return fault;
+}
 export async function retryNativeStorage() {
-  await SecureStore.getItemAsync("kairn-storage-probe");
-  fault = false;
+  try {
+    await SecureStore.getItemAsync("kairn-storage-probe");
+    fault = false;
+  } catch {
+    throw storageFailure();
+  }
 }
 export function nativeOrigin() {
   return origin;

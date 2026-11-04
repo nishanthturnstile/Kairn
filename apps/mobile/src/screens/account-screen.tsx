@@ -26,6 +26,7 @@ import {
   nativeAuthRequest,
   nativeCookie,
   retryNativeStorage,
+  nativeStorageFailed,
 } from "../data/native-auth.mjs";
 import {
   bindNativeAccountClient,
@@ -79,7 +80,11 @@ function ConfiguredAccount({ origin }: { origin: string }) {
   const [mode, setMode] = useState<"sign-in" | "create" | "recover" | "reset" | "verify">(
     params.action === "recover" ? "recover" : "sign-in",
   );
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState(() =>
+    nativeStorageFailed()
+      ? "Secure account storage is unavailable. Retry account access before continuing."
+      : "",
+  );
   const [intentHydrated, setIntentHydrated] = useState(false);
   setNativeInvalidator((reason) => {
     clearPrivateAccount(client, true);
@@ -215,8 +220,9 @@ function ConfiguredAccount({ origin }: { origin: string }) {
         }
       }),
   });
+  const [profileDefaults, setProfileDefaults] = useState({ displayName: "", bio: "" });
   const profile = useForm({
-    defaultValues: { displayName: "", bio: "" },
+    defaultValues: profileDefaults,
     onSubmitInvalid: ({ formApi }) => {
       if (formApi.getFieldMeta("displayName")?.errors.length) profileNameInput.current?.focus();
       else bioInput.current?.focus();
@@ -235,7 +241,9 @@ function ConfiguredAccount({ origin }: { origin: string }) {
         const saved = ProfileSchema.parse(await response.json());
         profileTag.current = saved.etag;
         intent.current = { digest: "", id: "", etag: "" };
-        profile.reset({ displayName: saved.displayName, bio: saved.bio ?? "" });
+        const accepted = { displayName: saved.displayName, bio: saved.bio ?? "" };
+        setProfileDefaults(accepted);
+        profile.reset(accepted);
         await query.refetch();
         setMessage("Profile saved.");
       }),
@@ -243,10 +251,12 @@ function ConfiguredAccount({ origin }: { origin: string }) {
   useEffect(() => {
     if (query.data) {
       profileTag.current = query.data.profile.etag;
-      profile.reset({
+      const accepted = {
         displayName: query.data.profile.displayName,
         bio: query.data.profile.bio ?? "",
-      });
+      };
+      setProfileDefaults(accepted);
+      profile.reset(accepted);
     }
   }, [query.data?.accountId]);
   const avatarQuery = useQuery({
@@ -429,10 +439,12 @@ function ConfiguredAccount({ origin }: { origin: string }) {
                     throw new Error("Saved profile could not be loaded.");
                   profileTag.current = result.data.profile.etag;
                   intent.current = { digest: "", id: "", etag: "" };
-                  profile.reset({
+                  const accepted = {
                     displayName: result.data.profile.displayName,
                     bio: result.data.profile.bio ?? "",
-                  });
+                  };
+                  setProfileDefaults(accepted);
+                  profile.reset(accepted);
                   setMessage("Saved profile loaded.");
                 })
               }
