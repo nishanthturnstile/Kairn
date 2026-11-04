@@ -6,6 +6,8 @@ import { resolve } from "node:path";
 const artifacts = resolve(".kairn/verification/b04/browser-artifacts");
 mkdirSync(artifacts, { recursive: true });
 const project = `kairn-domain-${randomUUID().slice(0, 8)}`;
+const container = `${project}-accounts`;
+let passed = false;
 const base = [
   "compose",
   "--project-name",
@@ -57,16 +59,29 @@ try {
     "tools",
     "run",
     "--build",
-    "--rm",
+    "--name",
+    container,
     "--no-deps",
-    "--volume",
-    `${artifacts}:/app/test-results/accounts`,
     ...Object.entries(testEnv).flatMap(([name, value]) => ["-e", `${name}=${value}`]),
     "tooling",
     "pnpm",
     "test:accounts",
   ]);
-  console.log("PASS real account browser/auth/profile/session/mail/storage flow.");
+  passed = true;
 } finally {
+  // Copy artifacts as the host caller; a runner-owned bind mount may have a
+  // different UID from the non-root test container. Retain failure screenshots too.
+  const captured = spawnSync(
+    "docker",
+    ["cp", `${container}:/app/test-results/accounts/.`, artifacts],
+    {
+      env,
+      stdio: "inherit",
+    },
+  );
   docker(["--profile", "tools", "down", "--volumes", "--remove-orphans"]);
+  if (passed) assert.equal(captured.status, 0, "Account browser artifacts were not retained.");
 }
+console.log(
+  "PASS real account browser/auth/profile/session/mail/storage flow and retained screenshots.",
+);
