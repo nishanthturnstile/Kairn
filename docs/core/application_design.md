@@ -571,15 +571,15 @@ The palette is light-first. Full dark mode is not part of this baseline. Dark me
 
 | Token | Value | Use |
 |---|---|---|
-| Paper 50 | `#F6F2E8` | Page background and public story field |
-| Paper 0 | `#FFFDF8` | Main surfaces, sheets, and cards |
-| Ink 950 | `#172019` | Primary text and dark controls |
-| Ink 700 | `#3F4C43` | Secondary text |
-| Ink 500 | `#646F66` | Metadata with approved contrast on light surfaces |
-| Line 200 | `#D8DDD6` | Borders, separators, and inactive tracks |
-| Forest 800 | `#234F3B` | Primary action and recorded-route anchor |
-| Forest 600 | `#3D735A` | Selected controls and secondary route marks |
-| Forest 100 | `#DDE9E0` | Selected backgrounds and success surfaces |
+| Paper 50 | `#F3F6F8` | Page background and public story field |
+| Paper 0 | `#FFFFFF` | Main surfaces, sheets, and cards |
+| Ink 950 | `#172D3B` | Primary text and dark controls |
+| Ink 700 | `#405969` | Secondary text |
+| Ink 500 | `#637684` | Metadata with approved contrast on light surfaces |
+| Line 200 | `#D3DEE5` | Borders, separators, and inactive tracks |
+| Forest 800 | `#164D70` | Primary action and recorded-route anchor |
+| Forest 600 | `#296C91` | Selected controls and secondary route marks |
+| Forest 100 | `#E0EDF5` | Selected backgrounds and success surfaces |
 | Clay 800 | `#81411F` | Review text and strong estimated-route label |
 | Clay 500 | `#C86F3F` | Accent marks, suggestion icons, and focus accents |
 | Clay 100 | `#F4E0D3` | Review and suggestion backgrounds |
@@ -649,7 +649,7 @@ Public page content has a maximum width of 1280 px. The main Story reading colum
 | Radius large | 16 px | Sheets, cover cards, and major map containers |
 | Radius round | 999 px | Chips, avatars, and segmented controls only |
 | Border | 1 px Line 200 | Default surface separation |
-| Raised shadow | `0 12px 32px rgba(23, 32, 25, 0.10)` | Floating sheets, menus, and map panels |
+| Raised shadow | `0 12px 32px rgba(23, 45, 59, 0.10)` | Floating sheets, menus, and map panels |
 | Focus ring | 3 px Clay 500 with 2 px Paper 0 offset | Keyboard and switch-access focus |
 
 Routine list rows use spacing and separators, not individual shadows. One screen has no more than two elevation levels.
