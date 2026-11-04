@@ -15,10 +15,7 @@
     },
     "draftRevision": 2,
     "approvedRevision": 1,
-    "completedActions": [
-      "sample capture",
-      "permit journey review"
-    ],
+    "completedActions": ["sample capture", "permit journey review"],
     "nextTask": "Inspect the prepared source on creator web",
     "fixtureVersion": "p02.2"
   },
@@ -41,9 +38,7 @@
       "publisher": true
     },
     "draftRevision": 2,
-    "completedActions": [
-      "local publication v1"
-    ]
+    "completedActions": ["local publication v1"]
   },
   {
     "id": "web-source-withdrawn",
@@ -64,8 +59,6 @@
       "publisher": false
     },
     "draftRevision": 2,
-    "completedActions": [
-      "owner source withdrawal"
-    ]
+    "completedActions": ["owner source withdrawal"]
   }
 ]

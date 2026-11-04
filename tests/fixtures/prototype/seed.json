@@ -495,17 +495,13 @@
   "draft": {
     "revision": 2,
     "caption": "We waited for the cloud to lift.",
-    "sourceIds": [
-      "sample-moment-3"
-    ],
+    "sourceIds": ["sample-moment-3"],
     "acceptedCorrection": "The rest day was in town, not on the ridge."
   },
   "approved": {
     "revision": 1,
     "caption": "An afternoon on the ridge.",
-    "sourceIds": [
-      "sample-moment-3"
-    ]
+    "sourceIds": ["sample-moment-3"]
   },
   "staleCandidate": {
     "baseRevision": 1,
@@ -520,18 +516,14 @@
   "answers": [
     {
       "id": "answer-1",
-      "sourceIds": [
-        "sample-moment-18"
-      ],
+      "sourceIds": ["sample-moment-18"],
       "text": "Prepared example, invalid after withdrawal."
     }
   ],
   "exportGrant": {
     "owner": "eli",
     "recipient": "mira",
-    "sourceIds": [
-      "sample-moment-18"
-    ],
+    "sourceIds": ["sample-moment-18"],
     "expiresAt": "2026-07-16T12:00:00Z"
   },
   "suggestions": [
@@ -540,14 +532,7 @@
       "sourceId": "sample-moment-6",
       "uncertainty": "Reported from transcript",
       "text": "Tea cost LKR 600 for four people.",
-      "operations": [
-        "accept",
-        "edit",
-        "dismiss",
-        "merge",
-        "split",
-        "reject"
-      ]
+      "operations": ["accept", "edit", "dismiss", "merge", "split", "reject"]
     }
   ],
   "scenarios": [
