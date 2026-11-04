@@ -168,7 +168,7 @@ describe("composed server/web boundary", () => {
       await browserExpect(
         page.getByRole("heading", { name: "A place for the journey." }),
       ).toBeVisible();
-      await page.getByRole("link", { name: "Service status", exact: true }).click();
+      await page.getByRole("link", { name: "Connection status", exact: true }).click();
       await browserExpect(page.getByRole("status")).toContainText("Service online");
       await page.reload();
       await browserExpect(page.getByRole("status")).toContainText("Service online");
