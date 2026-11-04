@@ -12,6 +12,8 @@ export class NativeSessionRequired extends Error {}
 let controller = new AbortController();
 const listeners = new Set<() => void>();
 export function clearPrivateAccount(client: QueryClient, suppress = false) {
+  // An already closed account must not remount again on every failed hydration.
+  if (suppress && suppressed) return;
   suppressed = suppress;
   controller.abort();
   controller = new AbortController();

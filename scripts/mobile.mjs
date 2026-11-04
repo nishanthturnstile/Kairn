@@ -176,11 +176,24 @@ if (mode === "check") {
         "2",
         `ARCHS=${process.arch === "arm64" ? "arm64" : "x86_64"}`,
         "ONLY_ACTIVE_ARCH=YES",
-        "CODE_SIGNING_ALLOWED=NO",
+        // SecureStore needs Xcode's simulated app-identifier entitlement.
+        // The local identity requires no team certificate or provisioning profile.
+        "CODE_SIGNING_ALLOWED=YES",
+        "CODE_SIGN_IDENTITY=-",
         "build",
       ],
       { cwd: join(mobile, "ios") },
     );
+    run("codesign", [
+      "--verify",
+      "--deep",
+      "--strict",
+      join(
+        root,
+        ".kairn/ios-build/Build/Products/Debug-iphonesimulator",
+        `${workspace.slice(0, -".xcworkspace".length)}.app`,
+      ),
+    ]);
     if (mode === "verify-ios") {
       /** @param {string} command @param {string[]} args */
       const output = (command, args) => {
@@ -218,6 +231,7 @@ if (mode === "check") {
             nativeTemplate,
             inputs,
             simulatorBuild: "passed",
+            simulatorSigning: "local identity; strict signature verification passed",
             simulatorRuntime: "not_run",
             physicalDevices: "not_run",
           },
