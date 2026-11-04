@@ -13,7 +13,7 @@ import type { Pool } from "pg";
 import { z } from "zod";
 
 const digest = z.string().regex(/^[a-f0-9]{64}$/);
-export const JournalEventSchema = z.strictObject({
+const LegacyJournalEventSchema = z.strictObject({
   id: z.uuid(),
   kind: z.enum([
     "invitation.revoke",
@@ -59,6 +59,17 @@ export const JournalEventSchema = z.strictObject({
   transferId: z.uuid().nullable(),
   generation: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
 });
+// Keep legacy signed bodies byte-for-byte. New account denies retain only the
+// opaque authentication subject needed when a backup predates domain provisioning.
+export const JournalEventSchema = z.union([
+  LegacyJournalEventSchema,
+  LegacyJournalEventSchema.extend({
+    version: z.literal(2),
+    kind: z.literal("account.delete"),
+    resourceKind: z.literal("account"),
+    authSubjectId: z.string().min(1).max(512),
+  }),
+]);
 const EntrySchema = z.strictObject({
   sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
   body: z.string().max(4096),

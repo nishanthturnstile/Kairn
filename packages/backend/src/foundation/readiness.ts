@@ -110,13 +110,31 @@ const objects = [
     "export_grant",
     "export_grant_asset",
   ].map((table) => ({ schema: "sources", table, columns: null })),
-  ...[
-    "command_receipt",
-    "audit_event",
-    "domain_change",
-    "restriction_event",
-    "restriction_delivery",
-  ].map((table) => ({ schema: "operations", table, columns: null })),
+  ...["command_receipt", "audit_event", "domain_change", "restriction_delivery"].map((table) => ({
+    schema: "operations",
+    table,
+    columns: null,
+  })),
+  {
+    schema: "operations",
+    table: "restriction_event",
+    columns: [
+      "id",
+      "operation_id",
+      "kind",
+      "account_id",
+      "journey_id",
+      "membership_id",
+      "source_id",
+      "source_grant_id",
+      "export_grant_id",
+      "invitation_id",
+      "transfer_id",
+      "policy_generation",
+      "integrity_sha256",
+      "created_at",
+    ],
+  },
   { schema: "operations", table: "impact_preview", columns: restrictedReads.impact_preview },
   {
     schema: "operations",
@@ -274,7 +292,7 @@ export async function assertFoundationStructure(client: PoolClient) {
       AND (pg_catalog.has_schema_privilege(r.oid, n.oid, 'CREATE')))
     AND NOT EXISTS (SELECT FROM objects AS o JOIN pg_catalog.pg_attribute AS a ON a.attrelid = o.oid AND a.attnum > 0 AND NOT a.attisdropped
       WHERE pg_catalog.has_column_privilege('kairn_server', o.oid, a.attname, 'SELECT') IS DISTINCT FROM (o.columns IS NULL OR a.attname = ANY(o.columns))
-        OR pg_catalog.has_column_privilege('kairn_server', o.oid, a.attname, 'INSERT') IS DISTINCT FROM (o.schema = 'operations' AND o."table" IN ('audit_event', 'domain_change', 'restriction_event'))
+        OR pg_catalog.has_column_privilege('kairn_server', o.oid, a.attname, 'INSERT') IS DISTINCT FROM (o.schema = 'operations' AND o."table" IN ('audit_event', 'domain_change', 'restriction_event') AND a.attname <> 'auth_subject_id')
         OR pg_catalog.has_column_privilege('kairn_server', o.oid, a.attname, 'UPDATE,REFERENCES'))
     AND NOT EXISTS (SELECT FROM objects AS o WHERE pg_catalog.has_table_privilege('kairn_server', o.oid, 'DELETE,TRUNCATE,TRIGGER'))
     AND NOT EXISTS (SELECT FROM objects AS o CROSS JOIN pg_catalog.pg_roles AS r WHERE r.rolname IN ('kairn_auth', 'kairn_worker')

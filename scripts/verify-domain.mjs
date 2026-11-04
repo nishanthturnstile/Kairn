@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
-import { spawnSync } from "node:child_process";
+import { verifyRecoveryContainerRelease } from "./verify-recovery-release.mjs";
+import { execFileSync, spawnSync } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import { readFileSync } from "node:fs";
 const project = `kairn-domain-${randomUUID().slice(0, 8)}`;
@@ -59,6 +60,11 @@ try {
     "pnpm",
     "test:domain",
   ]);
+  await verifyRecoveryContainerRelease(
+    execFileSync("docker", ["image", "inspect", `${project}-tooling`, "--format", "{{.Id}}"], {
+      encoding: "utf8",
+    }).trim(),
+  );
   docker(["build", "worker"]);
   const image = readFileSync(
     new URL("../tests/fixtures/identity/avatar-metadata.png", import.meta.url),

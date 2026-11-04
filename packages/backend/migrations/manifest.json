@@ -36,6 +36,10 @@
     {
       "file": "0008_recovery_boundary.sql",
       "sha256": "4cc181788b75369bd0493e182d9e8635c59d81ce9a334f07d035eac39df07263"
+    },
+    {
+      "file": "0009_recovery_identity_guards.sql",
+      "sha256": "8391995dbc0220c6563e2f38e72e93081264e2f3854071de57bb75be95bf8096"
     }
   ]
 }

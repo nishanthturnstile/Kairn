@@ -62,6 +62,8 @@ for (const mode of ["development", "runtime"]) {
       "run",
       "--rm",
       "--no-deps",
+      "-e",
+      `TEST_WEB_MODE=${mode}`,
       "tooling",
       "pnpm",
       "test:integration",

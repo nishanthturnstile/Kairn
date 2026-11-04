@@ -40,6 +40,7 @@ Start with the product plan and requirements. Use the implementation plans for t
 - [Repository setup research](research/repository-setup/) — toolchain, native builds, Compose, compatibility probes, and host observations
 - [Accounts and journey-access research](research/accounts-journey-access/analysis_2026-11-03.md) — current-code gaps, functional analysis, version-matched integration findings, and design/accessibility research for the next milestone
 - [Independent plan review](research/accounts-journey-access/review_2026-11-03.md) — OpenCode/DeepSeek V4.1 Flash findings, parent assessment, plan corrections, and remaining activation/verification gates
+- [Implementation review](research/accounts-journey-access/implementation_review_2026-11-04.md) — OCR host-agent review of B01–B03 and the SDK refresh, reproduced defects, corrections and validation before B04
 
 [Setup execution history](research/repository-setup/repository_setup_progress_2026-11-02.md) and [native host history](research/repository-setup/native_host_setup_2026-11-02.md) preserve archived attempts and detailed qualification. Current status stays in the implementation documents.
 

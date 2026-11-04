@@ -6,6 +6,9 @@ import AxeBuilder from "@axe-core/playwright";
 
 const baseUrl = process.env.TEST_BASE_URL;
 if (!baseUrl) throw new Error("TEST_BASE_URL must point at the composed application ingress.");
+const mode = process.env.TEST_WEB_MODE;
+if (mode !== "development" && mode !== "runtime")
+  throw new Error("TEST_WEB_MODE must explicitly select development or runtime delivery.");
 let browser: Browser;
 beforeAll(async () => {
   browser = await chromium.launch();
@@ -17,7 +20,8 @@ afterAll(async () => {
 describe("composed server/web boundary", () => {
   it("keeps account specimens local and exercises their critical form/access states", async () => {
     const response = await fetch(`${baseUrl}/setup/accounts`);
-    if (response.status === 404) {
+    if (mode === "runtime") {
+      expect(response.status).toBe(404);
       // Packaged production must not expose the development specimen route.
       expect(await response.text()).not.toContain("Development fixtures only");
       return;

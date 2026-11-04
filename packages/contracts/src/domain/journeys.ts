@@ -67,7 +67,7 @@ function matchesZone(time: z.infer<typeof IntendedTimeSchema>, zone: string) {
     const part = (name: Intl.DateTimeFormatPartTypes) =>
       parts.find((value) => value.type === name)?.value;
     return (
-      `${part("year")}-${part("month")}-${part("day")}T${part("hour")}:${part("minute")}` ===
+      `${part("year")?.padStart(4, "0")}-${part("month")}-${part("day")}T${part("hour")}:${part("minute")}` ===
       time.local
     );
   } catch {

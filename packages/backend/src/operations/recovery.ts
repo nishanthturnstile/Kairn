@@ -186,7 +186,10 @@ export const DockerContainersSchema = z.array(
     Image: z.string(),
     State: z.object({ Running: z.boolean() }),
     HostConfig: z.object({ RestartPolicy: z.object({ Name: z.string() }) }),
-    Config: z.object({ Env: z.array(z.string()).nullable() }),
+    Config: z.object({
+      Env: z.array(z.string()).nullable(),
+      Labels: z.record(z.string(), z.string()),
+    }),
   }),
 );
 export const FenceStateSchema = z.object({

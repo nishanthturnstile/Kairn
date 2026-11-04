@@ -1,3 +1,4 @@
+import { startCheckedContainers } from "./recovery-containers.mjs";
 import { readFile, writeFile, mkdir, stat } from "node:fs/promises";
 import { execFileSync } from "node:child_process";
 import { resolve, join, isAbsolute } from "node:path";
@@ -163,7 +164,7 @@ try {
         JSON.parse(
           docker([
             "inspect",
-            ...docker([...base, "ps", "--all", "--quiet", "server", "worker"])
+            ...docker([...base, "ps", "--all", "--quiet", "edge", "server", "worker"])
               .trim()
               .split("\n")
               .filter(Boolean),
@@ -171,21 +172,39 @@ try {
         ),
       );
       if (
-        containers.length !== 2 ||
-        containers.some((c) => c.State.Running || !evidence.compatibleImages.includes(c.Image))
+        containers.length !== 3 ||
+        new Set(containers.map((c) => c.Config.Labels["com.docker.compose.service"])).size !== 3 ||
+        containers.some(
+          (c) =>
+            c.State.Running ||
+            c.HostConfig.RestartPolicy.Name !== "no" ||
+            c.Config.Labels["com.docker.compose.project"] !== config.composeProject ||
+            !["edge", "server", "worker"].includes(
+              c.Config.Labels["com.docker.compose.service"] ?? "",
+            ) ||
+            !evidence.compatibleImages.includes(c.Image),
+        )
       )
         throw new Error("Only checked compatible stopped images may be admitted.");
       const passwords = WriterPasswordsSchema.parse(
         await privateJson(config.newWriterPasswordsFile),
       );
-      for (const container of containers) {
+      const writers = containers.filter(
+        (c) => c.Config.Labels["com.docker.compose.service"] !== "edge",
+      );
+      const edge = containers.filter(
+        (c) => c.Config.Labels["com.docker.compose.service"] === "edge",
+      );
+      for (const container of writers) {
         const value = container.Config.Env?.find((value) => value.startsWith("DATABASE_URL="));
         if (!value) throw new Error("A current writer credential mount is required.");
         const url = new URL(value.slice("DATABASE_URL=".length));
         const expected =
-          url.username === "kairn_server"
+          url.username === "kairn_server" &&
+          container.Config.Labels["com.docker.compose.service"] === "server"
             ? passwords.kairn_server
-            : url.username === "kairn_worker"
+            : url.username === "kairn_worker" &&
+                container.Config.Labels["com.docker.compose.service"] === "worker"
               ? passwords.kairn_worker
               : undefined;
         if (!expected || decodeURIComponent(url.password) !== expected)
@@ -204,20 +223,8 @@ try {
         throw new Error("A private next-generation appender credential is required.");
       const nextToken = (await readFile(config.newJournalAppenderTokenFile, "utf8")).trim();
       await journal.resume(nextToken);
-      docker([
-        ...base,
-        "up",
-        "--detach",
-        "--wait",
-        "--wait-timeout",
-        "60",
-        "--no-deps",
-        "--pull",
-        "never",
-        "server",
-        "worker",
-      ]);
-      docker([...base, "up", "--detach", "--no-deps", "--pull", "never", "edge"]);
+      await startCheckedContainers(docker, writers);
+      await startCheckedContainers(docker, edge);
       await record({
         ...state,
         state: "released",

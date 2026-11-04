@@ -418,6 +418,7 @@ export const restrictionEvent = operationsSchema
         .notNull()
         .references(() => lifecycleOperation.id, { onDelete: "restrict" }),
       kind: text("kind").notNull(),
+      authSubjectId: text("auth_subject_id"),
       accountId: uuid("account_id").references(() => domainAccount.id, { onDelete: "restrict" }),
       journeyId: uuid("journey_id").references(() => journey.id, { onDelete: "restrict" }),
       membershipId: uuid("membership_id").references(() => membership.id, { onDelete: "restrict" }),
@@ -447,6 +448,10 @@ export const restrictionEvent = operationsSchema
       index("restriction_invitation_idx").on(t.invitationId),
       index("restriction_transfer_idx").on(t.transferId),
       finite("restriction_kind_check", t.kind, restrictionTypes),
+      check(
+        "restriction_auth_subject_check",
+        sql`${t.authSubjectId} IS NULL OR (${t.kind} = 'account.delete' AND length(${t.authSubjectId}) BETWEEN 1 AND 512)`,
+      ),
       positive("restriction_generation_check", t.policyGeneration),
       digest("restriction_integrity_check", t.integritySha256),
       check(

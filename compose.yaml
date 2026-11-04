@@ -69,6 +69,7 @@ services:
     init: true
     environment:
       TEST_BASE_URL: http://edge:8080
+      TEST_WEB_MODE: runtime
       TEST_PUBLIC_ORIGIN: ${KAIRN_PUBLIC_ORIGIN:-http://localhost:8080}
       TEST_DATABASE_URL: ${KAIRN_WORKER_DATABASE_URL:-postgresql://kairn_worker:kairn-worker-local@postgres:5432/kairn}
       TEST_MIGRATION_DATABASE_URL: ${KAIRN_MIGRATION_DATABASE_URL:-postgresql://kairn_migrator:kairn-migrator-local@postgres:5432/kairn}

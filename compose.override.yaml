@@ -61,6 +61,7 @@ services:
     pids_limit: 64
   tooling:
     environment:
+      TEST_WEB_MODE: development
       TEST_MAILPIT_URL: http://mailpit:8025
       TEST_SMTP_HOST: mailpit
   server:

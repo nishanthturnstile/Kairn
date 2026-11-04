@@ -1,6 +1,6 @@
 # Identity database foundation
 
-This records the complete B02 schema/migration/privilege checkpoint (S01–S06). B03 extends it with the [transaction/worker boundary](domain_transaction_boundary.md), [recovery runbook](restriction_recovery_runbook.md), three opaque retirement/recovery records and migrations 0006–0008 (36 current tables). All 33 tables are modeled and migrated, including the five generated auth models, identity/avatar, canonical journey/admission/transfer, minimum source/export identities and durable operation/event/delivery state. B03 supplies the authorized command/worker, media, mail and independent-recovery implementations; B04–B08 supply their product flows. No authentication endpoint or account-deletion endpoint is enabled by this foundation.
+This records the complete B02 schema/migration/privilege checkpoint (S01–S06). B03 extends it with the [transaction/worker boundary](domain_transaction_boundary.md), [recovery runbook](restriction_recovery_runbook.md), three opaque retirement/recovery records and migrations 0006–0009 (36 current tables). All 33 tables are modeled and migrated, including the five generated auth models, identity/avatar, canonical journey/admission/transfer, minimum source/export identities and durable operation/event/delivery state. B03 supplies the authorized command/worker, media, mail and independent-recovery implementations; B04–B08 supply their product flows. No authentication endpoint or account-deletion endpoint is enabled by this foundation.
 
 ## Ownership and policy graph
 

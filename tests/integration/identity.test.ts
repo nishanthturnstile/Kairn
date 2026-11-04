@@ -138,6 +138,15 @@ describe("controlled identity migration and non-owner boundary", () => {
       ).toBeNull();
 
       await expect(checkIdentityDatabase(server)).rejects.toThrow("not ready");
+      // Upgrade the actual previously released 0000–0008 boundary before 0009.
+      await writeFile(
+        join(temporary, "manifest.json"),
+        JSON.stringify({
+          version: 1,
+          migrations: migrations.slice(0, 9).map(({ file, sha256 }) => ({ file, sha256 })),
+        }),
+      );
+      await migrateIdentity(owner, pathToFileURL(`${temporary}/`));
       await Promise.all([migrateIdentity(owner), migrateIdentity(owner)]);
       expect(
         (

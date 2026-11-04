@@ -101,6 +101,20 @@ describe("account/journey wire safety", () => {
 
   it("rejects impossible local times, inconsistent offsets and reversed chronology", () => {
     expect(JourneyDetailsSchema.parse(details)).toEqual(details);
+    for (const year of ["0001", "0099", "0999", "1000", "9999"]) {
+      expect(
+        JourneyDetailsSchema.safeParse({
+          ...details,
+          timeZone: "UTC",
+          start: {
+            local: `${year}-01-01T09:00`,
+            instant: `${year}-01-01T09:00:00Z`,
+            offsetMinutes: 0,
+          },
+          end: null,
+        }).success,
+      ).toBe(true);
+    }
     expect(
       JourneyDetailsSchema.safeParse({ ...details, start: { ...details.start, offsetMinutes: 0 } })
         .success,

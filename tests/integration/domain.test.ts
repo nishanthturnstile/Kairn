@@ -282,8 +282,8 @@ describe("B03 real role command, media and delivery boundaries", () => {
         [operation, actor, cmd, sha256("historical impact"), secret.hash],
       );
       await client.query(
-        "INSERT INTO operations.restriction_event(id,operation_id,kind,account_id,policy_generation,integrity_sha256,created_at) SELECT $1,$2,'account.delete',$3,2,encode(sha256(convert_to(jsonb_build_object('id',$1::uuid,'kind','account.delete','resourceKind','account','resourceId',$3::uuid,'accountId',$3::uuid,'journeyId',NULL,'membershipId',NULL,'sourceId',NULL,'sourceGrantId',NULL,'exportGrantId',NULL,'invitationId',NULL,'transferId',NULL,'generation',2)::text,'UTF8')),'hex'),now()-interval '46 days'",
-        [event, operation, actor],
+        "INSERT INTO operations.restriction_event(id,operation_id,kind,account_id,auth_subject_id,policy_generation,integrity_sha256,created_at) VALUES($1,$2,'account.delete',$3,$4,2,repeat('a',64),now()-interval '46 days')",
+        [event, operation, actor, randomUUID()],
       );
       await client.query("INSERT INTO operations.restriction_delivery(event_id) VALUES($1)", [
         event,
@@ -1288,4 +1288,244 @@ it("restores a pre-restriction database under real writer fences, verifies the i
     provisionVerifiedAccount(pools.auth, deleting.subject, "Must not restore history"),
   ).rejects.toThrow();
   await admin.query("DROP DATABASE kairn_domain_snapshot");
+});
+
+// Backup deliberately predates both the domain account and the original avatar command.
+it("restores signed identity denies across missing allocations and rejects legacy gaps", async () => {
+  const subject = randomUUID();
+  await pools.auth.query(
+    'INSERT INTO authn."user"(id,name,email,email_verified) VALUES($1,$2,$3,true)',
+    [subject, "Before provisioning", `${subject}@kairn.invalid`],
+  );
+  const avatarOwner = await account("Before avatar allocation");
+  const presentId = randomUUID();
+  const presentBytes = await readFile(
+    new URL("../fixtures/identity/avatar-metadata.png", import.meta.url),
+  );
+  await command(avatarOwner, {
+    type: "avatar.create",
+    id: presentId,
+    contentType: "image/png",
+    bytes: presentBytes.length,
+    sha256: sha256(presentBytes),
+    bucket,
+  });
+  await uploadAvatar(pools.server, avatarOwner, presentId, presentBytes, storage);
+  await command(avatarOwner, { type: "avatar.replace", id: presentId });
+  await processAvatar(pools.worker, presentId, storage);
+  const present = (
+    await pools.owner.query(
+      "SELECT revision,representation_key,representation_sha256 FROM identity.profile_avatar WHERE id=$1",
+      [presentId],
+    )
+  ).rows[0];
+  expect(await readAvatar(pools.server, avatarOwner, storage)).not.toBeNull();
+
+  await producer.stop();
+  await authProducer.stop();
+  await closePools();
+  await admin.query("CREATE DATABASE kairn_identity_snapshot WITH TEMPLATE kairn");
+  pools = makePools();
+  producer = await startJobProducer(pools.server, () => {});
+  authProducer = await startJobProducer(pools.auth, () => {});
+  const recoveryDirectory = await mkdtemp(join(tmpdir(), "kairn-identity-replay-"));
+  const recoveryJournal = new FileRestrictionJournal(recoveryDirectory, "v1", keys);
+  // The snapshot retains an earlier recovery checkpoint. Carry its exact signed
+  // history forward rather than substituting a fresh journal with a lower head.
+  const retainedEntries = await journal.read();
+  for (const entry of retainedEntries)
+    expect(await recoveryJournal.append(entry.body, entry.eventSha256)).toEqual(entry);
+  const accountEntry = retainedEntries.length;
+
+  try {
+    const actor = await provisionVerifiedAccount(pools.auth, subject, "After snapshot");
+    const impact = await previewImpact(pools.server, actor, {
+      action: "delete_account",
+      journeyId: null,
+      targetId: actor.accountId,
+    });
+    const deletion = await command(actor, {
+      type: "account.delete",
+      revision: 1,
+      generation: 1,
+      confirmDelete: "delete",
+      statusReceiptHash: newStatusReceipt().hash,
+      previewId: impact.previewId,
+      previewSecretHash: impact.previewSecretHash,
+    });
+    await confirmRestriction(pools.worker, recoveryJournal, await eventFor(deletion.resourceId));
+    const avatarId = randomUUID();
+    const createId = randomUUID();
+    const create = {
+      type: "avatar.create",
+      id: avatarId,
+      contentType: "image/jpeg",
+      bytes: 16,
+      sha256: "b".repeat(64),
+      bucket,
+    } as const;
+    await executeCommand(pools.server, avatarOwner, createId, create, producer, { fresh: true });
+    const deletedAvatar = await command(avatarOwner, {
+      type: "avatar.delete",
+      id: avatarId,
+      revision: 1,
+    });
+    await confirmRestriction(
+      pools.worker,
+      recoveryJournal,
+      await eventFor(deletedAvatar.resourceId),
+    );
+    const deletedPresent = await command(avatarOwner, {
+      type: "avatar.delete",
+      id: presentId,
+      revision: Number(present.revision),
+    });
+    await confirmRestriction(
+      pools.worker,
+      recoveryJournal,
+      await eventFor(deletedPresent.resourceId),
+    );
+    const entries = await recoveryJournal.read();
+    expect(JSON.parse(entries[accountEntry]!.body)).toMatchObject({
+      version: 2,
+      authSubjectId: subject,
+      resourceId: actor.accountId,
+    });
+    await expect(
+      pools.server.query("SELECT auth_subject_id FROM operations.restriction_event"),
+    ).rejects.toMatchObject({ code: "42501" });
+    // Cleanup cannot change the persisted signed binding used by a delivery retry.
+    await pools.worker.query("SELECT operations.account_cleanup_unit($1)", [deletion.resourceId]);
+    expect((await recoveryJournal.read())[accountEntry]).toEqual(entries[accountEntry]);
+    await producer.stop();
+    await authProducer.stop();
+    await closePools();
+    await admin.query("DROP DATABASE kairn WITH (FORCE)");
+    await admin.query(
+      "CREATE DATABASE kairn WITH TEMPLATE kairn_identity_snapshot OWNER kairn_migrator",
+    );
+    pools = makePools();
+    const head = { sequence: entries.length, checkpointSha256: entries.at(-1)!.checkpointSha256 };
+    await replayRestrictions(pools.owner, recoveryJournal, journalPublicKeys(keys), head);
+    await replayRestrictions(pools.owner, recoveryJournal, journalPublicKeys(keys), head);
+    expect(
+      (
+        await pools.owner.query("SELECT state,auth_subject_id FROM identity.account WHERE id=$1", [
+          actor.accountId,
+        ])
+      ).rows[0],
+    ).toMatchObject({ state: "deleting", auth_subject_id: subject });
+    expect(
+      (
+        await pools.owner.query(
+          "SELECT account_id FROM identity.retired_auth_subject WHERE auth_subject_id=$1",
+          [subject],
+        )
+      ).rows[0]?.account_id,
+    ).toBe(actor.accountId);
+    await expect(
+      provisionVerifiedAccount(pools.auth, subject, "Cannot reprovision"),
+    ).rejects.toThrow();
+    producer = await startJobProducer(pools.server, () => {});
+    authProducer = await startJobProducer(pools.auth, () => {});
+    await expect(
+      executeCommand(pools.server, avatarOwner, createId, create, producer, { fresh: true }),
+    ).rejects.toThrow();
+    expect(
+      (await pools.owner.query("SELECT id FROM identity.profile_avatar WHERE id=$1", [avatarId]))
+        .rows,
+    ).toEqual([]);
+    expect(
+      (
+        await pools.worker.query("SELECT operations.avatar_target($1,'process') AS target", [
+          avatarId,
+        ])
+      ).rows[0]?.target,
+    ).toBeNull();
+    expect(
+      (
+        await pools.worker.query(
+          "SELECT operations.complete_avatar($1,1,$2,$3,$4,16,1,1,1,1) AS activated",
+          [avatarId, bucket, `avatars/${avatarOwner.accountId}/${avatarId}.jpg`, "b".repeat(64)],
+        )
+      ).rows[0]?.activated,
+    ).toBe(false);
+    await expect(
+      runAsAccount(pools.server, avatarOwner, (tx) =>
+        tx.execute(`SELECT operations.avatar_target('${avatarId}','upload') AS target`),
+      ),
+    ).resolves.toMatchObject({ rows: [{ target: null }] });
+    expect(await readAvatar(pools.server, avatarOwner, storage)).toBeNull();
+    await processAvatar(pools.worker, presentId, storage);
+    expect(
+      (
+        await pools.worker.query(
+          "SELECT operations.complete_avatar($1,$2,$3,$4,$5,16,1,1,1,1) AS activated",
+          [
+            presentId,
+            present.revision,
+            bucket,
+            present.representation_key,
+            present.representation_sha256,
+          ],
+        )
+      ).rows[0]?.activated,
+    ).toBe(false);
+    expect(
+      (
+        await pools.owner.query("SELECT state FROM identity.profile_avatar WHERE id=$1", [
+          presentId,
+        ])
+      ).rows[0]?.state,
+    ).toBe("deleting");
+    // Existing legacy signed entries still replay when the exact binding survives.
+    const legacy = JSON.parse(entries[accountEntry]!.body);
+    delete legacy.version;
+    delete legacy.authSubjectId;
+    legacy.id = randomUUID();
+    const body = JSON.stringify(legacy);
+    await recoveryJournal.append(body, sha256(body));
+    const withLegacy = await recoveryJournal.read();
+    const legacyHead = {
+      sequence: withLegacy.length,
+      checkpointSha256: withLegacy.at(-1)!.checkpointSha256,
+    };
+    expect(verifyJournal(withLegacy, journalPublicKeys(keys)).at(-1)?.body).toBe(body);
+    await replayRestrictions(pools.owner, recoveryJournal, journalPublicKeys(keys), legacyHead);
+    const unknown = JSON.stringify({
+      ...legacy,
+      id: randomUUID(),
+      resourceId: randomUUID(),
+      accountId: null,
+    });
+    await recoveryJournal.append(unknown, sha256(unknown));
+    const incomplete = await recoveryJournal.read();
+    await expect(
+      replayRestrictions(pools.owner, recoveryJournal, journalPublicKeys(keys), {
+        sequence: incomplete.length,
+        checkpointSha256: incomplete.at(-1)!.checkpointSha256,
+      }),
+    ).rejects.toThrow("fenced");
+    expect(
+      Number(
+        (await pools.owner.query("SELECT sequence FROM operations.recovery_checkpoint WHERE id=1"))
+          .rows[0]?.sequence,
+      ),
+    ).toBe(legacyHead.sequence);
+    await expect(
+      pools.owner.query("SELECT operations.replay_restriction($1::jsonb,$2,$3)", [
+        JSON.stringify({ ...legacy, version: 2, authSubjectId: avatarOwner.subject }),
+        legacyHead.sequence + 1,
+        "f".repeat(64),
+      ]),
+    ).rejects.toMatchObject({ code: "23514" });
+    await pools.worker.query("SELECT operations.account_cleanup_unit($1)", [actor.accountId]);
+    await pools.worker.query("SELECT operations.account_cleanup_unit($1)", [actor.accountId]);
+    expect(
+      (await pools.owner.query('SELECT id FROM authn."user" WHERE id=$1', [subject])).rows,
+    ).toEqual([]);
+  } finally {
+    await admin.query("DROP DATABASE kairn_identity_snapshot");
+    await rm(recoveryDirectory, { recursive: true, force: true });
+  }
 });

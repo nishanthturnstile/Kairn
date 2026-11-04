@@ -164,7 +164,18 @@ try {
     return result.stdout.trim() === "healthy";
   });
   dataTests("verify");
-  docker(["--profile", "tools", "run", "--rm", "--no-deps", "tooling", "pnpm", "test:integration"]);
+  docker([
+    "--profile",
+    "tools",
+    "run",
+    "--rm",
+    "--no-deps",
+    "-e",
+    "TEST_WEB_MODE=runtime",
+    "tooling",
+    "pnpm",
+    "test:integration",
+  ]);
   docker([
     "run",
     "--rm",
