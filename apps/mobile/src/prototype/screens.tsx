@@ -1,7 +1,7 @@
 import { AppearanceControl } from "../theme/appearance";
 import { useState, type ReactNode } from "react";
 import { KeyboardAvoidingView, Platform, Pressable, ScrollView, Text, View } from "react-native";
-import { Link, usePathname, useRouter } from "expo-router";
+import { Link as RouterLink, usePathname, useRouter } from "expo-router";
 import { StyleSheet, withUnistyles } from "react-native-unistyles";
 import {
   JournalButton,
@@ -14,6 +14,9 @@ import { project, seed } from "./controller";
 import { JournalMark, NativeJourneyCover } from "./visuals";
 
 const StyledScrollView = withUnistyles(ScrollView);
+// Router Link forwards styles through a non-native component. Resolve them
+// through Unistyles so labels and selection react to device appearance changes.
+const Link = withUnistyles(RouterLink);
 
 export function SamplePage({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -406,7 +409,7 @@ const styles = StyleSheet.create((theme, rt) => ({
     textAlign: "center",
     overflow: "hidden",
   },
-  activeNav: { backgroundColor: theme.colors.successSurface, color: theme.colors.primary },
+  activeNav: { backgroundColor: theme.colors.selected, color: theme.colors.primary },
   openLink: {
     fontFamily: "InstrumentSans600",
     fontSize: 14,
