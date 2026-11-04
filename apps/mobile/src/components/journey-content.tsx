@@ -73,10 +73,12 @@ export function Media({
   source,
   alt,
   caption,
+  presentation = "cover",
 }: {
   source?: ImageSourcePropType;
   alt: string;
   caption: string;
+  presentation?: "cover" | "detail";
 }) {
   const [failed, setFailed] = useState(false);
   return (
@@ -86,7 +88,7 @@ export function Media({
           source={source}
           accessibilityLabel={alt}
           style={styles.image}
-          resizeMode="cover"
+          resizeMode={presentation === "detail" ? "contain" : "cover"}
           onError={() => setFailed(true)}
         />
       ) : (

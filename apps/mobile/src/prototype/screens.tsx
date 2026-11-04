@@ -12,6 +12,8 @@ import {
 import { useSample } from "./context";
 import { project, seed } from "./controller";
 import { JournalMark, NativeJourneyCover } from "./visuals";
+import { JourneyTimeline, MomentGallery } from "../components/journey-patterns";
+import { journeyPresentation } from "./journey-presenter";
 
 const StyledScrollView = withUnistyles(ScrollView);
 // Router Link forwards styles through a non-native component. Resolve them
@@ -226,6 +228,10 @@ export function NativeJourney() {
   const { state, dispatch } = useSample();
   const output = project(state);
   const [continuation, setContinuation] = useState(false);
+  const [stageId, setStageId] = useState<string | null>(null);
+  const [momentId, setMomentId] = useState<string | null>(null);
+  const presentation = journeyPresentation(state);
+  const filtered = output.visibleMoments.filter((source) => !stageId || source.stage === stageId);
   if (!state.joined)
     return (
       <SamplePage>
@@ -278,7 +284,47 @@ export function NativeJourney() {
           <JournalText muted>sample-moment-19 · Dev Raman · prepared sample</JournalText>
         </View>
       )}
-      <JournalText muted>Capture, People and story walkthroughs follow in P03–P05.</JournalText>
+      <View style={styles.section}>
+        <JournalText title>{output.canReview ? "Journey timeline" : "Your moments"}</JournalText>
+        <JournalText>Only your sources and contributions you can review appear here.</JournalText>
+        {output.canReview && (
+          <>
+            <JournalText muted>
+              Stage order is prepared sample data. Clock times and locations have not been supplied.
+            </JournalText>
+            <JourneyTimeline
+              entries={presentation.timeline}
+              selectedId={stageId}
+              onSelect={(id) => {
+                setStageId(id);
+                setMomentId(null);
+              }}
+            />
+          </>
+        )}
+        {stageId && (
+          <JournalButton
+            secondary
+            label="Show all moments"
+            onPress={() => {
+              setStageId(null);
+              setMomentId(null);
+            }}
+          />
+        )}
+        <MomentGallery
+          items={presentation.moments.filter((item) =>
+            filtered.some((source) => source.id === item.id),
+          )}
+          selectedId={momentId}
+          onSelect={setMomentId}
+          onClose={() => setMomentId(null)}
+          emptyMessage="No moments are available for this stage and participant."
+        />
+      </View>
+      <JournalText muted>
+        Capture, transfers and connected story editing remain to be implemented.
+      </JournalText>
     </SamplePage>
   );
 }

@@ -308,9 +308,13 @@ Use a surface when it groups a task or focused content, with the established rad
 
 Web confirmation uses the browser modal layer, safe Cancel focus, Escape, protected focus and trigger return. Native uses a platform Modal with Cancel/back behavior and focus requests. Native focus, keyboard, back and screen-reader behavior remain awaiting compiled-device acceptance. No transition is required to understand a dialog.
 
+Moment details use the same overlay owner with `fullScreen` and an explicit `closeLabel`. The body scrolls independently of the heading and Close action; web makes that body keyboard-focusable. Native uses a full-screen Modal within safe-area insets. Photo details contain the whole image rather than cropping it. This source implementation does not establish native runtime acceptance.
+
 ### Journey content
 
 ChapterNavigation keeps day, date, title, activity and selected state together. Include rest days and unknown locations in sequence. PracticalDetail keeps the observation/value, date, contributor and source action adjacent. Media keeps title/caption separate and falls back to text on failure. These components accept data and actions; fixture content belongs in catalog/controller code.
+
+JourneyTimeline preserves caller order, explicit unknown time/timezone/location, evidence and parallel-account labels. Selection filters a collection; this component does not infer chronology or reorder a story. MomentGallery receives only a bounded, already-permitted projection. It mounts media only for an explicitly opened item, derives the viewer from the current collection and removes its content when that item is absent. Keep source owner and photographer/credit separate, and label capture time and entry time independently. SourceScopeSummary explains private, review, publication-permitted and withdrawn states without implying publication or an original-file export grant. Missing video/audio playback retains a supplied description rather than presenting it as a transcript.
 
 Route context requires an explicit action. Recorded/reported/estimated evidence uses solid/dashed/dotted patterns plus text; unknown geometry stays a gap. The current route specimen is a labelled illustrative diagram, not a geographical map. Source ownership, coauthor authority, publication permission and original-file export remain separate in every composition.
 

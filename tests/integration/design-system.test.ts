@@ -109,6 +109,130 @@ it("retains drafts, guards pending activation, supports keyboard choices and res
   }
 });
 
+it("opens permitted moments on demand, retains failed-media context and drops an open viewer when the actor changes", async () => {
+  const context = await browser.newContext({
+    reducedMotion: "reduce",
+    viewport: { width: 390, height: 844 },
+  });
+  try {
+    const page = await context.newPage();
+    const errors: string[] = [];
+    page.on("pageerror", (error) => errors.push(error.message));
+    await page.goto(`${origin}/prototype/components`);
+    const specimen = page.locator("#product-patterns");
+    await check(specimen.locator("img")).toHaveCount(0);
+    await specimen.getByRole("button", { name: "Show 18-day timeline", exact: true }).click();
+    await check(
+      specimen.getByRole("button", {
+        name: "Day 18: A day with an incomplete record",
+        exact: true,
+      }),
+    ).toBeVisible();
+    await specimen
+      .getByRole("button", { name: "Day 4: A pause between places", exact: true })
+      .click();
+    await check(specimen.getByRole("status")).toHaveText(
+      "No permitted moments in this stage. Other stages remain available.",
+    );
+    await specimen.getByRole("button", { name: "Show all specimen moments", exact: true }).click();
+    const failedTrigger = specimen.getByRole("button", {
+      name: "Open moment: A photograph that cannot load",
+      exact: true,
+    });
+    await failedTrigger.focus();
+    await page.keyboard.press("Enter");
+    const failed = page.getByRole("dialog", { name: "A photograph that cannot load", exact: true });
+    await check(failed).toBeVisible();
+    await check(failed.getByRole("button", { name: "Close moment" })).toBeFocused();
+    await check(failed).toContainText("This photograph could not load.");
+    await check(failed).toContainText("Captured: Time unknown · timezone unknown");
+    await check(failed).toContainText("Entered: 15 July 2026, 12:00 UTC");
+    await check(failed).toContainText("Credit: Asha Fernando");
+    await check(failed).toContainText("Permission alone does not publish it.");
+    expect(
+      (
+        await new AxeBuilder({ page })
+          .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
+          .analyze()
+      ).violations,
+    ).toEqual([]);
+    await page.keyboard.press("Shift+Tab");
+    const details = failed.getByRole("region", {
+      name: "A photograph that cannot load details",
+      exact: true,
+    });
+    await check(details).toBeFocused();
+    await page.keyboard.press("PageDown");
+    await check.poll(() => details.evaluate((element) => element.scrollTop)).toBeGreaterThan(0);
+    await page.screenshot({ path: `${evidence}/moment-failed-390.png` });
+    await page.keyboard.press("Escape");
+    await check(failed).not.toBeVisible();
+    await check(failedTrigger).toBeFocused();
+    await check(specimen.locator("img")).toHaveCount(0);
+    await specimen
+      .getByRole("button", { name: "Open moment: The ridge in the morning", exact: true })
+      .click();
+    const photo = page.getByRole("dialog", { name: "The ridge in the morning", exact: true });
+    await check(photo.getByRole("img")).toBeVisible();
+    expect(
+      await photo
+        .getByRole("img")
+        .evaluate(
+          (image) => image instanceof HTMLImageElement && image.complete && image.naturalWidth > 0,
+        ),
+    ).toBe(true);
+    await check(photo).not.toContainText("This photograph could not load.");
+    expect(await photo.evaluate((dialog) => dialog.scrollWidth > dialog.clientWidth)).toBe(false);
+    await page.screenshot({ path: `${evidence}/moment-photo-390.png` });
+    await photo.getByRole("button", { name: "Close moment" }).click();
+    await page.setViewportSize({ width: 820, height: 960 });
+    await page.addStyleTag({ content: ":root { zoom: 2; }" });
+    await specimen
+      .getByRole("button", { name: "Open moment: A voice note from the bus", exact: true })
+      .click();
+    const voice = page.getByRole("dialog", { name: "A voice note from the bus", exact: true });
+    await check(voice).toContainText("voice preview unavailable.");
+    await check(voice).toContainText("not an audio transcript.");
+    const close = voice.getByRole("button", { name: "Close moment" });
+    const bounds = await close.boundingBox();
+    await page.screenshot({ path: `${evidence}/moment-text-growth.png` });
+    expect(
+      bounds &&
+        bounds.x >= 0 &&
+        bounds.y >= 0 &&
+        bounds.x + bounds.width <= 821 &&
+        bounds.y + bounds.height <= 961,
+    ).toBe(true);
+    expect(await voice.evaluate((dialog) => dialog.scrollWidth > dialog.clientWidth)).toBe(false);
+    await page.keyboard.press("Escape");
+
+    await page.goto(`${origin}/prototype`);
+    await page.getByText("Sample controls", { exact: true }).first().click();
+    await page.getByLabel("Prepared checkpoint", { exact: true }).selectOption("prepared-trip");
+    await page.getByText("Sample controls", { exact: true }).first().click();
+    await page.getByRole("link", { name: "Open journey", exact: true }).click();
+    await page.getByRole("button", { name: "Open moment: Leaving home", exact: true }).click();
+    await check(page.getByRole("dialog", { name: "Leaving home", exact: true })).toBeVisible();
+    // An upstream actor change must discard the open source and its description.
+    await page.locator("#sample-actor").evaluate((select) => {
+      if (!(select instanceof HTMLSelectElement)) throw new Error("Missing sample actor control");
+      select.value = "asha";
+      select.dispatchEvent(new Event("change", { bubbles: true }));
+    });
+    await check(page.getByRole("dialog")).not.toBeVisible();
+    await check(
+      page.getByRole("button", { name: "Open moment: Leaving home", exact: true }),
+    ).toHaveCount(0);
+    await check(page.getByText("Fictional field note: leaving home.", { exact: true })).toHaveCount(
+      0,
+    );
+    await check(page.getByRole("list", { name: "Journey timeline", exact: true })).toHaveCount(0);
+    expect(errors).toEqual([]);
+  } finally {
+    await context.close();
+  }
+});
+
 it("keeps the real profile form submitting through the canonical button", async () => {
   const context = await browser.newContext();
   try {

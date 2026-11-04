@@ -10,6 +10,8 @@ export function Dialog({
   action,
   actionLabel,
   destructive = false,
+  closeLabel = "Cancel",
+  fullScreen = false,
 }: {
   open: boolean;
   title: string;
@@ -18,14 +20,18 @@ export function Dialog({
   action?: () => void;
   actionLabel?: string;
   destructive?: boolean;
+  closeLabel?: string;
+  fullScreen?: boolean;
 }) {
   const ref = useRef<HTMLDialogElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
   const id = useId();
   useEffect(() => {
     const dialog = ref.current;
     if (!dialog || !open) return;
     const previous = document.activeElement;
     dialog.showModal();
+    closeRef.current?.focus();
     return () => {
       dialog.close();
       if (previous instanceof HTMLElement) previous.focus();
@@ -35,17 +41,24 @@ export function Dialog({
     <dialog
       ref={ref}
       aria-labelledby={id}
-      className="atlas-dialog"
+      className={fullScreen ? "atlas-dialog atlas-dialog-fullscreen" : "atlas-dialog"}
       onCancel={(event) => {
         event.preventDefault();
         onClose();
       }}
     >
       <h2 id={id}>{title}</h2>
-      <div className="atlas-dialog-body">{children}</div>
+      <div
+        className="atlas-dialog-body"
+        tabIndex={fullScreen ? 0 : undefined}
+        role={fullScreen ? "region" : undefined}
+        aria-label={fullScreen ? `${title} details` : undefined}
+      >
+        {children}
+      </div>
       <div className="atlas-actions">
-        <Button variant="secondary" autoFocus onClick={onClose}>
-          Cancel
+        <Button ref={closeRef} variant="secondary" autoFocus onClick={onClose}>
+          {closeLabel}
         </Button>
         {action && (
           <Button variant={destructive ? "destructive" : "primary"} onClick={action}>

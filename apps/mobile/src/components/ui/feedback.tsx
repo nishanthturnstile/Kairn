@@ -42,6 +42,8 @@ export function Dialog({
   action,
   actionLabel,
   destructive = false,
+  closeLabel = "Cancel",
+  fullScreen = false,
   returnFocusRef,
 }: {
   open: boolean;
@@ -51,6 +53,8 @@ export function Dialog({
   action?: () => void;
   actionLabel?: string;
   destructive?: boolean;
+  closeLabel?: string;
+  fullScreen?: boolean;
   returnFocusRef: RefObject<View | null>;
 }) {
   const cancelRef = useRef<View>(null);
@@ -58,7 +62,8 @@ export function Dialog({
   return (
     <Modal
       visible={open}
-      transparent
+      transparent={!fullScreen}
+      presentationStyle={fullScreen ? "fullScreen" : "overFullScreen"}
       animationType="none"
       onRequestClose={onClose}
       onDismiss={restoreFocus}
@@ -68,14 +73,14 @@ export function Dialog({
     >
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : undefined}
-        style={styles.scrim}
+        style={[styles.scrim, fullScreen && styles.viewerScrim]}
       >
-        <View accessibilityViewIsModal style={styles.dialog}>
+        <View accessibilityViewIsModal style={[styles.dialog, fullScreen && styles.viewer]}>
           <Text accessibilityRole="header" style={styles.title}>
             {title}
           </Text>
           <ScrollView keyboardShouldPersistTaps="handled">{children}</ScrollView>
-          <Button ref={cancelRef} label="Cancel" variant="secondary" onPress={onClose} />
+          <Button ref={cancelRef} label={closeLabel} variant="secondary" onPress={onClose} />
           {action && (
             <Button
               label={actionLabel || "Confirm"}
@@ -124,4 +129,6 @@ const styles = StyleSheet.create((theme, rt) => ({
     lineHeight: theme.typography.sectionTitle.lineHeight,
     color: theme.colors.text,
   },
+  viewerScrim: { backgroundColor: theme.colors.surface, paddingHorizontal: 0 },
+  viewer: { flex: 1, borderRadius: 0 },
 }));

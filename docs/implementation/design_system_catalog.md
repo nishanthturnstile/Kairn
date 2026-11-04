@@ -30,6 +30,7 @@ The NPS maps page could not be retrieved and is not counted as inspected inspira
 | Selection | Browser select, checkbox/radio; `SegmentedControl` | `components/ui/selection.tsx` picker/checkbox/radio/segments |
 | Confirmation | `components/ui/dialog.tsx`, browser top-layer dialog | `components/ui/feedback.tsx`, RN Modal |
 | Journey content | `components/journey-content.tsx` | `components/journey-content.tsx` |
+| Timeline, moments and source permission summary | `components/journey-patterns.tsx` | `components/journey-patterns.tsx` |
 | Catalog | `/prototype/components` | `/prototype/components` |
 | Appearance | `components/appearance.tsx`, pre-mount `appearance-init.ts` | `theme/appearance.tsx` and Unistyles adaptive themes |
 
@@ -40,6 +41,16 @@ Fields put the visible label before the control, then description or error. Web 
 Minimum controls: 44 CSS px web; 48dp native, including icon-only and compact variants. Controls grow with text rather than using fixed heights. Shape: 6px controls; 12px media/layers; 16px large content surfaces; circular radios/avatars only. Focus is distinct from selection. Native pressed feedback replaces web hover; web radio groups use browser arrow-key behavior, native exposes radiogroup/radio/checked semantics. Long native picker options scroll in a Modal with a visible Cancel action and system-back dismissal. Native picker focus requests are implemented but require real screen-reader confirmation.
 
 Web Dialog uses `showModal`, inert siblings, safe Cancel autofocus, Escape and return focus; actions do not implicitly submit surrounding forms. Native Modal supplies its own window and system back; accessible focus return, keyboard and TalkBack/VoiceOver acceptance remain open. No animation is required for comprehension. CSS removes transitions under reduced motion; native new overlays use no transition animation.
+
+## Timeline and moment contracts
+
+`JourneyTimeline` takes ordered entries, a controlled selected ID and a selection callback. Entries carry explicit time, timezone, location, evidence and optional parallel-account/contributor labels. Missing values render as unknown; the component does not sort, infer a route or edit chronology. Keyboard/button selection filters the caller's collection. Durable reordering remains a separate DS07 task.
+
+`MomentGallery` takes a bounded, already-permitted collection and controlled open/close state. It mounts no list thumbnails or originals. The selected item must still exist in the current collection for the full-screen viewer to render. Source owner, attribution, capture time and entry time stay separate. Images use the existing Media fallback and contain presentation. Voice/video without a playback adapter retain a supplied source description, never a fabricated transcript. Native retains the originating button ref for modal focus return; actual assistive-technology traversal remains unverified.
+
+`SourceScopeSummary` explains private, review-only, publication-permitted and withdrawn states. It issues no permission command, publication or original-export grant. The sample presenter receives the controller's visible-moment projection; it is not a server authorization boundary. Production consumers must obtain an authorized projection and permitted derivatives before invoking these components.
+
+Matched catalogs use `tests/fixtures/prototype/product-patterns.json`, replicated by the existing seed/check command. The 18-day specimen is synthetic scale/partial-data coverage, not a real long-journey qualification. Actual consumers are web JourneyWorkspace and native NativeJourney. No queue, capture confirmation, publication action or simulated playback was introduced.
 
 ## Theme behavior
 
@@ -79,12 +90,12 @@ Native shared static fonts are loaded once at the root. Prototype font-loading d
 | Badge/avatar/contributors | JournalStatus, prototype Status, account avatars, sample people | Themed via semantic adapter, circular avatars retained. Native and real account avatar failure behavior unchanged. Generic contributor data extraction still open. |
 | Journey preview/cover | Existing visual wrappers, reader, discovery | Retain title outside media; new Media accepts source/alt/caption without fixtures and fails to text. Remaining legacy covers need adapter migration. |
 | Day/chapter navigation | Web reader and native reader inline loops | Extracted ChapterNavigation on both; rest/transfer/long titles remain. All-days/deep-link/back restoration still DS06. |
-| Timeline/activity segment | Existing sample stage list only | Keep chronology; full parallel branches/reorder deferred to canonical revision/import adapters, DS07. |
+| Timeline/activity segment | Journey workspace, NativeJourney and matched catalogs | JourneyTimeline accepts caller order, explicit time/timezone/location gaps, evidence and parallel-account labels. Catalog extends to 18 days. Reordering and durable chronology edits remain DS07. |
 | Route context/map controls | Explicit diagram and evidence legend | Retained honest diagram. Actual map/satellite/attribution/playback awaits selected SDK and authorized overlays, DS06. |
-| Moment/media gallery | Source rows; cover media | Media fallback extracted. Full-screen photo/video/voice viewer requires authorized derivatives, DS06–07. |
+| Moment/media gallery | Journey workspace, NativeJourney and matched catalogs | MomentGallery and full-screen detail viewer implemented for a bounded, caller-permitted collection. Photo fallback and uncropped detail presentation; source descriptions for unavailable voice/video. Authorized derivatives, playback, pagination and real capture remain DS06–07. |
 | Practical detail | Reader Learn inline cards | Extracted PracticalDetail with dated value, author and source action, fixture-independent both platforms. Currency/units remain observed content. |
 | Import review/upload queue | Session-only legacy sample descriptions | Not a real queue. Blocked for production by durable files/SQLite/resumable transfer boundary; DS07. |
-| Collaboration/source scope | AudienceSelector; native source scopes; People | Existing actor/source projection preserved. Selected authority/real invitations await B05/B06/B08 transports, DS08. |
+| Collaboration/source scope | AudienceSelector; moment viewer; People | SourceScopeSummary separates owner, attribution, review/publication permission, withdrawal and original export. Sample actor projection is shared by the gallery consumers; real authorization/invitations await B05/B06/B08 transports, DS08. |
 | Story editing/conflict | Session caption and one-step undo | Form controls migrated. Expected-revision conflict resolution and durable drafts require real revision service, DS07. |
 | Publish review/sharing | Prepared approved fixture set | Keep no-publication/no-link wording. Exact-version preview/redaction/approval awaits actual publication service, DS08. |
 | Restriction/lifecycle | Existing account restriction and recovery boundary | Preserve persistent receipts and command semantics. Journey-level withdrawal/leave/unpublish/transfer UX awaits corresponding commands, DS08. |

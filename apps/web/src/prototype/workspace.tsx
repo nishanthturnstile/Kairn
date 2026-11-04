@@ -3,6 +3,8 @@ import { useState } from "react";
 import { AudienceSelector, Button, Field, Status } from "../components/prototype-controls";
 import { useSample } from "./context";
 import { project } from "./controller";
+import { JourneyTimeline, MomentGallery } from "../components/journey-patterns";
+import { journeyPresentation } from "./journey-presenter";
 
 export function JourneyWorkspace() {
   const { state, dispatch } = useSample();
@@ -11,15 +13,14 @@ export function JourneyWorkspace() {
   const [filter, setFilter] = useState("All days");
   const [caption, setCaption] = useState<string | null>(null);
   const [previous, setPrevious] = useState<string | null>(null);
-  const visible = state.data.moments.filter(
+  const [stageId, setStageId] = useState<string | null>(null);
+  const [momentId, setMomentId] = useState<string | null>(null);
+  const presentation = journeyPresentation(state);
+  const filtered = output.visibleMoments.filter(
     (source) =>
-      source.owner === state.actorId ||
-      (output.canReview && source.scope !== "only-me" && !source.withdrawn),
-  );
-  const filtered = visible.filter(
-    (source) =>
-      filter === "All days" ||
-      `Day ${state.data.stages.find((stage) => stage.id === source.stage)?.day}` === filter,
+      (!stageId || source.stage === stageId) &&
+      (filter === "All days" ||
+        `Day ${state.data.stages.find((stage) => stage.id === source.stage)?.day}` === filter),
   );
   return (
     <section className="atlas-workspace">
@@ -35,7 +36,14 @@ export function JourneyWorkspace() {
           <p>Only your sources and contributions you can review appear here.</p>
           <label className="atlas-filter">
             Moment day
-            <Select value={filter} onChange={(event) => setFilter(event.target.value)}>
+            <Select
+              value={filter}
+              onChange={(event) => {
+                setFilter(event.target.value);
+                setStageId(null);
+                setMomentId(null);
+              }}
+            >
               {[
                 "All days",
                 ...Array.from(new Set(state.data.stages.map((stage) => `Day ${stage.day}`))),
@@ -44,33 +52,57 @@ export function JourneyWorkspace() {
               ))}
             </Select>
           </label>
-          {filtered.map((source) => (
-            <article className="atlas-detail" key={source.id}>
-              <div className="sample-row">
-                <h3>{source.title}</h3>
-                <Status>
-                  {source.scope === "only-me"
-                    ? "Only me"
-                    : source.scope === "publication"
-                      ? "Publication permitted"
-                      : "Review only"}
-                </Status>
-              </div>
-              <p>{source.content}</p>
-              <p className="atlas-meta">
-                {state.data.actors.find((actor) => actor.id === source.owner)?.name} / {source.kind}{" "}
-                / {source.importState}
+          {output.canReview && (
+            <>
+              <h3>Journey timeline</h3>
+              <p>
+                Stage order is prepared sample data. Clock times and locations have not been
+                supplied.
               </p>
-              {source.id === "sample-moment-19" && source.owner === state.actorId && (
+              <JourneyTimeline
+                entries={presentation.timeline}
+                selectedId={stageId}
+                onSelect={(id) => {
+                  setStageId(id);
+                  setFilter("All days");
+                  setMomentId(null);
+                }}
+              />
+            </>
+          )}
+          {(stageId || filter !== "All days") && (
+            <Button
+              variant="secondary"
+              onClick={() => {
+                setStageId(null);
+                setFilter("All days");
+                setMomentId(null);
+              }}
+            >
+              Show all moments
+            </Button>
+          )}
+          <MomentGallery
+            items={presentation.moments.filter((item) =>
+              filtered.some((source) => source.id === item.id),
+            )}
+            selectedId={momentId}
+            onSelect={setMomentId}
+            onClose={() => setMomentId(null)}
+            emptyMessage="No moments are available for this day, stage and participant."
+          />
+          {filtered
+            .filter((source) => source.id === "sample-moment-19" && source.owner === state.actorId)
+            .map((source) => (
+              <section className="atlas-detail" key={source.id} aria-label="Source permission">
+                <h3>Permission for {source.title}</h3>
                 <AudienceSelector
                   value={source.scope}
                   onChange={(scope) => dispatch({ type: "scope", scope })}
                   audience="Journey coauthors and publishers"
                 />
-              )}
-            </article>
-          ))}
-          {filtered.length === 0 && <p>No moments are available for this day and participant.</p>}
+              </section>
+            ))}
         </>
       )}
       {area === "Story" && (

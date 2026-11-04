@@ -71,15 +71,19 @@ export function Media({
   alt,
   caption,
   priority = false,
+  presentation = "cover",
 }: {
   src?: string;
   alt: string;
   caption: string;
   priority?: boolean;
+  presentation?: "cover" | "detail";
 }) {
   const [failed, setFailed] = useState(false);
   return (
-    <figure className="atlas-cover">
+    <figure
+      className={presentation === "detail" ? "atlas-cover atlas-media-detail" : "atlas-cover"}
+    >
       {src && !failed ? (
         <img
           key={src}

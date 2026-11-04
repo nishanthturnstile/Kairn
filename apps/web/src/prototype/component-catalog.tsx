@@ -14,6 +14,7 @@ import { Dialog } from "../components/ui/dialog";
 import { AppearanceControl } from "../components/appearance";
 import { AudienceSelector, Status } from "../components/prototype-controls";
 import type { Scope } from "./controller";
+import { ProductPatternSpecimen } from "./product-pattern-specimen";
 
 function Section({
   id,
@@ -74,6 +75,7 @@ export function ComponentCatalog() {
         <a href="#selection">Selection</a>
         <a href="#feedback">Feedback & layers</a>
         <a href="#content">Journey content</a>
+        <a href="#product-patterns">Timeline & moments</a>
       </nav>
       <Section
         id="actions"
@@ -337,6 +339,13 @@ export function ComponentCatalog() {
           Source: sample-moment-5. Attribution does not imply export permission.
         </p>
         <a href="/prototype/reader">Read the chapter specimen</a>
+      </Section>
+      <Section
+        id="product-patterns"
+        title="Every account has its place."
+        description="Caller-ordered chronology, parallel accounts and a bounded permitted collection. Open a moment for ownership, capture versus entry time and source permission; media loads only in the viewer."
+      >
+        <ProductPatternSpecimen />
       </Section>
       <Dialog
         open={dialog}

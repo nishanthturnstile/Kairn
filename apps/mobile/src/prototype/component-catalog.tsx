@@ -7,6 +7,7 @@ import { Checkbox, Picker, RadioGroup, SegmentedControl } from "../components/ui
 import { Dialog, Notice } from "../components/ui/feedback";
 import { JournalText, JournalStatus } from "../components/journal-controls";
 import { SamplePage } from "./screens";
+import { ProductPatternSpecimen } from "./product-pattern-specimen";
 
 function Section({
   title,
@@ -243,6 +244,12 @@ export function NativeComponentCatalog() {
         <JournalText muted>
           Source: sample-moment-5. Attribution does not imply export permission.
         </JournalText>
+      </Section>
+      <Section
+        title="Every account has its place."
+        description="Caller-ordered chronology, parallel accounts and a bounded permitted collection. Open a moment for ownership, capture versus entry time and source permission; media loads only in the viewer."
+      >
+        <ProductPatternSpecimen />
       </Section>
       <Dialog
         returnFocusRef={returnFocusRef}
