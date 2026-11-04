@@ -195,8 +195,17 @@ it("completes real secure-cookie creation, verification, profile/export, session
     await page.getByRole("button", { name: "Save profile", exact: true }).click();
     await browserExpect(page.getByRole("status")).toBeVisible();
     await browserExpect(page.getByLabel("Bio (optional)")).toHaveValue("A private field note");
+    const refreshed = page.waitForResponse((response) => response.url() === `${origin}/api/v1/me`);
+    await page.evaluate(() => window.dispatchEvent(new Event("visibilitychange")));
+    await refreshed;
     await page.getByRole("button", { name: "Save profile", exact: true }).click();
     await browserExpect(page.getByRole("status")).toContainText("Profile saved");
+    const repeatSave = page.waitForResponse(
+      (response) =>
+        response.url().endsWith("/me/profile") && response.request().method() === "PATCH",
+    );
+    await page.getByRole("button", { name: "Save profile", exact: true }).click();
+    expect((await repeatSave).status()).toBe(200);
     const download = page.waitForEvent("download");
     await page.getByRole("button", { name: "Download account data" }).click();
     const saved = await download;

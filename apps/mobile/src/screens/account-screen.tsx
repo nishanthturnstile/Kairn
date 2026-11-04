@@ -18,6 +18,7 @@ import {
   AvatarUploadResultSchema,
   DisplayNameSchema,
   PasswordSchema,
+  ProfileSchema,
 } from "@kairn/contracts";
 import {
   setNativeInvalidator,
@@ -92,7 +93,8 @@ function ConfiguredAccount({ origin }: { origin: string }) {
   const [busy, setBusy] = useState(false);
   const [showLicenses, setShowLicenses] = useState(false);
   const resetToken = useRef<string | null>(null);
-  const intent = useRef({ digest: "", id: "" });
+  const intent = useRef({ digest: "", id: "", etag: "" });
+  const profileTag = useRef("");
   const nameInput = useRef<TextInput>(null);
   const emailInput = useRef<TextInput>(null);
   const passwordInput = useRef<TextInput>(null);
@@ -223,23 +225,30 @@ function ConfiguredAccount({ origin }: { origin: string }) {
       run(async () => {
         if (!query.data) return;
         const digest = JSON.stringify(value);
-        if (intent.current.digest !== digest) intent.current = { digest, id: Crypto.randomUUID() };
-        await accountFetch("/api/v1/me/profile", {
+        if (intent.current.digest !== digest)
+          intent.current = { digest, id: Crypto.randomUUID(), etag: profileTag.current };
+        const response = await accountFetch("/api/v1/me/profile", {
           method: "PATCH",
-          headers: { "content-type": "application/json", "if-match": query.data.profile.etag },
+          headers: { "content-type": "application/json", "if-match": intent.current.etag },
           body: JSON.stringify({ ...value, commandId: intent.current.id }),
         });
+        const saved = ProfileSchema.parse(await response.json());
+        profileTag.current = saved.etag;
+        intent.current = { digest: "", id: "", etag: "" };
+        profile.reset({ displayName: saved.displayName, bio: saved.bio ?? "" });
         await query.refetch();
         setMessage("Profile saved.");
       }),
   });
   useEffect(() => {
-    if (query.data)
+    if (query.data) {
+      profileTag.current = query.data.profile.etag;
       profile.reset({
         displayName: query.data.profile.displayName,
         bio: query.data.profile.bio ?? "",
       });
-  }, [query.data?.accountId, query.data?.profile.revision]);
+    }
+  }, [query.data?.accountId]);
   const avatarQuery = useQuery({
     queryKey: ["native-avatar", epoch, query.data?.accountId],
     enabled: !!query.data,
@@ -367,6 +376,7 @@ function ConfiguredAccount({ origin }: { origin: string }) {
                   <TextInput
                     ref={profileNameInput}
                     accessibilityLabel="Display name"
+                    editable={!busy}
                     autoComplete="name"
                     value={field.state.value}
                     onChangeText={field.handleChange}
@@ -391,6 +401,7 @@ function ConfiguredAccount({ origin }: { origin: string }) {
                   <TextInput
                     ref={bioInput}
                     accessibilityLabel="Bio (optional)"
+                    editable={!busy}
                     multiline
                     value={field.state.value}
                     onChangeText={field.handleChange}
@@ -406,6 +417,25 @@ function ConfiguredAccount({ origin }: { origin: string }) {
               title="Save profile"
               disabled={busy}
               onPress={() => void profile.handleSubmit()}
+            />
+            <Text style={styles.body}>Reloading replaces unsaved profile edits.</Text>
+            <Action
+              title="Reload saved profile"
+              disabled={busy}
+              onPress={() =>
+                void run(async () => {
+                  const result = await query.refetch();
+                  if (result.isError || !result.data)
+                    throw new Error("Saved profile could not be loaded.");
+                  profileTag.current = result.data.profile.etag;
+                  intent.current = { digest: "", id: "", etag: "" };
+                  profile.reset({
+                    displayName: result.data.profile.displayName,
+                    bio: result.data.profile.bio ?? "",
+                  });
+                  setMessage("Saved profile loaded.");
+                })
+              }
             />
           </View>
           <View style={styles.section}>
@@ -665,6 +695,7 @@ function ConfiguredAccount({ origin }: { origin: string }) {
                   <TextInput
                     ref={nameInput}
                     accessibilityLabel="Display name"
+                    editable={!busy}
                     autoComplete="name"
                     value={field.state.value}
                     onChangeText={field.handleChange}
@@ -691,6 +722,7 @@ function ConfiguredAccount({ origin }: { origin: string }) {
                   <TextInput
                     ref={emailInput}
                     accessibilityLabel="Email"
+                    editable={!busy}
                     keyboardType="email-address"
                     autoComplete="email"
                     autoCapitalize="none"
@@ -726,6 +758,7 @@ function ConfiguredAccount({ origin }: { origin: string }) {
                   <TextInput
                     ref={passwordInput}
                     accessibilityLabel="Password"
+                    editable={!busy}
                     autoComplete={mode === "sign-in" ? "current-password" : "new-password"}
                     textContentType={mode === "sign-in" ? "password" : "newPassword"}
                     secureTextEntry={!shown}

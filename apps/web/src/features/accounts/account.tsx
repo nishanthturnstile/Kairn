@@ -9,6 +9,7 @@ import {
   AvatarUploadResultSchema,
   DisplayNameSchema,
   PasswordSchema,
+  ProfileSchema,
   type MyAccount,
 } from "@kairn/contracts";
 import { Button } from "../../components/ui/button";
@@ -384,7 +385,8 @@ function PrivateAccount({
   const epoch = useAccountEpoch();
   const accountRequest = (path: string, init?: RequestInit) =>
     sendAccountRequest(path, init, epoch);
-  const intent = useRef({ id: crypto.randomUUID(), digest: "" });
+  const intent = useRef({ id: crypto.randomUUID(), digest: "", etag: "" });
+  const profileTag = useRef(account.profile.etag);
   const data = useQuery({
     queryKey: ["account-avatar", epoch, account.accountId],
     queryFn: async () =>
@@ -412,13 +414,19 @@ function PrivateAccount({
     defaultValues: { displayName: account.profile.displayName, bio: account.profile.bio ?? "" },
     onSubmit: async ({ value }) => {
       const digest = JSON.stringify(value);
-      if (intent.current.digest !== digest) intent.current = { id: crypto.randomUUID(), digest };
+      if (intent.current.digest !== digest)
+        intent.current = { id: crypto.randomUUID(), digest, etag: profileTag.current };
       try {
-        await accountRequest("/api/v1/me/profile", {
+        const response = await accountRequest("/api/v1/me/profile", {
           method: "PATCH",
-          headers: { "content-type": "application/json", "if-match": account.profile.etag },
+          headers: { "content-type": "application/json", "if-match": intent.current.etag },
           body: JSON.stringify({ commandId: intent.current.id, ...value }),
         });
+        const saved = ProfileSchema.parse(await response.json());
+        profileTag.current = saved.etag;
+        intent.current = { id: crypto.randomUUID(), digest: "", etag: "" };
+        if (JSON.stringify(form.state.values) === digest)
+          form.reset({ displayName: saved.displayName, bio: saved.bio ?? "" });
         setMessage("Profile saved.");
         await client.invalidateQueries({ queryKey: ["account"] });
       } catch (error) {
