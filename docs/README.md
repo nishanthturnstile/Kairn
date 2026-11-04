@@ -32,9 +32,12 @@ Start with the product plan and requirements. Use the implementation plans for t
 - [Domain transactions and bounded workers](implementation/domain_transaction_boundary.md) — B03 checked commands, atomic jobs, sealed mail/auth callback guard, private identity media and retention
 - [Restriction recovery runbook](implementation/restriction_recovery_runbook.md) — independent journal protocol, concrete operator fence/replay/credential sequence and actual deployment gate
 - [Identity database foundation](implementation/identity_database.md) — B02 identity/journey/source/operation models and policy graph, migrations, enqueue-only producer grants, existing-volume upgrade and pool budget
+- [Web and mobile experience prototype](implementation/prototype_plan.md) — connected sample workflows, screen coverage, branch isolation, delivery batches, verification and production handoff before the next product coding batch
 - [Accounts and journey experience handoff](implementation/accounts_journeys_access_design.md) — consumer workflows, screen/route inventory, components, responsive behavior, and UI/UX acceptance
 - [Selected account/journey decisions](implementation/accounts_journeys_access_decisions.md) — chosen authority/lifecycle policy, field limits, expiry, retention targets, asset inputs, and external activation gates
 - [How account/journey implementation starts](implementation/accounts_journeys_access_start.md) — first coding batch, visible checkpoints, user/developer responsibilities, existing checks, and current branch dependency
+
+- [Prototype progress](implementation/prototype_progress.md) — P00–P02 implementation, executed checks, visual checkpoint and platform gaps
 
 ## Research
 
@@ -43,7 +46,10 @@ Start with the product plan and requirements. Use the implementation plans for t
 - [Accounts and journey-access research](research/accounts-journey-access/analysis_2026-11-03.md) — current-code gaps, functional analysis, version-matched integration findings, and design/accessibility research for the next milestone
 - [Independent plan review](research/accounts-journey-access/review_2026-11-03.md) — OpenCode/DeepSeek V4.1 Flash findings, parent assessment, plan corrections, and remaining activation/verification gates
 - [Implementation review](research/accounts-journey-access/implementation_review_2026-11-04.md) — OCR host-agent review of B01–B03 and the SDK refresh, reproduced defects, corrections and validation before B04
+- [Prototype plan review](research/prototype/review_2026-11-03.md) — independent model findings, Codex dispositions, final OpenCode Go Argon 4 review and planning verification
 
 [Setup execution history](research/repository-setup/repository_setup_progress_2026-11-02.md) and [native host history](research/repository-setup/native_host_setup_2026-11-02.md) preserve archived attempts and detailed qualification. Current status stays in the implementation documents.
 
 The current core documents and implementation plans govern the build. Dated research preserves supporting evidence and earlier alternatives; superseded recommendations are marked in those files.
+
+- [Complete experience redesign](implementation/experience_redesign.md) ? audit, references, creative directions, implementation and outstanding production gates.

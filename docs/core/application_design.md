@@ -1,5 +1,7 @@
 # Application design specification
 
+> Active visual revision, 4 November 2026: the founder's complete-redesign brief supersedes the experimental visual palette and P02 composition. [Open atlas implementation](../implementation/experience_redesign.md) and [DESIGN.md](../../DESIGN.md) govern the new visual direction. Functional, permission, source-evidence, accessibility and production acceptance rules in this document remain in force. Implementation status is explicit in the redesign record.
+
 | Document field | Value |
 |---|---|
 | Version | 1.4 |

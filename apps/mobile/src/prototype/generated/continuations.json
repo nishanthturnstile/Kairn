@@ -1,0 +1,71 @@
+[
+  {
+    "id": "capture-and-contribute",
+    "native": "capture-and-contribute",
+    "web": "review-moment-19",
+    "journeyId": "sample-journey-01",
+    "sourceId": "sample-moment-19",
+    "content": "We waited out the rain over tea. The ridge disappeared into cloud.",
+    "scope": "journey-review",
+    "actor": "dev",
+    "powers": {
+      "admin": false,
+      "coauthor": false,
+      "publisher": false
+    },
+    "draftRevision": 2,
+    "approvedRevision": 1,
+    "completedActions": [
+      "sample capture",
+      "permit journey review"
+    ],
+    "nextTask": "Inspect the prepared source on creator web",
+    "fixtureVersion": "p02.2"
+  },
+  {
+    "id": "web-published-v1",
+    "native": "native-highlights-v1",
+    "web": "published-v1",
+    "journeyId": "sample-journey-01",
+    "sourceId": "sample-moment-3",
+    "scope": "publication",
+    "actor": "mira",
+    "attribution": "Sample contributor",
+    "approvedRevision": 1,
+    "nextTask": "Inspect approved personal highlights",
+    "fixtureVersion": "p02.2",
+    "content": "Fictional field note: ridge in the rain.",
+    "powers": {
+      "admin": true,
+      "coauthor": true,
+      "publisher": true
+    },
+    "draftRevision": 2,
+    "completedActions": [
+      "local publication v1"
+    ]
+  },
+  {
+    "id": "web-source-withdrawn",
+    "native": "native-highlights-withdrawn",
+    "web": "withdrawn-source",
+    "journeyId": "sample-journey-01",
+    "sourceId": "sample-moment-18",
+    "scope": "only-me",
+    "actor": "eli",
+    "attribution": "Sample contributor",
+    "approvedRevision": 1,
+    "nextTask": "Inspect unavailable highlight",
+    "fixtureVersion": "p02.2",
+    "content": "Fictional field note: a withdrawn photograph.",
+    "powers": {
+      "admin": false,
+      "coauthor": false,
+      "publisher": false
+    },
+    "draftRevision": 2,
+    "completedActions": [
+      "owner source withdrawal"
+    ]
+  }
+]

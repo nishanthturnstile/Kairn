@@ -1,0 +1,123 @@
+{
+  "notice": "Fictional reader demonstration. This is a separately authored public sample, not a publication of private prototype sources.",
+  "title": "The long way to the ridge",
+  "description": "A train into the hills, a walk above the clouds, and a day we never planned. Four days remembered by five people.",
+  "place": "Hill country",
+  "dates": "11–14 July 2026",
+  "chapters": [
+    {
+      "id": "departure",
+      "day": 1,
+      "date": "11 July",
+      "title": "The journey before the trail",
+      "activity": "Train & walking",
+      "author": "Mira Sen",
+      "evidence": "Reported",
+      "place": "From the station to the hills",
+      "body": "We left before the city had properly woken up. By lunchtime the windows were open, the air was cooler, and the conversation had given way to watching the hills. The walk began long before we reached the trail.",
+      "reflection": "Leave room for the getting there. It became one of our favourite parts.",
+      "source": "reader-demo-1",
+      "route": [
+        [55, 210],
+        [120, 180],
+        [185, 200],
+        [245, 130]
+      ]
+    },
+    {
+      "id": "ridge",
+      "day": 2,
+      "date": "12 July",
+      "title": "Above the morning cloud",
+      "activity": "Hiking",
+      "author": "Leo Martin",
+      "evidence": "Recorded",
+      "place": "Ridge path",
+      "body": "The first climb was quiet. We kept stopping, partly for breath and partly because the view changed every few minutes. At the ridge, the cloud lifted just long enough to show us how far we had come.",
+      "reflection": "A shorter day gave everyone time to walk at their own pace.",
+      "source": "reader-demo-2",
+      "route": [
+        [245, 130],
+        [280, 95],
+        [310, 120],
+        [350, 65],
+        [390, 85]
+      ]
+    },
+    {
+      "id": "rest",
+      "day": 3,
+      "date": "13 July",
+      "title": "A day with nowhere to be",
+      "activity": "Rest day",
+      "author": "Dev Raman",
+      "evidence": "Location unknown",
+      "place": "A pause in town",
+      "body": "Rain settled in overnight. We put the boots by the door and let the day be small: tea, a late breakfast, a conversation that ran into the afternoon. There is no track for this day. It belongs in the story all the same.",
+      "reflection": "The unplanned rest mattered as much as the distance.",
+      "source": "reader-demo-3",
+      "route": []
+    },
+    {
+      "id": "home",
+      "day": 4,
+      "date": "14 July",
+      "title": "Taking the hills home",
+      "activity": "Bus & train",
+      "author": "Noor Jayasinghe",
+      "evidence": "Estimated",
+      "place": "Return connection",
+      "body": "The bags were a little damp and the bus was late. We traded photographs on the way back, each of us remembering a different version of the same four days. This is where those versions meet.",
+      "reflection": "Write down the little details before they become the things you wish you remembered.",
+      "source": "reader-demo-4",
+      "route": [
+        [390, 85],
+        [340, 180],
+        [180, 245],
+        [55, 210]
+      ]
+    }
+  ],
+  "details": [
+    {
+      "category": "Costs",
+      "title": "Tea stop",
+      "value": "LKR 600 for four people",
+      "body": "One reported group expense. This is not a total journey budget or a current quote.",
+      "author": "Leo Martin",
+      "date": "12 July 2026",
+      "source": "reader-demo-2",
+      "chapter": 1
+    },
+    {
+      "category": "Transport",
+      "title": "Leave time for the connection",
+      "value": "Bus, then train",
+      "body": "Our return bus ran late. Check current timetables before travelling; no reliable duration was recorded.",
+      "author": "Noor Jayasinghe",
+      "date": "14 July 2026",
+      "source": "reader-demo-4",
+      "chapter": 3
+    },
+    {
+      "category": "Equipment",
+      "title": "A dry layer for the rest stop",
+      "value": "Pack separately from wet gear",
+      "body": "A personal lesson from this journey, not a complete packing list or safety assessment.",
+      "author": "Dev Raman",
+      "date": "13 July 2026",
+      "source": "reader-demo-3",
+      "chapter": 2
+    },
+    {
+      "category": "Accommodation",
+      "title": "The overnight stop",
+      "value": "Details not recorded",
+      "body": "No verified property name, rate or contact was supplied. We leave the gap visible.",
+      "author": "Mira Sen",
+      "date": "11 July 2026",
+      "source": "reader-demo-1",
+      "chapter": 0
+    }
+  ]
+}

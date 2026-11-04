@@ -1,4 +1,5 @@
 import { readdir, readFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
 import { createRequire } from "node:module";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -28,6 +29,9 @@ for (const group of ["apps", "packages", "tools"]) {
   for (const entry of await readdir(join(root, group), { withFileTypes: true })) {
     if (!entry.isDirectory()) continue;
     const directory = join(root, group, entry.name);
+    // Checkout sync preserves ignored outputs from other branches. A directory
+    // containing only those outputs is not a workspace on this source checkpoint.
+    if (!existsSync(join(directory, "package.json"))) continue;
     const manifest = JSON.parse(await readFile(join(directory, "package.json"), "utf8"));
     workspaces.push({ ...manifest, directory });
   }

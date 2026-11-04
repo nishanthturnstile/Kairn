@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "expo-router";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
 import { useQuery } from "@tanstack/react-query";
@@ -68,6 +69,9 @@ export default function StatusScreen() {
     <ScrollView style={densityStyles.screen} contentInsetAdjustmentBehavior="automatic">
       <View style={densityStyles.page}>
         <Text style={densityStyles.eyebrow}>DEVELOPMENT BUILD</Text>
+        <Link href="/prototype" style={densityStyles.secondaryButtonText}>
+          Open interaction prototype
+        </Link>
         <Text accessibilityRole="header" style={densityStyles.title}>
           Service connection
         </Text>

@@ -5,6 +5,7 @@ Date: 3 November 2026. Read with the [final implementation plan](accounts_journe
 The planning gaps from the independent review now have concrete designs, selected policies, work owners and acceptance checks. We can begin local implementation. Actual schema, auth, device and independent restore evidence still needs to be produced; “ready to implement” does not mean the feature or deployment is complete.
 
 Current execution (4 November): B02 and B03 local boundaries are complete; B01 remains in progress and B04 has started. Use the [execution record](accounts_journeys_access_progress.md) and [B04 delivery plan](accounts_b04_plan.md) for the live checkpoint. The original starting sequence and dated branch observations below preserve the initial handoff.
+The subsequent user request adds the [web and mobile experience prototype](prototype_plan.md) before the next product coding batch. It uses labelled sample state to review connected workflows in the existing applications. The first real account/journey slice and B01–B09 sequence below remain the production implementation plan; prototype screens do not close those acceptance gates. Reuse reviewed controls and interaction decisions through the prototype plan's explicit extraction handoff.
 
 ## 1. What you will see first
 
