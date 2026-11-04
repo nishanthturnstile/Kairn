@@ -43,3 +43,10 @@ Remote `development` is `e2e40cc26d65752f86858158b469ef71e0ae5cb9`. PR5 merged t
 ## Android access retry during this audit
 
 Pixel_10 is booted and shown in this chat's Device panel. Nevertheless, the bound command returned `DEVICE_IN_USE`: the automation lease belongs to session `t3-b3c42592db5b65924b715ca5`, while this thread's binding is `t3-7b1a03fb29d76972b9c1d45c`. `session list` confirmed the older owner, and the supported 15-second wait still did not obtain access. Device-panel visibility does not transfer that lease. No foreign session was reused/closed, emulator destroyed, app installed or Android UI pass claimed. The device-tool instructions explicitly prohibit closing/reusing another session; release must happen from its owner. Private retry logs are under Windows `.kairn/b04-native/android-audit-*.log`.
+
+
+## Follow-up after the audit
+
+The user merged PR7 at exact head `be76325` into development `f477db14fcbf45fcaf9558eeb850f136eb6542e0`; its required CI passed. The owning prototype thread then released its Android lease, and this thread acquired Pixel_10 without destroying it. The [resumed validation record](b04_native_2026-11-04.md#resumed-device-validation-after-ownership-release) closes the completed iOS functional, session, recovery, late-response, font and bounded larger-text items from the list above. Motion and text-size restoration are complete; task Metros/fault proxy and the task Mac env override are cleaned up.
+
+Remaining: Android actual API reachability and its device-tool fsync failure, remaining Android account flows and actual two-device revocation, screen-reader operation, post-login storage-failure evidence and physical iPad availability. Earlier source/lease observations remain historical audit evidence, not current ownership blockers. New evidence is authored from merged development on `chore/accounts-b04-validation-evidence`; no further push belongs on the merged account-qualification branch. The redesign workstream remains excluded and untouched.
