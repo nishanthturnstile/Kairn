@@ -15,7 +15,11 @@ export function Specimens() {
         <div>
           <h1>A journal, down to the details.</h1>
           <p className="sample-lead">Thoughtful surfaces for the stories we keep.</p>
-          <div className="sample-system-palette" aria-label="Paper, Forest, Clay and River palette">
+          <div
+            className="sample-system-palette"
+            role="img"
+            aria-label="Paper, Forest, Clay and River palette"
+          >
             <span className="sample-swatch" />
             <span className="sample-swatch" />
             <span className="sample-swatch" />

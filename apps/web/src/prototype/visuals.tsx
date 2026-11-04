@@ -36,6 +36,7 @@ export function Contributors() {
     <div className="sample-contributors">
       <div
         className="sample-avatar-stack"
+        role="img"
         aria-label={members.map((actor) => actor.name).join(", ")}
       >
         {members.slice(0, 3).map((actor) => (
