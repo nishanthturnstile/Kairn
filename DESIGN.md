@@ -2,6 +2,8 @@
 
 The complete-redesign brief of 4 November 2026 replaces the P02 photographic-journal direction. See [audit, research, architecture and acceptance](docs/implementation/experience_redesign.md) and the [direction studies](docs/implementation/experience_directions.html).
 
+The [detailed redesign plan](docs/implementation/design_system_redesign_plan.md) governs the remaining component-system work, platform consistency, screen migration and validation.
+
 ## Visual identity
 
 Mineral white canvas, white surfaces, slate text and deep blue actions. Shared semantic light/dark theme roles live in `packages/design-tokens/src/index.ts`. Existing color-key names remain compatibility aliases while their values follow the new identity. Do not introduce per-screen hex values. Newsreader is the expressive reading voice; Instrument Sans carries instructions and controls. The chronology is the signature: a visible sequence of days beside a focused story, including pauses and unknown locations.

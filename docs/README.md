@@ -39,6 +39,9 @@ Start with the product plan and requirements. Use the implementation plans for t
 
 - [Prototype progress](implementation/prototype_progress.md) — P00–P02 implementation, executed checks, visual checkpoint and platform gaps
 
+- [Design system and product experience redesign plan](implementation/design_system_redesign_plan.md): remaining component inventory, web/native consistency, DS01-DS12 delivery, screen migration and acceptance gates.
+- [Experience redesign audit and progress](implementation/experience_redesign.md): Open atlas direction, implemented checkpoint, executed evidence and outstanding production gates.
+
 ## Research
 
 - [Architecture research](research/architecture/) — stack, maps, providers, and the [map cost comparison](research/architecture/map_cost_comparison.md)
@@ -51,5 +54,3 @@ Start with the product plan and requirements. Use the implementation plans for t
 [Setup execution history](research/repository-setup/repository_setup_progress_2026-11-02.md) and [native host history](research/repository-setup/native_host_setup_2026-11-02.md) preserve archived attempts and detailed qualification. Current status stays in the implementation documents.
 
 The current core documents and implementation plans govern the build. Dated research preserves supporting evidence and earlier alternatives; superseded recommendations are marked in those files.
-
-- [Complete experience redesign](implementation/experience_redesign.md) ? audit, references, creative directions, implementation and outstanding production gates.

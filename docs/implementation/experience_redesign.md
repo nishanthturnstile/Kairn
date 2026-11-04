@@ -2,6 +2,8 @@
 
 4 November 2026. Active implementation record. This supersedes the P02 visual direction and its stop-at-P02 constraint, following the founder's complete redesign brief. Product requirements, source rights, production gates and the selected stack remain authoritative. Windows is the single authoring checkout for shared/web/native source; Compose verification remains in WSL.
 
+The [design system and product experience redesign plan](design_system_redesign_plan.md) defines the remaining DS01–DS12 sequence, component inventory, web/native contracts, production dependencies and acceptance criteria. This record owns executed evidence; the plan does not mark pending implementation complete.
+
 ## Audit and preservation
 
 The prototype branch contained create/join/revisit, actor projections, audience selection, pending/error specimens and a reader placeholder. Its permanent desktop sidebar, repeated rounded panels and oversized cover obscured chronology and gave discovery, editing and reading the same hierarchy. The reader could not tell a story. No discovery, chapter exploration or practical-information navigation existed. The library mixed personal journeys and a sample without a clear reading destination. Motion and theme roles were incomplete.
@@ -101,3 +103,9 @@ Host reconciliation: the WSL ignored `tools/identity-generation` directory conta
 5. Native Android/iOS/tablet runtime checks, screen-reader and text-scale review, broader responsive/accessibility coverage, media performance and representative user scenario sessions.
 
 The founder's five scenarios are therefore not all accepted: the public-reader and learning interactions have prototype evidence; capture, secure group contribution and revision-safe production editing remain incomplete. Do not promote this checkpoint as the finished redesign or erase these gates.
+
+## Detailed planning update
+
+The 4 November follow-up request adds the DS01–DS12 plan linked above. It inventories core, advanced and journey components; defines shared web/native contracts; maps the required screens to implementation and backend dependencies; and specifies migration, motion, media, accessibility, five end-to-end scenarios and production handoff. DS01 begins with a complete consumer inventory and representative form/editor/reader compositions. The new milestones remain unstarted; this documentation update does not change application acceptance.
+
+Planning verification: checked all 53 local document links across the plan, index, DESIGN.md and this record; confirmed twelve ordered milestones with exit criteria and all five founder scenarios; reconciled the screen mapping with application design and corrected W07 to revision/conflict. `git diff --check` passed. No application tests were rerun for this documentation-only change.
