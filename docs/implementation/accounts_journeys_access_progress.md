@@ -429,3 +429,47 @@ Published application checkpoint before the evidence-only update is `ada03ed3fe0
 Quality job `126437325831` at `5486f9a8c6ddba20dd23f38a96c007f807f35ed0` reached the account browser scenario but failed to write `profile-390.png`: the GitHub runner-owned 0755 artifact bind directory was not writable by the non-root container UID 1000. The host wrapper now retains its uniquely named test container, copies screenshots out as the host caller, and then removes only its named Compose project. Copy is attempted after failure too; after a passing scenario, failed artifact retention fails qualification. Container users, permissions and assertions are unchanged.
 
 The parent tested this exact wrapper patch privately in WSL: the complete real HTTPS/SQL/S3/SMTP browser flow passed (one scenario), all 390/820/1440 PNGs were copied, and all `kairn-domain-76bdfd39` containers/networks/volumes were removed. Evidence: ignored WSL `.kairn/verification/b04/ci-artifact-copy-verification.log`. On the Mac authoring host, selected formatting, Vite+ lint/types and Node syntax checks passed for `scripts/verify-accounts.mjs`. This is a host-wrapper correction; native application/dependency inputs are unchanged. Current-head hosted CI remains the parent's qualification task.
+
+### B04 native profile default correction — 2026-11-04
+
+- Actual iOS native creation, local Mailpit verification, cold verification intent, sign-in and authenticated relaunch succeeded. The device input runner intermittently reports its main-thread watchdog after applying the text; screenshot-based supported recovery allowed these checks to continue.
+- Native save and explicit reload exposed blank fields: the form adapter reapplied the screen's constant empty default values after `reset` cleared touched metadata. Accepted hydration/save/explicit-reload values now also update the form's stable defaults. Background refresh still does not replace drafts or their base ETag. The reproduction is on the real native screen; native retest follows the committed checkpoint.
+- Mac `pnpm check:mobile` passed, including selected lint, TypeScript, dependency checks and 20/20 Expo Doctor. Guarded owning-OS Android and signed iOS builds passed at preceding source `4fa323f18e3b327665cbc5ce80e68e91ac95ecea`; this correction changes JavaScript only. Android UI remains held by another device session after supported wait; physical iPad is unavailable and physical iPhone remains deferred. Native acceptance is still open.
+
+
+### B04 owning-OS build and partial device handoff — 2026-11-04
+
+See the [dated native evidence](../research/accounts-journey-access/b04_native_2026-11-04.md) for exact sources, hashes, commands, artifacts, failure diagnostics and preserved state. Windows guarded x86_64 Android build/lint and canonical Mac locked/signed iOS build passed at `4fa323f18e3b327665cbc5ce80e68e91ac95ecea`. Actual current iOS Metro/UI uses JavaScript correction `f07fdb65a25a46370ecb6ade71d0da2da424fa7a`; its dependency/native graph is unchanged. The fresh signed artifact was installed and used for retest. Both hosts' 70 input hashes match; current mobile checks and 20/20 Doctor passed.
+
+The user-requested iOS retry recovered enough for native registration/local mail verification, cold verification intent, sign-in, authenticated relaunch persistence, profile save/reload, seeded PNG/JPEG selection/crop/upload/read, avatar removal/initials fallback and JSON share-sheet open/cancel. Real native testing exposed and fixed accepted profile defaults becoming blank. The supported draft-input retry later failed with the main-thread watchdog again; further device input stopped. Profile conflict/outage and late-response cases, revoke/logout/switch, reset/warm links, authenticated storage failure, accessibility/full font licenses and all Android UI remain open. Pixel_10 stayed foreign-owned after supported wait. Reduce Motion is ON with restoration pending; original text size Large is unchanged. Physical iPad is unavailable and physical iPhone deferred. B04 is not complete; recovery G09, production sender/origin and shared journeys remain closed.
+
+Parent verified exact `ad7106af9de50dd4e42e81ddc9ba9c2a8cd942fb` passed [Repository setup workflow 41791993705](https://github.com/nishanthturnstile/Kairn/actions/runs/41791993705): Quality 126447444428 at 07:34:02Z, Android 126447444058 at 07:42:46Z and aggregate 126454223281 at 07:42:53Z. This includes the resolved host/container artifact-ownership and optional-camera manifest failures; it is not CI evidence for the later follow-up. Actual PR5 had merged; authoritative follow-up is `fix/accounts-b04-native-qualification` based on current development, with no new PR created here. Parent owns current-head integration/CI. No force, merge, promotion or protection change occurred.
+
+Mac task Metro 8082 and its owned ignored development env override remain running together; private Windows Serve 8444 remains isolated. Canonical ignored environment files, active prototype checkout and preserved unpublished Mac branch remain intact. Private evidence stays under each owning host's `.kairn/b04-native/`; fixture secrets and bearer links are not published.
+
+
+### Cross-host branch audit and deferred B04 checklist — 2026-11-04
+
+The [branch audit and remaining steps](../research/accounts-journey-access/b04_branch_audit_2026-11-04.md) inventories all seven registered Kairn checkouts on Windows/Mac/WSL. Source was clean; all three repositories have zero unpublished local branch commits after fetching. Only `fix/accounts-b04-native-qualification` needs an independent follow-up PR to development. The old post-merge account tip is patch-equivalent to its storage/signing fix. Old foundation tips are integrated or patch-equivalent. Prototype history is already contained by the explicitly excluded redesign branch/PR6; it was not changed.
+
+Open a draft account follow-up PR for completed fixes/evidence while preserving the deferred native checklist. Android was retried during the audit, but its automation lease is still owned by another session after the supported wait even though the emulator is visible here. It was not destroyed or taken over. The checklist records input/lease recovery, motion restoration, remaining native failure/session/recovery/accessibility/font gates, exact-head CI/review and later integration. No merge/promotion or native acceptance closure is implied.
+
+
+### B04 resumed native validation — 2026-11-04 (current)
+
+The [resumed device evidence](../research/accounts-journey-access/b04_native_2026-11-04.md#resumed-device-validation-after-ownership-release) supersedes the initial open iOS items. Android ownership was released by its owner without destroying the emulator; this thread acquired it and installed the verified APK. No application/dependency/native code changed: runtime `be76325f4c71dd1d161081cb0a61421acf213381` equals the app inputs in merged development `f477db14fcbf45fcaf9558eeb850f136eb6542e0`.
+
+- [x] iOS stale-profile conflict retained draft/base revision; explicit reload accepted the competing profile.
+- [x] iOS real service failure retained fields; retry succeeded after restoring only the task-owned HTTPS proxy.
+- [x] Warm other-account reset ended private access and prioritized reset heading; cold reset survived development-server selection, completed, and the new password signed in successfully.
+- [x] Two-account switch cleared prior fields; second-account authenticated relaunch and warm verification preserved correct identity.
+- [x] Native session list, individual revoke, bulk revoke and logout passed against real sessions.
+- [x] Delayed real background account response could not repopulate private content after native logout.
+- [x] External API-assisted current-session revoke followed by native denied refresh cleared private content. Actual two-device acceptance remains separate.
+- [x] Both native font/license views and all six font weights were visually inspected, including the otherwise unused 500/700 specimens; larger-text layout checks passed within the documented screens. Original Large text sizes and iOS Reduce Motion OFF are restored.
+- [x] PR7 exact-head Quality/Android/aggregate CI succeeded; the user merged it into development. Evidence-only follow-up starts from that integration SHA.
+- [ ] Android native account flows / two-device revoke: actual 8444 device connection failed despite host readiness 200. Missing documented emulator DNS arguments are observed, not a proven diagnosis. Supported log capture and debug retry both failed `EPERM: operation not permitted, fsync`; further Android commands stopped.
+- [ ] TalkBack/VoiceOver operation and authenticated SecureStore-failure evidence remain unaccepted. This iOS simulator exposes no VoiceOver setting in its Vision controls; no supported authenticated storage-fault control was available.
+- [ ] Physical iPad remains unavailable; physical iPhone deferred. Recovery G09, production sender/origin and shared journeys remain closed.
+
+Task Metros/fault proxy are stopped; the verified task-only Mac env override was removed, preserving the canonical env hash. Private 8444→8086 and unrelated 443/8443 routes remain intact. No further native rebuild was run for these documentation-only changes; acceptance is tied to the precise prior build/runtime inputs above. B04 is not declared complete while the unchecked gates remain.

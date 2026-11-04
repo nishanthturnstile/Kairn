@@ -1,6 +1,6 @@
 # Native host setup
 
-Date: 3 November 2026. Current operating instructions for the configured hosts. Android emulator, iPhone simulator, and available physical iPad foundation acceptance passed. Physical iPhone checks are deferred by the user. The [current checkpoint](repository_setup_progress.md#current-checkpoint) records evidence, CI revisions, resource measurements, and renewal timing.
+Date: 4 November 2026. Current operating instructions for the configured hosts. Android emulator, iPhone simulator, and available physical iPad foundation acceptance passed. Physical iPhone checks are deferred by the user. The [current checkpoint](repository_setup_progress.md#current-checkpoint) records evidence, CI revisions, resource measurements, and renewal timing.
 
 ## Checkouts and ownership
 
@@ -46,7 +46,7 @@ pnpm install --frozen-lockfile
 pnpm verify:ios
 ```
 
-The wrapper generates pinned iOS inputs, restores `apps/mobile/native-locks/ios/Podfile.lock`, installs Pods in locked mode, and compiles the host simulator architecture with two Xcode jobs. The qualified lock SHA-256 is `af67b96211728a2722f73fdfe7cba7abf05dc81afa5a9476be9f99d615e0c2ef`. Use `pnpm ios:pods:update` only for an intentional, reviewed native dependency update. Native generation recreates local project settings, so reselect Personal Team afterward if a physical build needs it.
+The wrapper generates pinned iOS inputs, restores `apps/mobile/native-locks/ios/Podfile.lock`, installs Pods in locked mode, and compiles the host simulator architecture with two Xcode jobs. The B04 lock SHA-256 is `d6a114172c0d6bd3945bd9962226e5a68243609e9cb41c7773f77eecfc6efbd8`; its intentional refresh adds the pinned Crypto, ImagePicker, Network, SecureStore and WebBrowser pods. The simulator wrapper uses Xcode local signing (`CODE_SIGNING_ALLOWED=YES`, `CODE_SIGN_IDENTITY=-`) and strict signature verification so SecureStore receives the simulated application identity; it does not renew Personal Team signing. An unsigned compile alone does not qualify account runtime. Use `pnpm ios:pods:update` only for an intentional, reviewed native dependency update. Native generation recreates local project settings, so reselect Personal Team afterward if a physical build needs it.
 
 The [SDK 58 patch refresh](expo_sdk_refresh_progress.md) records follow-up compilation separately from the original device/UI acceptance. Its Expo prebuilt Core podspec embeds an absolute local tarball URL in its checksum. Locked Pods therefore use the configured canonical Mac checkout above; moving to another checkout path requires an intentional reviewed native-lock refresh. The isolated-path checksum diagnostic did not change a dependency version.
 
@@ -72,6 +72,14 @@ The iPad route uses private Tailscale Serve, terminating normal TLS and forwardi
 Windows private HTTPS `8443` forwards the WSL application port `8080`; the pre-existing T3 `443` route is separate. Each native checkout's ignored `apps/mobile/.env.local` contains `EXPO_PUBLIC_API_URL=https://nishanth-windows.tail30fb6a.ts.net:8443`, and WSL Compose uses that origin as `KAIRN_PUBLIC_ORIGIN`. The hosts, emulator, simulator, and physical iPad passed the status contract over this route. Physical iPhone verification remains deferred.
 
 `pnpm check:mobile:host` checks the API, development bundle, and HMR WebSocket. It is a host route check and does not replace native launch/style/device evidence.
+
+### Isolated B04 account qualification
+
+The [4 November native record](../research/accounts-journey-access/b04_native_2026-11-04.md) separates owning-OS builds, current Metro runtime, partial iOS account tasks and unaccepted gates. Foundation device acceptance above does not close B04. The physical iPad is unavailable for this task; physical iPhone remains deferred.
+
+A task-owned alternate loopback Metro such as 8082 is supported when 8081 belongs to another checkout. Use an explicit development-client URL, and inspect actual API, virtual-entry bundle and HMR inputs. SDK 58's development virtual-env module can load an existing `.env.local` despite a process override or `EXPO_NO_DOTENV`; the task used a previously absent ignored `apps/mobile/.env.development.local` to select private API 8444 while preserving the canonical 8443 file. Record its ownership hash, and remove only that owned override when its task Metro stops. The isolated Windows Serve 8444 route forwards loopback 8086; preserve 443/8443 and other projects.
+
+The B04 Pixel_10 owner subsequently released its automation lease and the qualification thread installed its fresh local APK. The current app/bundle/HMR works, but actual native HTTPS API checks fail while host readiness succeeds. Emulator launch arguments lack the earlier DNS override; no DNS-specific exception was obtained, so the cause remains unproven. Supported app-log capture and its debug retry fail with `EPERM: operation not permitted, fsync`. See the resumed native record for exact diagnostics and remaining acceptance. Do not interrupt T3/prototype work, change network defaults or bypass TLS to obtain a pass. Both task Metros have since stopped and the verified task Mac env override was removed; canonical host environment files remain preserved.
 
 ## Personal Team renewal and device recovery
 
