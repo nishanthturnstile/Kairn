@@ -1,3 +1,4 @@
+import { TextArea } from "../../components/ui/form-controls";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "@tanstack/react-form";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -61,7 +62,7 @@ function PasswordInput(props: {
         aria-invalid={props.invalid}
         aria-describedby={`${props.id}-error`}
       />
-      <Button type="button" variant="outline" aria-pressed={shown} onClick={() => show(!shown)}>
+      <Button type="button" variant="secondary" aria-pressed={shown} onClick={() => show(!shown)}>
         {shown ? "Hide password" : "Show password"}
       </Button>
     </>
@@ -204,7 +205,7 @@ export function AccountPage({ mode }: { mode: Mode }) {
       </nav>
       {["reset-password", "verify-email"].includes(mode) ? (
         <Button
-          variant="outline"
+          variant="secondary"
           onClick={() => {
             if (mode === "verify-email") window.location.href = "kairn-dev://verify-email";
             else if (token.current)
@@ -340,18 +341,16 @@ export function AccountPage({ mode }: { mode: Mode }) {
               ) : null}
               <form.Subscribe selector={(state) => state.isSubmitting}>
                 {(pending) => (
-                  <Button type="submit" disabled={pending}>
-                    {pending
-                      ? "Please wait…"
-                      : mode === "sign-in"
-                        ? "Sign in"
-                        : mode === "create-account"
-                          ? "Create account"
-                          : mode === "reset-password"
-                            ? "Save new password"
-                            : mode === "verify-email"
-                              ? "Send verification email"
-                              : "Send reset email"}
+                  <Button type="submit" pending={pending}>
+                    {mode === "sign-in"
+                      ? "Sign in"
+                      : mode === "create-account"
+                        ? "Create account"
+                        : mode === "reset-password"
+                          ? "Save new password"
+                          : mode === "verify-email"
+                            ? "Send verification email"
+                            : "Send reset email"}
                   </Button>
                 )}
               </form.Subscribe>
@@ -503,7 +502,7 @@ function PrivateAccount({
               {(field) => (
                 <Field>
                   <FieldLabel htmlFor="profile-bio">Bio (optional)</FieldLabel>
-                  <textarea
+                  <TextArea
                     id="profile-bio"
                     value={field.state.value}
                     onChange={(event) => field.handleChange(event.target.value)}
@@ -516,12 +515,14 @@ function PrivateAccount({
             </form.Field>
             <form.Subscribe selector={(state) => state.isSubmitting}>
               {(pending) => (
-                <Button disabled={pending}>{pending ? "Saving…" : "Save profile"}</Button>
+                <Button type="submit" pending={pending}>
+                  Save profile
+                </Button>
               )}
             </form.Subscribe>
           </FieldGroup>
         </form>
-        <Button variant="outline" onClick={() => window.location.reload()}>
+        <Button variant="secondary" onClick={() => window.location.reload()}>
           Reload saved profile
         </Button>
         <h3>Avatar</h3>
@@ -622,7 +623,7 @@ function PrivateAccount({
             </Button>
             <Button
               disabled={uploading}
-              variant="outline"
+              variant="secondary"
               onClick={() =>
                 void act(async () => {
                   setUploading(true);
@@ -646,12 +647,12 @@ function PrivateAccount({
         ) : avatar?.state === "processing" ? (
           <p role="status">Your avatar is processing.</p>
         ) : null}
-        <Button variant="outline" onClick={() => void data.refetch()}>
+        <Button variant="secondary" onClick={() => void data.refetch()}>
           Refresh avatar status
         </Button>
         {avatar?.state === "available" ? (
           <Button
-            variant="outline"
+            variant="secondary"
             onClick={() =>
               void act(async () => {
                 const result = await (
@@ -675,7 +676,7 @@ function PrivateAccount({
         ) : null}
         <h3>Your data</h3>
         <Button
-          variant="outline"
+          variant="secondary"
           onClick={() =>
             void act(async () => {
               const response = await accountRequest("/api/v1/me/export");
@@ -712,7 +713,7 @@ function PrivateAccount({
                 </p>
                 {!session.current ? (
                   <Button
-                    variant="outline"
+                    variant="secondary"
                     onClick={() =>
                       void act(async () => {
                         await authRequest("revoke-session", { sessionId: session.id });
@@ -728,7 +729,7 @@ function PrivateAccount({
           </ul>
         )}
         <Button
-          variant="outline"
+          variant="secondary"
           onClick={() =>
             void act(async () => {
               await authRequest("revoke-other-sessions", {});

@@ -1,3 +1,6 @@
+import { ChapterNavigation, PracticalDetail, Media } from "../components/journey-content";
+import { Input } from "../components/ui/input";
+import { SegmentedControl, Select } from "../components/ui/form-controls";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Button } from "../components/prototype-controls";
@@ -76,52 +79,26 @@ export function JourneyReader() {
           <p>{reader.description}</p>
           <Contributors />
         </div>
-        <figure className="atlas-cover">
-          <img
-            src={ridge}
-            alt="Green hills in morning mist. AI-generated sample imagery."
-            width="1536"
-            height="1024"
-            fetchPriority="high"
-          />
-          <figcaption>Fictional journey · generated sample image</figcaption>
-        </figure>
+        <Media
+          src={ridge}
+          alt="Green hills in morning mist. AI-generated sample imagery."
+          caption="Fictional journey · generated sample image"
+          priority
+        />
       </div>
       <div className="atlas-reader-bar">
-        <div className="atlas-segments" role="group" aria-label="Journey view">
-          {(["Story", "Explore", "Learn"] as const).map((item) => (
-            <Button
-              key={item}
-              variant="secondary"
-              aria-pressed={mode === item}
-              onClick={() => setMode(item)}
-            >
-              {item}
-            </Button>
-          ))}
-        </div>
+        <SegmentedControl
+          label="Journey view"
+          value={mode}
+          options={["Story", "Explore", "Learn"]}
+          onChange={(value) => {
+            if (value === "Story" || value === "Explore" || value === "Learn") setMode(value);
+          }}
+        />
         <span className="atlas-meta">Four days. Every part belongs.</span>
       </div>
       <div className="atlas-reading-layout">
-        <nav className="atlas-chapters" aria-label="Journey chapters">
-          {reader.chapters.map((item, index) => (
-            <button
-              data-slot="button"
-              className="atlas-chapter"
-              key={item.id}
-              aria-current={selected === index ? "step" : undefined}
-              onClick={() => choose(index)}
-            >
-              <span className="atlas-day">{String(item.day).padStart(2, "0")}</span>
-              <span>
-                <small>
-                  {item.date} / {item.activity}
-                </small>
-                <strong>{item.title}</strong>
-              </span>
-            </button>
-          ))}
-        </nav>
+        <ChapterNavigation chapters={reader.chapters} selected={selected} onSelect={choose} />
         <section className="atlas-reading" aria-label={mode}>
           {mode === "Learn" ? (
             <>
@@ -132,33 +109,23 @@ export function JourneyReader() {
               </p>
               <label className="atlas-filter">
                 Find practical details
-                <select value={category} onChange={(event) => setCategory(event.target.value)}>
+                <Select value={category} onChange={(event) => setCategory(event.target.value)}>
                   {["All details", ...reader.details.map((item) => item.category)].map((item) => (
                     <option key={item}>{item}</option>
                   ))}
-                </select>
+                </Select>
               </label>
               {reader.details
                 .filter((item) => category === "All details" || category === item.category)
                 .map((item) => (
-                  <article className="atlas-detail" key={item.category}>
-                    <span className="atlas-meta">{item.category}</span>
-                    <h3>{item.title}</h3>
-                    <strong>{item.value}</strong>
-                    <p>{item.body}</p>
-                    <p className="atlas-meta">
-                      Reported by {item.author}, {item.date}
-                    </p>
-                    <Button
-                      variant="secondary"
-                      onClick={() => {
-                        choose(item.chapter);
-                        setMode("Story");
-                      }}
-                    >
-                      Read source chapter
-                    </Button>
-                  </article>
+                  <PracticalDetail
+                    key={item.category}
+                    {...item}
+                    onReadSource={() => {
+                      choose(item.chapter);
+                      setMode("Story");
+                    }}
+                  />
                 ))}
             </>
           ) : (
@@ -264,7 +231,7 @@ export function Discover() {
       <div className="atlas-search">
         <label>
           Find a place or journey
-          <input
+          <Input
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
@@ -273,11 +240,11 @@ export function Discover() {
         </label>
         <label>
           Travel your way
-          <select value={activity} onChange={(event) => setActivity(event.target.value)}>
+          <Select value={activity} onChange={(event) => setActivity(event.target.value)}>
             {["All journeys", "Hiking", "Train journeys", "Cycling"].map((item) => (
               <option key={item}>{item}</option>
             ))}
-          </select>
+          </Select>
         </label>
       </div>
       <p className="atlas-meta" role="status">

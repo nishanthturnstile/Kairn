@@ -1,3 +1,4 @@
+import { SegmentedControl, Select, TextArea } from "../components/ui/form-controls";
 import { useState } from "react";
 import { AudienceSelector, Button, Field, Status } from "../components/prototype-controls";
 import { useSample } from "./context";
@@ -22,32 +23,26 @@ export function JourneyWorkspace() {
   );
   return (
     <section className="atlas-workspace">
-      <div className="atlas-segments" role="group" aria-label="Journey workspace">
-        {["Moments", "Story", "People", "Review"].map((item) => (
-          <Button
-            key={item}
-            variant="secondary"
-            aria-pressed={area === item}
-            onClick={() => setArea(item)}
-          >
-            {item}
-          </Button>
-        ))}
-      </div>
+      <SegmentedControl
+        label="Journey workspace"
+        value={area}
+        options={["Moments", "Story", "People", "Review"]}
+        onChange={setArea}
+      />
       {area === "Moments" && (
         <>
           <h2>Small moments. A whole journey.</h2>
           <p>Only your sources and contributions you can review appear here.</p>
           <label className="atlas-filter">
             Moment day
-            <select value={filter} onChange={(event) => setFilter(event.target.value)}>
+            <Select value={filter} onChange={(event) => setFilter(event.target.value)}>
               {[
                 "All days",
                 ...Array.from(new Set(state.data.stages.map((stage) => `Day ${stage.day}`))),
               ].map((day) => (
                 <option key={day}>{day}</option>
               ))}
-            </select>
+            </Select>
           </label>
           {filtered.map((source) => (
             <article className="atlas-detail" key={source.id}>
@@ -95,7 +90,7 @@ export function JourneyWorkspace() {
                 hint="Session-only sample edit. Other contributors’ original sources stay unchanged."
               >
                 {(id, descriptionId) => (
-                  <textarea
+                  <TextArea
                     id={id}
                     aria-describedby={descriptionId}
                     value={caption ?? output.draft!.caption}

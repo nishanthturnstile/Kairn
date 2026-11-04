@@ -228,7 +228,7 @@ function PeopleSpecimen() {
           Administration: River Chen, sample organiser. Transferring administration requires a
           separate offer and acceptance.
         </p>
-        <Button type="submit" variant="outline">
+        <Button type="submit" variant="secondary">
           Preview sample powers
         </Button>
         <p className="specimen-feedback" role="status">
@@ -248,7 +248,7 @@ function RestrictionSpecimen() {
       <p className="specimen-kicker">04 / Honest operation status</p>
       <h2 id="restriction-specimen-title">Know what has happened.</h2>
       <RestrictionStatus result={complete ? confirmed : pending} />
-      <Button type="button" variant="outline" onClick={() => setComplete((value) => !value)}>
+      <Button type="button" variant="secondary" onClick={() => setComplete((value) => !value)}>
         {complete ? "Show pending fixture" : "Show confirmed fixture"}
       </Button>
       <Button type="button" disabled aria-busy="true">

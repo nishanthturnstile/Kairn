@@ -1,5 +1,6 @@
+import { Select } from "../components/ui/form-controls";
 import { Link, Outlet } from "@tanstack/react-router";
-import { useState } from "react";
+import { AppearanceControl } from "../components/appearance";
 import { SampleProvider, useSample } from "./context";
 import { seed } from "./controller";
 import { Button } from "../components/prototype-controls";
@@ -8,11 +9,10 @@ import "./prototype.css";
 import "./experience.css";
 
 function ShellContent() {
-  const [dark, setDark] = useState(false);
   const { state, dispatch } = useSample();
   const actor = state.data.actors.find((item) => item.id === state.actorId)!;
   return (
-    <div className="prototype" data-theme={dark ? "dark" : "light"}>
+    <div className="prototype">
       <a className="sample-skip" href="#sample-content">
         Skip to content
       </a>
@@ -68,13 +68,11 @@ function ShellContent() {
               </summary>
               <div className="sample-panel">
                 <h2>Sample controls</h2>
-                <Button variant="secondary" aria-pressed={dark} onClick={() => setDark(!dark)}>
-                  Dark appearance
-                </Button>
+                <AppearanceControl />
                 <Link to="/prototype/components">Design system</Link>
                 <p className="sample-muted">Fictional data. Changes clear on reload.</p>
                 <label htmlFor="sample-actor">Act as</label>
-                <select
+                <Select
                   id="sample-actor"
                   value={state.actorId}
                   onChange={(event) => dispatch({ type: "actor", id: event.target.value })}
@@ -84,9 +82,9 @@ function ShellContent() {
                       {item.name}
                     </option>
                   ))}
-                </select>
+                </Select>
                 <label htmlFor="sample-scenario">Prepared checkpoint</label>
-                <select
+                <Select
                   id="sample-scenario"
                   value={state.scenario}
                   onChange={(event) => dispatch({ type: "reset", scenario: event.target.value })}
@@ -94,7 +92,7 @@ function ShellContent() {
                   {seed.scenarios.map((scenario) => (
                     <option key={scenario}>{scenario}</option>
                   ))}
-                </select>
+                </Select>
                 <Button
                   variant="secondary"
                   onClick={() => dispatch({ type: "reset", scenario: "first-run" })}

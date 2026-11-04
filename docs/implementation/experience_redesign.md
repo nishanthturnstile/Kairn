@@ -1,4 +1,4 @@
-# Complete journey experience redesign
+﻿# Complete journey experience redesign
 
 4 November 2026. Active implementation record. This supersedes the P02 visual direction and its stop-at-P02 constraint, following the founder's complete redesign brief. Product requirements, source rights, production gates and the selected stack remain authoritative. Windows is the single authoring checkout for shared/web/native source; Compose verification remains in WSL.
 
@@ -109,3 +109,61 @@ The founder's five scenarios are therefore not all accepted: the public-reader a
 The 4 November follow-up request adds the DS01–DS12 plan linked above. It inventories core, advanced and journey components; defines shared web/native contracts; maps the required screens to implementation and backend dependencies; and specifies migration, motion, media, accessibility, five end-to-end scenarios and production handoff. DS01 begins with a complete consumer inventory and representative form/editor/reader compositions. The new milestones remain unstarted; this documentation update does not change application acceptance.
 
 Planning verification: checked all 53 local document links across the plan, index, DESIGN.md and this record; confirmed twelve ordered milestones with exit criteria and all five founder scenarios; reconciled the screen mapping with application design and corrected W07 to revision/conflict. `git diff --check` passed. No application tests were rerun for this documentation-only change.
+
+## Component-system implementation — 4 November 2026
+
+Authoring branch: `feat/design-system-redesign`, based on current development `d07a69508d98afecb5c9d1b9003956d1db1fa236`. This supersedes the earlier “new milestones unstarted” planning status above. The complete redesign is **not accepted**: DS01–DS05 now have implemented work and web evidence; device and production dependencies remain open. The [component guide, inventory and screen traceability](design_system_catalog.md) assigns every plan section 7 family and A/W/P screen a disposition.
+
+Implemented:
+
+- Expanded semantic light/dark roles for feedback, review, controls, dividers, elevated surfaces and scrims; shared control dimensions and unitless media ratios.
+- One web theme adapter used by prototype and real account surfaces, a pre-mount appearance initializer, and device/Light/Dark preferences. Native now registers both Unistyles themes and persists an explicit preference separately from auth. Navigation and status-bar appearance follow the active theme.
+- Canonical platform Buttons, icon controls, fields, Input/TextArea, selection and segmented navigation. Secondary now means a bordered alternative on both platforms. Web small/icon variants meet the 44px floor; native controls use 48dp minimums and growing text.
+- Real native account buttons and inputs delegate to the system while retaining their refs, callbacks and form state. Web account buttons consume the same component as prototype actions; password/profile submit labels remain stable while pending.
+- Matched, interactive, photography-free catalogs with long content, optional/help/error, pending, disabled/read-only, selected, permissions, persistent failure and confirmation examples. Shared state contracts are platform-owned rather than fixture-coupled rendered components.
+- Extracted ChapterNavigation, PracticalDetail and Media on both platforms; readers consume them. Missing/failed media has a text fallback; chapter/source navigation and explicit route-diagram behavior remain.
+- Removed superseded catalogs, prototype button/field CSS, and duplicate native prototype font loading. Retained wrappers and CSS aliases have named consumers/removal gates in the ledger.
+
+Consequential corrections during implementation: unique audience radio-group names; reachable segmented radio hit areas; explicit appearance labels; long-button wrapping under scaling; profile form explicitly submits after Button adopted a safe non-submit default; real account revision-conflict draft retention tested; native dialog safe Cancel focus and trigger-return requests implemented. Native focus remains unverified on a compiled device. Reader screenshots are captured after clearing focus and returning scroll to the top.
+
+| Milestone | Current status | Remaining acceptance |
+| --- | --- | --- |
+| DS01 | Implementing | Complete family/screen disposition and specimen source exist. Component-reference text research is recorded; geographical/visual reference calibration and native composition inspection remain. |
+| DS02 | Implemented awaiting verification | Shared mappings, web/native adapters and preference behavior exist. Native runtime/contrast/screen-reader qualification and legacy-alias retirement remain. |
+| DS03 | Implemented awaiting verification for initial controls | Core batch works in web catalogs and existing consumers; native source/Metro passes. Date/time, unused advanced controls and actual native interaction gates remain as inventoried. |
+| DS04 | Implementing | Browser confirmation focus/Escape/return accepted. Native picker/dialog source implemented; native focus/back/keyboard checks and advanced real-consumer patterns remain. |
+| DS05 | Implementing | Chapter/practical/media components extracted and both catalogs work at source level. Full product pattern layer, long real journeys and native visual parity remain. |
+| DS06 | Implementing on existing sample reader | Migrated primitive/product components; reader interaction evidence retained. Actual authorized reads/maps/derivatives, all-days/direct-link/return restoration, genuine media and supported answers remain open. |
+| DS07 | Blocked for connected UX: real durable capture/import/revision adapters | No fake durable confirmation, transfer queue or conflict service was added. |
+| DS08 | Blocked for connected UX: actual journey capability/grant/publication/lifecycle transports | Existing source projection and real account authority contracts preserved. No generated public links. |
+| DS09 | Implementing existing supporting surfaces | Real account controls/themes migrated; eligible discovery/private history/saved research/public profiles need their services. |
+| DS10 | Implementing foundations only | Reduced-motion CSS and native no-animation overlays exist. Genuine derivatives, device/network performance and numeric budgets remain open. |
+| DS11 | Implementing limited web checks | Catalog/reader/real-form transport tests pass; five production scenarios and representative participant/device/screen-reader research are unaccepted. |
+| DS12 | Implementing migration documentation only | Removed known duplicates; maintained extension and alias ledger. Production fixture isolation, remaining aliases, CI and release/native handoff still require closure. |
+
+### Executed evidence for this component batch
+
+Inputs are the named development base plus the authored source delta recorded in ignored `.kairn/verification/design-system/inputs.json` (public source hashes and built manifests; no environment/credential files). The final checkpoint ID is available from the feature branch history. Runtime tests use the actual built Windows web client through an isolated loopback harness. The harness has no real database/account service; its real-profile test deliberately uses contract-validated transport fixtures to prove click → submit → PATCH/If-Match → retained conflict draft, not account-service security.
+
+| Check | Result / practical limit |
+| --- | --- |
+| `pnpm build:web` | Passed shared/API prerequisite builds, client build, approved-reader SSR build and declarations. Final client rebuilt after review fixes. |
+| `pnpm --filter @kairn/web check` and targeted Vite+ check | Passed; no TypeScript/lint warnings or errors. |
+| Native TypeScript/Expo check and Vite+ mobile lint | Passed; 20/20 Expo checks. Final log `.kairn/verification/design-system-native-check.log`. |
+| Android/iOS Metro exports | Passed from final source, `.kairn/verification/design-system-mobile-final.log`; Android/iOS metadata and HBC outputs remain OS-local. This is not a native build/install/runtime pass. |
+| Built-client integration | 3/3 passed, `.kairn/verification/design-system-review-fixes.log`: retained fields, pending repeat prevention, arrow-key selection, dialog safe focus/trapping/Escape/return, appearance persistence without resetting current draft; actual profile form submit/revision-conflict draft retention; reader rest-day route gap, Learn/source chapter. |
+| Responsive/accessibility catalog matrix | 320/390/820/1440 CSS px, light/dark: no document overflow, no undersized enabled buttons, no axe WCAG A/AA-tag violations in the catalog states tested. `browser.json` and `catalog-{appearance}-{width}.png` are private evidence. This does not certify all controls, real account states or WCAG conformance. |
+| Text-growth stress | CSS `zoom:2` at 820 CSS px scales all catalog content without overflow. `catalog-text-growth.png`. CSS zoom does not change media-query breakpoints; browser-UI zoom, text-only scaling and reader scaling remain separate open acceptance. The earlier root-font-size-only capture is superseded and was not full text-growth evidence. |
+| Reader visual confirmation | `reader-dark-390.png` reset to document top with cleared focus. No map SDK is loaded; the route context remains explicitly an illustrative diagram. |
+| Prototype actor/source isolation | 14/14 existing tests passed. Backend/recovery tests were not unnecessarily rerun for presentation changes. |
+| Boundaries / formatting / whitespace | Workspace boundaries passed; targeted Vite+ formatting and `git diff --check` passed. Existing Vite+ tooling retained. |
+| Mechanical design detector | Changed system CSS scan returned `[]`. Native was not scanned by the DOM/CSS detector. |
+| Independent review | Initial disposition fix: caught implicit profile submission regression, native modal focus implementation gap and overstated mixed-unit scaling evidence. Corrected in one batch with profile regression coverage and clean captures. Final fix-list verdict recorded below when returned; this is not whole-product acceptance. |
+| Android Device | `device_list`/`device_open` supplied local Pixel_10. Launch returned `DEVICE_IN_USE` for foreign session `t3-7b1a03fb29d76972b9c1d45c`; inspected session list per advice, did not reuse/close it. No device runtime acceptance. |
+| iOS/tablet/assistive technology | No final source handoff or new native build/install/session here. VoiceOver/TalkBack, text scaling, keyboard/sheet/back and native appearance runtime remain open. No earlier device pass is attributed to this input. |
+
+No Compose image, production service, public deployment, provider account, schema, source permission or published journey was changed. Host-local dependency output that blocked the checkout helper was moved within this Windows checkout under `.kairn`, then restored after exact-source sync; it was not transferred to another OS. This authoring checkout remains the source owner.
+
+Final fix-list review: profile submission resolved; native focus implementation added but runtime acceptance partial/open; CSS-scaling evidence resolved at its narrowed stress-test scope; clean reader recapture accepted. The reviewer accepted the reviewed web fixes, not DS01–DS12 completion. The subsequent authentication-label source correction now uses `pending` with stable action labels and was included in the final passing build/three-test rerun. Browser: headless Microsoft Edge `156.0.4314.58` on Windows, reduced motion enabled for the catalog matrix. Remaining visual migration drift includes legacy account/global focus styling and differing media crops; those are not silently certified as universal token parity.
+
+Final public-source/build-input manifest SHA-256: `4326e1039c75e37dac6ed2c79a6e22c9b651c3ee6447dc2645e3abcfd7ae67fd`, `.kairn/verification/design-system/inputs.json`. It records modified/new source hashes, the deleted legacy catalog, web manifest and both Metro metadata hashes. Design/progress prose is separate from those tested application inputs. No hosted CI check, full native runtime or release acceptance is asserted by this local record.

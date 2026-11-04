@@ -12,7 +12,8 @@ function declarations(value, path = []) {
   const unit =
     typeof value === "number" &&
     !path.some((part) => unitless.has(part)) &&
-    path.at(-1) !== "opacity"
+    path.at(-1) !== "opacity" &&
+    !path.at(-1)?.endsWith("Ratio")
       ? "px"
       : "";
   const cssValue = path.includes("family") ? JSON.stringify(value) : String(value);

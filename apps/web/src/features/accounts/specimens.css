@@ -1,20 +1,4 @@
 .account-specimens {
-  --background: var(--kairn-color-paper0);
-  --foreground: var(--kairn-color-ink950);
-  --primary: var(--kairn-color-forest800);
-  --primary-foreground: var(--kairn-color-paper0);
-  --secondary: var(--kairn-color-forest100);
-  --secondary-foreground: var(--kairn-color-forest800);
-  --muted: var(--kairn-color-paper50);
-  --muted-foreground: var(--kairn-color-ink700);
-  --accent: var(--kairn-color-forest100);
-  --accent-foreground: var(--kairn-color-forest800);
-  --card: var(--kairn-color-paper0);
-  --card-foreground: var(--kairn-color-ink950);
-  --input: var(--kairn-color-ink500);
-  --border: var(--kairn-color-line200);
-  --ring: var(--kairn-color-clay500);
-  --destructive: var(--kairn-color-danger800);
   display: flex;
   flex-direction: column;
   gap: var(--kairn-spacing-xxl);

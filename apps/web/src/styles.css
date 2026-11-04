@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "@kairn/design-tokens/tokens.css";
+@import "./components/ui/system.css";
 
 @font-face {
   font-family: "Instrument Sans";

@@ -17,14 +17,6 @@
   font-display: swap;
 }
 .prototype {
-  --background: var(--kairn-color-paper50);
-  --card: var(--kairn-color-paper0);
-  --foreground: var(--kairn-color-ink950);
-  --muted-foreground: var(--kairn-color-ink700);
-  --primary: var(--kairn-color-forest800);
-  --primary-foreground: var(--kairn-color-white);
-  --border: var(--kairn-color-ink500);
-  --ring: var(--kairn-color-clay500);
   font:
     16px/1.55 "Instrument Sans",
     sans-serif;
@@ -489,79 +481,6 @@
     500 32px/1.15 Newsreader,
     serif;
   max-width: 24ch;
-}
-.sample-field {
-  display: grid;
-  gap: 8px;
-  margin-bottom: 20px;
-}
-.sample-field p {
-  margin: 0;
-}
-.sample-field label,
-.sample-audience legend {
-  font-weight: 600;
-  font-size: 14px;
-}
-.prototype input:not([type="radio"]),
-.prototype textarea,
-.prototype select {
-  display: block;
-  width: 100%;
-  min-width: 0;
-  min-height: 48px;
-  padding: 12px 16px;
-  background: var(--card);
-  color: var(--foreground);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  font: inherit;
-  caret-color: var(--primary);
-}
-.prototype input[aria-invalid="true"],
-.prototype textarea[aria-invalid="true"] {
-  border-color: var(--kairn-color-danger800);
-}
-.prototype .sample-error {
-  color: var(--kairn-color-danger800);
-  font-size: 13px;
-}
-.prototype .sample-button {
-  display: inline-flex;
-  min-height: 48px;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  border: 1px solid transparent;
-  border-radius: 999px;
-  padding: 12px 20px;
-  font:
-    600 14px/1.4 "Instrument Sans",
-    sans-serif;
-  white-space: normal;
-  text-align: center;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-.prototype .sample-button-primary {
-  background: var(--primary);
-  color: var(--primary-foreground);
-}
-.prototype .sample-button-secondary {
-  background: var(--card);
-  color: var(--primary);
-  border-color: var(--border);
-}
-.prototype .sample-button-danger {
-  background: var(--kairn-color-danger800);
-  color: var(--primary-foreground);
-}
-.prototype .sample-button:active:not(:disabled) {
-  filter: brightness(0.84);
-}
-.prototype .sample-button:disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
 }
 .sample-inline {
   display: flex;

@@ -1,29 +1,4 @@
 /* Open atlas: broad reading surfaces and a chronological spine. */
-.prototype {
-  --background: var(--kairn-theme-light-canvas);
-  --card: var(--kairn-theme-light-surface);
-  --foreground: var(--kairn-theme-light-text);
-  --muted-foreground: var(--kairn-theme-light-muted);
-  --primary: var(--kairn-theme-light-action);
-  --primary-foreground: var(--kairn-theme-light-on-action);
-  --selected: var(--kairn-theme-light-selected);
-  --border: var(--kairn-theme-light-border);
-  --ring: var(--primary);
-  color-scheme: light;
-  scrollbar-color: var(--border) var(--background);
-  caret-color: var(--primary);
-}
-.prototype[data-theme="dark"] {
-  --background: var(--kairn-theme-dark-canvas);
-  --card: var(--kairn-theme-dark-surface);
-  --foreground: var(--kairn-theme-dark-text);
-  --muted-foreground: var(--kairn-theme-dark-muted);
-  --primary: var(--kairn-theme-dark-action);
-  --primary-foreground: var(--kairn-theme-dark-on-action);
-  --selected: var(--kairn-theme-dark-selected);
-  --border: var(--kairn-theme-dark-border);
-  color-scheme: dark;
-}
 .prototype .sample-layout {
   display: block;
   max-width: none;
@@ -84,23 +59,6 @@
   color: var(--foreground);
   border-color: var(--card);
 }
-.prototype .sample-button {
-  border-radius: var(--kairn-radius-small);
-  transition: background-color var(--kairn-motion-feedback) var(--kairn-motion-ease);
-}
-.prototype .sample-button-primary {
-  color: var(--primary-foreground);
-  background: var(--primary);
-}
-.prototype .sample-button-secondary {
-  color: var(--primary);
-  background: var(--card);
-  border-color: var(--border);
-}
-.prototype .sample-button-secondary[aria-pressed="true"] {
-  background: var(--primary);
-  color: var(--primary-foreground);
-}
 .prototype .sample-note,
 .prototype .sample-form-panel,
 .prototype .sample-specimen,
@@ -108,23 +66,6 @@
   background: var(--card);
   color: var(--foreground);
   border-radius: var(--kairn-radius-medium);
-}
-.prototype input,
-.prototype textarea,
-.prototype select {
-  background: var(--card);
-  color: var(--foreground);
-  border: 1px solid var(--border);
-  border-radius: var(--kairn-radius-small);
-  font: inherit;
-  min-height: 48px;
-  padding: var(--kairn-spacing-md);
-  max-width: 100%;
-}
-.prototype input::placeholder,
-.prototype textarea::placeholder {
-  color: var(--muted-foreground);
-  opacity: 1;
 }
 .prototype .sample-choice:has(input:checked) {
   background: var(--selected);

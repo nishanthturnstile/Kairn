@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
-import { Pressable, Text, TextInput, View, type TextInputProps } from "react-native";
+import { Text, View, type TextInputProps } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
+import { Button } from "./ui/button";
+import { Field } from "./ui/field";
 
 export function JournalButton({
   label,
@@ -16,21 +18,13 @@ export function JournalButton({
   pending?: boolean;
 }) {
   return (
-    <Pressable
-      accessibilityRole="button"
-      accessibilityLabel={label}
-      accessibilityState={{ disabled: disabled || pending, busy: pending }}
-      disabled={disabled || pending}
+    <Button
+      label={label}
       onPress={onPress}
-      style={({ pressed }) => [
-        styles.button,
-        secondary && styles.secondary,
-        pressed && styles.pressed,
-        (disabled || pending) && styles.disabled,
-      ]}
-    >
-      <Text style={[styles.buttonText, secondary && styles.secondaryText]}>{label}</Text>
-    </Pressable>
+      variant={secondary ? "secondary" : "primary"}
+      disabled={disabled}
+      pending={pending}
+    />
   );
 }
 export function JournalText({
@@ -64,20 +58,7 @@ export function JournalField({
   error,
   ...props
 }: TextInputProps & { label: string; hint?: string; error?: string }) {
-  return (
-    <View style={styles.field}>
-      <Text style={styles.label}>{label}</Text>
-      <TextInput
-        accessibilityLabel={label}
-        accessibilityHint={error || hint}
-        style={[styles.input, error && styles.errorBorder]}
-        {...props}
-      />
-      <Text accessibilityLiveRegion="polite" style={[styles.hint, error && styles.errorText]}>
-        {error || hint}
-      </Text>
-    </View>
-  );
+  return <Field label={label} hint={hint ?? ""} error={error ?? ""} {...props} />;
 }
 export function JournalStatus({
   children,
@@ -95,7 +76,7 @@ export function JournalStatus({
 
 const styles = StyleSheet.create((theme) => ({
   text: {
-    fontFamily: "InstrumentSans",
+    fontFamily: "InstrumentSans400",
     fontSize: 16,
     lineHeight: 24,
     color: theme.colors.text,
@@ -104,57 +85,8 @@ const styles = StyleSheet.create((theme) => ({
   title: { fontFamily: "InstrumentSans600", fontSize: 19, lineHeight: 26 },
   editorial: { fontFamily: "Newsreader500", fontSize: 32, lineHeight: 38 },
   muted: { color: theme.colors.secondaryText, fontSize: 14, lineHeight: 21 },
-  button: {
-    minHeight: 48,
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    borderRadius: theme.radius.round,
-    backgroundColor: theme.colors.primary,
-    alignItems: "center",
-    justifyContent: "center",
-    borderWidth: 1,
-    borderColor: theme.colors.primary,
-  },
-  secondary: { backgroundColor: theme.colors.surface, borderColor: theme.colors.controlBorder },
-  buttonText: {
-    fontFamily: "InstrumentSans600",
-    fontSize: 14,
-    lineHeight: 22,
-    color: theme.colors.primaryText,
-    textAlign: "center",
-  },
-  secondaryText: { color: theme.colors.primary },
-  pressed: { opacity: 0.8 },
-  disabled: { opacity: 0.55 },
-  field: { gap: 8 },
-  label: {
-    fontFamily: "InstrumentSans600",
-    fontSize: 16,
-    lineHeight: 24,
-    color: theme.colors.text,
-  },
-  input: {
-    fontFamily: "InstrumentSans",
-    fontSize: 16,
-    lineHeight: 24,
-    color: theme.colors.text,
-    backgroundColor: theme.colors.surface,
-    minHeight: 48,
-    padding: 12,
-    borderRadius: theme.radius.medium,
-    borderWidth: 1,
-    borderColor: theme.colors.controlBorder,
-  },
-  hint: {
-    fontFamily: "InstrumentSans",
-    fontSize: 14,
-    lineHeight: 21,
-    color: theme.colors.secondaryText,
-  },
-  errorBorder: { borderColor: theme.colors.error },
-  errorText: { color: theme.colors.error },
   status: {
-    backgroundColor: theme.colors.successSurface,
+    backgroundColor: theme.colors.selected,
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: theme.radius.round,

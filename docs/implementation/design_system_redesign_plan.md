@@ -2,6 +2,8 @@
 
 Date: 4 November 2026. Status: implementation plan; remaining work is not accepted or complete.
 
+Implementation is now underway. See the [component/consumer inventory, screen traceability and extension guide](design_system_catalog.md) and the latest [component-system evidence](experience_redesign.md#component-system-implementation--4-november-2026). These records separate implemented components from native runtime and production acceptance; the unchecked completion gates below remain open.
+
 This plan takes Kairn from the current Open atlas checkpoint to a coherent, maintainable experience across web, Android and iOS. It covers individual controls, advanced interactions, product components, complete screens, production integration and validation. The next implementation milestone is a matched component system demonstrated in real forms and journey content, before further broad screen expansion.
 
 The goal is that capture feels reassuring, shared creation feels understandable, viewing feels immersive, and learning feels useful. Every component must support those jobs and belong to one recognizable identity.

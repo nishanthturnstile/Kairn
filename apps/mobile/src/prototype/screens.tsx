@@ -1,7 +1,8 @@
+import { AppearanceControl } from "../theme/appearance";
 import { useState, type ReactNode } from "react";
 import { KeyboardAvoidingView, Platform, Pressable, ScrollView, Text, View } from "react-native";
 import { Link, usePathname, useRouter } from "expo-router";
-import { StyleSheet } from "react-native-unistyles";
+import { StyleSheet, withUnistyles } from "react-native-unistyles";
 import {
   JournalButton,
   JournalField,
@@ -9,8 +10,10 @@ import {
   JournalText,
 } from "../components/journal-controls";
 import { useSample } from "./context";
-import { project, seed, type Scope } from "./controller";
-import { JournalMark, NativeJourneyCover, NativeKitCover } from "./visuals";
+import { project, seed } from "./controller";
+import { JournalMark, NativeJourneyCover } from "./visuals";
+
+const StyledScrollView = withUnistyles(ScrollView);
 
 export function SamplePage({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -47,12 +50,16 @@ export function SamplePage({ children }: { children: ReactNode }) {
           </Pressable>
         )}
       </View>
-      <ScrollView keyboardShouldPersistTaps="handled" contentInsetAdjustmentBehavior="automatic">
+      <StyledScrollView
+        keyboardShouldPersistTaps="handled"
+        contentInsetAdjustmentBehavior="automatic"
+      >
         <View style={styles.page}>
           {children}
+          <AppearanceControl />
           <JournalText muted>Fictional prototype · changes reset on relaunch</JournalText>
         </View>
-      </ScrollView>
+      </StyledScrollView>
       <View style={styles.footer}>
         <Link
           href="/prototype/reader"
@@ -306,149 +313,6 @@ export function NativeSamples() {
     </SamplePage>
   );
 }
-export function NativeSpecimens() {
-  const [scope, setScope] = useState<Scope>("journey-review");
-  const [pending, setPending] = useState(false);
-  const [error, setError] = useState(true);
-  const [confirm, setConfirm] = useState(false);
-  const options = [
-    { value: "only-me", label: "Only me", detail: "Private to the source owner." },
-    {
-      value: "journey-review",
-      label: "Journey review",
-      detail: "Coauthors and publishers can review. No publication.",
-    },
-    {
-      value: "publication",
-      label: "Allow journey publication and sharing",
-      detail: "Eligible for approved presentations of this journey.",
-    },
-  ] as const;
-  return (
-    <SamplePage>
-      <JournalText editorial>A journal, down to the details.</JournalText>
-      <JournalText muted>
-        Isolated component examples. No source permissions change here.
-      </JournalText>
-      <NativeKitCover />
-      <View style={styles.section}>
-        <JournalText title>Audience & rights</JournalText>
-        <JournalText muted>
-          Review audience: Mira Sen and Leo Martin (coauthors); Mira Sen and Noor Jayasinghe
-          (publishers).
-        </JournalText>
-        <View accessibilityRole="radiogroup">
-          {options.map((option) => (
-            <Pressable
-              key={option.value}
-              accessibilityRole="radio"
-              accessibilityLabel={option.label}
-              accessibilityState={{ checked: scope === option.value }}
-              onPress={() => setScope(option.value)}
-              style={({ pressed }) => [
-                styles.choice,
-                scope === option.value && styles.chosen,
-                pressed && styles.pressed,
-              ]}
-            >
-              <View style={[styles.radio, scope === option.value && styles.radioSelected]} />
-              <View style={styles.optionText}>
-                <JournalText>{option.label}</JournalText>
-                <JournalText muted>{option.detail}</JournalText>
-              </View>
-            </Pressable>
-          ))}
-        </View>
-        <JournalStatus review>Review only · publication blocked</JournalStatus>
-        <JournalText muted>
-          Original-file export needs separate approval: named files, recipient and expiry.
-        </JournalText>
-      </View>
-      <View style={styles.section}>
-        <JournalText title>Actions & feedback</JournalText>
-        <JournalButton label="Save sample" pending={pending} onPress={() => setPending(true)} />
-        <JournalButton secondary label="Clear pending example" onPress={() => setPending(false)} />
-        <JournalButton secondary label="Publish unavailable" disabled onPress={() => {}} />
-        <View accessibilityLiveRegion="polite">
-          <JournalText>
-            {pending ? "Pending specimen. No timer or real save." : "Ready for a sample action."}
-          </JournalText>
-        </View>
-        <JournalField
-          label="Journey title"
-          defaultValue="Four friends, a slow train, and the long way home through the hill country"
-          multiline
-          error={error ? "Could not save this example. Your title is retained." : ""}
-          hint="Long text stays readable."
-        />
-        <JournalButton
-          secondary
-          label={error ? "Retry sample" : "Show error example"}
-          onPress={() => setError(!error)}
-        />
-      </View>
-      <View style={styles.section}>
-        <JournalText title>People & sources</JournalText>
-        <JournalText>Asha Fernando With A Very Long Display Name</JournalText>
-        <JournalText muted>Administrator only · no draft or source-review access</JournalText>
-        <JournalText>Rain at the tea stop</JournalText>
-        <JournalText muted>Dev Raman · note · location unknown</JournalText>
-        <JournalStatus review>Review only</JournalStatus>
-        <JournalText>
-          Saving, uploading, contributing and permitting publication are separate steps.
-        </JournalText>
-      </View>
-      <View style={styles.section}>
-        <JournalText title>Chapter & practical detail</JournalText>
-        <JournalText editorial>A day without a track</JournalText>
-        <JournalText>
-          We stayed in town while the ridge disappeared into cloud. A gap in the record stays a gap.
-        </JournalText>
-        <JournalStatus review>Day 2 · rest stage · location unknown</JournalStatus>
-        <JournalText muted>
-          Prepared chapter specimen · source: sample-moment-8 · not an assembled story
-        </JournalText>
-        <JournalText>Tea stop · LKR 600 per group of 4</JournalText>
-        <JournalText muted>
-          Observed 12 July 2026 · Leo Martin · source: sample-moment-5
-        </JournalText>
-        <JournalStatus review>Reported · sample cost</JournalStatus>
-        <JournalText muted>
-          A dated observation, not a current price. Editing and source navigation follow in P04.
-        </JournalText>
-      </View>
-      <View style={styles.section}>
-        <JournalText title>Impact confirmation</JournalText>
-        <JournalButton
-          secondary
-          label="Inspect withdrawal impact"
-          onPress={() => setConfirm(true)}
-        />
-        {confirm && (
-          <>
-            <JournalText>Withdraw “Rain at the tea stop”?</JournalText>
-            <JournalText>
-              Journey review and dependent hosted output become unavailable. Your original remains
-              yours. Already downloaded copies cannot be recalled.
-            </JournalText>
-            <JournalText muted>Illustrative only. No restriction receipt is created.</JournalText>
-            <JournalButton
-              secondary
-              label="Keep the current permission"
-              onPress={() => setConfirm(false)}
-            />
-          </>
-        )}
-      </View>
-      <View style={styles.section}>
-        <JournalText editorial>No cover. Still your journey.</JournalText>
-        <JournalText>
-          11–14 July 2026 · An intentional space before the first photograph.
-        </JournalText>
-      </View>
-    </SamplePage>
-  );
-}
 const styles = StyleSheet.create((theme, rt) => ({
   fill: { flex: 1, backgroundColor: theme.colors.background, paddingTop: rt.insets.top },
   header: {
@@ -486,7 +350,7 @@ const styles = StyleSheet.create((theme, rt) => ({
   },
   heading: { gap: 8, marginBottom: 4 },
   greeting: {
-    fontFamily: "InstrumentSans",
+    fontFamily: "InstrumentSans400",
     fontSize: 12,
     lineHeight: 18,
     color: theme.colors.secondaryText,
@@ -507,7 +371,7 @@ const styles = StyleSheet.create((theme, rt) => ({
     gap: 12,
     marginTop: 8,
   },
-  meta: { fontFamily: "InstrumentSans", fontSize: 12, color: theme.colors.secondaryText },
+  meta: { fontFamily: "InstrumentSans400", fontSize: 12, color: theme.colors.secondaryText },
   section: {
     backgroundColor: theme.colors.surface,
     borderRadius: theme.radius.medium,
@@ -538,7 +402,7 @@ const styles = StyleSheet.create((theme, rt) => ({
     minHeight: 48,
     paddingHorizontal: 6,
     paddingVertical: 14,
-    borderRadius: theme.radius.round,
+    borderRadius: theme.controlRadius,
     textAlign: "center",
     overflow: "hidden",
   },
@@ -552,7 +416,7 @@ const styles = StyleSheet.create((theme, rt) => ({
     minHeight: 48,
     padding: 13,
     textAlign: "center",
-    borderRadius: theme.radius.round,
+    borderRadius: theme.controlRadius,
     overflow: "hidden",
   },
   link: {

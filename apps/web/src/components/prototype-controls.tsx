@@ -1,4 +1,6 @@
 import { useId, type ButtonHTMLAttributes, type ReactNode } from "react";
+import { Button as CoreButton } from "./ui/button";
+import { FormField } from "./ui/form-controls";
 
 export function Button({
   children,
@@ -6,15 +8,15 @@ export function Button({
   ...props
 }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: "primary" | "secondary" | "danger" }) {
   return (
-    <button
-      type="button"
-      data-slot="button"
-      data-variant={variant}
-      className={`sample-button sample-button-${variant}`}
+    <CoreButton
+      variant={
+        variant === "danger" ? "destructive" : variant === "secondary" ? "secondary" : "primary"
+      }
+      pending={props["aria-busy"] === true}
       {...props}
     >
       {children}
-    </button>
+    </CoreButton>
   );
 }
 export function Field({
@@ -28,15 +30,10 @@ export function Field({
   error?: string;
   children: (id: string, descriptionId: string) => ReactNode;
 }) {
-  const id = useId();
   return (
-    <div className="sample-field">
-      <label htmlFor={id}>{label}</label>
-      {children(id, `${id}-help`)}
-      <p id={`${id}-help`} className={error ? "sample-error" : "sample-muted"}>
-        {error || hint}
-      </p>
-    </div>
+    <FormField label={label} hint={hint ?? ""} error={error ?? ""}>
+      {children}
+    </FormField>
   );
 }
 export function Status({
@@ -70,6 +67,7 @@ export function AudienceSelector({
   onChange: (value: (typeof scopeOptions)[number]["value"]) => void;
   audience: string;
 }) {
+  const name = useId();
   return (
     <fieldset className="sample-audience">
       <legend>Who can use this source?</legend>
@@ -78,7 +76,7 @@ export function AudienceSelector({
         <label key={option.value} className="sample-choice">
           <input
             type="radio"
-            name="source-scope"
+            name={name}
             value={option.value}
             checked={value === option.value}
             onChange={() => onChange(option.value)}
