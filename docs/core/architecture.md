@@ -4,7 +4,7 @@
 |---|---|
 | Version | 1.6 |
 | Research date | 1 November 2026 |
-| Status | Architecture baseline for the complete R1 product, reconciled with requirements version 2.3 and design version 1.4. No application has been implemented or load-tested. |
+| Status | Architecture baseline for the complete R1 product, reconciled with requirements version 2.3 and design version 1.4. Current implementation and qualification evidence lives in the implementation progress documents; this architecture is not completion or load-test evidence. |
 | Product authority | [Product requirements](product_requirements.md), [product plan](product_plan.md), and [application design](application_design.md). Requirements take precedence. |
 | Confirmed platform choices | Vite+ with React and TanStack for web. Expo/React Native Android and iOS development and local testing now; Android public mobile distribution first. Apple enrollment and iOS public distribution deferred. No EAS subscription during development. |
 | Confirmed styling | Tailwind/shadcn on web; React Native Unistyles v3 on Android and iOS, backed by the shared design tokens. NativeWind is excluded. |
@@ -281,6 +281,12 @@ docs/
 ```
 
 Use pnpm workspaces through Vite+'s package-management and task commands. Keep web/native UI components inside their applications until actual cross-application reuse warrants a package. Do not add a second monorepo task runner. Clients may import contracts and pure rules, never database tables, server auth configuration, secrets, or backend repositories. Shared React code must not bundle another React. Mobile and web can resolve different SDK-compatible React versions.
+
+### 5.3 Ecosystem extraction direction
+
+The [ecosystem direction](ecosystem_direction.md#5-engineering-boundaries-to-preserve-now) maps future GeoKit, Moments, Player/Replay, Privacy and Publisher interfaces onto these existing owners. Keep pure route, placement and playback logic independent of rendering and infrastructure; keep access policy, source grants, publication projection and delivery authorization server-side. Studio composes those capabilities within the current apps. A future Embed consumes the approved Player delivery path. Do not expose raw source/domain records as a public viewer contract.
+
+These are module boundaries within the modular monolith, not selected new packages or services. Extract public packages only after production use and an independent consumer prove the interface, with compiled exports, versioning, meaningful fixtures and explicit ownership. Mapbox remains selected; separating playback logic from its map adapter does not select another provider. Section 14 remains the dependency authority. The [parallel work packets](ecosystem_direction.md#7-delivery-and-parallel-engineering) supplement, and do not replace, section 16's product dependency order.
 
 ## 6. Data model and invariants
 
