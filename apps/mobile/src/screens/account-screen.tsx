@@ -80,9 +80,13 @@ function ConfiguredAccount({ origin }: { origin: string }) {
   );
   const [message, setMessage] = useState("");
   const [intentHydrated, setIntentHydrated] = useState(false);
-  setNativeInvalidator(() => {
+  setNativeInvalidator((reason) => {
     clearPrivateAccount(client, true);
-    setMessage("Secure account storage is unavailable. Retry account access before continuing.");
+    setMessage(
+      reason === "session"
+        ? "Your session ended. Sign in again."
+        : "Secure account storage is unavailable. Retry account access before continuing.",
+    );
   });
   const [shown, show] = useState(false);
   const [busy, setBusy] = useState(false);

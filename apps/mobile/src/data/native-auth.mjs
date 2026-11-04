@@ -11,7 +11,7 @@ export function setNativeInvalidator(callback) {
 }
 function storageFailure() {
   fault = true;
-  invalidate();
+  invalidate("storage");
   return new Error("Secure account storage is unavailable.");
 }
 let client;
@@ -92,6 +92,11 @@ async function sendAuthRequest(path, body) {
     ...(body === undefined ? {} : { body }),
   });
   if (fault) throw new Error("Secure account storage is unavailable.");
+  if (
+    result.error?.status === 401 &&
+    ["get-session", "list-sessions", "revoke-session", "revoke-other-sessions"].includes(path)
+  )
+    invalidate("session");
   if (result.error)
     throw new Error(
       result.error.status === 429

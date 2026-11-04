@@ -52,8 +52,7 @@ export async function accountRequest(path: string, init: RequestInit = {}, expec
     signal: AbortSignal.any([controller.signal, ...(init.signal ? [init.signal] : [])]),
   });
   if (generation !== epoch) throw new DOMException("Account changed", "AbortError");
-  if (response.status === 401 && path !== "/api/v1/me" && boundClient)
-    clearAccount(boundClient, true);
+  if (response.status === 401 && boundClient) clearAccount(boundClient, true);
   if (!response.ok) {
     const body: unknown = await response.json().catch(() => null);
     const code =

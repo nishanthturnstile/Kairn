@@ -4,4 +4,4 @@ export function nativeAuthRequest(path: string, body?: unknown): Promise<unknown
 export function retryNativeStorage(): Promise<void>;
 export function nativeOrigin(): string | undefined;
 
-export function setNativeInvalidator(callback: () => void): void;
+export function setNativeInvalidator(callback: (reason: "storage" | "session") => void): void;

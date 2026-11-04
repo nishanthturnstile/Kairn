@@ -49,7 +49,7 @@ export async function accountFetch(path: string, init: RequestInit = {}, expecte
   });
   if (generation !== epoch) throw new Error("Account changed. Retry this action.");
   if (response.status === 401) {
-    if (path !== "/api/v1/me" && boundClient) clearPrivateAccount(boundClient, true);
+    if (boundClient) clearPrivateAccount(boundClient, true);
     throw new NativeSessionRequired("Your session ended. Sign in again.");
   }
   if (!response.ok)

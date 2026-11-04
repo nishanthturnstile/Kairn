@@ -293,8 +293,22 @@ it("completes real secure-cookie creation, verification, profile/export, session
     await releaseLate();
     await browserExpect(companionTab.getByText(email, { exact: true })).toHaveCount(0);
     await browserExpect(companionTab.getByLabel("Bio (optional)")).toHaveValue("");
-    await page.getByRole("button", { name: "Sign out", exact: true }).click();
-    await browserExpect(page.getByRole("heading", { name: "Welcome back." })).toBeVisible();
+    const activeSessions = await (
+      await context.request.get(`${origin}/api/auth/list-sessions`)
+    ).json();
+    const revoked = await context.request.post(`${origin}/api/auth/revoke-session`, {
+      headers: { Origin: origin },
+      data: {
+        sessionId: activeSessions.find((session: { current: boolean }) => session.current).id,
+      },
+    });
+    expect(revoked.ok()).toBe(true);
+    await page.evaluate(() => window.dispatchEvent(new Event("visibilitychange")));
+    await companionTab.evaluate(() => window.dispatchEvent(new Event("visibilitychange")));
+    await browserExpect(
+      page.getByRole("heading", { name: "Private profile", exact: true }),
+    ).toHaveCount(0);
+    await browserExpect(companionTab.getByText(secondEmail, { exact: true })).toHaveCount(0);
 
     await pools.owner.query("DELETE FROM operations.abuse_counter WHERE operation='auth_mail'");
     await page.goto(`${origin}/recover`);
