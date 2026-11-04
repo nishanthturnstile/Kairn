@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Button, Field, Status } from "../components/prototype-controls";
 import { useSample } from "./context";
@@ -11,6 +11,10 @@ export function Journeys() {
   const [title, setTitle] = useState(seed.journey.title);
   const [code, setCode] = useState("");
   const [titleError, setTitleError] = useState("");
+  const formPanel = useRef<HTMLElement>(null);
+  useEffect(() => {
+    if (form) formPanel.current?.querySelector("input")?.focus();
+  }, [form]);
   return (
     <>
       <div className="sample-page-heading">
@@ -28,7 +32,7 @@ export function Journeys() {
         </Button>
       </div>
       {form && (
-        <section className="sample-form-panel">
+        <section className="sample-form-panel" ref={formPanel}>
           <div className="sample-section-heading">
             <h2>{form === "create" ? "Start a shared journal" : "Join your group"}</h2>
             <Button variant="secondary" onClick={() => setForm(null)}>

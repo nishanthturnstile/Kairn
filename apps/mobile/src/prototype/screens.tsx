@@ -54,11 +54,19 @@ export function SamplePage({ children }: { children: ReactNode }) {
         </View>
       </ScrollView>
       <View style={styles.footer}>
-        <Link href="/prototype" replace style={[styles.navLink, home && styles.activeNav]}>
+        <Link
+          href="/prototype"
+          replace
+          accessibilityRole="link"
+          accessibilityState={{ selected: home }}
+          style={[styles.navLink, home && styles.activeNav]}
+        >
           Journeys
         </Link>
         <Link
           href="/prototype/components"
+          accessibilityRole="link"
+          accessibilityState={{ selected: pathname.endsWith("/components") }}
           replace
           style={[styles.navLink, pathname.endsWith("/components") && styles.activeNav]}
         >
@@ -66,6 +74,8 @@ export function SamplePage({ children }: { children: ReactNode }) {
         </Link>
         <Link
           href="/prototype/samples"
+          accessibilityRole="link"
+          accessibilityState={{ selected: pathname.endsWith("/samples") }}
           replace
           style={[styles.navLink, pathname.endsWith("/samples") && styles.activeNav]}
         >
@@ -161,6 +171,7 @@ export function NativeJourneys() {
         {state.joined ? (
           <Link
             href="/prototype/journey"
+            accessibilityRole="link"
             style={styles.openLink}
             onPress={() => dispatch({ type: "revisit" })}
           >

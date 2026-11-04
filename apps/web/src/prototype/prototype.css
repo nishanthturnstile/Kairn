@@ -504,6 +504,7 @@
   font-size: 14px;
 }
 .prototype input:not([type="radio"]),
+.prototype textarea,
 .prototype select {
   display: block;
   width: 100%;
@@ -517,7 +518,8 @@
   font: inherit;
   caret-color: var(--primary);
 }
-.prototype input[aria-invalid="true"] {
+.prototype input[aria-invalid="true"],
+.prototype textarea[aria-invalid="true"] {
   border-color: var(--kairn-color-danger800);
 }
 .prototype .sample-error {
@@ -772,8 +774,17 @@
     display: none;
   }
   .prototype .sample-toolbar {
-    padding: 0 16px 12px;
+    padding: 0;
+    border: 0;
     font-size: 11px;
+  }
+  .sample-toolbar > span {
+    display: none;
+  }
+  .sample-tools {
+    position: absolute;
+    top: 16px;
+    right: 16px;
   }
   .sample-tools > summary {
     font-size: 12px;

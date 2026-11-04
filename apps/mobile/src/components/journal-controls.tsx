@@ -46,7 +46,7 @@ export function JournalText({
 }) {
   return (
     <Text
-      accessibilityRole={title ? "header" : undefined}
+      accessibilityRole={title || editorial ? "header" : undefined}
       style={[
         styles.text,
         title && styles.title,

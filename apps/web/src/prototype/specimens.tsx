@@ -67,7 +67,8 @@ export function Specimens() {
             error={error ? "Could not save this example. Your title is retained." : ""}
           >
             {(id, descriptionId) => (
-              <input
+              <textarea
+                rows={3}
                 id={id}
                 aria-describedby={descriptionId}
                 aria-invalid={error}
