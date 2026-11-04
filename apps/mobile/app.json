@@ -32,6 +32,7 @@
           "microphonePermission": false
         }
       ],
+      "./plugins/with-optional-camera.cjs",
       "expo-web-browser"
     ]
   }
