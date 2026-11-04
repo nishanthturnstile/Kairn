@@ -31,13 +31,9 @@ function ShellContent() {
               <JournalIcon name="journeys" />
               Your journeys
             </Link>
-            <Link to="/prototype/components">
-              <JournalIcon name="kit" />
-              Design system
-            </Link>
             <Link to="/prototype/reader">
               <JournalIcon name="reader" />
-              Read a journey
+              Read
             </Link>
           </nav>
           <div className="sample-rail-note">
@@ -65,9 +61,6 @@ function ShellContent() {
         <div className="sample-work">
           <header className="sample-toolbar">
             <span>Capture. Experience. Learn.</span>
-            <Button variant="secondary" aria-pressed={dark} onClick={() => setDark(!dark)}>
-              Dark appearance
-            </Button>
             <details className="sample-tools">
               <summary>
                 <JournalIcon name="settings" />
@@ -75,6 +68,10 @@ function ShellContent() {
               </summary>
               <div className="sample-panel">
                 <h2>Sample controls</h2>
+                <Button variant="secondary" aria-pressed={dark} onClick={() => setDark(!dark)}>
+                  Dark appearance
+                </Button>
+                <Link to="/prototype/components">Design system</Link>
                 <p className="sample-muted">Fictional data. Changes clear on reload.</p>
                 <label htmlFor="sample-actor">Act as</label>
                 <select

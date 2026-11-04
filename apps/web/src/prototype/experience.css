@@ -453,7 +453,10 @@
     display: none;
   }
   .prototype .sample-toolbar {
-    padding: var(--kairn-spacing-lg);
+    padding: 0;
+    height: 0;
+    min-height: 0;
+    border: 0;
   }
   .atlas-reader-heading,
   .atlas-feature,
