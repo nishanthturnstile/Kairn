@@ -60,3 +60,44 @@ All controls: 44 CSS px web / 48 dp Android; visible keyboard focus, text wrappi
 The five founder scenarios require real selected import/durable save, group contributions, public reader, dated practical information and revision-safe editing. Reader prototypes can demonstrate chronology, no-GPS days, chapter switching and knowledge navigation. They cannot prove capture, publication, collaboration security or revision durability. Production release additionally needs all R1 backend integrations, genuine licensed journey media, live map integration, device evidence on Android/iOS, screen-reader review and performance measurements. Do not mark this record production-ready before those pass.
 
 Executed verification and exact limitations are recorded below as work proceeds.
+
+## Implemented checkpoint and verification
+
+Application checkpoint: `d285e27cd2d9e67ad0527a2c248803a68eab0563`, branch `feat/product-experience-redesign`. This is an active, incomplete redesign, not full-product or production-ready acceptance.
+
+- Shared mineral/blue foundations, semantic light/dark roles and motion durations; compatibility keys retained for current web/native/account consumers.
+- Horizontal product navigation, with sample/design controls in a disclosure. Compact navigation was revised after inspecting the phone layout.
+- Discover: one honestly labelled sample journey, place/text and activity filters, explicit empty results and reset.
+- Reader: four chapters, Story/Explore/Learn, retained chapter selection, dated practical observations, source-chapter navigation, explicit route-context action and an illustrative evidence diagram. The reader fixture is separate from private source state.
+- Creator: existing create/join/revisit retained; moments filter by day and visibility; caption editing has one-step undo; people show distinct powers; review explains publication eligibility without issuing fake links. These remain session-only samples.
+- Native: focused chapter reader and practical details using Unistyles; existing creation and audience controls remain. Runtime inspection is blocked, not passed.
+
+| Check | Actual result and limits |
+|---|---|
+| Windows package/API builds | Passed. Initial direct web build failed on stale compiled package exports; rebuilding packages resolved it. |
+| Web TypeScript, native TypeScript, targeted Vite+ lint and boundaries | Passed on authored changes. No compiler strictness relaxed. |
+| Existing prototype regression | 14/14 passed, including actor/source projections and continuations. |
+| Broader Windows test run | 62/64 passed; two existing restriction-journal tests fail with `EPERM: fsync` on Windows. Do not treat this as a complete pass. |
+| Fresh Linux tooling image, source `2d6182202c4d3d60b9fde2d123019a018de1acd4` | `docker compose run --build --rm --no-deps tooling pnpm test`: 64/64 passed. Subsequent d285e27 changes affect only shell composition/CSS; they received web type and final browser checks. |
+| Final browser input | WSL checkout and rebuilt server at d285e27. Container shell/experience/workspace SHA-256 matched the authored files; runtime source was not borrowed from an old image. |
+| Reader interaction | Rest day, view selection retention, explicit route opening, visible unknown gap, practical filter and source chapter exercised. |
+| Responsive | Headless Edge measured 1440, 390 and 320 CSS px, no document overflow; desktop/mobile inspected. This is responsive web evidence, not native/tablet qualification. |
+| Automated accessibility | Axe WCAG 2 A/AA, 2.1 AA and 2.2 AA tag scans: no violations for tested reader states at all three widths and dark reader. Not a complete WCAG conformance claim; screen readers, maximum text scaling and all account/creator states remain unverified. |
+| Discovery and creator | Native select filtering, clear/reset, search empty state, create/revisit, caption save/undo and administrator-only edit denial passed in headless browser. |
+| Color calculations | Light body 13.12:1, secondary 7.37:1, action 9.01:1; dark body 14.76:1, secondary 8.27:1, action 10.39:1. These are named semantic pairs, not every possible overlay. |
+| Android | Initial id became stale; refreshed list/open found Pixel_10. Launch then returned DEVICE_IN_USE for another session. No takeover, screenshot or runtime pass claimed. iOS not exercised. |
+| Performance | Reader chunk about 12 kB before gzip in build output; route context creates no map/network dependency. Existing generated cover is 2.69 MB, so image derivatives and genuine licensed media remain a release blocker. No CWV/device-performance pass claimed. |
+
+Private evidence: Windows `.kairn/verification/redesign/browser.mjs`, `browser.json`, `contrast.json`, and reader screenshots; WSL `.kairn/verification/redesign-test.log`, `redesign-final-sync.json` and `redesign-final-server.log`. The first axe harness attempt needed an explicit browser context; corrected before reported results. Shared preview automation repeatedly timed out on reset, so final checks used the permitted headless fallback.
+
+Host reconciliation: the WSL ignored `tools/identity-generation` directory contained only its host-local `node_modules`. Preserved the complete directory under `.kairn/checkout-backups/redesign-pre-sync/` before exact-commit sync; no dependencies crossed hosts. Current development requires identity migrations missing from the older foundation database. Followed the documented existing-volume principal/migration procedure without dropping data; API, worker and supporting services returned healthy. No account provider or public deployment was activated.
+
+## Work still required for the complete brief
+
+1. Real selected-media/GPX/FIT import and durable capture UI against its protocol; grouping, recovery, progress and offline behavior need real boundary tests.
+2. Full chapter/revision editing, collaboration invitations/conflicts, publishing/sharing and profile/library flows backed by authorized APIs, beyond sample caption controls.
+3. Genuine licensed travel photography with responsive derivatives; Mapbox integration and authorized real overlays, explicit map action, failure fallback and playback. 3D remains outside the governing R1 baseline.
+4. Complete cross-platform component specimens and native counterparts for newly connected flows; remove remaining legacy primitive-name aliases when consumers migrate.
+5. Native Android/iOS/tablet runtime checks, screen-reader and text-scale review, broader responsive/accessibility coverage, media performance and representative user scenario sessions.
+
+The founder's five scenarios are therefore not all accepted: the public-reader and learning interactions have prototype evidence; capture, secure group contribution and revision-safe production editing remain incomplete. Do not promote this checkpoint as the finished redesign or erase these gates.

@@ -1,5 +1,7 @@
 # Prototype implementation progress
 
+> Current redesign work continues in [the complete experience redesign record](experience_redesign.md). The founder's later brief supersedes the P02-only visual stop below. This document preserves historical evidence; the new checkpoint does not claim production capture/publication acceptance.
+
 3 November 2026. Scope: P00–P02 only, on `feat/experience-prototype`. P03 is not started. This record distinguishes implementation, agent inspection, founder review and production acceptance.
 
 ## Current visual revision — 4 November 2026
