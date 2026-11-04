@@ -114,7 +114,7 @@ try {
       const target = await copyArtifact(path, name);
       if (!target) continue;
       const content = readFileSync(target);
-      assert.deepEqual(content, readFileSync(join(root, path)), `Generated input drift: ${path}`);
+      assert.ok(content.equals(readFileSync(join(root, path))), `Generated input drift: ${path}`);
       result.sourceComparisons.push({
         path,
         sha256: createHash("sha256").update(content).digest("hex"),
@@ -135,6 +135,9 @@ try {
   }
   // Existing wrappers own isolated application projects, durability checks, and cleanup.
   await run(process.execPath, [join(root, "scripts/verify-web.mjs")]);
+  await run(process.execPath, [join(root, "scripts/verify-identity.mjs")]);
+  await run(process.execPath, [join(root, "scripts/verify-domain.mjs")]);
+  await run(process.execPath, [join(root, "scripts/verify-accounts.mjs")]);
   await run(process.execPath, [join(root, "scripts/verify-data.mjs")]);
   result.status = "passed";
   console.log(

@@ -61,3 +61,22 @@ for (const owner of owners) {
     await rm(directory, { recursive: true, force: true });
   }
 }
+
+// Exercise the compiled Node-only transaction API against a real typed table.
+{
+  const backendRequire = createRequire(join(root, "package.json"));
+  const backendCompiler = backendRequire("typescript/package.json");
+  const backendCompilerPath = join(
+    backendRequire.resolve("typescript/package.json"),
+    "..",
+    backendCompiler.bin.tsc,
+  );
+  execFileSync(
+    process.execPath,
+    [backendCompilerPath, "--project", join(root, "tests/types/tsconfig.backend.json")],
+    { stdio: "inherit" },
+  );
+  console.log(
+    "PASS TS7: compiled backend transaction inference and negative schema fixtures without DOM globals.",
+  );
+}

@@ -1,0 +1,4 @@
+services:
+  tooling:
+    build:
+      target: tooling

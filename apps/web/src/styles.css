@@ -1,6 +1,42 @@
 @import "tailwindcss";
 @import "@kairn/design-tokens/tokens.css";
 
+@font-face {
+  font-family: "Instrument Sans";
+  src: url("./assets/fonts/InstrumentSans.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Newsreader";
+  src: url("./assets/fonts/Newsreader.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 500 600;
+  font-display: swap;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-destructive: var(--destructive);
+  --radius-md: var(--kairn-radius-medium);
+  --radius-lg: var(--kairn-radius-large);
+}
+
 :root {
   color: var(--kairn-color-ink950);
   background: var(--kairn-color-paper50);
@@ -32,7 +68,7 @@ a {
   color: var(--kairn-color-forest800);
   text-underline-offset: 0.2em;
 }
-button {
+button:not([data-slot]) {
   font: inherit;
   border: 0;
   border-radius: var(--kairn-radius-medium);
@@ -41,7 +77,7 @@ button {
   color: var(--kairn-color-white);
   cursor: pointer;
 }
-button:disabled {
+button:not([data-slot]):disabled {
   opacity: 0.6;
   cursor: default;
 }
@@ -63,4 +99,19 @@ button:disabled {
 }
 .marker {
   overflow-wrap: anywhere;
+}
+.creator-header nav {
+  flex-wrap: wrap;
+}
+.creator-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--kairn-spacing-lg);
+  margin-top: var(--kairn-spacing-xxl);
+  font-size: 0.75rem;
+}
+.creator-shell:has(.account-specimens) {
+  max-width: var(--kairn-layout-page-max);
+  margin-block: var(--kairn-spacing-xxl);
+  padding-inline: var(--kairn-layout-margin-compact);
 }

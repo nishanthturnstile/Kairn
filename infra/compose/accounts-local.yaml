@@ -1,0 +1,29 @@
+# Explicit local account activation. Production sender/journal activation is separate.
+services:
+  edge:
+    ports: !override ["127.0.0.1:8086:8080"]
+    networks:
+      default:
+        ipv4_address: 10.245.87.2
+  server:
+    environment:
+      PUBLIC_ORIGIN: https://nishanth-windows.tail30fb6a.ts.net:8444
+      KAIRN_ACCOUNTS_CONFIG: /run/kairn/accounts.json
+    volumes:
+      - ./.kairn/accounts/server.json:/run/kairn/accounts.json:ro
+  worker:
+    environment:
+      KAIRN_ACCOUNT_WORKER_CONFIG: /run/kairn/account-worker.json
+    volumes:
+      - ./.kairn/accounts/worker.json:/run/kairn/account-worker.json:ro
+  tooling:
+    volumes:
+      - ./.kairn/accounts/worker.json:/run/kairn/account-worker.json:ro
+  mailpit:
+    ports: !override ["127.0.0.1:8026:8025"]
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 10.245.87.0/24
+          ip_range: 10.245.87.128/25

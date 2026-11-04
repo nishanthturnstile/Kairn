@@ -1,0 +1,59 @@
+.account-live nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.account-live form {
+  margin-block: 1.5rem;
+}
+.account-live textarea {
+  font: inherit;
+  width: 100%;
+  min-height: 7rem;
+  border: 1px solid var(--kairn-color-ink500);
+  border-radius: var(--kairn-radius-small);
+  padding: 0.75rem;
+  box-sizing: border-box;
+  background: var(--kairn-color-paper0);
+}
+.account-live textarea:focus-visible {
+  outline: 3px solid var(--kairn-color-clay500);
+  outline-offset: 2px;
+}
+.account-live .specimen-panel > button {
+  margin: 0.75rem 0.75rem 0.75rem 0;
+}
+.account-live .account-avatar,
+.account-live .account-initials {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  display: grid;
+  place-items: center;
+  background: var(--kairn-color-forest100);
+  font-size: 2rem;
+}
+.account-live ul {
+  list-style: none;
+  padding: 0;
+}
+.account-live li {
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--kairn-color-line200);
+}
+
+.account-live[data-view="account"] h1 {
+  font-family: var(--kairn-typography-family-interface), system-ui, sans-serif;
+  font-weight: 600;
+}
+
+.account-live {
+  max-width: 48rem;
+  margin-inline: auto;
+}
+.account-live[data-view="account"] .specimen-intro h1 {
+  font-size: clamp(2rem, 3vw, 2.375rem);
+  line-height: 1.16;
+  font-weight: 700;
+}

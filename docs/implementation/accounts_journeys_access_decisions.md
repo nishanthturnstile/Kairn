@@ -176,6 +176,8 @@ Before real shared-data activation, operations must supply and verify: destinati
 
 The deployment capability flag stays closed until this record and G09 pass. A local test append adapter is explicitly a failure fixture. If an available backup destination cannot provide the required append/head/integrity semantics, implement the reviewed coordinator there or choose an independently hosted alternative before activation; do not call an ordinary object upload equivalent proof.
 
+Development decision, 3 November 2026: the user has a separate Linux server but defers deployment there. Local module testing and account implementation proceed. D01/D11 and actual independent-host G09 remain pending before real shared-data activation.
+
 ### Writer fence
 
 Implement the single-VPS fence in plan section 8.3 using external maintenance/service controls, writer roles set unable to establish new sessions, termination of old pooled sessions, disabled automatic service restart and replay-only credentials. Restore under that fence, reapply it if restored role metadata differs, obtain the independent head and replay. Release using a new writer credential generation only after completeness/integrity tests pass; old credentials remain invalid.

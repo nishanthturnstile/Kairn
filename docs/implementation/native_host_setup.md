@@ -46,7 +46,9 @@ pnpm install --frozen-lockfile
 pnpm verify:ios
 ```
 
-The wrapper generates pinned iOS inputs, restores `apps/mobile/native-locks/ios/Podfile.lock`, installs Pods in locked mode, and compiles the host simulator architecture with two Xcode jobs. The qualified lock SHA-256 is `08f7d47babd31b361ab39b95617dde4d50d3427ea2cc0c80fca567407522a41a`. Use `pnpm ios:pods:update` only for an intentional, reviewed native dependency update. Native generation recreates local project settings, so reselect Personal Team afterward if a physical build needs it.
+The wrapper generates pinned iOS inputs, restores `apps/mobile/native-locks/ios/Podfile.lock`, installs Pods in locked mode, and compiles the host simulator architecture with two Xcode jobs. The qualified lock SHA-256 is `af67b96211728a2722f73fdfe7cba7abf05dc81afa5a9476be9f99d615e0c2ef`. Use `pnpm ios:pods:update` only for an intentional, reviewed native dependency update. Native generation recreates local project settings, so reselect Personal Team afterward if a physical build needs it.
+
+The [SDK 58 patch refresh](expo_sdk_refresh_progress.md) records follow-up compilation separately from the original device/UI acceptance. Its Expo prebuilt Core podspec embeds an absolute local tarball URL in its checksum. Locked Pods therefore use the configured canonical Mac checkout above; moving to another checkout path requires an intentional reviewed native-lock refresh. The isolated-path checksum diagnostic did not change a dependency version.
 
 The simulator artifact is `.kairn/ios-build/Build/Products/Debug-iphonesimulator/KairnDev.app` (`dev.kairn.app`, x86_64 on this host). The signed arm64 iPad artifact is `.kairn/ipad-build/Build/Products/Debug-iphoneos/KairnDev.app`. Build/install, runtime, and user-observed results are separate entries in setup progress.
 

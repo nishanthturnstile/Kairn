@@ -287,7 +287,7 @@ if (mode === "check") {
   const cwd = join(mobile, "android");
   if (process.platform === "win32") {
     // Fixed command/validated architecture values; paths stay in cwd, outside shell text.
-    run(process.env.ComSpec ?? "cmd.exe", ["/d", "/s", "/c", `gradlew.bat ${args.join(" ")}`], {
+    run(process.env.ComSpec ?? "cmd.exe", ["/d", "/s", "/c", `.\\gradlew.bat ${args.join(" ")}`], {
       cwd,
     });
   } else run("./gradlew", args, { cwd });

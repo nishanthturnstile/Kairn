@@ -10,11 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AccountRouteImport } from './routes/account'
+import { Route as CreateAccountRouteImport } from './routes/create-account'
+import { Route as RecoverRouteImport } from './routes/recover'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as SignInRouteImport } from './routes/sign-in'
+import { Route as VerifyEmailRouteImport } from './routes/verify-email'
+import { Route as SetupAccountsRouteImport } from './routes/setup.accounts'
 import { Route as SetupStatusRouteImport } from './routes/setup.status'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountRoute = AccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CreateAccountRoute = CreateAccountRouteImport.update({
+  id: '/create-account',
+  path: '/create-account',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecoverRoute = RecoverRouteImport.update({
+  id: '/recover',
+  path: '/recover',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignInRoute = SignInRouteImport.update({
+  id: '/sign-in',
+  path: '/sign-in',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerifyEmailRoute = VerifyEmailRouteImport.update({
+  id: '/verify-email',
+  path: '/verify-email',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SetupAccountsRoute = SetupAccountsRouteImport.update({
+  id: '/setup/accounts',
+  path: '/setup/accounts',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SetupStatusRoute = SetupStatusRouteImport.update({
@@ -25,27 +67,83 @@ const SetupStatusRoute = SetupStatusRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/account': typeof AccountRoute
+  '/create-account': typeof CreateAccountRoute
+  '/recover': typeof RecoverRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/sign-in': typeof SignInRoute
+  '/verify-email': typeof VerifyEmailRoute
+  '/setup/accounts': typeof SetupAccountsRoute
   '/setup/status': typeof SetupStatusRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/account': typeof AccountRoute
+  '/create-account': typeof CreateAccountRoute
+  '/recover': typeof RecoverRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/sign-in': typeof SignInRoute
+  '/verify-email': typeof VerifyEmailRoute
+  '/setup/accounts': typeof SetupAccountsRoute
   '/setup/status': typeof SetupStatusRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/account': typeof AccountRoute
+  '/create-account': typeof CreateAccountRoute
+  '/recover': typeof RecoverRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/sign-in': typeof SignInRoute
+  '/verify-email': typeof VerifyEmailRoute
+  '/setup/accounts': typeof SetupAccountsRoute
   '/setup/status': typeof SetupStatusRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/setup/status'
+  fullPaths:
+    | '/'
+    | '/account'
+    | '/create-account'
+    | '/recover'
+    | '/reset-password'
+    | '/sign-in'
+    | '/verify-email'
+    | '/setup/accounts'
+    | '/setup/status'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/setup/status'
-  id: '__root__' | '/' | '/setup/status'
+  to:
+    | '/'
+    | '/account'
+    | '/create-account'
+    | '/recover'
+    | '/reset-password'
+    | '/sign-in'
+    | '/verify-email'
+    | '/setup/accounts'
+    | '/setup/status'
+  id:
+    | '__root__'
+    | '/'
+    | '/account'
+    | '/create-account'
+    | '/recover'
+    | '/reset-password'
+    | '/sign-in'
+    | '/verify-email'
+    | '/setup/accounts'
+    | '/setup/status'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AccountRoute: typeof AccountRoute
+  CreateAccountRoute: typeof CreateAccountRoute
+  RecoverRoute: typeof RecoverRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
+  SignInRoute: typeof SignInRoute
+  VerifyEmailRoute: typeof VerifyEmailRoute
+  SetupAccountsRoute: typeof SetupAccountsRoute
   SetupStatusRoute: typeof SetupStatusRoute
 }
 
@@ -56,6 +154,55 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account': {
+      id: '/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/create-account': {
+      id: '/create-account'
+      path: '/create-account'
+      fullPath: '/create-account'
+      preLoaderRoute: typeof CreateAccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recover': {
+      id: '/recover'
+      path: '/recover'
+      fullPath: '/recover'
+      preLoaderRoute: typeof RecoverRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sign-in': {
+      id: '/sign-in'
+      path: '/sign-in'
+      fullPath: '/sign-in'
+      preLoaderRoute: typeof SignInRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verify-email': {
+      id: '/verify-email'
+      path: '/verify-email'
+      fullPath: '/verify-email'
+      preLoaderRoute: typeof VerifyEmailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/setup/accounts': {
+      id: '/setup/accounts'
+      path: '/setup/accounts'
+      fullPath: '/setup/accounts'
+      preLoaderRoute: typeof SetupAccountsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/setup/status': {
@@ -70,6 +217,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AccountRoute: AccountRoute,
+  CreateAccountRoute: CreateAccountRoute,
+  RecoverRoute: RecoverRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
+  SignInRoute: SignInRoute,
+  VerifyEmailRoute: VerifyEmailRoute,
+  SetupAccountsRoute: SetupAccountsRoute,
   SetupStatusRoute: SetupStatusRoute,
 }
 export const routeTree = rootRouteImport

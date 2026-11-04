@@ -4,6 +4,8 @@ Date: 3 November 2026. Read with the [final implementation plan](accounts_journe
 
 The planning gaps from the independent review now have concrete designs, selected policies, work owners and acceptance checks. We can begin local implementation. Actual schema, auth, device and independent restore evidence still needs to be produced; “ready to implement” does not mean the feature or deployment is complete.
 
+Current execution (4 November): B02 and B03 local boundaries are complete; B01 remains in progress and B04 has started. Use the [execution record](accounts_journeys_access_progress.md) and [B04 delivery plan](accounts_b04_plan.md) for the live checkpoint. The original starting sequence and dated branch observations below preserve the initial handoff.
+
 ## 1. What you will see first
 
 The first usable feature is: create an account, receive verification/recovery mail locally, sign in, manage a private profile/session, and reach a polished Your journeys empty state. Next, create one private journey and invite another test account into that exact same journey with clear powers. The later capture/import/publishing product still follows the main R1 order.
@@ -18,7 +20,7 @@ That earlier observation was superseded when setup PR #2 merged into main at 7db
 
 Plan finalization itself did not publish a PR. The subsequent authorized checkout reconciliation publishes the preserved planning documents with the source-management helper, separately from application implementation. The next feature uses its own development-based branch/publication; no account credential or signing setting needs to change just to start code.
 
-Record the initial source commit, selected decision version and batch status in `docs/implementation/accounts_journeys_access_progress.md` when implementation begins. That progress file does not exist yet. Keep each batch not started/in progress/verified with actual evidence; the repository setup checkpoint remains the source for completed foundation work.
+Implementation has now begun on the WSL authoring checkout. [Implementation progress](accounts_journeys_access_progress.md) records the actual starting commit, selected baseline, first B01 slice and executed evidence. Keep each batch not started/in progress/verified with actual evidence; the repository setup checkpoint remains the source for completed foundation work.
 
 ## 3. First reviewable coding batch
 
@@ -73,6 +75,6 @@ docker compose --profile tools run --build --rm tooling pnpm test:integration
 
 Windows native uses `pnpm check:mobile` / `pnpm verify:android`; Mac uses `pnpm verify:ios` for the affected rebuilt inputs. The host guide owns exact native sequencing/signing. `pnpm api:generate` intentionally updates contracts; `pnpm api:check` detects drift. Vite+ remains the formatter/lint/test owner.
 
-B02 adds the actual domain migration commands and focused real-DB acceptance to the existing verification entry points. They do not exist yet, and the current queue-only bootstrap is not a domain migration test. Add only mandatory/critical tests needed for the boundary; do not add routine configuration-value tests or a new task runner.
+B02 now supplies identity migration/generation commands, the enqueue-only producer boundary and `pnpm verify:identity` through the existing verification entry point. The [identity boundary guide](identity_database.md) records the policy graph, restricted queue grants, existing-volume upgrade and current/planned pool budget; [implementation progress](accounts_journeys_access_progress.md) owns executed results. Journey/grant/operation schemas and full command/audit/event/mail acceptance remain open. Add only mandatory/critical tests needed for the boundary; do not add routine configuration-value tests or a new task runner.
 
 Before each handoff, record code/schema/lock/image/device inputs, actual command results, visual task evidence and remaining limits. Never borrow setup CI or an earlier native pass to qualify changed auth/SQL/UI inputs. Push/review/CI happen on the actual implementation head when publishing is authorized; a green check from a closed PR does not qualify later changes.

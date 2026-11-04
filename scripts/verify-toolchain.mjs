@@ -28,6 +28,7 @@ const expected = [
   "packages/shared",
   "packages/sync-protocol",
   "tools/api-generation",
+  "tools/identity-generation",
 ];
 const actual = [];
 for (const group of ["apps", "packages", "tools"]) {

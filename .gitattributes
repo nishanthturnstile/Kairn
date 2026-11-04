@@ -8,3 +8,5 @@
 *.woff2 binary
 # Preserve generated patch headers/context; pnpm hashes their exact bytes.
 patches/*.patch whitespace=-blank-at-eol
+# Preserve pinned upstream license notices byte-for-byte.
+apps/web/src/assets/fonts/*-OFL.txt whitespace=-blank-at-eol

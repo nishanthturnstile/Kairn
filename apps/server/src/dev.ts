@@ -1,12 +1,13 @@
 import { createServer } from "node:http";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import { getRequestListener } from "@hono/node-server";
 import { createServer as createViteServer } from "vite";
 import { z } from "zod";
 import { createLogger } from "@kairn/backend";
 import { checkDatabase, createDatabasePool, readDatabaseUrl } from "@kairn/backend/database";
 import { createApp } from "./app.js";
+import { loadAccountRuntime } from "./accounts/runtime.js";
+import { createNodeRequestListener } from "./node-handler.js";
 import { readServerEnvironment } from "./environment.js";
 import { readerDocument } from "./document.js";
 
@@ -17,6 +18,11 @@ database.on("error", () =>
   logger.error({ code: "database_error" }, "Idle database connection failed"),
 );
 await checkDatabase(database);
+const accountsRuntime = await loadAccountRuntime(
+  process.env.KAIRN_ACCOUNTS_CONFIG,
+  environment.publicOrigin,
+  database,
+);
 const root = resolve(process.cwd(), "../web");
 const server = createServer();
 const vite = await createViteServer({
@@ -39,7 +45,12 @@ const vite = await createViteServer({
 });
 const RenderedSchema = z.strictObject({ html: z.string(), title: z.string() });
 const app = createApp({
-  checkReady: () => checkDatabase(database),
+  ...(accountsRuntime ? { accounts: accountsRuntime.accounts } : {}),
+  designSpecimens: true,
+  checkReady: async () => {
+    await checkDatabase(database);
+    await accountsRuntime?.checkReady();
+  },
   publicOrigin: environment.publicOrigin,
   onError: (error) => {
     vite.ssrFixStacktrace(error);
@@ -65,7 +76,7 @@ const app = createApp({
     },
   },
 });
-const listener = getRequestListener(app.fetch);
+const listener = createNodeRequestListener(app, accountsRuntime);
 server.on("request", (request, response) => {
   const pathname = new URL(request.url ?? "/", environment.publicOrigin).pathname;
   const vitePath =
@@ -82,6 +93,7 @@ for (const signal of ["SIGINT", "SIGTERM"] as const)
   process.once(signal, () => {
     void vite
       .close()
+      .then(() => accountsRuntime?.close())
       .then(() => server.close(() => void database.end().then(() => process.exit(0))));
     setTimeout(() => process.exit(1), 10_000).unref();
   });

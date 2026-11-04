@@ -62,6 +62,8 @@ for (const mode of ["development", "runtime"]) {
       "run",
       "--rm",
       "--no-deps",
+      "-e",
+      `TEST_WEB_MODE=${mode}`,
       "tooling",
       "pnpm",
       "test:integration",
@@ -71,6 +73,7 @@ for (const mode of ["development", "runtime"]) {
 import assert from 'node:assert/strict';
 import { existsSync, realpathSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import { createRequire } from 'node:module';
 for (const name of ['@kairn/backend', '@kairn/contracts', '@kairn/shared', '@kairn/sync-protocol', '@kairn/design-tokens', '@kairn/web/reader']) {
   await import(name);
   const path = realpathSync(fileURLToPath(import.meta.resolve(name)));
@@ -78,6 +81,10 @@ for (const name of ['@kairn/backend', '@kairn/contracts', '@kairn/shared', '@kai
 }
 for (const name of ['vite', 'vite-plus', 'typescript', 'openapi-typescript', '@playwright/test']) {
   assert.throws(() => import.meta.resolve(name));
+}
+const backendRequire = createRequire(import.meta.resolve('@kairn/backend'));
+for (const name of ['drizzle-kit', 'auth', '@kairn/identity-generation', 'gel', 'mysql2']) {
+  assert.throws(() => backendRequire.resolve(name));
 }
 for (const path of ['src', 'apps', 'packages', 'tools', '.env']) assert.equal(existsSync(path), false, path);
 assert.notEqual(process.getuid(), 0);

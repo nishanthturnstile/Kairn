@@ -1,0 +1,11 @@
+services:
+  postgres:
+    command: [postgres, -c, "kairn.test_project=${KAIRN_DOMAIN_TEST_PROJECT:?}"]
+  tooling:
+    build:
+      target: source
+  mailpit:
+    extends:
+      file: compose.override.yaml
+      service: mailpit
+    ports: !reset []

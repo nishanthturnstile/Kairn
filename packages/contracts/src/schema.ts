@@ -1,6 +1,8 @@
 // Generation/server registration only. Client entry points never import this module.
 import { createRoute, OpenAPIHono } from "@hono/zod-openapi";
 import { ApiErrorSchema, CONTRACT_VERSION, SYSTEM_PATH, SystemStatusSchema } from "./schemas.js";
+import { accountJourneyRoutes } from "./domain/routes.js";
+import { extendedAccountJourneyRoutes } from "./domain/extended-routes.js";
 
 export const systemRoute = createRoute({
   method: "get",
@@ -27,6 +29,8 @@ export function createOpenAPIDocument(): ReturnType<OpenAPIHono["getOpenAPI31Doc
   // Register descriptors without handlers, a process entry, sockets, or environment reads.
   const registry = new OpenAPIHono();
   registry.openAPIRegistry.registerPath(systemRoute);
+  for (const route of accountJourneyRoutes) registry.openAPIRegistry.registerPath(route);
+  for (const route of extendedAccountJourneyRoutes) registry.openAPIRegistry.registerPath(route);
   return registry.getOpenAPI31Document({
     openapi: "3.1.0",
     info: { title: "Kairn API", version: String(CONTRACT_VERSION) },

@@ -732,9 +732,11 @@ Observed on 1 November 2026. Exact direct pins and the resolved lockfile are req
 | Web React | `react`, `react-dom` | `19.3.1` | Matching render/hydration pair. |
 | Web routes | `@tanstack/react-router`, `@tanstack/router-plugin` | `1.170.46`, `1.168.48` | Foundation; compatible release pair, not necessarily equal numbers. |
 | Web/native server state | `@tanstack/react-query` | `5.105.1` | Foundation and processing-status UI. |
-| Web/native forms | `@tanstack/react-form` | `1.33.5` | Journey, details, rights, and publication forms. |
+| Web/native forms | `@tanstack/react-form` | `1.33.5` | B04 account forms; later journey, details, rights, and publication forms. |
 | Web batch review | `@tanstack/react-table` | `9.3.1` | Import/moderation workspace; no native table adapter. |
 | Web component generation | `shadcn` CLI | `4.23.0` | Generate only selected components; owned source, not a runtime umbrella library. |
+| Owned web primitive support | `cn`, `class-variance-authority` | `0.5.2`, `0.7.1` | B01 selected shadcn source utilities; no component-explorer or second styling framework. |
+| Web primitive base | `@radix-ui/react-slot`, `@radix-ui/react-label`, `@radix-ui/react-separator` | `1.5.0`, `2.1.17`, `1.2.0` | B01 generated button/field support, narrowed to the three used primitives instead of the full `radix-ui` entry. |
 | Web styles | `tailwindcss`, `@tailwindcss/vite` | `4.3.3` | Design foundation. |
 | Icons | `lucide-react`, `lucide-react-native` | `1.66.0` | Design foundation with the native SVG peer below. |
 | Web recovery | `dexie` | `4.4.7` | Unsent web edits/outbox; distinct from Query caching. |
@@ -744,10 +746,14 @@ Observed on 1 November 2026. Exact direct pins and the resolved lockfile are req
 | Generator compiler | `typescript` in `tools/api-generation` | `6.0.3` exact | Development-only compiler API exception for `openapi-typescript@7.13.0`; its declared `^5.x` peer is extended only for this exact tested pair. Root/shared remain on TypeScript 7; contracts never depend on this tool. |
 | Database access | `drizzle-orm`, `drizzle-kit`, `pg` | `0.45.4`, `0.31.11`, `8.23.1` | Reviewed data schema/migrations, raw spatial/retrieval SQL where needed. |
 | Authentication | `better-auth`, `@better-auth/expo` | `1.7.15` | Accounts, sessions, recovery, native integration. |
+| Auth shared core/utilities | `@better-auth/core`, `@better-auth/utils` | `1.7.15`, `0.5.1` | Explicit Expo integration peers in the B04 server/native graph. |
+| Auth schema generation | `auth` CLI | `1.7.15` | Development-only in `tools/identity-generation`, matched to Better Auth; no runtime CLI. |
+| Auth runtime/declaration peers | `@better-fetch/fetch`, `better-call`, `jose`, `kysely`, `nanostores`, `@types/bun` | `1.3.3`, `1.4.4`, `6.2.15`, `0.29.8`, `1.5.5`, `1.4.4` | Explicit strict peer/declaration graph in the isolated auth generator, B04 HTTP server and native client. `@types/bun` stays development-only, loaded only by those two workspaces because the auth declarations import `bun:sqlite`; the backend remains checked with Node-only globals. Native uses a narrow checked adapter over the actual SDK runtime so server-only ambient declarations do not enter its compilation. No Bun runtime or second backend is selected. |
+| Drizzle declaration peers | `gel`, `mysql2` | `2.2.1`, `3.24.6` | Development-only published dialect declaration dependencies; PostgreSQL remains the runtime database. |
 | Durable worker | `pg-boss` | `12.38.0` | First asynchronous domain work; direct `fromDrizzle` transaction adapter. |
 | Queue peer | `@opentelemetry/api` | `1.10.0` | Required pg-boss peer at foundation; no tracing backend is introduced. |
 | PostgreSQL declarations | `@types/pg` | `8.23.1` | Backend development types for the selected driver. |
-| Portable object storage | `@aws-sdk/client-s3` | `3.1161.0` | Development-only foundation storage acceptance, then server-only source uploads/media adapter. Future R2/AWS S3 endpoint configuration stays behind that adapter. |
+| Portable object storage | `@aws-sdk/client-s3` | `3.1161.0` | Foundation storage acceptance and the B03 server-only private identity-media adapter; later source uploads use the same boundary. Future R2/AWS S3 endpoint configuration stays behind that adapter. |
 | AI tasks | `ai` | `7.0.159` | Transcription/embedding/generation workstream. Gateway provider is exported from this package. |
 | SMTP | `nodemailer` | `10.3.1` | Account email/invitations; same transport for both environments. |
 | Logs | `pino` | `10.4.0` | Server/worker foundation, with redaction. |
@@ -759,6 +765,7 @@ Observed on 1 November 2026. Exact direct pins and the resolved lockfile are req
 | Native maps | `@rnmapbox/maps` | `10.3.16` | Community bridge with Expo config plugin. Separate native workspace and development builds; actual Android and local iOS qualification required. |
 | Web behavior tests | `@testing-library/react` | `16.3.3` | Add with meaningful component behavior. |
 | Web acceptance | `@playwright/test`, `@axe-core/playwright` | `1.64.1`, `4.14.0` | Integrated web/accessibility qualification; no separate browser app service. |
+| Accessibility test peer | `playwright-core` | `1.64.1` | Explicit `@axe-core/playwright` peer; matches the existing Playwright browser/test version. Development-only. |
 
 Vite+ bundles Vite `8.3.5`, Rolldown `1.2.15`, Vitest `5.0.5`, Oxlint `1.89.0`, Oxfmt `0.74.0`, and tsdown `0.23.1`. Those are bundled observations, not additional direct selections. Preserve the supported pnpm overrides for `vite@*` to the single Vite+ core and `vitest@*` to the bundled runner version. Use `vite-plus` config APIs and `vite-plus/test` test APIs. No standalone Biome, ESLint, Prettier, Vitest, or Turbo stack is added. [Vite+ local setup](https://viteplus.dev/guide/local-cli), [shipped-tool evidence](../research/architecture/revision_toolchain_ai_email.md).
 
@@ -772,36 +779,39 @@ Setup step 3 qualifies the composed Hono/Vite development server and deployed pr
 
 Setup step 4 adds the selected PostgreSQL, SeaweedFS, Mailpit, and pg-boss foundation. The lockfile retains a declaration-only `pg-boss@12.38.0` patch restoring two interfaces present in its tagged source but omitted by its declaration build; runtime code is unchanged and declaration checking remains enabled. Schema-owner credentials are reserved for bootstrap and acceptance tooling, outside both application processes. Three focused data integration scenarios and the required startup/readiness gates are recorded in [step 4 evidence](../research/repository-setup/repository_setup_progress_2026-11-02.md#step-4-verification), following the [testing scope guidance](../../AGENTS.md#testing-scope). Domain transaction/Drizzle integration, uploads, and account email remain their later workstreams.
 
+The first account B02 slice adds strict declaration-only repairs for Drizzle/Gel and isolates auth generation from runtime. Its [identity boundary guide](../implementation/identity_database.md) records roles, the pool budget and the version-specific frozen legacy deployment workaround for pnpm's patched development-peer pruning. The normal frozen source install and final dependency-closure probes remain mandatory. [Account implementation progress](../implementation/accounts_journeys_access_progress.md) owns the current evidence; foundation acceptance above does not qualify these changed inputs.
+
 AI SDK currently depends on Gateway provider `4.0.132`. Using its exported `gateway`/`createGateway` does not require a second direct package. Install a provider subpackage only if code actually imports a capability not exported by the selected core.
 
 Mapbox package versions were rechecked against the [web registry metadata](https://registry.npmjs.org/mapbox-gl/latest) and [native bridge metadata](https://registry.npmjs.org/@rnmapbox/maps/latest). The bridge declares an optional web-only `mapbox-gl` peer of `^2.9.0`, which does not match our current web package. Use direct GL JS in the web workspace and the bridge only in the native workspace. Do not use its web shim, auto-install that optional peer, downgrade web GL JS, or suppress all peer checks. The [selection metadata](../research/architecture/mapbox_selection_versions.json) records these constraints.
 
 ### 14.3 Expo-supported direct modules and peers
 
-Use `expo install` and `expo-doctor` against the adopted SDK. The [shipped SDK matrix](https://unpkg.com/expo@58.0.22/bundledNativeModules.json), [template metadata](https://registry.npmjs.org/expo-template-default/58.0.31), and native builds govern mobile compatibility. The lockfile records actual resolutions; do not independently maximize every SDK peer. The locked Unistyles/Nitro foundation pins passed Android and iOS build/runtime qualification with the adopted SDK. Requalify the affected combination when those native inputs change.
+Use `expo install` and `expo-doctor` against the adopted SDK. The [shipped SDK matrix](https://unpkg.com/expo@58.0.23/bundledNativeModules.json), [template metadata](https://registry.npmjs.org/expo-template-default/58.0.31), and native builds govern mobile compatibility. The lockfile records actual resolutions; do not independently maximize every SDK peer. The locked Unistyles/Nitro foundation pins passed Android and iOS build/runtime qualification with the adopted SDK. Requalify the affected combination when those native inputs change. The [SDK 58 patch refresh](../implementation/expo_sdk_refresh_progress.md) records the current dependency update and its new verification; the earlier foundation build does not qualify the refreshed graph.
 
 | Package/group | SDK-supported selection | Reason / stage |
 |---|---|---|
-| `expo`, `react-native` | `58.0.22`, `0.88.1` | Mobile foundation. |
+| `expo`, `react-native` | `58.0.23`, `0.88.1` | Mobile foundation. |
 | Mobile `react` | `19.3.0` | SDK/template pin; intentionally differs from web. |
-| Mobile transitive navigation peers | `react-dom@19.3.0`, `@expo/metro-runtime@58.0.16` | Required by the installed Router/Radix graph during foundation; this does not select a mobile web application. |
+| Mobile transitive navigation peers | `react-dom@19.3.0`, `@expo/metro-runtime@58.0.17` | Required by the installed Router/Radix graph during foundation; this does not select a mobile web application. |
 | Mobile `typescript` | `~6.0.3` template baseline | Keep until current mobile tools pass with the latest compiler. This is an explicit SDK exception. |
-| Mobile development tooling | `@babel/core@7.29.7`, `babel-preset-expo@58.0.23`, `react-refresh@0.14.2`, `@react-native/metro-config@0.88.1`, `expo-doctor@1.21.5` | SDK-matched Babel preset and its explicit refresh peer; matching Metro config supplies Worklets' required peer. Keep Expo Metro defaults. |
+| Mobile development tooling | `@babel/core@7.29.7`, `babel-preset-expo@58.0.24`, `react-refresh@0.14.2`, `@react-native/metro-config@0.88.1`, `expo-doctor@1.21.5` | SDK-matched Babel preset and its explicit refresh peer; matching Metro config supplies Worklets' required peer. Keep Expo Metro defaults. |
 | `expo-dev-client` | `58.0.18`, selected through `expo install` | Local Android/iOS development builds without an EAS requirement. |
 | Foundation display/type peers | `expo-font@58.0.11`, `expo-symbols@58.0.4`, `expo-system-ui@58.0.7` | Router's published native-tab declarations require Symbols and its font peer; System UI applies the selected light native appearance. No additional UI framework or icon system is introduced. |
-| `expo-router` | `~58.0.29` | Navigation/deep links. |
+| `expo-router` | `~58.0.30` | Navigation/deep links. |
 | `react-native-unistyles` | `3.7.0` | Mobile foundation; confirmed native styling layer, themes, variants, and responsive styles. Requires New Architecture and the Babel integration. |
 | `react-native-nitro-modules` | `0.37.1` exact | Mobile foundation; meets Unistyles 3.4+ minimum. Pin explicitly; do not float independently of Unistyles. |
 | `@react-native/normalize-colors` | Exact installed React Native version (`0.88.1` baseline) | Required Unistyles peer; explicitly declare in mobile and verify against the actual SDK graph. |
-| `react-native-screens`, `react-native-safe-area-context` | `~4.30.1`, `~5.10.1` | Navigation/display peers selected with the Expo router. |
+| `react-native-screens`, `react-native-safe-area-context` | `~4.30.1`, `~5.11.1` | Navigation/display peers selected with the Expo router. |
 | `expo-sqlite`, `expo-file-system` | `~58.0.15`, `~58.0.13` | Durable moments, unsent commands, uploads, files. |
 | `expo-camera` | `~58.0.14` | Photo and bounded video capture. |
 | `expo-audio`, `expo-video` | `~58.0.11`, `~58.0.13` | Voice capture and user-started playback. |
-| `expo-image-picker`, `expo-document-picker` | `~58.0.10`, `~58.0.4` | Explicit media/audio/GPX/FIT selection. |
+| `expo-image-picker`, `expo-document-picker` | `58.0.10`, `~58.0.4` | Image Picker activated in B04 for selected private avatars; document/audio/GPX/FIT selection remains later. |
+| `expo-crypto` | `58.0.7` | B04 UUID command identities and SHA-256 avatar declarations; no web crypto polyfill. |
 | `expo-location` | `~58.0.20` | Bounded foreground capture location. |
-| `expo-secure-store` | `~58.0.2` | Native session material. |
-| `expo-network`, `expo-web-browser`, `expo-constants` | `~58.0.4`, `~58.0.7`, `~58.0.14` | Required Expo/auth integration peers, not an extra authentication system. |
-| `expo-sharing`, `expo-linking` | `~58.0.21`, `~58.0.15` | Native sharing/deep-link behavior. |
+| `expo-secure-store` | `58.0.2` | B04 native session material and bounded recovery intent. |
+| `expo-network`, `expo-web-browser`, `expo-constants` | `58.0.4`, `58.0.7`, `58.0.15` | B04 native online state and required Expo/auth integration peers. |
+| `expo-sharing`, `expo-linking` | `~58.0.21`, `~58.0.16` | Native sharing/deep-link behavior. |
 | `expo-haptics` | `~58.0.7` | Capture-stage feedback after the completed durable local save, as specified by the application design. |
 | `expo-background-task` | `~58.0.12` | Opportunistic deferred sync; no immediate-after-force-stop promise. |
 | `expo-image` | `~58.0.18` | Image presentation/cache controls. |
@@ -811,9 +821,9 @@ Use `expo install` and `expo-doctor` against the adopted SDK. The [shipped SDK m
 
 Unistyles/Nitro pins and peer observations are recorded in the [Unistyles compatibility evidence](../research/repository-setup/unistyles_compatibility.json). Unistyles requires React Native 0.81+, React 19+, Expo SDK 54+ when using Expo, and Xcode 16.4+ for Nitro; the actual adopted SDK may impose higher toolchain floors. Reanimated and `react-native-edge-to-edge` are optional peers in Unistyles 3.7.0. Keep Reanimated at its existing feature-driven stage unless navigation needs it earlier. Expo already enables Android edge-to-edge; do not add the deprecated edge-to-edge package just to satisfy an optional peer. [Upstream compatibility table](https://github.com/jpudysz/react-native-unistyles#installation).
 
-The actual foundation graph requires Reanimated and Gesture Handler through `expo-router@58.0.29` → `react-native-drawer-layout@4.2.12`, so the selected Reanimated/Worklets/Gesture Handler set enters in setup step 1 under that navigation exception. Native build/runtime qualification passed for the foundation and remains required when its inputs change.
+The adopted graph requires Reanimated and Gesture Handler through `expo-router@58.0.30` → `react-native-drawer-layout@4.2.12`, so the selected Reanimated/Worklets/Gesture Handler set enters in setup step 1 under that navigation exception. Native build/runtime qualification passed for the foundation and remains required when its inputs change.
 
-The styled shell initializes Unistyles before Router and uses the generated status client with TanStack Query. Its native-only TypeScript environment uses ES libraries, real React Native globals, and RN 0.88's `react-native-legacy-deep-imports` declaration condition for existing Router/Safe Area type imports. Strict declaration checking and exact optional properties remain enabled. Version-specific declaration-only patches for Router 58.0.29, Unistyles 3.7.0, and Expo Server 58.0.6 correct published declaration defects without changing runtime code or fabricating DOM globals. SDK 58 requires New Architecture by default; its app schema rejects the older `newArchEnabled` configuration field. See the [mobile setup evidence](../implementation/repository_setup_progress.md#current-checkpoint) for actual native qualification status.
+The styled shell initializes Unistyles before Router and uses the generated status client with TanStack Query. Its native-only TypeScript environment uses ES libraries, real React Native globals, and RN 0.88's `react-native-legacy-deep-imports` declaration condition for existing Router/Safe Area type imports. Strict declaration checking and exact optional properties remain enabled. Version-specific declaration-only patches for Router 58.0.30, Unistyles 3.7.0, and Expo Server 58.0.6 correct published declaration defects without changing runtime code or fabricating DOM globals. SDK 58 requires New Architecture by default; its app schema rejects the older `newArchEnabled` configuration field. See the [mobile setup evidence](../implementation/repository_setup_progress.md#current-checkpoint) for actual native qualification status.
 
 NativeWind is excluded from this project. Wider media-library scanning, an additional UI framework, FlashList, and push services still require a selected requirement/integration before becoming application dependencies. Agent skills for future workstreams are installed now under `.agents/skills`; having that guidance available does not install its example libraries or change this dependency register. System capture durability still requires actual files/device tests; metadata compatibility is not runtime evidence.
 

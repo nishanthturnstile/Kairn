@@ -1,1 +1,1 @@
-export { default } from "../screens/status-screen";
+export { AccountScreen as default } from "../screens/account-screen";
