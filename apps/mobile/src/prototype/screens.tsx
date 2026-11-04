@@ -1,6 +1,6 @@
 import { AppearanceControl } from "../theme/appearance";
 import { useState, type ReactNode } from "react";
-import { KeyboardAvoidingView, Platform, Pressable, ScrollView, Text, View } from "react-native";
+import { Platform, Pressable, ScrollView, Text, View } from "react-native";
 import { Link as RouterLink, usePathname, useRouter } from "expo-router";
 import { StyleSheet, withUnistyles } from "react-native-unistyles";
 import {
@@ -25,10 +25,7 @@ export function SamplePage({ children }: { children: ReactNode }) {
   const actor = state.data.actors.find((item) => item.id === state.actorId)!;
   const home = pathname === "/prototype" || pathname === "/prototype/";
   return (
-    <KeyboardAvoidingView
-      style={styles.fill}
-      behavior={Platform.OS === "ios" ? "padding" : undefined}
-    >
+    <View style={styles.fill}>
       <View style={styles.header}>
         <View style={styles.brand}>
           <JournalMark />
@@ -56,6 +53,10 @@ export function SamplePage({ children }: { children: ReactNode }) {
       <StyledScrollView
         keyboardShouldPersistTaps="handled"
         contentInsetAdjustmentBehavior="automatic"
+        // Let the native scroll view move the focused input above the iOS IME.
+        // Shrinking its parent alone can leave a lower input outside the viewport.
+        automaticallyAdjustKeyboardInsets
+        keyboardDismissMode={Platform.OS === "ios" ? "interactive" : "none"}
       >
         <View style={styles.page}>
           {children}
@@ -101,7 +102,7 @@ export function SamplePage({ children }: { children: ReactNode }) {
           Samples
         </Link>
       </View>
-    </KeyboardAvoidingView>
+    </View>
   );
 }
 export function NativeJourneys() {
