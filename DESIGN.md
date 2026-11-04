@@ -260,6 +260,8 @@ Use the shared four-point spacing scale. Compact layouts start at the smallest v
 
 Horizontal web navigation replaces the permanent sidebar. Discover presents one editorial journey entry per event with useful filters. Your journeys owns create/join/revisit. The reader preserves chapter selection while switching Story, Explore and Learn; wide layouts place chronology beside content, while compact/native layouts present a chapter grid and one focused content view. An account form is a sequential task, not a miniature reader or new hero.
 
+The sample reader supports One day and All days. All days keeps rest and transfer chapters in sequence and marks no single chapter as current. Selecting a day returns to a focused view. Known chapter IDs, view, scope and practical-detail filter travel in route parameters; browser history and the native stack retain the Learn context when visiting a source. Read/Continue reading resumes the last context within the sample session. This is not private history, a durable bookmark or cross-device progress. Route diagrams still require an explicit action and are not restored from links.
+
 Use broad surfaces and section dividers; avoid nested card grids. Let text, controls and grouped actions wrap without clipping. Safe areas, keyboards, system back and text scaling are platform requirements, not reasons to remove content or reduce targets.
 
 Media currently adapts by composition: web editorial covers use 4:3, the compact reader uses 16:9, and native media uses 3:2. Shared ratio tokens are a reserved contract and are not yet universally applied. Keep titles and essential labels outside media, preserve meaningful captions, and retain a text route when media is missing or fails.

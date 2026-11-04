@@ -9,7 +9,7 @@ import "./prototype.css";
 import "./experience.css";
 
 function ShellContent() {
-  const { state, dispatch } = useSample();
+  const { state, dispatch, reading } = useSample();
   const actor = state.data.actors.find((item) => item.id === state.actorId)!;
   return (
     <div className="prototype">
@@ -31,7 +31,7 @@ function ShellContent() {
               <JournalIcon name="journeys" />
               Your journeys
             </Link>
-            <Link to="/prototype/reader">
+            <Link to="/prototype/reader" search={reading ?? {}}>
               <JournalIcon name="reader" />
               Read
             </Link>

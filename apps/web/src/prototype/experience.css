@@ -1,4 +1,7 @@
 /* Open atlas: broad reading surfaces and a chronological spine. */
+.atlas-reader {
+  container-type: inline-size;
+}
 .prototype .sample-layout {
   display: block;
   max-width: none;
@@ -185,6 +188,24 @@
 .atlas-reading {
   min-width: 0;
   max-width: 760px;
+}
+.atlas-all-days {
+  display: grid;
+  gap: var(--kairn-spacing-xxl);
+}
+.atlas-day-story {
+  min-width: 0;
+  padding-top: var(--kairn-spacing-xl);
+  border-top: 1px solid var(--border);
+}
+.atlas-day-story h3 {
+  font:
+    500
+      var(--kairn-typography-desktop-section-title-font-size)/var(
+        --kairn-typography-desktop-section-title-line-height
+      )
+      var(--kairn-typography-family-editorial),
+    serif;
 }
 .prototype .atlas-reading h2 {
   font:
@@ -452,6 +473,16 @@
   }
   .atlas-feature-story {
     padding-bottom: var(--kairn-spacing-xl);
+  }
+}
+/* Content width also responds to browser text/zoom growth, unlike viewport queries. */
+@container (max-width: 700px) {
+  .atlas-reader-heading,
+  .atlas-reading-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .atlas-reader-bar {
+    flex-wrap: wrap;
   }
 }
 @media (prefers-reduced-motion: reduce) {

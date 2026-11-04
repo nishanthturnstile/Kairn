@@ -23,7 +23,7 @@ const Link = withUnistyles(RouterLink);
 export function SamplePage({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const { state } = useSample();
+  const { state, reading } = useSample();
   const actor = state.data.actors.find((item) => item.id === state.actorId)!;
   const home = pathname === "/prototype" || pathname === "/prototype/";
   return (
@@ -68,7 +68,7 @@ export function SamplePage({ children }: { children: ReactNode }) {
       </StyledScrollView>
       <View style={styles.footer}>
         <Link
-          href="/prototype/reader"
+          href={{ pathname: "/prototype/reader", params: reading ?? {} }}
           replace
           accessibilityRole="link"
           accessibilityState={{ selected: pathname.endsWith("/reader") }}

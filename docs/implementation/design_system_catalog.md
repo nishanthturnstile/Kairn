@@ -89,7 +89,7 @@ Native shared static fonts are loaded once at the root. Prototype font-loading d
 | Breadcrumb/pagination | Previous/next reader chapters; one catalog result | Chapter paging retained. Discovery result pagination/breadcrumb deferred until real bounded hierarchy/result service. |
 | Badge/avatar/contributors | JournalStatus, prototype Status, account avatars, sample people | Themed via semantic adapter, circular avatars retained. Native and real account avatar failure behavior unchanged. Generic contributor data extraction still open. |
 | Journey preview/cover | Existing visual wrappers, reader, discovery | Retain title outside media; new Media accepts source/alt/caption without fixtures and fails to text. Remaining legacy covers need adapter migration. |
-| Day/chapter navigation | Web reader and native reader inline loops | Extracted ChapterNavigation on both; rest/transfer/long titles remain. All-days/deep-link/back restoration still DS06. |
+| Day/chapter navigation | Web/native reader and canonical ChapterNavigation | One day/All days, known chapter-ID route parameters, mode/scope/filter retention and sample-session resume implemented. ChapterNavigation accepts null selection for All days. Native runtime and authorized production restoration remain DS06. |
 | Timeline/activity segment | Journey workspace, NativeJourney and matched catalogs | JourneyTimeline accepts caller order, explicit time/timezone/location gaps, evidence and parallel-account labels. Catalog extends to 18 days. Reordering and durable chronology edits remain DS07. |
 | Route context/map controls | Explicit diagram and evidence legend | Retained honest diagram. Actual map/satellite/attribution/playback awaits selected SDK and authorized overlays, DS06. |
 | Moment/media gallery | Journey workspace, NativeJourney and matched catalogs | MomentGallery and full-screen detail viewer implemented for a bounded, caller-permitted collection. Photo fallback and uncropped detail presentation; source descriptions for unavailable voice/video. Authorized derivatives, playback, pagination and real capture remain DS06–07. |
@@ -125,13 +125,21 @@ Native shared static fonts are loaded once at the root. Prototype font-loading d
 | W08 | Workspace Review fixture | DS08; no issued links/publication claims, exact approval open |
 | W09 | `features/accounts/account.tsx`; real profile/security/export | DS09; button vocabulary/themes migrated, private history/saved research open |
 | P01 | Discover fixture in `prototype/experience.tsx` | DS09; actual metadata filtering retained; eligible listings/moderation open |
-| P02 | JourneyReader and NativeReader plus existing approved SSR reader | DS06; chapter/practical/media primitives, fixture interactions verified; authorized full reader open |
+| P02 | JourneyReader and NativeReader plus existing approved SSR reader | DS06; primitives plus sample all-days, validated links and session return. Authorized full reader, exact publication-version restoration and native runtime remain open |
 | P03 | Explicit illustrative route diagram | DS06; genuine map/authorized overlay open |
 | P04 | Learn practical fixture | DS06; source jumps retained; real search/answers open |
 | P05 | Source chapter action only | DS06; approved supporting source detail open |
 | P06 | No public highlights | DS08; approved selection/access open |
 | P07 | No public profile | DS09; deliberate public identity/listing service open |
 | P08 | Existing non-disclosing unavailable boundary | DS08/09; preserve protected payload redaction; old-link tests need service |
+
+## Reader navigation contract
+
+The sample route accepts `chapter` (known chapter ID), `view` (Story/Explore/Learn), `days=all`, and a known practical-detail `category`. `packages/shared/src/reader-navigation.ts` validates only presentation state against the caller's available IDs/categories; it does not authorize content. Web and native adapters use the separately authored public reader fixture, never private sample moments. Unknown, stale, non-string and ambiguous values fall back to the first chapter, Story, One day or All details as appropriate.
+
+Web uses typed TanStack search state, replaces view/filter changes, and pushes day/source visits so Back restores the preceding context. Browser history owns scroll restoration. Native uses local route parameters, writes explicit defaults when clearing merged parameters, pushes source visits onto the stack and refreshes its remembered context when the screen regains focus. Read and the web Discover continuation carry the last sample-session context. No source body or media is stored in that context; nothing is persisted as an account bookmark. Production progress needs an authorized reader projection and keys for the journey and exact approved version.
+
+All-days Story/Explore renders every chapter, including rest and unknown-location entries. Practical details continue to span the sample and explicitly explain that scope; the chosen day/scope survives switching back to Story/Explore. Route context remains an explicit action and is absent after a fresh linked/reloaded reader entry.
 
 ## Migration and compatibility ledger
 

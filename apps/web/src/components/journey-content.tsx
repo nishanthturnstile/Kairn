@@ -8,7 +8,7 @@ export function ChapterNavigation({
   onSelect,
 }: {
   chapters: readonly Chapter[];
-  selected: number;
+  selected: number | null;
   onSelect: (index: number) => void;
 }) {
   return (

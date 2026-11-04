@@ -8,6 +8,7 @@ export function createAppRouter() {
     routeTree,
     context: { queryClient },
     defaultPreloadStaleTime: 0,
+    scrollRestoration: true,
     Wrap: ({ children }) => (
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     ),

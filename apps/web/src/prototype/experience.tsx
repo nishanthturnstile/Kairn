@@ -1,15 +1,70 @@
 import { ChapterNavigation, PracticalDetail, Media } from "../components/journey-content";
 import { Input } from "../components/ui/input";
 import { SegmentedControl, Select } from "../components/ui/form-controls";
-import { useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { useEffect, useId, useState } from "react";
+import { Link, getRouteApi } from "@tanstack/react-router";
+import type { ReaderSearch } from "@kairn/shared";
 import { Button } from "../components/prototype-controls";
 import reader from "./generated/reader.json";
 import ridge from "./generated/ridge-sample.png";
 import { Contributors } from "./visuals";
+import { useSample } from "./context";
+import { parseReaderSearch } from "./reader-navigation";
 import "./experience.css";
 
 type Mode = "Story" | "Explore" | "Learn";
+const readerRoute = getRouteApi("/prototype/reader");
+
+function ReaderChapter({
+  chapter,
+  mode,
+  allDays,
+  onReadDay,
+}: {
+  chapter: (typeof reader.chapters)[number];
+  mode: Exclude<Mode, "Learn">;
+  allDays: boolean;
+  onReadDay: () => void;
+}) {
+  const titleId = useId();
+  const Heading = allDays ? "h3" : "h2";
+  return (
+    <article className={allDays ? "atlas-day-story" : undefined} aria-labelledby={titleId}>
+      <div className="atlas-chapter-heading" aria-live={allDays ? undefined : "polite"}>
+        <p className="atlas-meta">
+          Day {chapter.day} / {chapter.date} / {chapter.place}
+        </p>
+        <Heading id={titleId}>{chapter.title}</Heading>
+      </div>
+      <p className="atlas-meta">
+        {chapter.activity} · Evidence: {chapter.evidence}
+      </p>
+      {mode === "Story" ? (
+        <>
+          <p className="atlas-prose">{chapter.body}</p>
+          <blockquote>
+            {chapter.reflection}
+            <cite>{chapter.author}</cite>
+          </blockquote>
+        </>
+      ) : (
+        <p>
+          {chapter.route.length
+            ? "The diagram shows sequence only, not surveyed geography."
+            : "No location was recorded. No connecting route is inferred."}
+        </p>
+      )}
+      <p className="atlas-meta">
+        {chapter.date} 2026 · Fictional source {chapter.source} · {chapter.author}
+      </p>
+      {allDays && (
+        <Button variant="secondary" onClick={onReadDay}>
+          Read day {chapter.day}
+        </Button>
+      )}
+    </article>
+  );
+}
 
 function RouteDiagram({ chapter }: { chapter: (typeof reader.chapters)[number] }) {
   return (
@@ -60,13 +115,27 @@ function RouteDiagram({ chapter }: { chapter: (typeof reader.chapters)[number] }
 }
 
 export function JourneyReader() {
-  const [selected, setSelected] = useState(0);
-  const [mode, setMode] = useState<Mode>("Story");
+  const search = readerRoute.useSearch();
+  const navigate = readerRoute.useNavigate();
+  const { rememberReading } = useSample();
+  const selected = Math.max(
+    0,
+    reader.chapters.findIndex((chapter) => chapter.id === search.chapter),
+  );
+  const mode = search.view ?? "Story";
+  const allDays = search.days === "all";
+  const category = search.category ?? "All details";
   const [mapOpen, setMapOpen] = useState(false);
-  const [category, setCategory] = useState("All details");
+  const categoryId = useId();
   const chapter = reader.chapters[selected]!;
+  useEffect(() => rememberReading(parseReaderSearch(search)), [search, rememberReading]);
+  function update(next: ReaderSearch, replace = true) {
+    void navigate({ search: parseReaderSearch(next), replace, resetScroll: false });
+  }
   function choose(index: number) {
-    setSelected(index);
+    const next = reader.chapters[index];
+    const { days: _days, ...rest } = search;
+    if (next) update({ ...rest, chapter: next.id }, false);
   }
   return (
     <div className="atlas-reader">
@@ -92,13 +161,26 @@ export function JourneyReader() {
           value={mode}
           options={["Story", "Explore", "Learn"]}
           onChange={(value) => {
-            if (value === "Story" || value === "Explore" || value === "Learn") setMode(value);
+            if (value === "Story" || value === "Explore" || value === "Learn")
+              update({ ...search, view: value });
           }}
         />
-        <span className="atlas-meta">Four days. Every part belongs.</span>
+        <SegmentedControl
+          label="Reading scope"
+          value={allDays ? "All days" : "One day"}
+          options={["One day", "All days"]}
+          onChange={(value) => {
+            const { days: _days, ...rest } = search;
+            update(value === "All days" ? { ...rest, days: "all" } : rest);
+          }}
+        />
       </div>
       <div className="atlas-reading-layout">
-        <ChapterNavigation chapters={reader.chapters} selected={selected} onSelect={choose} />
+        <ChapterNavigation
+          chapters={reader.chapters}
+          selected={allDays ? null : selected}
+          onSelect={choose}
+        />
         <section className="atlas-reading" aria-label={mode}>
           {mode === "Learn" ? (
             <>
@@ -107,14 +189,22 @@ export function JourneyReader() {
                 Firsthand observations, with the gaps left visible. All values below are fictional
                 examples.
               </p>
-              <label className="atlas-filter">
-                Find practical details
-                <Select value={category} onChange={(event) => setCategory(event.target.value)}>
+              <p className="atlas-meta">
+                Practical details span the whole sample. Your day and reading scope are kept when
+                you return to Story or Explore.
+              </p>
+              <div className="atlas-filter">
+                <label htmlFor={categoryId}>Find practical details</label>
+                <Select
+                  id={categoryId}
+                  value={category}
+                  onChange={(event) => update({ ...search, category: event.target.value })}
+                >
                   {["All details", ...reader.details.map((item) => item.category)].map((item) => (
                     <option key={item}>{item}</option>
                   ))}
                 </Select>
-              </label>
+              </div>
               {reader.details
                 .filter((item) => category === "All details" || category === item.category)
                 .map((item) => (
@@ -122,42 +212,43 @@ export function JourneyReader() {
                     key={item.category}
                     {...item}
                     onReadSource={() => {
-                      choose(item.chapter);
-                      setMode("Story");
+                      const { days: _days, ...rest } = search;
+                      update(
+                        { ...rest, chapter: reader.chapters[item.chapter]!.id, view: "Story" },
+                        false,
+                      );
                     }}
                   />
                 ))}
             </>
           ) : (
             <>
-              <div className="atlas-chapter-heading" aria-live="polite">
-                <p className="atlas-meta">
-                  Day {chapter.day} / {chapter.place}
-                </p>
-                <h2>{chapter.title}</h2>
+              {allDays && (
+                <div className="atlas-chapter-heading" aria-live="polite">
+                  <h2>All days</h2>
+                  <p>
+                    Every chapter in order, including rest and transfer days. Unknown locations
+                    remain gaps.
+                  </p>
+                </div>
+              )}
+              <div className={allDays ? "atlas-all-days" : undefined}>
+                {(allDays ? reader.chapters : [chapter]).map((item) => (
+                  <ReaderChapter
+                    key={item.id}
+                    chapter={item}
+                    mode={mode}
+                    allDays={allDays}
+                    onReadDay={() =>
+                      choose(reader.chapters.findIndex((entry) => entry.id === item.id))
+                    }
+                  />
+                ))}
               </div>
-              {mode === "Story" ? (
-                <>
-                  <p className="atlas-prose">{chapter.body}</p>
-                  <blockquote>
-                    {chapter.reflection}
-                    <cite>{chapter.author}</cite>
-                  </blockquote>
-                  <p className="atlas-meta">
-                    {chapter.date} 2026 · Fictional source {chapter.source}
-                  </p>
-                </>
-              ) : (
-                <>
-                  <p>
-                    {chapter.activity}. Evidence: <strong>{chapter.evidence}</strong>.
-                  </p>
-                  <p>
-                    {chapter.route.length
-                      ? "See how this chapter fits into the whole journey. The diagram shows sequence only, not surveyed geography."
-                      : "A rest day has a place in the chronology even when its location is unknown."}
-                  </p>
-                </>
+              {allDays && (
+                <p className="atlas-meta">
+                  Route context: Day {chapter.day} / {chapter.title}
+                </p>
               )}
               <Button
                 variant="secondary"
@@ -177,24 +268,26 @@ export function JourneyReader() {
                   </p>
                 </div>
               )}
-              <div className="atlas-pagination">
-                <Button
-                  variant="secondary"
-                  disabled={selected === 0}
-                  onClick={() => choose(selected - 1)}
-                >
-                  Previous day
-                </Button>
-                <span>
-                  {selected + 1} of {reader.chapters.length}
-                </span>
-                <Button
-                  disabled={selected === reader.chapters.length - 1}
-                  onClick={() => choose(selected + 1)}
-                >
-                  Next day
-                </Button>
-              </div>
+              {!allDays && (
+                <div className="atlas-pagination">
+                  <Button
+                    variant="secondary"
+                    disabled={selected === 0}
+                    onClick={() => choose(selected - 1)}
+                  >
+                    Previous day
+                  </Button>
+                  <span>
+                    {selected + 1} of {reader.chapters.length}
+                  </span>
+                  <Button
+                    disabled={selected === reader.chapters.length - 1}
+                    onClick={() => choose(selected + 1)}
+                  >
+                    Next day
+                  </Button>
+                </div>
+              )}
             </>
           )}
         </section>
@@ -208,6 +301,7 @@ export function JourneyReader() {
 }
 
 export function Discover() {
+  const { reading } = useSample();
   const [query, setQuery] = useState("");
   const [activity, setActivity] = useState("All journeys");
   const matches =
@@ -273,8 +367,8 @@ export function Discover() {
               <span>Home</span>
             </div>
             <Contributors />
-            <Link className="atlas-read-link" to="/prototype/reader">
-              Step into the journey
+            <Link className="atlas-read-link" to="/prototype/reader" search={reading ?? {}}>
+              {reading ? "Continue reading" : "Step into the journey"}
             </Link>
           </div>
         </article>

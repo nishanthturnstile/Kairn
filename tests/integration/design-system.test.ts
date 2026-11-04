@@ -233,6 +233,156 @@ it("opens permitted moments on demand, retains failed-media context and drops an
   }
 });
 
+it("restores linked reader context, all-days chronology and practical-source return without opening route context", async () => {
+  const context = await browser.newContext({
+    reducedMotion: "reduce",
+    viewport: { width: 390, height: 960 },
+  });
+  const results: unknown[] = [];
+  try {
+    const page = await context.newPage();
+    const errors: string[] = [];
+    const writes: string[] = [];
+    page.on("pageerror", (error) => errors.push(error.message));
+    page.on("request", (request) => {
+      if (request.method() !== "GET") writes.push(request.url());
+    });
+    await page.goto(`${origin}/prototype/reader?chapter=rest&view=Explore&days=all`);
+    await check(page.getByRole("radio", { name: "Explore", exact: true })).toBeChecked();
+    await check(page.getByRole("radio", { name: "All days", exact: true })).toBeChecked();
+    await check(page.locator(".atlas-all-days article h3")).toHaveText([
+      "The journey before the trail",
+      "Above the morning cloud",
+      "A day with nowhere to be",
+      "Taking the hills home",
+    ]);
+    await check(page.locator(".atlas-chapter[aria-current]")).toHaveCount(0);
+    await check(page.locator(".atlas-map")).toHaveCount(0);
+    await check(
+      page.getByRole("article", { name: "A day with nowhere to be", exact: true }),
+    ).toContainText("No connecting route is inferred.");
+    await page.getByRole("button", { name: "Open route context", exact: true }).click();
+    await check(page.locator(".atlas-map")).toContainText("No connecting route inferred");
+    await page.getByRole("radio", { name: "Story", exact: true }).check();
+    await check(page.locator(".atlas-all-days .atlas-prose")).toHaveCount(4);
+    await page.getByRole("button", { name: "Read day 3", exact: true }).click();
+    await check(page.getByRole("radio", { name: "One day", exact: true })).toBeChecked();
+    await check(page.locator(".atlas-reading h2")).toHaveText("A day with nowhere to be");
+    await check(page.locator(".atlas-chapter").nth(2)).toHaveAttribute("aria-current", "step");
+    expect(new URL(page.url()).searchParams.get("chapter")).toBe("rest");
+    await page.reload();
+    await check(page.locator(".atlas-reading h2")).toHaveText("A day with nowhere to be");
+    await check(page.locator(".atlas-map")).toHaveCount(0);
+    await page.getByRole("radio", { name: "All days", exact: true }).check();
+    await page.getByRole("radio", { name: "Learn", exact: true }).check();
+    await page.getByLabel("Find practical details", { exact: true }).selectOption("Costs");
+    await page.evaluate(() => document.fonts.ready);
+    const source = page.getByRole("button", { name: "Read source chapter", exact: true });
+    await source.scrollIntoViewIfNeeded();
+    const learnUrl = page.url();
+    const learnScroll = await page.evaluate(() => window.scrollY);
+    await source.click();
+    await check(page.locator(".atlas-reading h2")).toHaveText("Above the morning cloud");
+    expect(new URL(page.url()).searchParams.get("chapter")).toBe("ridge");
+    await page.goBack();
+    await check(page).toHaveURL(learnUrl);
+    await check(page.getByRole("radio", { name: "Learn", exact: true })).toBeChecked();
+    await check(page.getByLabel("Find practical details", { exact: true })).toHaveValue("Costs");
+    await check(page.getByRole("radio", { name: "All days", exact: true })).toBeChecked();
+    await check(page.locator(".atlas-chapter[aria-current]")).toHaveCount(0);
+    await check
+      .poll(async () => Math.abs((await page.evaluate(() => window.scrollY)) - learnScroll))
+      .toBeLessThan(8);
+    await page
+      .getByRole("navigation", { name: "Prototype", exact: true })
+      .getByRole("link", { name: "Discover", exact: true })
+      .click();
+    await page.getByRole("link", { name: "Continue reading", exact: true }).click();
+    await check(page.getByRole("radio", { name: "Learn", exact: true })).toBeChecked();
+    await check(page.getByLabel("Find practical details", { exact: true })).toHaveValue("Costs");
+    await check(page.getByRole("radio", { name: "All days", exact: true })).toBeChecked();
+    expect(new URL(page.url()).searchParams.get("chapter")).toBe("rest");
+    await page
+      .getByRole("navigation", { name: "Prototype", exact: true })
+      .getByRole("link", { name: "Your journeys", exact: true })
+      .click();
+    await page
+      .getByRole("navigation", { name: "Prototype", exact: true })
+      .getByRole("link", { name: "Read", exact: true })
+      .click();
+    await check(page.getByRole("radio", { name: "Learn", exact: true })).toBeChecked();
+    await check(page.getByLabel("Find practical details", { exact: true })).toHaveValue("Costs");
+    await page.reload();
+    await check(page.getByRole("radio", { name: "Learn", exact: true })).toBeChecked();
+    await check(page.getByLabel("Find practical details", { exact: true })).toHaveValue("Costs");
+
+    for (const appearance of ["light", "dark"]) {
+      await page.addInitScript(
+        (value) => localStorage.setItem("kairn.appearance", value),
+        appearance,
+      );
+      for (const width of [320, 820, 1440]) {
+        await page.setViewportSize({ width, height: 960 });
+        await page.goto(`${origin}/prototype/reader?chapter=rest&days=all`);
+        await page.evaluate(() => document.fonts.ready);
+        await check(page.locator(".atlas-map")).toHaveCount(0);
+        const overflow = await page.evaluate(
+          () => document.documentElement.scrollWidth > innerWidth,
+        );
+        const axe = await new AxeBuilder({ page })
+          .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
+          .analyze();
+        results.push({ appearance, width, overflow, violations: axe.violations });
+        await page.screenshot({
+          path: `${evidence}/reader-all-days-${appearance}-${width}.png`,
+          fullPage: true,
+        });
+        expect(overflow).toBe(false);
+        expect(axe.violations).toEqual([]);
+      }
+    }
+    await page.setViewportSize({ width: 820, height: 960 });
+    await page.addStyleTag({ content: ":root { zoom: 2; }" });
+    const textGrowthOverflow = await page.evaluate(() =>
+      [...document.querySelectorAll("body *")]
+        .filter((element) => {
+          const rect = element.getBoundingClientRect();
+          return rect.width > 0 && (rect.right > innerWidth + 1 || rect.left < -1);
+        })
+        .map((element) => ({ tag: element.tagName, className: element.className })),
+    );
+    const readingBounds = await page
+      .getByRole("region", { name: "Story", exact: true })
+      .boundingBox();
+    await writeFile(
+      `${evidence}/reader-text-growth-layout.json`,
+      JSON.stringify({ textGrowthOverflow, readingBounds }, null, 2),
+    );
+    await page.screenshot({ path: `${evidence}/reader-all-days-text-growth.png`, fullPage: true });
+    expect(textGrowthOverflow).toEqual([]);
+    expect(readingBounds && readingBounds.width > 615).toBe(true);
+    await page.goto(
+      `${origin}/prototype/reader?chapter=sample-moment-19&view=unsupported&days=bad&category=Unknown&unrecognized=sample-note`,
+    );
+    await check(page.getByRole("radio", { name: "Story", exact: true })).toBeChecked();
+    await check(page.getByRole("radio", { name: "One day", exact: true })).toBeChecked();
+    await check(page.locator(".atlas-reading h2")).toHaveText("The journey before the trail");
+    await check(page.locator(".atlas-map")).toHaveCount(0);
+    await page
+      .getByRole("navigation", { name: "Prototype", exact: true })
+      .getByRole("link", { name: "Discover", exact: true })
+      .click();
+    await check(
+      page.getByRole("link", { name: "Continue reading", exact: true }),
+    ).not.toHaveAttribute("href", /unrecognized/);
+    expect(errors).toEqual([]);
+    expect(writes).toEqual([]);
+  } finally {
+    await writeFile(`${evidence}/reader-navigation.json`, JSON.stringify(results, null, 2));
+    await context.close();
+  }
+});
+
 it("keeps the real profile form submitting through the canonical button", async () => {
   const context = await browser.newContext();
   try {
