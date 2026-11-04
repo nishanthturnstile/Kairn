@@ -1,0 +1,199 @@
+[
+  {
+    "name": "create, join and revisit one ID",
+    "scenario": "first-run",
+    "actions": [
+      {
+        "type": "create",
+        "title": "The long way to the ridge"
+      },
+      {
+        "type": "actor",
+        "id": "dev"
+      },
+      {
+        "type": "join",
+        "code": "RIDGE"
+      },
+      {
+        "type": "revisit"
+      }
+    ],
+    "expected": {
+      "journeyId": "sample-journey-01",
+      "joined": true,
+      "actorId": "dev"
+    }
+  },
+  {
+    "name": "invalid invite does not join",
+    "scenario": "first-run",
+    "actions": [
+      {
+        "type": "join",
+        "code": "WRONG"
+      }
+    ],
+    "expected": {
+      "joined": false,
+      "notice": "That sample invite is invalid. Use RIDGE."
+    }
+  },
+  {
+    "name": "participant cannot inspect draft",
+    "scenario": "prepared-trip",
+    "actions": [
+      {
+        "type": "actor",
+        "id": "dev"
+      }
+    ],
+    "expected": {
+      "canEdit": false,
+      "canPublish": false,
+      "canReview": false,
+      "draft": null
+    }
+  },
+  {
+    "name": "admin is independent from editor",
+    "scenario": "prepared-trip",
+    "actions": [
+      {
+        "type": "actor",
+        "id": "asha"
+      }
+    ],
+    "expected": {
+      "administrator": "asha",
+      "canEdit": false,
+      "canReview": false,
+      "canPublish": false
+    }
+  },
+  {
+    "name": "publisher can review without editing",
+    "scenario": "editing",
+    "actions": [
+      {
+        "type": "actor",
+        "id": "noor"
+      }
+    ],
+    "expected": {
+      "canEdit": false,
+      "canPublish": true,
+      "canReview": true
+    }
+  },
+  {
+    "name": "review scope is not publication permission",
+    "scenario": "review-moment-19",
+    "actions": [],
+    "expected": {
+      "continuation": {
+        "sourceId": "sample-moment-19",
+        "scope": "journey-review",
+        "eligible": false
+      }
+    }
+  },
+  {
+    "name": "scope may only be changed by owner",
+    "scenario": "review-moment-19",
+    "actions": [
+      {
+        "type": "actor",
+        "id": "mira"
+      },
+      {
+        "type": "scope",
+        "scope": "publication"
+      }
+    ],
+    "expected": {
+      "continuation": {
+        "scope": "journey-review",
+        "eligible": false
+      }
+    }
+  },
+  {
+    "name": "draft changes leave approved caption alone",
+    "scenario": "editing",
+    "actions": [
+      {
+        "type": "caption",
+        "caption": "A corrected draft"
+      }
+    ],
+    "expected": {
+      "draft": {
+        "caption": "A corrected draft"
+      },
+      "approved": {
+        "caption": "An afternoon on the ridge."
+      }
+    }
+  },
+  {
+    "name": "owner restriction invalidates dependent output",
+    "scenario": "published-v1",
+    "actions": [
+      {
+        "type": "actor",
+        "id": "mira"
+      },
+      {
+        "type": "withdraw",
+        "sourceId": "sample-moment-3"
+      }
+    ],
+    "expected": {
+      "approved": {
+        "sourceIds": []
+      },
+      "eligibleHighlightIds": [],
+      "validAnswerIds": []
+    }
+  },
+  {
+    "name": "deterministic reset",
+    "scenario": "editing",
+    "actions": [
+      {
+        "type": "actor",
+        "id": "dev"
+      },
+      {
+        "type": "reset",
+        "scenario": "first-run"
+      }
+    ],
+    "expected": {
+      "actorId": "mira",
+      "joined": false,
+      "journeyId": null
+    }
+  },
+  {
+    "name": "departed owner retains restriction access",
+    "scenario": "withdrawn-source",
+    "actions": [
+      {
+        "type": "actor",
+        "id": "eli"
+      },
+      {
+        "type": "withdraw",
+        "sourceId": "sample-moment-18"
+      }
+    ],
+    "expected": {
+      "canEdit": false,
+      "canReview": false,
+      "eligibleHighlightIds": [],
+      "validAnswerIds": []
+    }
+  }
+]

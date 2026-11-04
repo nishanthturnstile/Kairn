@@ -2,7 +2,13 @@ import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import { chromium, expect as browserExpect, type Browser } from "@playwright/test";
 import { SystemStatusSchema } from "@kairn/contracts";
 import { createApiClient } from "@kairn/contracts/client";
+import { tokens } from "@kairn/design-tokens";
 import AxeBuilder from "@axe-core/playwright";
+
+function cssColor(hex: string) {
+  const value = Number.parseInt(hex.replace("#", ""), 16);
+  return `rgb(${(value >> 16) & 0xff}, ${(value >> 8) & 0xff}, ${value & 0xff})`;
+}
 
 const baseUrl = process.env.TEST_BASE_URL;
 if (!baseUrl) throw new Error("TEST_BASE_URL must point at the composed application ingress.");
@@ -143,7 +149,7 @@ describe("composed server/web boundary", () => {
       await browserExpect(page.getByTestId("request-marker")).toHaveText(marker);
       await browserExpect(
         page.getByRole("button", { name: "Mark as read", exact: true }),
-      ).toHaveCSS("background-color", "rgb(35, 79, 59)");
+      ).toHaveCSS("background-color", cssColor(tokens.color.forest800));
       if (await page.locator('script[src="/@vite/client"]').count()) {
         await browserExpect.poll(() => hmrConnected).toBe(true);
       }

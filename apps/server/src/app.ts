@@ -139,6 +139,8 @@ export function createApp(options: {
   for (const path of [
     "/",
     "/setup/status",
+    "/prototype",
+    "/prototype/*",
     ...(options.accounts
       ? ["/sign-in", "/create-account", "/recover", "/reset-password", "/verify-email", "/account"]
       : []),

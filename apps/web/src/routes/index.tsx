@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({ component: Home });
 
@@ -12,6 +12,9 @@ function Home() {
         between the web app and its service.
       </p>
       <a href="/setup/reader">Open the synthetic reader</a>
+      <p>
+        <Link to="/prototype">Open the interaction prototype</Link>
+      </p>
     </section>
   );
 }

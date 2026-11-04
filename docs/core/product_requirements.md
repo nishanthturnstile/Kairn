@@ -821,7 +821,7 @@ Metric definitions and community evaluation belong to the [product plan](product
 
 Build the complete agreed product directly in the production codebase. The R1 baseline and requirement tables in this document define that complete scope. Technical work follows dependencies, but every component contributes to the final application and its complete user journeys.
 
-Do not introduce an MVP, proof of concept, manually curated trial service, or small end-to-end trial build before the full implementation. Community interviews, preliminary adoption targets, paid commitments, and competitor benchmarks are not approval gates for building the agreed product.
+Do not introduce an MVP, functional proof of concept, manually curated trial service, or reduced end-to-end product as a prerequisite for the full implementation. The user-requested [web and mobile interaction prototype](../implementation/prototype_plan.md) is a bounded design activity in the existing applications using labelled sample data and simulated operations. It does not change R1 scope, qualify production capabilities, or create a market-validation or release-approval gate. Community interviews, preliminary adoption targets, paid commitments, and competitor benchmarks are not approval gates for building the agreed product.
 
 Implement the selected [architecture](architecture.md) and qualify its integrations, supported inputs, and operating limits during implementation. Run component tests, integration tests, device checks, and full-product acceptance tests as the production capabilities become available. Testing verifies the implementation and prepares it for release.
 

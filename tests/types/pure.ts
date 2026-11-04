@@ -1,7 +1,7 @@
 import { assertNever } from "@kairn/shared";
 import { tokens } from "@kairn/design-tokens";
 
-const radius: 14 = tokens.radius.medium;
+const radius: 12 = tokens.radius.medium;
 // @ts-expect-error Exhaustive checking must reject a remaining union member.
 assertNever("unhandled");
 // @ts-expect-error Pure packages must not introduce Node globals.

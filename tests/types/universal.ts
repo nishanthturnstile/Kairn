@@ -15,7 +15,7 @@ const command = createCommandEnvelopeSchema("fixture.status", SystemStatusSchema
   payload: status,
 });
 const literalCommand: "fixture.status" = command.command;
-const radius: 14 = tokens.radius.medium;
+const radius: 12 = tokens.radius.medium;
 // @ts-expect-error Contract version is a literal, not an arbitrary number.
 const invalidVersion: SystemStatus = { ...status, contractVersion: 2 };
 // @ts-expect-error Unknown status values cannot cross this contract.
