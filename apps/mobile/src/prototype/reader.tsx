@@ -1,15 +1,108 @@
-import { useState } from "react";
-import { Image, Pressable, Text, View } from "react-native";
+import { ChapterNavigation, PracticalDetail, Media } from "../components/journey-content";
+import { Picker, SegmentedControl } from "../components/ui/selection";
+import { useCallback, useMemo, useState } from "react";
+import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
+import type { ReaderSearch } from "@kairn/shared";
+import { View } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
 import { JournalButton, JournalText } from "../components/journal-controls";
 import { SamplePage } from "./screens";
 import reader from "./generated/reader.json";
+import { parseReaderSearch } from "./reader-navigation";
+import { useSample } from "./context";
+
+function ReaderChapter({
+  chapter,
+  mode,
+  allDays,
+  onReadDay,
+}: {
+  chapter: (typeof reader.chapters)[number];
+  mode: "Story" | "Explore";
+  allDays: boolean;
+  onReadDay: () => void;
+}) {
+  return (
+    <View style={allDays ? styles.day : styles.chapter}>
+      <View accessibilityLiveRegion={allDays ? "none" : "polite"}>
+        <JournalText muted>
+          Day {chapter.day} / {chapter.date} / {chapter.place}
+        </JournalText>
+        <JournalText editorial>{chapter.title}</JournalText>
+      </View>
+      <JournalText muted>
+        {chapter.activity} · Evidence: {chapter.evidence}
+      </JournalText>
+      <JournalText>
+        {mode === "Story"
+          ? chapter.body
+          : chapter.route.length
+            ? "This sample describes sequence, not surveyed geography."
+            : "No location was recorded. No connecting route is inferred."}
+      </JournalText>
+      {mode === "Story" && (
+        <View style={styles.reflection}>
+          <JournalText editorial>{chapter.reflection}</JournalText>
+          <JournalText muted>{chapter.author}</JournalText>
+        </View>
+      )}
+      <JournalText muted>
+        Fictional source {chapter.source} / {chapter.author}
+      </JournalText>
+      {allDays && <JournalButton secondary label={`Read day ${chapter.day}`} onPress={onReadDay} />}
+    </View>
+  );
+}
 
 export function NativeReader() {
-  const [selected, setSelected] = useState(0);
-  const [mode, setMode] = useState<"Story" | "Explore" | "Learn">("Story");
+  const { chapter: chapterParam, view, days, category: categoryParam } = useLocalSearchParams();
+  const chapterValue = typeof chapterParam === "string" ? chapterParam : undefined;
+  const viewValue = typeof view === "string" ? view : undefined;
+  const daysValue = typeof days === "string" ? days : undefined;
+  const categoryValue = typeof categoryParam === "string" ? categoryParam : undefined;
+  const search = useMemo(
+    () =>
+      parseReaderSearch({
+        chapter: chapterValue,
+        view: viewValue,
+        days: daysValue,
+        category: categoryValue,
+      }),
+    [chapterValue, viewValue, daysValue, categoryValue],
+  );
+  const router = useRouter();
+  const { rememberReading } = useSample();
+  useFocusEffect(
+    useCallback(() => {
+      rememberReading(search);
+    }, [search, rememberReading]),
+  );
+  const selected = Math.max(
+    0,
+    reader.chapters.findIndex((entry) => entry.id === search.chapter),
+  );
+  const mode = search.view ?? "Story";
+  const allDays = search.days === "all";
+  const category = search.category ?? "All details";
   const [context, setContext] = useState(false);
   const chapter = reader.chapters[selected]!;
+  function update(next: ReaderSearch, push = false) {
+    const valid = parseReaderSearch(next);
+    // setParams merges: write defaults explicitly so an old filter/scope is cleared.
+    const params = {
+      chapter: valid.chapter ?? reader.chapters[0]!.id,
+      view: valid.view ?? "Story",
+      days: valid.days ?? "one",
+      category: valid.category ?? "All details",
+    };
+    if (push) router.push({ pathname: "/prototype/reader", params });
+    else router.setParams(params);
+  }
+  function choose(index: number) {
+    const next = reader.chapters[index];
+    const { days: _days, ...rest } = search;
+    if (next) update({ ...rest, chapter: next.id });
+  }
   return (
     <SamplePage>
       <JournalText muted>
@@ -17,85 +110,94 @@ export function NativeReader() {
       </JournalText>
       <JournalText title>{reader.title}</JournalText>
       <JournalText>{reader.description}</JournalText>
-      <Image
+      <Media
         source={require("./generated/ridge-sample.png")}
-        style={styles.cover}
-        accessibilityLabel="Green hills in morning mist. AI-generated sample image."
+        alt="Green hills in morning mist. AI-generated sample image."
+        caption="Fictional journey · generated sample imagery"
       />
-      <JournalText muted>Fictional journey · generated sample imagery</JournalText>
-      <View style={styles.modes}>
-        {(["Story", "Explore", "Learn"] as const).map((item) => (
-          <Pressable
-            key={item}
-            accessibilityRole="button"
-            accessibilityState={{ selected: mode === item }}
-            onPress={() => setMode(item)}
-            style={[styles.mode, mode === item && styles.selected]}
-          >
-            <Text style={styles.label}>{item}</Text>
-          </Pressable>
-        ))}
-      </View>
-      <View style={styles.chapters}>
-        {reader.chapters.map((item, index) => (
-          <Pressable
-            key={item.id}
-            accessibilityRole="button"
-            accessibilityLabel={`Day ${item.day}, ${item.title}`}
-            accessibilityState={{ selected: selected === index }}
-            onPress={() => setSelected(index)}
-            style={[styles.chapter, selected === index && styles.selected]}
-          >
-            <Text style={styles.day}>Day {item.day}</Text>
-            <Text style={styles.label}>{item.title}</Text>
-            <Text style={styles.meta}>{item.activity}</Text>
-          </Pressable>
-        ))}
-      </View>
+      <SegmentedControl
+        label="Journey view"
+        value={mode}
+        options={["Story", "Explore", "Learn"]}
+        onChange={(value) => {
+          if (value === "Story" || value === "Explore" || value === "Learn")
+            update({ ...search, view: value });
+        }}
+      />
+      <SegmentedControl
+        label="Reading scope"
+        value={allDays ? "All days" : "One day"}
+        options={["One day", "All days"]}
+        onChange={(value) => {
+          const { days: _days, ...rest } = search;
+          update(value === "All days" ? { ...rest, days: "all" } : rest);
+        }}
+      />
+      <ChapterNavigation
+        chapters={reader.chapters}
+        selected={allDays ? null : selected}
+        onSelect={choose}
+      />
       {mode === "Learn" ? (
         <>
           <JournalText editorial>The details you take with you</JournalText>
           <JournalText>
             Firsthand observations. All values are fictional examples, not current quotes.
           </JournalText>
-          {reader.details.map((item) => (
-            <View style={styles.detail} key={item.category}>
-              <JournalText muted>{item.category}</JournalText>
-              <JournalText editorial>{item.title}</JournalText>
-              <JournalText>{item.value}</JournalText>
-              <JournalText>{item.body}</JournalText>
-              <JournalText muted>
-                {item.author} / {item.date}
-              </JournalText>
-              <JournalButton
-                secondary
-                label="Read source chapter"
-                onPress={() => {
-                  setSelected(item.chapter);
-                  setMode("Story");
+          <JournalText muted>
+            Practical details span the whole sample. Your day and reading scope are kept when you
+            return to Story or Explore.
+          </JournalText>
+          <Picker
+            label="Find practical details"
+            value={category}
+            options={["All details", ...reader.details.map((item) => item.category)].map(
+              (value) => ({ value, label: value }),
+            )}
+            onChange={(value) => update({ ...search, category: value })}
+          />
+          {reader.details
+            .filter((item) => category === "All details" || category === item.category)
+            .map((item) => (
+              <PracticalDetail
+                key={item.category}
+                {...item}
+                onReadSource={() => {
+                  const { days: _days, ...rest } = search;
+                  update(
+                    { ...rest, chapter: reader.chapters[item.chapter]!.id, view: "Story" },
+                    true,
+                  );
                 }}
               />
-            </View>
-          ))}
+            ))}
         </>
       ) : (
         <>
-          <View accessibilityLiveRegion="polite">
-            <JournalText muted>
-              Day {chapter.day} / {chapter.date}
-            </JournalText>
-            <JournalText editorial>{chapter.title}</JournalText>
-          </View>
-          <JournalText>
-            {mode === "Story"
-              ? chapter.body
-              : `${chapter.activity}. ${chapter.evidence}. ${chapter.route.length ? "This sample describes sequence, not surveyed geography." : "No location was recorded. We do not infer a connecting route."}`}
-          </JournalText>
-          {mode === "Story" && (
-            <View style={styles.reflection}>
-              <JournalText editorial>{chapter.reflection}</JournalText>
-              <JournalText muted>{chapter.author}</JournalText>
+          {allDays && (
+            <View accessibilityLiveRegion="polite">
+              <JournalText editorial>All days</JournalText>
+              <JournalText>
+                Every chapter in order, including rest and transfer days. Unknown locations remain
+                gaps.
+              </JournalText>
             </View>
+          )}
+          <View style={styles.chapter}>
+            {(allDays ? reader.chapters : [chapter]).map((item) => (
+              <ReaderChapter
+                key={item.id}
+                chapter={item}
+                mode={mode}
+                allDays={allDays}
+                onReadDay={() => choose(reader.chapters.findIndex((entry) => entry.id === item.id))}
+              />
+            ))}
+          </View>
+          {allDays && (
+            <JournalText muted>
+              Route context: Day {chapter.day} / {chapter.title}
+            </JournalText>
           )}
           <JournalButton
             secondary
@@ -116,22 +218,21 @@ export function NativeReader() {
               </JournalText>
             </View>
           )}
-          <JournalText muted>
-            Fictional source {chapter.source} / {chapter.author}
-          </JournalText>
-          <View style={styles.pagination}>
-            <JournalButton
-              secondary
-              disabled={selected === 0}
-              label="Previous day"
-              onPress={() => setSelected(selected - 1)}
-            />
-            <JournalButton
-              disabled={selected === reader.chapters.length - 1}
-              label="Next day"
-              onPress={() => setSelected(selected + 1)}
-            />
-          </View>
+          {!allDays && (
+            <View style={styles.pagination}>
+              <JournalButton
+                secondary
+                disabled={selected === 0}
+                label="Previous day"
+                onPress={() => choose(selected - 1)}
+              />
+              <JournalButton
+                disabled={selected === reader.chapters.length - 1}
+                label="Next day"
+                onPress={() => choose(selected + 1)}
+              />
+            </View>
+          )}
         </>
       )}
     </SamplePage>
@@ -139,47 +240,13 @@ export function NativeReader() {
 }
 
 const styles = StyleSheet.create((theme) => ({
-  cover: { width: "100%", aspectRatio: 1.5, borderRadius: theme.radius.medium },
-  modes: { flexDirection: "row", gap: theme.spacing.sm, marginVertical: theme.spacing.lg },
-  mode: {
-    flex: 1,
-    minHeight: 48,
-    alignItems: "center",
-    justifyContent: "center",
-    borderWidth: 1,
-    borderColor: theme.colors.controlBorder,
-    borderRadius: theme.radius.small,
-    padding: theme.spacing.sm,
-  },
-  selected: { backgroundColor: theme.colors.successSurface, borderColor: theme.colors.primary },
-  label: {
-    fontFamily: "InstrumentSans600",
-    fontSize: 15,
-    lineHeight: 22,
-    color: theme.colors.text,
-  },
-  meta: {
-    fontFamily: "InstrumentSans",
-    fontSize: 13,
-    lineHeight: 20,
-    color: theme.colors.secondaryText,
-  },
-  chapters: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: theme.spacing.sm,
-    marginBottom: theme.spacing.xl,
-  },
-  chapter: {
-    flexBasis: "46%",
-    flexGrow: 1,
-    gap: theme.spacing.xs,
-    padding: theme.spacing.md,
-    borderWidth: 1,
+  chapter: { gap: theme.spacing.lg },
+  day: {
+    gap: theme.spacing.lg,
+    paddingTop: theme.spacing.xl,
+    borderTopWidth: 1,
     borderColor: theme.colors.border,
-    borderRadius: theme.radius.small,
   },
-  day: { fontFamily: "Newsreader500", fontSize: 24, lineHeight: 28, color: theme.colors.primary },
   reflection: {
     gap: theme.spacing.md,
     padding: theme.spacing.xl,

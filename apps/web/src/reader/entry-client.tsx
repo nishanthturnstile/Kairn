@@ -15,3 +15,4 @@ hydrateRoot(
     <Reader data={data} />
   </QueryClientProvider>,
 );
+import "../components/appearance-init";

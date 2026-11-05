@@ -1,1 +1,1 @@
-export { NativeSpecimens as default } from "../../prototype/screens";
+export { NativeComponentCatalog as default } from "../../prototype/component-catalog";

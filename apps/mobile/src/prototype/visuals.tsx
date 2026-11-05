@@ -106,7 +106,7 @@ const styles = StyleSheet.create((theme) => ({
     backgroundColor: theme.colors.surface,
   },
   mediaText: {
-    fontFamily: "InstrumentSans",
+    fontFamily: "InstrumentSans400",
     fontSize: 10,
     lineHeight: 16,
     color: theme.colors.secondaryText,
@@ -114,7 +114,7 @@ const styles = StyleSheet.create((theme) => ({
   coverBody: { padding: 20, gap: 18 },
   meta: { flexDirection: "row", justifyContent: "space-between", gap: 8, flexWrap: "wrap" },
   metaText: {
-    fontFamily: "InstrumentSans",
+    fontFamily: "InstrumentSans400",
     fontSize: 12,
     lineHeight: 18,
     color: theme.colors.secondaryText,
@@ -141,6 +141,6 @@ const styles = StyleSheet.create((theme) => ({
   clayAvatar: { backgroundColor: theme.colors.reviewSurface },
   riverAvatar: { backgroundColor: theme.colors.riverSurface },
   initials: { fontFamily: "InstrumentSans600", fontSize: 10, color: theme.colors.text },
-  memberLabel: { fontFamily: "InstrumentSans", fontSize: 12, color: theme.colors.secondaryText },
+  memberLabel: { fontFamily: "InstrumentSans400", fontSize: 12, color: theme.colors.secondaryText },
   kitCover: { height: 164, borderRadius: theme.radius.large, overflow: "hidden" },
 }));

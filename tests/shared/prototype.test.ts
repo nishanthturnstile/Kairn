@@ -14,6 +14,43 @@ import vectors from "../fixtures/prototype/vectors.json" with { type: "json" };
 import manifest from "../fixtures/prototype/continuations.json" with { type: "json" };
 
 describe("canonical sample transitions on both app boundaries", () => {
+  test("moment projections isolate owners, review access and withdrawn sources on both app boundaries", () => {
+    for (const boundary of [
+      { initial: webInitial, reduce: web, project: webProject },
+      { initial: nativeInitial, reduce: native, project: nativeProject },
+    ]) {
+      expect(boundary.project(boundary.initial()).visibleMoments).toEqual([]);
+      const owner = boundary.initial("review-moment-19");
+      const outsider = boundary.reduce(owner, { type: "actor", id: "eli" });
+      expect(boundary.project(outsider).visibleMoments).toEqual([]);
+      const ownItems = boundary.project(owner).visibleMoments;
+      expect(ownItems.length).toBeGreaterThan(0);
+      expect(ownItems.every((item) => item.owner === "dev")).toBe(true);
+      const reviewer = boundary.reduce(owner, { type: "actor", id: "leo" });
+      const reviewItems = boundary.project(reviewer).visibleMoments;
+      expect(reviewItems.some((item) => item.id === "sample-moment-19")).toBe(true);
+      expect(
+        reviewItems.every(
+          (item) => item.owner === "leo" || (item.scope !== "only-me" && !item.withdrawn),
+        ),
+      ).toBe(true);
+      const administrator = boundary.reduce(owner, { type: "actor", id: "asha" });
+      expect(
+        boundary.project(administrator).visibleMoments.every((item) => item.owner === "asha"),
+      ).toBe(true);
+      const withdrawn = boundary.reduce(owner, { type: "withdraw", sourceId: "sample-moment-19" });
+      expect(
+        boundary.project(withdrawn).visibleMoments.find((item) => item.id === "sample-moment-19")
+          ?.withdrawn,
+      ).toBe(true);
+      const afterWithdrawal = boundary.reduce(withdrawn, { type: "actor", id: "leo" });
+      expect(
+        boundary
+          .project(afterWithdrawal)
+          .visibleMoments.some((item) => item.id === "sample-moment-19"),
+      ).toBe(false);
+    }
+  });
   test("withdrawal starts with accessible dependents", () => {
     for (const output of [
       webProject(webInitial("published-v1")),

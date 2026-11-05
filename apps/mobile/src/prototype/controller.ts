@@ -136,6 +136,13 @@ export function project(state: SampleState) {
     actorId: actor.id,
     administrator: state.data.actors.find((item) => item.admin)!.id,
     canReview,
+    visibleMoments:
+      state.joined && actor.member
+        ? state.data.moments.filter(
+            (item) =>
+              item.owner === actor.id || (canReview && item.scope !== "only-me" && !item.withdrawn),
+          )
+        : [],
     canViewContinuation: actor.id === source.owner || (canReview && source.scope !== "only-me"),
     canEdit: state.joined && actor.member && actor.coauthor,
     canPublish: state.joined && actor.member && actor.publisher,

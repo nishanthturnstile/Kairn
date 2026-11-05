@@ -1,35 +1,50 @@
-import { tokens } from "@kairn/design-tokens";
+﻿import { tokens } from "@kairn/design-tokens";
 import { StyleSheet } from "react-native-unistyles";
 
-export const theme = {
-  colors: {
-    background: tokens.color.paper50,
-    surface: tokens.color.paper0,
-    text: tokens.color.ink950,
-    secondaryText: tokens.color.ink700,
-    border: tokens.color.line200,
-    controlBorder: tokens.color.ink500,
-    primary: tokens.color.forest800,
-    primaryText: tokens.color.white,
-    successSurface: tokens.color.forest100,
-    error: tokens.color.danger800,
-    reviewSurface: tokens.color.clay100,
-    reviewText: tokens.color.clay800,
-    riverSurface: tokens.color.river100,
-  },
-  spacing: tokens.spacing,
-  radius: tokens.radius,
-  typography: tokens.typography.mobile,
-  // Account screens use the bundled, named static weights loaded by the root layout.
-};
-type AppThemes = { light: typeof theme };
+function makeTheme(appearance: "light" | "dark") {
+  const color = tokens.theme[appearance];
+  return {
+    colors: {
+      background: color.canvas,
+      surface: color.surface,
+      text: color.text,
+      secondaryText: color.muted,
+      border: color.divider,
+      controlBorder: color.border,
+      primary: color.action,
+      primaryText: color.onAction,
+      selected: color.selected,
+      success: color.success,
+      successSurface: color.successSurface,
+      error: color.danger,
+      errorSurface: color.dangerSurface,
+      onError: color.onDanger,
+      reviewSurface: color.reviewSurface,
+      reviewText: color.review,
+      riverSurface: color.infoSurface,
+      info: color.info,
+      warning: color.warning,
+      warningSurface: color.warningSurface,
+      scrim: color.scrim,
+      elevated: color.elevated,
+    },
+    spacing: tokens.spacing,
+    radius: tokens.radius,
+    typography: tokens.typography.mobile,
+    control: tokens.control.native,
+    controlRadius: tokens.control.radius,
+  };
+}
+export const theme = makeTheme("light");
+export const darkTheme = makeTheme("dark");
+type AppThemes = { light: typeof theme; dark: typeof darkTheme };
 type AppBreakpoints = typeof tokens.layout.breakpoint;
 declare module "react-native-unistyles" {
   export interface UnistylesThemes extends AppThemes {}
   export interface UnistylesBreakpoints extends AppBreakpoints {}
 }
 StyleSheet.configure({
-  themes: { light: theme },
+  themes: { light: theme, dark: darkTheme },
   breakpoints: tokens.layout.breakpoint,
-  settings: { initialTheme: "light" },
+  settings: { adaptiveThemes: true },
 });

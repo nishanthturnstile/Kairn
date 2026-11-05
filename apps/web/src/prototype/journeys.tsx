@@ -1,3 +1,4 @@
+import { Input } from "../components/ui/input";
 import { useEffect, useRef, useState } from "react";
 import { JourneyWorkspace } from "./workspace";
 import { Link } from "@tanstack/react-router";
@@ -55,7 +56,7 @@ export function Journeys() {
                 error={titleError}
               >
                 {(id, descriptionId) => (
-                  <input
+                  <Input
                     id={id}
                     aria-describedby={descriptionId}
                     aria-invalid={!!titleError}
@@ -78,7 +79,7 @@ export function Journeys() {
             >
               <Field label="Sample invitation code" hint="Use RIDGE. No invitation is sent.">
                 {(id, descriptionId) => (
-                  <input
+                  <Input
                     id={id}
                     aria-describedby={descriptionId}
                     value={code}

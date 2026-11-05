@@ -15,6 +15,7 @@ Start with the product plan and requirements. Use the implementation plans for t
 - [Product requirements](core/product_requirements.md)
 - [Architecture and stack](core/architecture.md)
 - [Application design](core/application_design.md)
+- [Open atlas component guide and coverage ledger](implementation/design_system_catalog.md)
 
 ## Implementation plans
 

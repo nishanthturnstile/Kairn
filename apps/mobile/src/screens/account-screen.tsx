@@ -1,5 +1,8 @@
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/field";
+import { AppearanceControl } from "../theme/appearance";
 import { useEffect, useRef, useState } from "react";
-import { Alert, Image, Share, Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import { Alert, Image, Share, ScrollView, Text, View, type TextInput } from "react-native";
 import { useForm } from "@tanstack/react-form";
 import { useQuery, useQueryClient, onlineManager } from "@tanstack/react-query";
 import * as Crypto from "expo-crypto";
@@ -8,7 +11,7 @@ import * as SecureStore from "expo-secure-store";
 import * as ImagePicker from "expo-image-picker";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { fontNotices } from "../assets/font-notices";
-import { StyleSheet } from "react-native-unistyles";
+import { StyleSheet, withUnistyles } from "react-native-unistyles";
 import { z } from "zod";
 import { createAvatarTransfer } from "@kairn/shared";
 import {
@@ -37,6 +40,8 @@ import {
 } from "../data/account";
 import { readApiUrl } from "../data/system-query";
 
+const StyledScrollView = withUnistyles(ScrollView);
+
 function Action({
   title,
   onPress,
@@ -46,17 +51,7 @@ function Action({
   onPress: () => void;
   disabled?: boolean;
 }) {
-  return (
-    <Pressable
-      accessibilityRole="button"
-      accessibilityLabel={title}
-      disabled={disabled}
-      onPress={onPress}
-      style={[styles.button, disabled && styles.disabled]}
-    >
-      <Text style={styles.buttonText}>{title}</Text>
-    </Pressable>
-  );
+  return <Button label={title} onPress={onPress} disabled={disabled} />;
 }
 export function AccountScreen() {
   const epoch = useAccountEpoch();
@@ -310,12 +305,12 @@ function ConfiguredAccount({ origin }: { origin: string }) {
       </View>
     );
   return (
-    <ScrollView
+    <StyledScrollView
       contentContainerStyle={styles.page}
       keyboardShouldPersistTaps="handled"
       automaticallyAdjustKeyboardInsets
     >
-      <Text style={styles.kicker}>KAIRN / YOUR PRIVATE ACCOUNT</Text>
+      <AppearanceControl />
       <Text style={styles.heading}>
         {mode === "reset"
           ? "Choose a new password"
@@ -383,14 +378,13 @@ function ConfiguredAccount({ origin }: { origin: string }) {
               {(field) => (
                 <>
                   <Text style={styles.label}>Display name</Text>
-                  <TextInput
+                  <Input
                     ref={profileNameInput}
                     accessibilityLabel="Display name"
                     editable={!busy}
                     autoComplete="name"
                     value={field.state.value}
                     onChangeText={field.handleChange}
-                    style={styles.input}
                   />
                   <Text accessibilityLiveRegion="polite" style={styles.error}>
                     {field.state.meta.errors.join(" ")}
@@ -408,14 +402,14 @@ function ConfiguredAccount({ origin }: { origin: string }) {
               {(field) => (
                 <>
                   <Text style={styles.label}>Bio (optional)</Text>
-                  <TextInput
+                  <Input
                     ref={bioInput}
                     accessibilityLabel="Bio (optional)"
                     editable={!busy}
                     multiline
                     value={field.state.value}
                     onChangeText={field.handleChange}
-                    style={[styles.input, styles.bio]}
+                    style={styles.bio}
                   />
                   <Text accessibilityLiveRegion="polite" style={styles.error}>
                     {field.state.meta.errors.join(" ")}
@@ -704,14 +698,13 @@ function ConfiguredAccount({ origin }: { origin: string }) {
               {(field) => (
                 <>
                   <Text style={styles.label}>Display name</Text>
-                  <TextInput
+                  <Input
                     ref={nameInput}
                     accessibilityLabel="Display name"
                     editable={!busy}
                     autoComplete="name"
                     value={field.state.value}
                     onChangeText={field.handleChange}
-                    style={styles.input}
                   />
                   <Text accessibilityLiveRegion="polite" style={styles.error}>
                     {field.state.meta.errors.join(" ")}
@@ -731,7 +724,7 @@ function ConfiguredAccount({ origin }: { origin: string }) {
               {(field) => (
                 <>
                   <Text style={styles.label}>Email</Text>
-                  <TextInput
+                  <Input
                     ref={emailInput}
                     accessibilityLabel="Email"
                     editable={!busy}
@@ -741,7 +734,6 @@ function ConfiguredAccount({ origin }: { origin: string }) {
                     autoCorrect={false}
                     value={field.state.value}
                     onChangeText={field.handleChange}
-                    style={styles.input}
                   />
                   <Text accessibilityLiveRegion="polite" style={styles.error}>
                     {field.state.meta.errors.join(" ")}
@@ -767,7 +759,7 @@ function ConfiguredAccount({ origin }: { origin: string }) {
               {(field) => (
                 <>
                   <Text style={styles.label}>Password</Text>
-                  <TextInput
+                  <Input
                     ref={passwordInput}
                     accessibilityLabel="Password"
                     editable={!busy}
@@ -778,7 +770,6 @@ function ConfiguredAccount({ origin }: { origin: string }) {
                     autoCorrect={false}
                     value={field.state.value}
                     onChangeText={field.handleChange}
-                    style={styles.input}
                   />
                   <Text accessibilityLiveRegion="polite" style={styles.error}>
                     {field.state.meta.errors.join(" ")}
@@ -842,7 +833,7 @@ function ConfiguredAccount({ origin }: { origin: string }) {
           <Text style={styles.body}>{fontNotices.InstrumentSans}</Text>
         </View>
       ) : null}
-    </ScrollView>
+    </StyledScrollView>
   );
 }
 const styles = StyleSheet.create((theme, rt) => ({
@@ -867,17 +858,6 @@ const styles = StyleSheet.create((theme, rt) => ({
   label: { fontFamily: "InstrumentSans600", fontSize: 16, color: theme.colors.text },
   body: { fontFamily: "InstrumentSans400", fontSize: 16, lineHeight: 24, color: theme.colors.text },
   kicker: { fontFamily: "InstrumentSans500", fontSize: 12, color: theme.colors.secondaryText },
-  input: {
-    fontFamily: "InstrumentSans400",
-    fontSize: 17,
-    color: theme.colors.text,
-    backgroundColor: theme.colors.surface,
-    borderColor: theme.colors.controlBorder,
-    borderWidth: 1,
-    borderRadius: theme.radius.small,
-    padding: theme.spacing.md,
-    minHeight: 48,
-  },
   bio: { minHeight: 104, textAlignVertical: "top" },
   error: { fontFamily: "InstrumentSans400", color: theme.colors.error, fontSize: 14 },
   notice: {
@@ -889,16 +869,6 @@ const styles = StyleSheet.create((theme, rt) => ({
     color: theme.colors.text,
     borderRadius: theme.radius.small,
   },
-  button: {
-    minHeight: 48,
-    padding: theme.spacing.md,
-    borderRadius: theme.radius.small,
-    backgroundColor: theme.colors.primary,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  disabled: { opacity: 0.5 },
-  buttonText: { fontFamily: "InstrumentSans600", fontSize: 16, color: theme.colors.primaryText },
-  avatar: { width: 96, height: 96, borderRadius: 48 },
   initials: { fontFamily: "Newsreader600", fontSize: 44, color: theme.colors.primary },
+  avatar: { width: 96, height: 96, borderRadius: 48 },
 }));

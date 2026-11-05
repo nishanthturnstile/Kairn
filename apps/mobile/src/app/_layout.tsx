@@ -4,9 +4,11 @@ import { useFonts } from "expo-font";
 import { Text, View } from "react-native";
 import { Stack } from "expo-router/stack";
 import { focusManager, QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { theme } from "../theme/unistyles";
+import { useUnistyles } from "react-native-unistyles";
+import { AppearanceProvider } from "../theme/appearance";
 
 export default function RootLayout() {
+  const { theme, rt } = useUnistyles();
   const [fontsLoaded, fontError] = useFonts({
     Newsreader500: require("../assets/fonts/Newsreader500.ttf"),
     Newsreader600: require("../assets/fonts/Newsreader600.ttf"),
@@ -36,22 +38,26 @@ export default function RootLayout() {
     );
   return (
     <QueryClientProvider client={client}>
-      <Stack
-        screenOptions={{
-          headerStyle: { backgroundColor: theme.colors.background },
-          headerTintColor: theme.colors.text,
-          contentStyle: { backgroundColor: theme.colors.background },
-          headerShadowVisible: false,
-          // Expo's iOS shell owns its status bar; this option is needed on Android.
-          ...(Platform.OS === "android" ? { statusBarStyle: "dark" } : {}),
-        }}
-      >
-        <Stack.Screen name="account" options={{ title: "Your account" }} />
-        <Stack.Screen name="reset-password" options={{ title: "Reset password" }} />
-        <Stack.Screen name="verify-email" options={{ title: "Verify email" }} />
-        <Stack.Screen name="index" options={{ title: "Kairn Dev" }} />
-        <Stack.Screen name="prototype" options={{ headerShown: false }} />
-      </Stack>
+      <AppearanceProvider>
+        <Stack
+          screenOptions={{
+            headerStyle: { backgroundColor: theme.colors.background },
+            headerTintColor: theme.colors.text,
+            contentStyle: { backgroundColor: theme.colors.background },
+            headerShadowVisible: false,
+            // Expo's iOS shell owns its status bar; this option is needed on Android.
+            ...(Platform.OS === "android"
+              ? { statusBarStyle: rt.themeName === "dark" ? "light" : "dark" }
+              : {}),
+          }}
+        >
+          <Stack.Screen name="account" options={{ title: "Your account" }} />
+          <Stack.Screen name="reset-password" options={{ title: "Reset password" }} />
+          <Stack.Screen name="verify-email" options={{ title: "Verify email" }} />
+          <Stack.Screen name="index" options={{ title: "Kairn Dev" }} />
+          <Stack.Screen name="prototype" options={{ headerShown: false }} />
+        </Stack>
+      </AppearanceProvider>
     </QueryClientProvider>
   );
 }
