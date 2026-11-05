@@ -1,6 +1,10 @@
 # Kairn development guidance
 
-Read `docs/README.md` for the documentation map. Requirements in `docs/core/product_requirements.md` govern functional scope. `docs/core/architecture.md` section 14 is the canonical dependency register; `docs/core/application_design.md` governs design. The setup/mobile plans under `docs/implementation/` govern the foundation and host workflow. Dated research can contain superseded alternatives.
+Read `docs/README.md` for the documentation map. Requirements in `docs/core/product_requirements.md` govern functional scope. `docs/core/architecture.md` section 14 is the canonical dependency register; `DESIGN.md` is the active design/workflow hub; `docs/core/application_design.md` retains functional screen responsibilities. The setup/mobile plans under `docs/implementation/` govern the foundation and host workflow. Dated research can contain superseded alternatives.
+
+## Fresh design reset — 5 November 2026
+
+The user withdrew the previous visual identity, design constraints, component styling, page layouts and prototype/redesign plans. Start design work at `DESIGN.md`. Colors, fonts, spacing, icons, logo, motion and every page are undecided; do not infer defaults from existing tokens, components, screenshots or installed icon/font packages. Workflow documents remain functional inputs; their presentation proposals are revisitable. Do not resume old prototype/design milestone sequences. Archived visual progress under `docs/archive/design-before-2026-11-05/` is for explicitly requested historical implementation audits only, not default planning context. Preserve functional requirements, authorization, accessibility, durability and the selected technical stack.
 
 ## Testing scope
 

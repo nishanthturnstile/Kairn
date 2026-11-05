@@ -1,6 +1,6 @@
 # Kairn
 
-Shared journey capture, composition, and reading. Start with the [documentation map](docs/README.md).
+Shared journey capture, composition, and reading. Start design and workflow planning with [DESIGN.md](DESIGN.md); use the [documentation map](docs/README.md) for implementation references. Visual design has been reset; existing prototype appearance is superseded.
 
 Repository setup follows the [setup plan](docs/implementation/repository_setup_plan.md#9-implementation-sequence-and-acceptance-gates). Toolchain, shared packages, generated contracts, composed services, Android, iPhone simulator, and physical iPad acceptance have passed for the agreed scope. Physical iPhone checks are deferred by the user. Evidence and revision-specific hosted CI results are in the [current checkpoint](docs/implementation/repository_setup_progress.md#current-checkpoint).
 

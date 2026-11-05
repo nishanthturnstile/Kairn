@@ -271,7 +271,7 @@ packages/
   backend/             Server-only domain modules, policy, Drizzle data and jobs
   shared/              Pure chronology, evidence, money, and URL-selection rules
   sync-protocol/       Versioned commands, acknowledgments, conflicts, tombstones
-  design-tokens/       Existing palette, fonts, spacing, radii, motion tokens
+  design-tokens/       Shared value boundary; visual values reopened in DESIGN.md
 tests/fixtures/        Consented media, GPX/FIT, permission and answer corpora
 infra/
   compose/             Service definitions, health checks, resource limits
@@ -376,7 +376,7 @@ Implement and locally qualify both native platforms during the current build. Wi
 
 Expo Router owns native screens/deep links. App-owned files and SQLite own captures, unsent edits, upload progress, and sync cursors. SecureStore owns session secrets. Query owns fetched server state with focus/connectivity integration. It never owns the only copy of a capture. [Query React Native integration](https://tanstack.com/query/latest/docs/framework/react/react-native).
 
-Use owned shadcn components with Tailwind on web and React Native controls styled with **Unistyles v3** inside the Expo app. This is the confirmed mobile styling choice; do not introduce NativeWind. Share palette, typography, spacing, evidence language, and pure rules through the platform-neutral `design-tokens` package. Keep Unistyles configuration and styles inside `apps/mobile`; do not share DOM components or add native dependencies to the token package. Self-host the licensed Newsreader/Instrument Sans files. shadcn's primitive dependencies are selected by the components actually generated, not by installing every component. [shadcn introduction](https://ui.shadcn.com/docs), [Unistyles setup](https://www.unistyl.es/v3/start/getting-started/).
+Use owned shadcn components with Tailwind on web and React Native controls styled with **Unistyles v3** inside the Expo app. This is the confirmed mobile styling choice; do not introduce NativeWind. Share newly selected palette, typography and spacing values, evidence language, and pure rules through the platform-neutral `design-tokens` package. Keep Unistyles configuration and styles inside `apps/mobile`; do not share DOM components or add native dependencies to the token package. Font families are undecided under the [fresh design hub](../../DESIGN.md); self-host appropriately licensed assets once selected. shadcn's primitive dependencies are selected by the components actually generated, not by installing every component. [shadcn introduction](https://ui.shadcn.com/docs), [Unistyles setup](https://www.unistyl.es/v3/start/getting-started/).
 
 Unistyles enters the mobile foundation with its Nitro Modules dependency, the New Architecture, and a local development build. It does not run in Expo Go, so compiled builds are required before Mapbox is introduced too. Configure the supported Babel plugin with `babel-preset-expo`, a source root covering native components, and explicit processing of route files outside that root where necessary. Initialize the token-backed theme and breakpoints in a custom entry before importing `expo-router/entry` or any module creating a Unistyles stylesheet. Keep the experimental Metro integration out of the baseline and never enable both transform integrations. Import `StyleSheet` directly from `react-native-unistyles`, retain reactive styles through style arrays, and qualify themed props on Mapbox/other third-party native views. [Babel integration](https://www.unistyl.es/v3/other/babel-plugin/), [Expo Router initialization](https://www.unistyl.es/v3/guides/expo-router/).
 
@@ -744,7 +744,7 @@ Observed on 1 November 2026. Exact direct pins and the resolved lockfile are req
 | Owned web primitive support | `cn`, `class-variance-authority` | `0.5.2`, `0.7.1` | B01 selected shadcn source utilities; no component-explorer or second styling framework. |
 | Web primitive base | `@radix-ui/react-slot`, `@radix-ui/react-label`, `@radix-ui/react-separator` | `1.5.0`, `2.1.17`, `1.2.0` | B01 generated button/field support, narrowed to the three used primitives instead of the full `radix-ui` entry. |
 | Web styles | `tailwindcss`, `@tailwindcss/vite` | `4.3.3` | Design foundation. |
-| Icons | `lucide-react`, `lucide-react-native` | `1.66.0` | Design foundation with the native SVG peer below. |
+| Icons | `lucide-react`, `lucide-react-native` | `1.66.0` | Currently installed with the native SVG peer below; icon design is reopened in DESIGN.md. |
 | Web recovery | `dexie` | `4.4.7` | Unsent web edits/outbox; distinct from Query caching. |
 | HTTP | `hono`, `@hono/node-server` | `4.13.16`, `2.1.5` | API, auth, renderer and protected gateways. |
 | Contracts | `zod`, `@hono/zod-openapi` | `4.6.7`, `1.6.3` | Wire validation and OpenAPI. |
@@ -988,7 +988,7 @@ Retention durations, total account quota, global AI concurrency, and public-read
 
 Build all workstreams in the same production application. This order follows dependencies and does not introduce an MVP, separate trial service, or preliminary proof-of-concept gate.
 
-The user-requested [web and mobile interaction prototype](../implementation/prototype_plan.md) precedes the next product coding batch as a bounded design activity in the existing apps. Its isolated review branch uses explicit sample state; selected reusable code returns through a reviewed integration change that excludes prototype entry points and fixtures. Simulated interactions do not qualify this section's production evidence or change the complete R1 dependency order.
+The user has restarted visual and prototype planning through [DESIGN.md](../../DESIGN.md). Existing sample code remains superseded implementation history. A newly planned prototype must label simulated state and keep production artifacts/acceptance separate; it does not change the complete R1 dependency order.
 
 | Order | Production capability | Evidence required before complete R1 release |
 |---|---|---|

@@ -14,7 +14,7 @@ Requirements and architecture remain authoritative. The numerical policies below
 | D04 Forms/offers/abuse | Explicit bounds, expiry windows and PostgreSQL-backed budgets. | Selected; sections 3–4. |
 | D05 Authentication | Verified email/password, fixed maximum session lifetime, fresh authentication for sensitive actions, bounded reset/verification tokens and current DB sessions. | Selected; section 5. |
 | D06 Time/category/history | Intended instants plus IANA context; explicit ambiguous-time handling; canonical start-year filtering; small optional category enum. | Selected; section 6. |
-| D07 Assets/components | Existing field-journal system; pinned font source artifacts and weights; defined light/dark-surface focus and enabled-control borders. | Selected inputs; packaging/rendering is implementation work, not another brand decision. |
+| D07 Assets/components | Visual identity, fonts, icons and component styling reopened in DESIGN.md; identity-media validation below remains selected. | Visual choices undecided after the user reset on 5 November 2026. |
 | D08 Retention/status | Concrete bounded internal defaults, opaque history/tombstones and a separate deletion receipt. Recovery-journal retention is constrained by every restorable backup. | Selected targets; production terms require verified operational configuration. |
 | D09 Devices | Windows Android emulator, Mac iPhone simulator and available physical iPad; physical iPhone remains deferred. | Selected qualification scope. Device availability/signing is checked when the affected build runs. |
 | D10 Lifecycle | Admin-authorized canonical deletion, two requester confirmations, no invented group consent; archived collaboration is closed; account deletion withdraws owned-source reuse. | Selected; section 8. |
@@ -110,13 +110,7 @@ The password direction is informed by the [current NIST password guidance](https
 
 ### Fonts and components
 
-Use the existing Newsreader editorial / Instrument Sans interface system, light-first Paper/Forest/Clay palette and shared scales. Font sources are pinned in [font source evidence](../research/accounts-journey-access/font_sources_2026-11-03.json): actual downloaded TTF/license/metadata checksums, not only family names.
-
-- Newsreader normal, weights 500/600, optical size 16 baseline with the specified display scale.
-- Instrument Sans normal, weights 400/500/600/700, standard width 100.
-- Ship the corresponding license notices. Web uses self-hosted WOFF2 outputs from these inputs where produced; native uses correctly mapped named weights through Expo Font. B04 records derived hashes and the exact build transformation, and proves real iOS/Android weight rendering; synthetic bold/fallback is not acceptance.
-- Empty/no-cover state: owned simple field-note/journey-line vector composition, no stock destination photography, generated journey data or new icon family. Lucide remains the selected utility icons.
-- Enabled borders use Ink 500 on Paper; Line 200 is a separator. Preserve Paper separation around Clay light-surface focus, and a Paper companion on dark/Forest surfaces. Follow the existing handoff's actual-adjacency checks.
+The user withdrew the prior font, palette, icon and component-style selections on 5 November 2026. [DESIGN.md](../../DESIGN.md) owns the fresh choices. Existing downloaded font files, licenses and package pins describe installed artifacts only; they are not required design inputs. New selections must be licensed, packaged and qualified on web/native before shipping. Identity-media validation and access rules below are unaffected.
 
 ### Bounded avatar dependency
 

@@ -2,11 +2,11 @@
 
 <!-- impeccable:product-schema 1 -->
 
-This is a design-tool index of confirmed repository requirements, not a new product authority. `docs/core/product_requirements.md` and `docs/core/application_design.md` govern. No new interview or product claims are inferred.
+This is a concise index of product facts. [Product requirements](docs/core/product_requirements.md) govern scope; [DESIGN.md](DESIGN.md) is the active workflow and fresh-design hub.
 
 ## Platform
 
-adaptive
+Android/iOS native capture and editing, responsive creator web, and public web reading.
 
 ## Users
 
@@ -18,16 +18,16 @@ A shared record of a journey that happened. Capture, compose, experience and lea
 
 ## Capabilities and Constraints
 
-The current work is a fictional P00–P02 prototype, not a functioning capture, sync, publication or authentication service. Existing Expo/React Native/Unistyles mobile and React/TanStack web applications remain the implementation. The complete-redesign brief authorizes experience expansion beyond P02; production integrations still require their documented gates. Documentation owns permission and evidence semantics.
+Retain the functional workflows and current architecture. Existing application code contains both real account behavior and simulated prototype experiences; inspect the owning implementation record before claiming a capability works. Design is restarting from scratch. Existing prototype appearance, component styling and assets do not determine the new design.
 
 ## Brand Commitments
 
-The founder authorizes replacement of the experimental identity and navigation. The chosen Open atlas direction is documented in DESIGN.md; product, permission and evidence requirements remain unchanged.
+No visual direction is selected. Colors, fonts, spacing, icons, logo, imagery, page layouts and navigation composition are undecided. Follow the decision process in DESIGN.md; do not infer approval from existing source code or historical screenshots.
 
 ## Evidence on Hand
 
-`tests/fixtures/prototype` holds fictional actors and journey content. Purpose-created images must be labelled sample imagery and carry provenance. Real journey photos, testimonials and production acceptance do not exist here.
+The workflow specifications describe tasks, connectivity, information, permissions and failures. Existing fixture data is fictional. Purpose-created media needs clear provenance; old mockups are not product or design acceptance evidence for the new work.
 
 ## Accessibility & Inclusion
 
-Readable long text, visible focus, semantic states, reduced motion, 44 CSS px web and 48 dp Android targets. Native platform evidence is separate from responsive web evidence.
+Readable text, visible focus, labelled controls, non-color state cues, reduced motion, accessible targets and resilient keyboard/screen-reader interaction. Qualify native behavior on its platforms separately from responsive web.

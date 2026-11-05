@@ -1,3 +1,5 @@
+> **Design reset, 5 November 2026:** visual choices and visual instructions in this historical record are withdrawn. Font/color/icon references describe past artifacts only. Use [DESIGN.md](../../DESIGN.md) for new design; technical evidence and domain policy retain their recorded scope.
+
 # Accounts, journeys and access: implementation progress
 
 Date: 3 November 2026. Execution against [implementation plan 1.2](accounts_journeys_access_plan.md) and the [selected decisions](accounts_journeys_access_decisions.md). This record is separate from completed [repository foundation acceptance](repository_setup_progress.md).

@@ -1,6 +1,6 @@
 # Documentation
 
-Start with the product plan and requirements. Use the implementation plans for the next engineering work.
+Start design and workflow work with [DESIGN.md](../DESIGN.md). The user has reset visual planning; previous colors, fonts, components and layouts are withdrawn. Product requirements and technical implementation records retain their own scope.
 
 | Folder | Contents |
 |---|---|
@@ -14,8 +14,19 @@ Start with the product plan and requirements. Use the implementation plans for t
 - [Kairn ecosystem direction](core/ecosystem_direction.md) — toolkit vision, current-scope mapping, reusable boundaries and parallel engineering packets
 - [Product requirements](core/product_requirements.md)
 - [Architecture and stack](core/architecture.md)
-- [Application design](core/application_design.md)
-- [Open atlas component guide and coverage ledger](implementation/design_system_catalog.md)
+- [Application experience requirements and screen IDs](core/application_design.md) — functional responsibilities; visual planning lives in DESIGN.md
+
+## Design and workflows
+
+[DESIGN.md](../DESIGN.md) connects the fresh decision process to all surfaces. No new visual direction is selected. Workflow documents below preserve tasks and connections; their layout/container examples remain revisitable.
+
+- [Pen.dev setup and design workflow](implementation/pen_dev_setup_plan.md) — extension/MCP connection, three configured Codex profiles, verified MCP canvas access, session refresh, free-plan limits, reusable libraries and screen-by-screen handoff
+- [Cross-surface journeys and lifecycle workflows](implementation/lifecycle_workflow_spec.md) — start here for the complete journey map, shared account/history/export/highlight screens, named lifecycle actions and combined scenarios
+- [Mobile workflow and screen specification](implementation/mobile_workflow_specification.md) — A01–A09 screen families, 48 screen/overlay contracts, incoming/outgoing navigation, components, actions, permission/recovery states and prototype acceptance
+- [Creator-web workflow and screen specification](implementation/creator_web_workflow_spec.md) — W01–W08 entry/exit connectivity, components, actions, permissions, adverse states, architecture boundaries and prototype review tasks
+- [Public-web workflow and screen specification](implementation/public_web_workflow.md) — P01–P08 incoming/outgoing navigation, components, saved research, question states, publication boundaries and prototype acceptance scenarios
+- [Accounts and journey experience handoff](implementation/accounts_journeys_access_design.md) — consumer workflows, screen/route inventory, components, responsive behavior, and UI/UX acceptance
+- [Workflow review and reset verification](implementation/workflow_review.md) — functional findings, corrections and documentation checks
 
 ## Implementation plans
 
@@ -36,25 +47,17 @@ Start with the product plan and requirements. Use the implementation plans for t
 - [Domain transactions and bounded workers](implementation/domain_transaction_boundary.md) — B03 checked commands, atomic jobs, sealed mail/auth callback guard, private identity media and retention
 - [Restriction recovery runbook](implementation/restriction_recovery_runbook.md) — independent journal protocol, concrete operator fence/replay/credential sequence and actual deployment gate
 - [Identity database foundation](implementation/identity_database.md) — B02 identity/journey/source/operation models and policy graph, migrations, enqueue-only producer grants, existing-volume upgrade and pool budget
-- [Web and mobile experience prototype](implementation/prototype_plan.md) — connected sample workflows, screen coverage, branch isolation, delivery batches, verification and production handoff before the next product coding batch
-- [Accounts and journey experience handoff](implementation/accounts_journeys_access_design.md) — consumer workflows, screen/route inventory, components, responsive behavior, and UI/UX acceptance
-- [Selected account/journey decisions](implementation/accounts_journeys_access_decisions.md) — chosen authority/lifecycle policy, field limits, expiry, retention targets, asset inputs, and external activation gates
+- [Selected account/journey decisions](implementation/accounts_journeys_access_decisions.md) — chosen authority/lifecycle policy, field limits, expiry, retention targets and external activation gates; visual asset choices are reopened
 - [How account/journey implementation starts](implementation/accounts_journeys_access_start.md) — first coding batch, visible checkpoints, user/developer responsibilities, existing checks, and current branch dependency
-
-- [Prototype progress](implementation/prototype_progress.md) — P00–P02 implementation, executed checks, visual checkpoint and platform gaps
-
-- [Design system and product experience redesign plan](implementation/design_system_redesign_plan.md): remaining component inventory, web/native consistency, DS01-DS12 delivery, screen migration and acceptance gates.
-- [Experience redesign audit and progress](implementation/experience_redesign.md): Open atlas direction, implemented checkpoint, executed evidence and outstanding production gates.
 
 ## Research
 
 - [Architecture research](research/architecture/) — stack, maps, providers, and the [map cost comparison](research/architecture/map_cost_comparison.md)
 - [Repository setup research](research/repository-setup/) — toolchain, native builds, Compose, compatibility probes, and host observations
-- [Accounts and journey-access research](research/accounts-journey-access/analysis_2026-11-03.md) — current-code gaps, functional analysis, version-matched integration findings, and design/accessibility research for the next milestone
+- [Accounts and journey-access research](research/accounts-journey-access/analysis_2026-11-03.md) — current-code gaps, functional analysis, version-matched integration findings; historical visual recommendations are withdrawn
 - [Independent plan review](research/accounts-journey-access/review_2026-11-03.md) — OpenCode/DeepSeek V4.1 Flash findings, parent assessment, plan corrections, and remaining activation/verification gates
 - [Implementation review](research/accounts-journey-access/implementation_review_2026-11-04.md) — OCR host-agent review of B01–B03 and the SDK refresh, reproduced defects, corrections and validation before B04
-- [Prototype plan review](research/prototype/review_2026-11-03.md) — independent model findings, Codex dispositions, final OpenCode Go Argon 4 review and planning verification
 
 [Setup execution history](research/repository-setup/repository_setup_progress_2026-11-02.md) and [native host history](research/repository-setup/native_host_setup_2026-11-02.md) preserve archived attempts and detailed qualification. Current status stays in the implementation documents.
 
-The current core documents and implementation plans govern the build. Dated research preserves supporting evidence and earlier alternatives; superseded recommendations are marked in those files.
+DESIGN.md governs new design planning; product requirements and current technical plans govern functional implementation. Historical visual prescriptions in research and archived records are not design inputs. Dated research preserves supporting evidence and earlier alternatives; superseded recommendations are marked in those files.

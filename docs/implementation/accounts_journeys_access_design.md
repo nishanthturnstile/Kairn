@@ -2,43 +2,21 @@
 
 Date: 3 November 2026. Status: detailed experience handoff; the first B01 web forms, empty/no-cover, powers and restriction specimens are implemented. Full compositions, native components and integrated acceptance remain pending; see [execution progress](accounts_journeys_access_progress.md). Read with the [implementation plan](accounts_journeys_access_plan.md) and [research](../research/accounts-journey-access/analysis_2026-11-03.md).
 
-Independent-review reconciliation: [findings and dispositions](../research/accounts-journey-access/review_2026-11-03.md). The [selected baseline](accounts_journeys_access_decisions.md) now fixes authority, lifecycle, limits and asset inputs for implementation plan 1.2. Real rendering/API/device acceptance remains required.
+Independent-review reconciliation: [findings and dispositions](../research/accounts-journey-access/review_2026-11-03.md). The [selected baseline](accounts_journeys_access_decisions.md) now fixes authority, lifecycle and limits; former visual asset choices have been reopened for implementation plan 1.2. Real rendering/API/device acceptance remains required.
 
-[Application design](../core/application_design.md) remains the visual authority. This document specifies its first delivery handoff: account access, private history, journey setup, membership/People, permission primitives and lifecycle feedback. It adds no new visual identity or product scope. Screen references below refine existing A01/A06/A09/W01/W06/W09 and shared entry flows; they do not renumber the core inventory.
+[DESIGN.md](../../DESIGN.md) owns fresh visual planning; no visual direction is currently selected. This document specifies its first delivery handoff: account access, private history, journey setup, membership/People, permission primitives and lifecycle feedback. It adds no new visual identity or product scope. Screen references below refine existing A01/A06/A09/W01/W06/W09 and shared entry flows; they do not renumber the core inventory.
 
 ## 1. Experience goal
 
 A first-time participant should understand three facts without reading documentation: this is one shared journey, their personal material stays private, and each action has a clear audience and consequence. An organiser should invite people and manage powers without mistaking administration for ownership of their files. Returning users should reach their journeys quickly and trust what happened after a save, error or access change.
 
-Use the contemporary field-journal direction already selected: Paper surfaces, Forest actions, quiet editorial rhythm, restrained Clay review states, and real approved/private media only where permitted. The memorable element is recognizable journey identity and the journey line. Account forms and People management prioritize clear tasks over decorative storytelling.
+Account and People screens need clear tasks, audiences and results. Their visual identity and composition will be designed afresh.
 
-## 2. Visual and component contract
+## 2. Functional component requirements
 
-### 2.1 Preserve and complete the system
+### 2.1 Visual choices reopened
 
-| Layer | Implementation instruction | Evidence needed |
-| --- | --- | --- |
-| Palette | Consume `packages/design-tokens`; map semantic background/surface/text/action/review/error/focus roles to existing values. Never use semantic color alone to convey permission or status. | Contrast in default, focus, pressed, disabled, error and selected states; meaningful borders meet the relevant contrast requirement. |
-| Typography | Instrument Sans for controls, forms and creator headings; Newsreader for editorial welcome/empty treatments where the baseline permits it. Bundle reviewed native font files and self-host web assets; include licenses and fallback metrics. | Actual font/weight rendering, larger text, long names and fallback behavior on each platform. |
-| Spacing/shape | Reuse the 4-point scale and 8/14/22 radii. Routine People rows use spacing/separators, not a shadowed card per row. At most two elevation levels. | Consistent screen margins, readable groups and usable dense/large-text layouts. |
-| Iconography | Selected Lucide family and the 1.75 stroke token; pair critical icons with words. Initials are a real avatar fallback. | Labels survive missing images and screen-reader access. |
-| Motion | Add shared motion tokens for the design's 160–220 ms screen transitions and 220–280 ms sheets. Short press/selection feedback must not delay the action. Reduced motion removes nonessential movement. | Keyboard and reduced-motion paths; no layout jump on pending/success. |
-| Media | No destination stock image stands in for a journey with no media. Use type/date/line composition until an owner supplies permitted imagery. | Empty and missing-cover states look intentional. |
-| Web primitives | Generate selected owned shadcn components and map their semantic variables/variants to the tokens. Record primitive base and exact generated dependencies. Avoid broad CSS selectors that restyle public reading or every element globally. | Component specimens plus a narrow screen build; no wholesale generated dashboard or preset replacement. |
-| Native primitives | React Native controls and platform navigation composed with Unistyles variants; configure theme before Router. Preserve platform back, selection, sheets, safe areas and keyboard behavior. | Actual native screenshots and primary-task checks. No web dialog imitation for long native forms. |
-
-The generic design skills do not authorize NativeWind, a second theme, @expo/ui, different icon families, a dark-mode expansion, Expo Go, a hosted build service, or new animation packages. Use already selected dependencies when a real control requires them; additions go through architecture review.
-
-Map the following semantic aliases to existing palette values during component implementation; do not add a new palette. Rendered adjacent surfaces still require verification.
-
-| Semantic role | Planned value / treatment | Acceptance |
-| --- | --- | --- |
-| Enabled control boundary | Ink 500 against Paper 0/50, or an equally compliant native control affordance. | Approximately 5.15:1 on Paper 0; check required outlines/underlines in every enabled state. Line 200 remains a decorative separator, not the sole enabled-control cue. |
-| Focus on light surfaces | Clay 500 with the specified Paper 0 offset/halo, preserving the 3 px ring and 2 px separation. | Approximately 3.56:1 against Paper 0; verify actual adjacent pixels and distinguish focus from default/selected state. |
-| Focus on dark/Forest surfaces | Paper 0 contrast companion/halo rather than an unbuffered Clay ring touching Forest. | Paper 0 versus Forest 800 is approximately 9.17:1. Use a two-tone or stable scrim treatment for variable imagery, then test it. |
-| Disabled control boundary | The quieter baseline treatment can remain where appropriate. | Still show disabled state/label clearly; do not mistake a disabled-control exception for an enabled-input contrast pass. |
-
-Clay 500 directly against Forest 800 is approximately 2.57:1. That pair alone is insufficient for a required non-text boundary, but it does not prove the existing focused primary button fails: the ring may instead border Paper outside the button. Preserve the baseline paper-offset intent and inspect the rendered geometry rather than diagnosing from nonadjacent colors.
+Select colors, typography, spacing, shapes, icons, imagery, motion and layout through DESIGN.md. Existing component values and font assets do not constrain those choices. Keep the selected rendering/styling architecture, current field validation, accessible interaction, safe native Back and keyboard behavior. New assets need appropriate licenses and actual rendering checks; selected semantic roles must be verified in context.
 
 ### 2.2 Build a small useful component set
 
@@ -213,7 +191,7 @@ Every active screen needs first-load, success, empty where meaningful, field err
 | Spinner replacing every screen | Stable skeleton or inline pending/refresh state. | Preserves context and perceived responsiveness. |
 | One generic permission chip | Explicit scope selection and audience explanation. | Makes consequences understandable. |
 
-Keep action names consistent from button to result. Avoid confetti, artificial readiness scores, repetitive card chrome and decorative maps. Motion should explain a person's action, not hold up routine use.
+Keep action names consistent from button to result. Avoid misleading readiness scores or imagery that fabricates journey evidence. Motion should explain a person's action, not hold up routine use.
 
 ## 7. Design acceptance and handoff packet
 
