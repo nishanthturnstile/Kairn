@@ -13,6 +13,7 @@ Kairn records one shared journey that happened: people capture selected moments,
 | Product purpose and audience | [Product context](PRODUCT.md), [product plan](docs/core/product_plan.md) |
 | Functional scope and acceptance | [Product requirements](docs/core/product_requirements.md) |
 | Whole journey, cross-surface handoffs and lifecycle | [Shared workflow specification](docs/implementation/lifecycle_workflow_spec.md) |
+| Complete mockup screen map, platform equivalents, states and open interaction choices | [Mockup screen map](docs/implementation/mockup_screen_map.md) |
 | Native journey history, create/join, capture, moments/sync, import, focused editing, highlights and account | [Mobile workflows](docs/implementation/mobile_workflow_specification.md) |
 | Creator overview, story, route, practical details, sources, people, conflicts and publishing | [Creator-web workflows](docs/implementation/creator_web_workflow_spec.md) |
 | Discovery, approved reader, sources, highlights, profiles, research and questions | [Public-web workflows](docs/implementation/public_web_workflow.md) |
@@ -56,6 +57,7 @@ This is an incremental design process, not a mandate to pick everything now. Fut
 | --- | --- | --- | --- |
 | RESET-01 | Start visual identity, components and page design afresh | User requested, 5 November 2026 | Prior visual decisions and design milestones have no authority over new work. |
 | RESET-02 | Keep functional workflow research and domain rules as planning input | Reset scope | Screen connectivity, ownership, privacy and durability remain available without inheriting their former presentation. |
+| MAP-01 | Complete screen mapping before mockup production | User requested, 5 November 2026 | The [screen map](docs/implementation/mockup_screen_map.md) reconciles current responsibilities and handoffs; visual choices and mockup composition remain open. |
 
 For each future choice record: area, options considered, selection/date, rationale, affected screen/component IDs, artifact link and verification still needed. This file tracks the current choice; rejected alternatives do not become active rules.
 

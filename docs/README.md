@@ -22,6 +22,7 @@ Start design and workflow work with [DESIGN.md](../DESIGN.md). The user has rese
 
 - [Pen.dev setup and design workflow](implementation/pen_dev_setup_plan.md) — extension/MCP connection, three configured Codex profiles, verified MCP canvas access, session refresh, free-plan limits, reusable libraries and screen-by-screen handoff
 - [Cross-surface journeys and lifecycle workflows](implementation/lifecycle_workflow_spec.md) — start here for the complete journey map, shared account/history/export/highlight screens, named lifecycle actions and combined scenarios
+- [Mockup screen map](implementation/mockup_screen_map.md) — complete mobile/web inventory, shared-flow aliases, principal connections, required states, lifecycle coverage and open choices before mockup production
 - [Mobile workflow and screen specification](implementation/mobile_workflow_specification.md) — A01–A09 screen families, 48 screen/overlay contracts, incoming/outgoing navigation, components, actions, permission/recovery states and prototype acceptance
 - [Creator-web workflow and screen specification](implementation/creator_web_workflow_spec.md) — W01–W08 entry/exit connectivity, components, actions, permissions, adverse states, architecture boundaries and prototype review tasks
 - [Public-web workflow and screen specification](implementation/public_web_workflow.md) — P01–P08 incoming/outgoing navigation, components, saved research, question states, publication boundaries and prototype acceptance scenarios
