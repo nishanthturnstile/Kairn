@@ -4,7 +4,7 @@
 |---|---|
 | Version | 2.3 |
 | Date | 1 November 2026 |
-| Status | Product vision and strategy with the current architecture choices reconciled. Implementation has not started. |
+| Status | Product vision and strategy. Foundation and product execution status are recorded in the implementation progress documents; this document is not completion evidence. |
 | Product owner | Founder. |
 | Brand | Not selected. The product description is not a confirmed brand. |
 | Initial audience | People taking self-organised multi-day trips with friends. |
@@ -205,6 +205,8 @@ R1 is the complete agreed scope. Conditional capabilities retain working baselin
 The complete release candidate undergoes internal verification and representative community acceptance testing before release. Post-release community evaluation measures usefulness and adoption. Neither activity introduces a reduced product or a preliminary approval gate for the authorised build.
 
 ### 7.3 Future direction
+
+Kairn's long-term direction is an open-source geographic storytelling toolkit, with the integrated journey application as its first consumer. The [ecosystem direction](ecosystem_direction.md) records Studio, Player, Replay, Embed, GeoKit, Moments, Publisher and Privacy, with Atlas, Compare and Cinematics as later candidates. Build reusable boundaries while delivering the complete R1 product; extract independently supported packages when real consumption proves those boundaries. These names do not authorize eight new applications or expand R1. Replay is the proposed flagship experience; reliable route/media processing and safe publication are its engineering prerequisites.
 
 Later capabilities remain future product decisions. Candidates include cinematic exports, richer playback, visual media search, additional formats, external search-engine indexing, creator collections, preparation checklists, document workflows, equipment allocation, club archives, operator tools, and paid plans. iOS capture development and local testing are included now; Apple membership, final distribution verification, and public iOS publication are deferred independently of these feature decisions.
 

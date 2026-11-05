@@ -113,6 +113,8 @@ The document groups related requirements without changing their stable section n
 
 ### 1.4 Exclusions and later scope
 
+The [Kairn ecosystem direction](ecosystem_direction.md) maps reusable toolkit responsibilities onto the requirement families below. It is a design direction, not additional R1 scope: basic Explore playback, metadata/placement review, privacy enforcement and permitted data export remain R1; external package distribution, embeds, additional route formats, richer cinematic playback, self-hostable story websites and designed print/video outputs remain later. Existing Conditional R1 labels and fallbacks are unchanged. Toolkit extraction must preserve these permission, evidence, accessibility and lifecycle requirements.
+
 - Continuous location recording, live location following, navigation, SOS, rescue coordination, and offline messaging.
 - A booking marketplace, permit reseller, guide marketplace, or travel-payment service.
 - A social feed, follower network, comments, likes, streaks, or engagement gamification.

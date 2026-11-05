@@ -18,6 +18,8 @@ This document defines how the R1 product looks and behaves. The product plan own
 
 ## 1. Design position
 
+The [ecosystem direction](ecosystem_direction.md) describes reusable engineering capabilities behind this experience. Keep the product organized around creating, reviewing and experiencing journeys rather than adding eight branded navigation destinations. Studio is the creator experience; Player is the approved Story/Explore/Learn experience; Replay lives within Explore. Privacy review and publication preview remain integral steps, with preview and visitor rendering consuming the same safe projection. Preserve accessible stage lists, explicit playback/map actions, reduced motion and useful no-GPS journeys. Future Embed and portable Publisher interfaces require separate design handoffs before implementation.
+
 ### 1.1 Product reading
 
 The product is a shared record of a journey that already happened. It is not a trip planner, booking dashboard, live tracker, or safety tool.
