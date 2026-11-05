@@ -11,11 +11,14 @@ Start with the product plan and requirements. Use the implementation plans for t
 ## Core documents
 
 - [Product plan and vision](core/product_plan.md)
+- [Kairn ecosystem direction](core/ecosystem_direction.md) — toolkit vision, current-scope mapping, reusable boundaries and parallel engineering packets
 - [Product requirements](core/product_requirements.md)
 - [Architecture and stack](core/architecture.md)
 - [Application design](core/application_design.md)
 
 ## Implementation plans
+
+- [Ecosystem planning progress](implementation/ecosystem_direction_progress.md) — recorded direction, branch baseline, documentation checks and unimplemented follow-ups
 
 - [Repository setup](implementation/repository_setup_plan.md) — completed foundation interface, acceptance gates, and constraints on later changes
 - [Repository setup progress](implementation/repository_setup_progress.md) — implemented batches, compatibility decisions, and executed checks
