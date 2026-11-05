@@ -279,14 +279,14 @@ Build and install locally through Expo CLI/native tools without EAS. Pair the us
 
 ### 8.3 CI and review evidence
 
-Maintain the two GitHub Actions jobs and their final required status, which runs even when an upstream job fails and succeeds only when both jobs succeed:
+Maintain Quality and Android for PRs targeting `main`, pushes to `main`, and explicit workflow dispatch. The final `Repository setup required` status runs even when an upstream job fails and requires both jobs to succeed in full mode. Per the user's 5 November 2026 decision, PRs targeting `development` instead require dependency-free whitespace, unresolved-merge-marker and package-JSON checks; the aggregate requires that quick job to succeed and both full jobs to be skipped. Development pushes do not duplicate verification. Branch protection and administrator enforcement remain intact.
 
 | Job | Required work | Evidence |
 |---|---|---|
 | Quality | Compose config validation, frozen tooling-image install, checks/tests/JS builds including both native exports, final image builds, composed HTTP/queue/storage integration | Test output, API drift comparison, web manifests, Android/iOS export output, image runtime results, startup/persistence checks |
 | Android | Frozen install, native checks, pinned prebuild, debug APK, Gradle lint | APK, lint results, generated build settings and logs |
 
-Run both on pull requests and the main branch initially. Avoid path filters until dependency-sensitive invalidation has been proven. Use read-only default token permissions, cancel superseded PR runs, bound job timeouts, pin actions by reviewed commit SHA, and preserve failure logs. Untrusted pull requests require no production secrets. Native debug signing is suitable for setup; signed release AABs belong to distribution configuration after identity is decided. [GitHub workflow guidance](https://docs.github.com/en/actions/reference/security/secure-use).
+Select checks by PR target rather than file-path filters. Avoid path filters until dependency-sensitive invalidation has been proven. Use read-only default token permissions, cancel superseded PR runs, bound job timeouts, pin actions by reviewed commit SHA, and preserve failure logs. Untrusted pull requests require no production secrets. Native debug signing is suitable for setup; signed release AABs belong to distribution configuration after identity is decided. [GitHub workflow guidance](https://docs.github.com/en/actions/reference/security/secure-use).
 
 Require local Mac iOS verification evidence for relevant mobile/shared code, dependency, and configuration changes and before release readiness. Record the reviewed commit and results with the review. The two GitHub jobs do not establish iOS native success; paid hosted macOS CI, self-hosted runner installation, and EAS are not prerequisites. Android distribution remains first; Apple distribution signing/TestFlight/store checks follow later enrollment.
 

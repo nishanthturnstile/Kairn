@@ -1,8 +1,10 @@
+> **ARCHIVED — VISUAL DIRECTION WITHDRAWN, 5 November 2026.** Historical implementation evidence only. Do not use its palettes, fonts, layouts, plans, instructions or acceptance verdicts for new design. Start at [DESIGN.md](../../../DESIGN.md). Links to removed plans lead there for orientation only.
+
 ﻿# Complete journey experience redesign
 
 4 November 2026. Active implementation record. This supersedes the P02 visual direction and its stop-at-P02 constraint, following the founder's complete redesign brief. Product requirements, source rights, production gates and the selected stack remain authoritative. Windows is the single authoring checkout for shared/web/native source; Compose verification remains in WSL.
 
-The [design system and product experience redesign plan](design_system_redesign_plan.md) defines the remaining DS01–DS12 sequence, component inventory, web/native contracts, production dependencies and acceptance criteria. This record owns executed evidence; the plan does not mark pending implementation complete.
+The [design system and product experience redesign plan](../../../DESIGN.md) defines the remaining DS01–DS12 sequence, component inventory, web/native contracts, production dependencies and acceptance criteria. This record owns executed evidence; the plan does not mark pending implementation complete.
 
 ## Audit and preservation
 
@@ -112,7 +114,7 @@ Planning verification: checked all 53 local document links across the plan, inde
 
 ## Component-system implementation — 4 November 2026
 
-Authoring branch: `feat/design-system-redesign`, based on current development `d07a69508d98afecb5c9d1b9003956d1db1fa236`. This supersedes the earlier “new milestones unstarted” planning status above. The complete redesign is **not accepted**: DS01–DS05 now have implemented work and web evidence; device and production dependencies remain open. The [component guide, inventory and screen traceability](design_system_catalog.md) assigns every plan section 7 family and A/W/P screen a disposition.
+Authoring branch: `feat/design-system-redesign`, based on current development `d07a69508d98afecb5c9d1b9003956d1db1fa236`. This supersedes the earlier “new milestones unstarted” planning status above. The complete redesign is **not accepted**: DS01–DS05 now have implemented work and web evidence; device and production dependencies remain open. The [component guide, inventory and screen traceability](../../../DESIGN.md) assigns every plan section 7 family and A/W/P screen a disposition.
 
 Implemented:
 
@@ -285,3 +287,36 @@ Verification corrected the practical-filter label association, the reader's narr
 Private evidence: `.kairn/verification/design-system-reader-navigation-inputs.json`, SHA-256 `338ef0c9345ce8fd71194b8422b43e299240691ae94c7e36582df4910dc165df`. It records source hashes, compiled shared exports, current web manifests/build/browser logs, native export metadata/bundles, the six-case reader matrix and text-growth bounds/screenshots. No environment or credential files are included.
 
 DS06 remains implementing. Native runtime qualification, the previously open iOS/screen-reader/tablet checks, actual authorized reader/media/map adapters, exact-version progress and grounded knowledge still remain. DS07 durable capture/import/transfers/revision editing and DS08 grants/publication/lifecycle work retain their service dependencies. No foundation or release acceptance gate was closed by this sample-reader batch.
+
+## Mobile workflow planning — 5 November 2026
+
+The [mobile workflow and screen specification](../../implementation/mobile_workflow_specification.md) expands the existing A01–A09 families into 48 screen/overlay contracts, including incoming/outgoing navigation, Back/return behavior, components, actions, permissions, recovery states, architecture boundaries and prototype review scenarios. It follows the later Open atlas direction while retaining selected ownership, source/export, sole-administrator and lifecycle rules. Child-screen decomposition is proposed design, not implemented product behavior.
+
+Original mobile-draft verification (before the combined review below) targeted the connectivity boundary: all 139 forward-action edges have declared endpoints; their incoming/outgoing projections agree; all 48 screens are reachable from roots/global handlers; every screen has its required contract fields. All 109 referenced functional IDs and 80 local/anchor/external link entries were checked for register validity or local resolution as applicable; external source inspection is separately identified in the specification. Whitespace checks passed. Base input was `4a6528e728bc4c799a957730dcd6244b65417ab7` plus the documentation delta; the specification records the detailed verification and limits.
+
+No application/native tests or builds were run for this documentation-only work. No DS, capture, publication, account, recovery or release acceptance gate is closed by this specification. The combined review below subsequently reconciles all three surfaces and supersedes the original navigation/link counts.
+
+## Combined workflow and lifecycle review — 5 November 2026
+
+Reviewed the pending mobile, creator-web, public-web and prototype specifications, this experience record and the documentation index against the current product requirements, architecture, selected account decisions and Open atlas design. Input base was `4a6528e728bc4c799a957730dcd6244b65417ab7` plus the uncommitted documentation. Three read-only subagents reviewed mobile durability/lifecycle, creator/prototype completeness and public/cross-surface boundaries individually. The parent reconciled their findings and edited the final set. These final edits were checked by the parent; no second independent clean-review verdict is claimed.
+
+Start at the [cross-surface and lifecycle specification](../../implementation/lifecycle_workflow_spec.md), then follow its mobile, creator and public specifications. It adds the complete journey map, shared screen contracts and 16 named lifecycle actions without creating another application or changing selected domain powers.
+
+| Material finding | Final correction |
+| --- | --- |
+| Web history/account and former-owner management stopped at unnamed handoffs | Defined W09 history/account, own-source contributions, export/status/download, highlights, public-profile selection, preferences/help and E12–E14 review/status compositions with entry, controls, states and return behavior. Reuse W05 own-only import mechanics. |
+| P06 was both creator and reader in different documents | W09.highlights/preview owns creation/management; P06 remains the receiving page. Existing hosted-share selection/revocation is explicit on native and web. |
+| Lifecycle was scattered across impact menus | Added L01–L16 actions, authority, retained data, confirmation, status, safe return and public effects. Separate source withdrawal/deletion, leave/removal, transfer/archive, unpublish/link/share restriction, profile/research removal, account/canonical deletion, listing/report and exports. |
+| Required fresh-auth paths were missing on native | Added A04.export, A06.powers and A06.transfer → A09.reauth, including reciprocal entries and the selected ten-minute matrix. Return refreshes impact without auto-execution; owner restrictions retain the valid-session exception. |
+| Expired-session capture conflicted with universal auth routing; sign-out retention was vague | Established-account local saving remains available during expiry/offline. Explicit logout stops sends and isolates retained work until the same account authenticates; browser retention and secure native storage remain qualification obligations. |
+| Archive and no-successor freeze could be interpreted identically | Specified separate action matrices, archive invalidation of pending expansion offers, existing-coauthor transfer and exact-original approval exceptions. No unarchive or ordinary claim-admin control was added. |
+| Restriction feedback skipped offline and uncertain outcomes | Defined waiting to send, checking result, server denial with pending journal receipt, confirmed restriction and separate cleanup. Post-deletion finite read-only receipt remains outside account guards/cache. |
+| Public route collided with private workspace; adjacency omitted search/new/member/info paths | Proposed `/stories/{publicationAlias}` distinct from private `/journeys/{journeyId}`; kept one canonical identity and credential-aware unlisted access. Reconciled those public edges and their inbound contexts. |
+| Reporting/listing had no operator completion path | Added restricted queue/evidence/decision/audit flow; listing-only removal differs from takedown, reports grant no authority. Actual staffing/channel/response policy remains a release input. |
+| Prototype plan still prescribed old palette, isolated unmerged branch and restarting B01–B02 | Reconciled Open atlas, later integrated sample checkpoint, fresh task-branch workflow, production artifact exclusion and actual current account delivery status. Historical model reviews remain provenance, not a recurring provider requirement. |
+
+Executed documentation checks: all 48 mobile contracts contain required fields; all **143** forward edges have declared endpoints and matching inbound/outbound projections; all mobile screens are reachable from roots/global handlers. Creator W01–W08 sections and **N01–N27** connections pass structure/reference checks. Public P01–P08 plus search/question/research/boundary rows were manually reconciled with the shared destinations. All **117** functional requirement IDs are referenced across the final specifications, with no invalid IDs; this is traceability, not proof that each requirement has been implemented. Relative files and heading/explicit anchors in all seven changed final documents resolve. Whitespace checks include the four new untracked specifications as well as tracked edits.
+
+Cleanup removes the one-off mobile/workbench generators, document check scripts, context dump, intermediate checker output and workbench template under `.kairn/planning` after recording their results. Preserve the previously requested standalone `kairn-planning-workbench.html` as a dated final artifact; it was not regenerated from this review. Its earlier check record covered seven views, ten component inspectors, 117 requirement rows, filter/navigation and proposal export payloads; file delivery/import and browser-restart persistence were not exercised. The maintained specifications govern current workflow decisions. Historical accepted research/reviews, application fixtures, native/host evidence and private environment files remain intact.
+
+No application tests, builds, browser/device interactions, commits or publication were performed for this documentation reconciliation. Remaining work is implementation and qualification: real capture/sync, permissions/export jobs, publication/restriction recovery, cross-device and accessibility evidence, configured limits/languages/media/support and the existing production release gates. Proposed child routes/compositions and local logout recovery remain reviewable design decisions, not claims of implemented behavior.

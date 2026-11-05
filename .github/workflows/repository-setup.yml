@@ -3,7 +3,7 @@ name: Repository setup
 on:
   pull_request:
   push:
-    branches: [main, development]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -22,8 +22,42 @@ env:
   FORCE_COLOR: "0"
 
 jobs:
+  development:
+    name: Development quick checks
+    if: ${{ github.event_name == 'pull_request' && github.base_ref == 'development' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - name: Check out source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Check whitespace and unresolved merge markers
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          git diff --check "$BASE_SHA"...HEAD
+          if git grep -I -n -E '^(<<<<<<< |>>>>>>> )' -- .; then
+            echo 'Unresolved merge markers found.' >&2
+            exit 1
+          else
+            result=$?
+            test "$result" -eq 1
+          fi
+      - name: Validate workspace package manifests
+        run: |
+          node --input-type=module <<'NODE'
+          import { execFileSync } from 'node:child_process';
+          import { readFileSync } from 'node:fs';
+          const files = execFileSync('git', ['ls-files', '-z', '*package.json'], { encoding: 'utf8' }).split('\0').filter(Boolean);
+          for (const file of files) JSON.parse(readFileSync(file, 'utf8'));
+          console.log(`Validated ${files.length} package manifests without installing dependencies.`);
+          NODE
+
   quality:
     name: Quality
+    if: ${{ github.event_name != 'pull_request' || github.base_ref != 'development' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     steps:
@@ -71,6 +105,7 @@ jobs:
 
   android:
     name: Android
+    if: ${{ github.event_name != 'pull_request' || github.base_ref != 'development' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     env:
@@ -181,14 +216,20 @@ jobs:
   required:
     name: Repository setup required
     if: ${{ always() }}
-    needs: [quality, android]
+    needs: [development, quality, android]
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
-      - name: Require both foundation jobs to succeed
+      - name: Require the checks selected for the target branch
         env:
+          QUICK_MODE: ${{ github.event_name == 'pull_request' && github.base_ref == 'development' }}
+          DEVELOPMENT_RESULT: ${{ needs.development.result }}
           QUALITY_RESULT: ${{ needs.quality.result }}
           ANDROID_RESULT: ${{ needs.android.result }}
         run: |
-          printf 'Quality: %s\nAndroid: %s\n' "$QUALITY_RESULT" "$ANDROID_RESULT"
-          [[ "$QUALITY_RESULT" == success && "$ANDROID_RESULT" == success ]]
+          printf 'Development: %s\nQuality: %s\nAndroid: %s\n' "$DEVELOPMENT_RESULT" "$QUALITY_RESULT" "$ANDROID_RESULT"
+          if [[ "$QUICK_MODE" == true ]]; then
+            [[ "$DEVELOPMENT_RESULT" == success && "$QUALITY_RESULT" == skipped && "$ANDROID_RESULT" == skipped ]]
+          else
+            [[ "$DEVELOPMENT_RESULT" == skipped && "$QUALITY_RESULT" == success && "$ANDROID_RESULT" == success ]]
+          fi

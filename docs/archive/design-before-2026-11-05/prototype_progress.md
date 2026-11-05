@@ -1,3 +1,5 @@
+> **ARCHIVED — VISUAL DIRECTION WITHDRAWN, 5 November 2026.** Historical implementation evidence only. Do not use its palettes, fonts, layouts, plans, instructions or acceptance verdicts for new design. Start at [DESIGN.md](../../../DESIGN.md). Links to removed plans lead there for orientation only.
+
 # Prototype implementation progress
 
 > Current redesign work continues in [the complete experience redesign record](experience_redesign.md). The founder's later brief supersedes the P02-only visual stop below. This document preserves historical evidence; the new checkpoint does not claim production capture/publication acceptance.
