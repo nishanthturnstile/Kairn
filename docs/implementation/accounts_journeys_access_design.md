@@ -205,3 +205,42 @@ Before each feature batch is called complete, supply:
 - Evidence that role controls match current server policy, account switching clears prior content, and no UI success overstates a pending operation.
 
 UI/UX acceptance is mandatory alongside the corresponding API/data acceptance. Database completion alone does not complete this handoff, and a static mockup does not prove the behavior. Physical iPhone acceptance remains a separately recorded deferred device item until available; new auth/storage behavior needs fresh evidence on the devices actually exercised.
+
+## First connected static wireframes — 5 November 2026
+
+Artifact: [flow-wireframes.pen](../../design/flow-wireframes.pen). Start at canvas frame **00 / OjON2**, then follow numbered frames and the adjacent review annotations. This is a **static flow wireframe**, not a clickable prototype. Pen's installed schema/execute API exposes no frame-navigation interaction primitive; a text `href` does not establish prototype transitions. The overview has drawn arrow connectors and each frame has explicit forward, Back/Cancel, entry, actor, state and accessibility notes outside its product UI.
+
+Review status **S** below means static contract/connection review and structural canvas check completed, with representative rendered screens inspected. It does not mean user-approved interaction design, runtime/device acceptance or individually exercised accessibility. N = native shared Android/iOS review size 390 × 844; W = browser review size 1280 × 900. Aliases on a wide frame are functional equivalents, not an additional drawn native composition; compact/wide adaptations remain open. A state under an existing ID is not a new page requirement.
+
+All content and outcomes are fictional/simulated. Inter, grayscale, rectangle controls, dimensions and spacing are disposable wireframe choices. They establish no visual system. Frame-level annotations carry state reuse and alternatives; they do not claim actual durable saving, upload, email delivery, publishing or deletion.
+
+| Frame / Pen node | Screen IDs and task/state | Drawn size | Actor / source state | Notes node | Review |
+| --- | --- | --- | --- | --- | --- |
+| 01 / `lthGv` | E01 / A09.auth — Sign in | N | Signed out | `ppIUO` | S |
+| 02 / `L3y8eK` | E01 / A09.auth — Create account | N | Signed out | `cDdTb` | S |
+| 03 / `wwGKc` | E02 / A09.verify — Check your email | N | Unverified account | `aH6fX` | S |
+| 04 / `b1BYo` | E05 / A01 — Your journeys | N | Verified first-use account | `B2D1y` | S |
+| 05 / `uNx9m` | E05 / A01 — Your journeys | N | Maya; creator capabilities | `A20ZAE` | S |
+| 06 / `Bkwp6` | E06 / A01.create — Create journey | N | Maya; verified | `q7DfjR` | S |
+| 07 / `h057sF` | E08 / A06 — Journey created | N | Maya; administrator + coauthor + publisher | `mnE7A` | S |
+| 08 / `eHHjM` | E08 / A06 — Your journey | N | Arun; participant only | `kEpRS` | S |
+| 09 / `r02AQ1` | E09 / A06.invite — Invite companion | N | Maya; administrator | `bcDdZ` | S |
+| 10 / `UwqvZ` | E09 / A06.people — Invitation status | N | Maya; administrator | `DH97n` | S |
+| 11 / `EIwYJ` | E07 / A01.join — Accept invitation? | N | Arun; verified invited account | `FBZNT` | S |
+| 12 / `HwBMY` | E07 / A01.join — Use the invited account | N | Wrong account / unavailable offer | `L46D5` | S |
+| 28 / `fgskj` | A09.contributions / E15 — Your own contributions | N | Arun; former member / source owner | `A9Jds` | S |
+| 32 / `KImvn` | A07 / X.web / E01 — Continue in creator web | W | Leela; native authenticated | `xGZTj` | S |
+| 63 / `XRAlV` | W09.history / E05 — Your journeys | W | Leela; authenticated browser | `jgNlL` | S |
+| 66 / `GUF9G` | E12 / E14 / A06.lifecycle / A06.operation — Withdraw source reuse | N | Arun; source owner | `UBNn6` | S |
+
+## Scope-to-preview refinement — 5 November 2026
+
+Continue in [flow-wireframes.pen](../../design/flow-wireframes.pen), overview **R00 / `OLIDE`**. The R labels are artifact/state references, **not new canonical screen IDs**. This refinement adds 21 paired native/compact-browser states (42 screens and 42 external annotation panels). Original first-flow frames remain intact and their relevant annotations point here. The detailed loop below supersedes their schematic treatment for this task only; unrelated canvas work is preserved.
+
+All ordinary frames use a **390 × 844** native or browser content viewport. R19 uses 200% text and a **390 × 1316 full scroll-content capture** for that same 844px viewport. R20 is a scrolled editor fragment with a 300px keyboard-occlusion allowance; its actions end at y=388, above the y=544 occlusion boundary. Browser chrome/OS keyboard are not app-owned drawings. These are temporary review sizes, not selected breakpoints or typography.
+
+Status **S** = static contract review, settled canvas bounds check, and representative screenshot inspection; no runtime/accessibility certification. Every screen has entry, action, caller-specific return, actor/current source state, failures and focus notes outside product UI. N/W are platform equivalents of the existing A/W/E responsibilities.
+
+| Artifact / Pen node | Existing screen responsibility and state | Actor | Size | Notes node | Review |
+| --- | --- | --- | --- | --- | --- |
+| R21W / `nogEX` | E01 / W02 — Independent browser sign-in and repair return | Leela; browser initially signed out | 390 × 844 | `B16ou` | S |

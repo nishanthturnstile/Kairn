@@ -237,3 +237,100 @@ Keep this shared specification plus the three platform specifications as the fin
 All proposed route/child-screen choices remain reviewable business/interaction decisions. Numerical retention/expiry values copied from selected decisions are targets to qualify, not independently verified promises. Public domain, support/moderation staffing, actual legal copy, media/language/device limits and operational credentials remain explicit release inputs. No extra design subscription, application framework or administration product is introduced.
 
 Temporary context dumps, one-off document generators/checkers and redundant intermediate validation output can be removed after concise results are recorded in [workflow review](workflow_review.md). Preserve governing documents, historical accepted implementation/review evidence, source fixtures and relevant technical evidence. This cleanup does not remove installed skills, native output, host environment/signing files or unrelated `.kairn` backups.
+
+## First connected static wireframes — 5 November 2026
+
+Artifact: [flow-wireframes.pen](../../design/flow-wireframes.pen). Start at canvas frame **00 / OjON2**, then follow numbered frames and the adjacent review annotations. This is a **static flow wireframe**, not a clickable prototype. Pen's installed schema/execute API exposes no frame-navigation interaction primitive; a text `href` does not establish prototype transitions. The overview has drawn arrow connectors and each frame has explicit forward, Back/Cancel, entry, actor, state and accessibility notes outside its product UI.
+
+Review status **S** below means static contract/connection review and structural canvas check completed, with representative rendered screens inspected. It does not mean user-approved interaction design, runtime/device acceptance or individually exercised accessibility. N = native shared Android/iOS review size 390 × 844; W = browser review size 1280 × 900. Aliases on a wide frame are functional equivalents, not an additional drawn native composition; compact/wide adaptations remain open. A state under an existing ID is not a new page requirement.
+
+All content and outcomes are fictional/simulated. Inter, grayscale, rectangle controls, dimensions and spacing are disposable wireframe choices. They establish no visual system. Frame-level annotations carry state reuse and alternatives; they do not claim actual durable saving, upload, email delivery, publishing or deletion.
+
+| Frame / Pen node | Screen IDs and task/state | Drawn size | Actor / source state | Notes node | Review |
+| --- | --- | --- | --- | --- | --- |
+| 28 / `fgskj` | A09.contributions / E15 — Your own contributions | N | Arun; former member / source owner | `A9Jds` | S |
+| 29 / `pvUGq` | A04.export — Original-file permission | N | Arun; source owner | `wZKKh` | S |
+| 32 / `KImvn` | A07 / X.web / E01 — Continue in creator web | W | Leela; native authenticated | `xGZTj` | S |
+| 49 / `Hmjs4` | W08 / A06 — Publication approved | W | Dev; publisher · simulated success | `yLXMf` | S |
+| 50 / `C3mig` | W08 — Discover listing status | W | Dev; publisher | `o5YLT` | S |
+| 56 / `oZPC5` | A08 / W09.highlights — Choose your highlights | N | Arun; active participant; approved V1 | `iikbx` | S |
+| 57 / `GUxwL` | A08.preview / W09.highlight-preview — Preview your highlights | N | Arun; active member | `T4d8ft` | S |
+| 58 / `M6R5ee` | A08.preview / W09.highlight-preview — Share explicitly | N | Arun; hosted selection ready (simulated) | `lNIgy` | S |
+| 59 / `iXtMm` | P06 — Arun’s highlights | W | Guest recipient; read-only | `qPqib` | S |
+| 60 / `pixLN` | P05 / P06 / P08 — This content is unavailable | W | Guest; withdrawn source/share or denied journey | `fH2dK` | S |
+| 64 / `ejLTk` | W09.highlights / W09.highlight-preview — Create personal highlights | W | Arun; browser authenticated active member | `P5bLr` | S |
+| 65 / `kteiW` | A09.contributions / A04.scope — Restrict an existing contribution | N | Arun; former member, source owner | `p9EJs` | S |
+| 66 / `GUF9G` | E12 / E14 / A06.lifecycle / A06.operation — Withdraw source reuse | N | Arun; source owner | `UBNn6` | S |
+
+
+### Connected scenario and bounded review result
+
+One event, **J-NIL — Rain and rest in the Nilgiris**, intended 12–15 October 2026 in Asia/Kolkata. Maya begins as creator/administrator/coauthor/publisher; Arun accepts a participant-only invitation and owns the sample moments. Leela (coauthor) and Dev (publisher only) have already accepted separately scoped offers. Switching the reviewer between those actors is a scenario transition, never an in-product role switch or a grant of powers. No public roster is implied.
+
+The main path is 01–07 create, or 01/03/11 explicit join → 08 → 13–18 capture, or 23–26 selected import → 20/21/27 scope review → authorized coauthor 30/31 → 32 independently authenticated browser → 33–40 composition and conflict recovery → publisher 41–48 review/repair/exact candidate → 49 approved publication. Frame 50 separately submits the catalog listing; 51 is a later **operator-listed** scenario, not the result of pressing Submit. Guest 51–55 reads the approved record; active member 56–58 (web 64) creates and explicitly shares highlights; recipient 59 reads and opens the same accessible journey in 52.
+
+Chapter **Waiting out the rain**, stage **Coonoor rest**, source **S-VOICE**, candidate **C2** and approved version **V1** have distinct identities. Rain photo and the short weather text are publication/share eligible. The voice note remains journey-review only; the rights repair excludes its placement and dependent taxi claim, not the owner's original. The candidate/public Learn view therefore omits the taxi amount. A participant-specific reported road return never becomes an exact measured path. Unknown times/location and the no-GPS rest stage remain useful content.
+
+Bounded review covered each required path A–E from the task, including auth return intent without auto-acceptance, explicit batch approval, input retention, unknown-operation reconciliation, private/source/export boundaries, source-return context, publisher/coauthor separation, stale approval, optional maps and read-only recipients. Corrected findings: font unsupported by Pen; frame references leaking into action labels; synthetic stale-save action; former-member expansion route (now 28 → 65 → 66 → 28); ambiguous publisher-to-editor handoff (actor/capability annotation required). Pen's settled layout query returned **zero clipped nodes**, zero placeholder frames and **133 top-level frames: 66 screens, 66 annotation panels, one connected overview**. Representative account, capture, composition, contribution, candidate, recipient and owner-restriction renders were inspected. Source save/reopen and local whitespace checks are recorded with the design hub. No application tests were appropriate for this artifact/documentation-only change.
+
+All screen transitions are annotations; static review cannot prove runtime focus, typography growth, persistence, source enforcement, delivery or map behavior. Failure variants that retain the same structure are annotated, not separate drawn destinations. OS picker/settings/share are explicit external boundaries, not replicas of operating-system screens. Native and browser sessions authenticate independently; the prepared fictional continuation does not sync devices.
+
+### Remaining decisions and undrawn scope
+
+Reversible proposals: phone 390 × 844 and wide web 1280 × 900; form/page rather than modal composition; explicit map loading with list-first Explore; retained candidate comparison; selected chapter/stage/moment return context. Final shell, responsive breakpoints, keyboard/safe-area behavior, text-growth layout, exact editor schema/limits, chapter-stage association commands, transcript-correction authority details, publication conflict/redaction projection rules, URL shape, Discover ordering and format/storage/transcription qualification remain open. No new domain policy or command is established by a wireframe control. Detailed owner transcript editing was undrawn at the initial checkpoint; R04/R20 below now cover the owner-only proposal. Reviewer inspection still grants no transcript-writing authority.
+
+Still undrawn as dedicated destinations/compositions: native notices, metadata correction, full People/power/transfer tasks, revision history/restore, account hub/profile/security/recovery/reauthentication, saved research, storage/appearance/help, complete exports and account deletion; creator W06 management (native invite/status equivalents exist), full W05 browser import/transfer/original-grant panels, W07 historical restore, other W09 account/research/profile/export/preferences/help tasks; public P04.search and P04.question, P07, R-list/R-note, report/help/policy flows and restricted operator tooling. The initial flow used wide equivalents for native conflict and candidate modes; R09N and R12N/R13N/R15N now draw the focused repair-conflict and native candidate modes. General revision-history/restore remains undrawn. Compact public web, tablets, landscape, standalone browser account/create/join forms and exhaustive actor/state variants remain undrawn. Lifecycle actions beyond the narrow owner withdrawal scenario remain mapped in the specifications, not completed by this artifact.
+
+**First-flow recommendation, now executed below:** refine the source-scope → publication blocker → authorized repair → refreshed candidate loop at native and compact-browser sizes, including owner transcript correction, publisher-only inspection, large text and keyboard/focus return. Keep visual styling provisional until the user selects a visual direction. This is not a resumption of any withdrawn prototype milestone.
+
+## Scope-to-preview refinement — 5 November 2026
+
+Continue in [flow-wireframes.pen](../../design/flow-wireframes.pen), overview **R00 / `OLIDE`**. The R labels are artifact/state references, **not new canonical screen IDs**. This refinement adds 21 paired native/compact-browser states (42 screens and 42 external annotation panels). Original first-flow frames remain intact and their relevant annotations point here. The detailed loop below supersedes their schematic treatment for this task only; unrelated canvas work is preserved.
+
+All ordinary frames use a **390 × 844** native or browser content viewport. R19 uses 200% text and a **390 × 1316 full scroll-content capture** for that same 844px viewport. R20 is a scrolled editor fragment with a 300px keyboard-occlusion allowance; its actions end at y=388, above the y=544 occlusion boundary. Browser chrome/OS keyboard are not app-owned drawings. These are temporary review sizes, not selected breakpoints or typography.
+
+Status **S** = static contract review, settled canvas bounds check, and representative screenshot inspection; no runtime/accessibility certification. Every screen has entry, action, caller-specific return, actor/current source state, failures and focus notes outside product UI. N/W are platform equivalents of the existing A/W/E responsibilities.
+
+| Artifact / Pen node | Existing screen responsibility and state | Actor | Size | Notes node | Review |
+| --- | --- | --- | --- | --- | --- |
+| R06N / `ah1u9` | A06.publish — Publication is blocked | Dev · publisher only | 390 × 844 | `W5SkEp` | S |
+| R06W / `b4WarO` | W08 — Publication is blocked | Dev · publisher only | 390 × 844 | `P6uAa` | S |
+| R07N / `cYNA5` | A06.publish — Repair the rights blocker | Leela · coauthor, not publisher | 390 × 844 | `fYxoV` | S |
+| R07W / `S3T8z` | W08 — Repair the rights blocker | Leela · coauthor, not publisher | 390 × 844 | `rDg4S` | S |
+| R08N / `VchU3` | A07.chapter / A07.knowledge — Exclude the affected uses | Leela · coauthor | 390 × 844 | `KRado` | S |
+| R08W / `Z3mZnS` | W02 / W04 — Exclude the affected uses | Leela · coauthor | 390 × 844 | `HUN8b` | S |
+| R10N / `zygcj` | A06.publish — Preparing a fresh preview | Dev publisher / Leela reviewer | 390 × 844 | `zRrNV` | S |
+| R10W / `fBGR0` | W08 — Preparing a fresh preview | Dev publisher / Leela reviewer | 390 × 844 | `i5WK2` | S |
+| R16N / `rbl1Z` | A06.publish / A06.preview — This preview is out of date | Dev · publisher | 390 × 844 | `t0RKFI` | S |
+| R16W / `FAHfZ` | W08 — This preview is out of date | Dev · publisher | 390 × 844 | `p3TH7M` | S |
+| R18N / `RCfYi` | A06.unavailable / E15 — This task is unavailable | Current account lacks required access | 390 × 844 | `G82hi` | S |
+| R18W / `oAsxq` | E15 — This task is unavailable | Current account lacks required access | 390 × 844 | `mkhGo` | S |
+| R21N / `t1WWh` | A07 / X.web — Continue the repair | Leela · coauthor; separate device/browser sessions | 390 × 844 | `a97dsP` | S |
+| R21W / `nogEX` | E01 / W02 — Independent browser sign-in and repair return | Leela; browser initially signed out | 390 × 844 | `B16ou` | S |
+
+
+### Refined interaction contract and walkthrough
+
+1. **Owner scope (R01–R03):** review each selected owned source independently. The sample mixed batch retains the rain photo's publication eligibility and the voice note's review-only grant; “Keep these scopes” is honest because no change was selected. Changed-selection variants name Before/After and require confirmation. Selecting a narrower grant enters the existing impact/status flow (66), not a silent ordinary save. Staged-import scope returns to batch approval without upload or grant activation. Audience changes preserve the proposed choice and require renewed review; current-role assignments do not imply original export.
+2. **Owner transcript (R04–R05):** Arun corrects “Sixteen hundred each” to “Sixteen hundred for all four of us” against audio at 00:08–00:14. Original text/audio/provenance remain. Scope and publication are unchanged. Known failure retains the correction; uncertain result checks the same operation. R14 is the later acknowledged-correction scenario, not evidence that merely opening R05 saved it. Source language, processing support and broad correction command details still need qualification.
+3. **Capability-specific blocker (R06/R07/R14):** Dev can inspect and approve, but cannot repair draft or grant Arun's rights. Leela can inspect permitted evidence and enter editorial exclusion, but cannot approve publication. These are separate authenticated actor scenarios, never a user-facing role switch. No new “request permission” messaging command is introduced. Direct owner access does not expose protected draft dependencies.
+4. **Repair and return (R08–R10):** remove the voice placement and its dependent taxi claim; retain original recording and other permitted material. Saves respect each actual entity revision. This proposed aggregated consequence view does not establish an atomic multi-entity command: partial acceptance remains visible and preview stays blocked until all required repairs are accepted. R09 retains the candidate and Maya's unrelated paragraph; reapply rechecks the current revision, never force-overwrites. Return restores the Rights issue and rebuilds a safe candidate; accepted repair is not yet a ready preview.
+5. **Exact refreshed preview (R11–R17):** Story, Explore and Learn all inspect C2, with selected chapter/rest stage preserved. Review-only voice material and the dependent taxi amount are absent, including the question-source manifest. No-GPS rest and reported participant branch remain explicit. Map loading is optional; failure retains the complete stage list. Publisher-only final action names Public/Unlisted accurately and rechecks current candidate, grants, privacy and capability. Coauthor projection omits approval. Listing is still separate. Draft/rights race invalidates the preview (R16); lost authority removes protected information (R18). A source-return path restores exact origin and rechecks freshness.
+6. **Native/browser handoff (R21N/W):** native unsaved-work gate offers Save before continuing, explicit Continue with shared draft, and Stay in native editor. Save must be confirmed before the successful variant offers Open creator web. Continuing without saving retains the native candidate and warns that the browser starts from the latest accepted shared revision. Browser sign-in/verification is independent and returns to authorized R08W without submitting exclusions. Account change, expiry, cancelled auth and denied access cannot silently restore authority or lose native work. The fixture does not synchronize devices.
+
+### Bounded review and remaining decisions
+
+Reviewed these paths against requirements COL-01–03/COL-06–07, PUB-01–03/PUB-07–08, ASK-02, creator W05/W08, mobile A04.scope/A04.moment/A06.publish and shared lifecycle §§1.1/4.2. Fixed findings in place: single-source versus mixed-batch context; retained option after audience race; browser continuation incorrectly displaying native wording; unsaved handoff incorrectly assuming a confirmed save. Kept transcript-correction controls owner-only and publication controls publisher-only. First-flow related notes link to the detailed R frames.
+
+Canvas verification: **218 top-level frames = 108 screen/state frames + 108 external annotation panels + 2 overviews**. Settled bounds report zero clipped nodes, zero overlapping top-level frames, zero unfinished placeholders. Representative owner scope, publisher blocker, coauthor repair, fresh review, independent browser sign-in, keyboard and 200% text renders were inspected. Source saved and closed/reopened in VS Code, then checked using a fresh registered Pen MCP client. Local references and whitespace checked. No application, browser runtime, screen-reader, native durability or publication-service test was run or claimed; application implementation remains later.
+
+Remaining interaction decisions: final navigation shell/viewport adaptation; exact owner-transcript correction command/schema and processing support; aggregation of multi-entity repair saves; how original-versus-corrected evidence is exposed in a finalized inspector; actual persistence/eviction behavior; implemented focus/keyboard behavior. Current controls are reversible interaction proposals under existing authority, not selected policy changes or a visual system. Compact public reading, general historical restore, remaining account/lifecycle tasks and the broader inventory previously listed are still outside this refinement.
+
+**Next bounded task:** walk through R01–R21 with owner, coauthor and publisher scenarios, settling scope wording and the exclusion/return interaction before choosing visual foundations or implementing an interactive prototype. This static refinement does not establish clickable navigation; connectors and explicit transition annotations remain the review mechanism.
+
+
+## Gather component system — 5 November 2026
+
+Gather is selected. The [component candidate](../design/gather-system.md), [catalogue](../../design/gather-system/catalog.json) and [frame registry](../../design/gather-system/frames.json) add GS00–GS12 (13 cross-platform library/state/foundation boards, 1280 × 960), GS17 (calendar/capture/import recovery board, 1280 × 1140; frame `bXgTg`, note `S85K5`) and GS13N–GS16N (four compact recipes with owning mobile/creator records) in [gather.pen](../../design/gather.pen). Each has an external note. Library specimens are reusable states and compositions, not new screen IDs or destinations. The collection maps 50 selected shadcn entries and 22 product patterns; all broader states remain governed by this specification. GS17 was added in the parent's bounded correction after the independent review.
+
+Gather 1.0 is approved and frozen. GS00?GS17 in [gather.pen](../../design/gather.pen) contain 18 boards/recipes and 18 notes. See the [system](../design/gather-system.md), [frame registry](../../design/gather-system/frames.json) and [qualification record](../design/gather-verification.md). The existing R01?R21 contracts remain the complete functional scope/repair/preview reference.

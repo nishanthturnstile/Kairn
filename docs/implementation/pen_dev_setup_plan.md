@@ -95,7 +95,7 @@ Proposed organization, to create as work begins:
 ```text
 DESIGN.md                         current choices and links
 design/
-  explorations.pen                labelled candidate directions
+  gather.pen                labelled candidate directions
   kairn-system.lib.pen            selected components and variables
   mobile.pen                      A-screen states
   creator-web.pen                 W-screen states

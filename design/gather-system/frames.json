@@ -1,0 +1,541 @@
+{
+  "canvas": "../gather.pen",
+  "boards": [
+    {"key":"GS17","id":"bXgTg","note":"S85K5","title":"Dates and capture recovery","width":1280,"height":1140},
+    {
+      "key": "GS00",
+      "id": "kKd6P",
+      "note": "izZ2C",
+      "title": "Actions with a little give",
+      "width": 1280,
+      "height": 960
+    },
+    {
+      "key": "GS01",
+      "id": "eKtUQ",
+      "note": "BtSRe",
+      "title": "Inputs that make room",
+      "width": 1280,
+      "height": 960
+    },
+    {
+      "key": "GS02",
+      "id": "t0wduc",
+      "note": "xZB62",
+      "title": "Dates, type and small details",
+      "width": 1280,
+      "height": 960
+    },
+    {
+      "key": "GS03",
+      "id": "K6NoMw",
+      "note": "R1gCg",
+      "title": "Navigation attached to the story",
+      "width": 1280,
+      "height": 960
+    },
+    {
+      "key": "GS04",
+      "id": "P8FS5",
+      "note": "aPoBB",
+      "title": "Focused surfaces",
+      "width": 1280,
+      "height": 960
+    },
+    {
+      "key": "GS05",
+      "id": "tw1FK",
+      "note": "OtTsW",
+      "title": "Honest feedback",
+      "width": 1280,
+      "height": 960
+    },
+    {
+      "key": "GS06",
+      "id": "nGwlb",
+      "note": "srOwi",
+      "title": "Moments, people and media",
+      "width": 1280,
+      "height": 960
+    },
+    {
+      "key": "GS07",
+      "id": "yfCsc",
+      "note": "F822yU",
+      "title": "Source work, with the facts intact",
+      "width": 1280,
+      "height": 960
+    },
+    {
+      "key": "GS08",
+      "id": "e5GyKo",
+      "note": "wuXVU",
+      "title": "Compose, correct, keep the candidate",
+      "width": 1280,
+      "height": 960
+    },
+    {
+      "key": "GS09",
+      "id": "pW3iA",
+      "note": "QV6Iv",
+      "title": "Approval, sharing and safe returns",
+      "width": 1280,
+      "height": 960
+    },
+    {
+      "key": "GS10",
+      "id": "Vlqg0",
+      "note": "uq8y8",
+      "title": "Resilience belongs in the system",
+      "width": 1280,
+      "height": 960
+    },
+    {
+      "key": "GS11",
+      "id": "SJYAb",
+      "note": "v89Xq",
+      "title": "States are part of the design",
+      "width": 1280,
+      "height": 960
+    },
+    {
+      "key": "GS12",
+      "id": "hGlEz",
+      "note": "RzulG",
+      "title": "Gather foundations",
+      "width": 1280,
+      "height": 960
+    },
+    {
+      "key": "GS13N",
+      "id": "ohx6V",
+      "note": "Suwq9",
+      "title": "Who can use this moment?",
+      "width": 390,
+      "height": 1040
+    },
+    {
+      "key": "GS14W",
+      "id": "bp64o",
+      "note": "zCKmD",
+      "title": "One source needs repair",
+      "width": 390,
+      "height": 1040
+    },
+    {
+      "key": "GS15W",
+      "id": "U2uvL",
+      "note": "e9aJpo",
+      "title": "Exclude dependent uses",
+      "width": 390,
+      "height": 1040
+    },
+    {
+      "key": "GS16N",
+      "id": "bCcaf",
+      "note": "HVNE7",
+      "title": "Preview refreshed",
+      "width": 390,
+      "height": 1040
+    }
+  ],
+  "masters": [
+    {"name":"Calendar month","kind":"calendar","id":"Ks3gB","board":"bXgTg"},
+    {
+      "name": "Button",
+      "kind": "button",
+      "id": "lBPBg",
+      "board": "kKd6P"
+    },
+    {
+      "name": "Button Group",
+      "kind": "group",
+      "id": "oByNz",
+      "board": "kKd6P"
+    },
+    {
+      "name": "Toggle",
+      "kind": "toggle",
+      "id": "qHmoB",
+      "board": "kKd6P"
+    },
+    {
+      "name": "Toggle Group",
+      "kind": "toggle-group",
+      "id": "FdIfx",
+      "board": "kKd6P"
+    },
+    {
+      "name": "Input",
+      "kind": "input",
+      "id": "F58T8d",
+      "board": "kKd6P"
+    },
+    {
+      "name": "Input Group",
+      "kind": "input-group",
+      "id": "HQQ9m",
+      "board": "kKd6P"
+    },
+    {
+      "name": "Field + Label",
+      "kind": "field",
+      "id": "Ma76u",
+      "board": "eKtUQ"
+    },
+    {
+      "name": "Textarea",
+      "kind": "textarea",
+      "id": "wr3V0",
+      "board": "eKtUQ"
+    },
+    {
+      "name": "Radio Group",
+      "kind": "radio",
+      "id": "O28kFQ",
+      "board": "eKtUQ"
+    },
+    {
+      "name": "Checkbox",
+      "kind": "checkbox",
+      "id": "i0Vl2q",
+      "board": "eKtUQ"
+    },
+    {
+      "name": "Switch",
+      "kind": "switch",
+      "id": "jWGpE",
+      "board": "eKtUQ"
+    },
+    {
+      "name": "Select + Native Select",
+      "kind": "select",
+      "id": "SrdQ1",
+      "board": "eKtUQ"
+    },
+    {
+      "name": "Calendar + Date Picker",
+      "kind": "date",
+      "id": "mX5bx",
+      "board": "t0wduc"
+    },
+    {
+      "name": "Combobox",
+      "kind": "combo",
+      "id": "Y0f7X",
+      "board": "t0wduc"
+    },
+    {
+      "name": "Typography",
+      "kind": "type",
+      "id": "WVOOR",
+      "board": "t0wduc"
+    },
+    {
+      "name": "Direction + source text",
+      "kind": "direction",
+      "id": "F8x4OW",
+      "board": "t0wduc"
+    },
+    {
+      "name": "Separator",
+      "kind": "separator",
+      "id": "rFeVQ",
+      "board": "t0wduc"
+    },
+    {
+      "name": "Kbd",
+      "kind": "kbd",
+      "id": "ZaV0H",
+      "board": "t0wduc"
+    },
+    {
+      "name": "Tabs",
+      "kind": "tabs",
+      "id": "M8GnER",
+      "board": "K6NoMw"
+    },
+    {
+      "name": "Breadcrumb",
+      "kind": "breadcrumb",
+      "id": "viBMO",
+      "board": "K6NoMw"
+    },
+    {
+      "name": "Navigation Menu",
+      "kind": "navigation",
+      "id": "KXP8Z",
+      "board": "K6NoMw"
+    },
+    {
+      "name": "Pagination",
+      "kind": "pagination",
+      "id": "iJYTE",
+      "board": "K6NoMw"
+    },
+    {
+      "name": "Accordion",
+      "kind": "accordion",
+      "id": "g2vDS",
+      "board": "K6NoMw"
+    },
+    {
+      "name": "Collapsible",
+      "kind": "collapsible",
+      "id": "c4ZjU",
+      "board": "K6NoMw"
+    },
+    {
+      "name": "Dialog",
+      "kind": "dialog",
+      "id": "R0Egi",
+      "board": "P8FS5"
+    },
+    {
+      "name": "Alert Dialog",
+      "kind": "alert-dialog",
+      "id": "cmyMO",
+      "board": "P8FS5"
+    },
+    {
+      "name": "Sheet",
+      "kind": "sheet",
+      "id": "R0Vubv",
+      "board": "P8FS5"
+    },
+    {
+      "name": "Dropdown Menu",
+      "kind": "menu",
+      "id": "VMFIM",
+      "board": "P8FS5"
+    },
+    {
+      "name": "Popover",
+      "kind": "popover",
+      "id": "FUEPX",
+      "board": "P8FS5"
+    },
+    {
+      "name": "Tooltip",
+      "kind": "tooltip",
+      "id": "IUm2R",
+      "board": "P8FS5"
+    },
+    {
+      "name": "Alert",
+      "kind": "alert",
+      "id": "lhXYH",
+      "board": "tw1FK"
+    },
+    {
+      "name": "Empty",
+      "kind": "empty",
+      "id": "y01U9",
+      "board": "tw1FK"
+    },
+    {
+      "name": "Progress",
+      "kind": "progress",
+      "id": "TXj1f",
+      "board": "tw1FK"
+    },
+    {
+      "name": "Skeleton",
+      "kind": "skeleton",
+      "id": "BEDzG",
+      "board": "tw1FK"
+    },
+    {
+      "name": "Spinner",
+      "kind": "spinner",
+      "id": "O39UTs",
+      "board": "tw1FK"
+    },
+    {
+      "name": "Toast",
+      "kind": "toast",
+      "id": "mwpGf",
+      "board": "tw1FK"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "id": "MYKM4",
+      "board": "nGwlb"
+    },
+    {
+      "name": "Item",
+      "kind": "item",
+      "id": "Px3PM",
+      "board": "nGwlb"
+    },
+    {
+      "name": "Avatar + Badge",
+      "kind": "avatar",
+      "id": "K0xipu",
+      "board": "nGwlb"
+    },
+    {
+      "name": "Attachment",
+      "kind": "attachment",
+      "id": "C6r9S",
+      "board": "nGwlb"
+    },
+    {
+      "name": "Aspect Ratio + Carousel",
+      "kind": "gallery",
+      "id": "DPe9M",
+      "board": "nGwlb"
+    },
+    {
+      "name": "Slider",
+      "kind": "slider",
+      "id": "H1iIw",
+      "board": "nGwlb"
+    },
+    {
+      "name": "Table + Data Table",
+      "kind": "table",
+      "id": "UQHLu",
+      "board": "yfCsc"
+    },
+    {
+      "name": "Message / grounded answer",
+      "kind": "message",
+      "id": "QdoBs",
+      "board": "yfCsc"
+    },
+    {
+      "name": "Destination receipt",
+      "kind": "destination",
+      "id": "t6h5U",
+      "board": "yfCsc"
+    },
+    {
+      "name": "Transfer receipt",
+      "kind": "transfer",
+      "id": "n1GzNU",
+      "board": "yfCsc"
+    },
+    {
+      "name": "Scope review",
+      "kind": "scope",
+      "id": "ZAG2O",
+      "board": "yfCsc"
+    },
+    {
+      "name": "Original export grant",
+      "kind": "export",
+      "id": "R26PS",
+      "board": "yfCsc"
+    },
+    {
+      "name": "Transcript correction",
+      "kind": "transcript",
+      "id": "qLjO2",
+      "board": "e5GyKo"
+    },
+    {
+      "name": "Stage and participant branch",
+      "kind": "stage",
+      "id": "og31L",
+      "board": "e5GyKo"
+    },
+    {
+      "name": "Practical observation",
+      "kind": "practical",
+      "id": "aIAO3",
+      "board": "e5GyKo"
+    },
+    {
+      "name": "Editor and insertion",
+      "kind": "editor",
+      "id": "Jy2zI",
+      "board": "e5GyKo"
+    },
+    {
+      "name": "Conflict comparison",
+      "kind": "conflict",
+      "id": "aD4bj",
+      "board": "e5GyKo"
+    },
+    {
+      "name": "Publication blocker",
+      "kind": "blocker",
+      "id": "r4gVm",
+      "board": "e5GyKo"
+    },
+    {
+      "name": "Exact candidate preview",
+      "kind": "preview",
+      "id": "ajK2I",
+      "board": "pW3iA"
+    },
+    {
+      "name": "Visibility approval",
+      "kind": "approval",
+      "id": "y2irD",
+      "board": "pW3iA"
+    },
+    {
+      "name": "Listing receipt",
+      "kind": "listing",
+      "id": "HkYLC",
+      "board": "pW3iA"
+    },
+    {
+      "name": "Highlight selection",
+      "kind": "highlight",
+      "id": "I65mWp",
+      "board": "pW3iA"
+    },
+    {
+      "name": "Lifecycle impact",
+      "kind": "lifecycle",
+      "id": "N96hv4",
+      "board": "pW3iA"
+    },
+    {
+      "name": "Invitation acceptance",
+      "kind": "invitation",
+      "id": "mc4Qa",
+      "board": "pW3iA"
+    },
+    {
+      "name": "Saved research",
+      "kind": "research",
+      "id": "HEJES",
+      "board": "Vlqg0"
+    },
+    {
+      "name": "Safe unavailable",
+      "kind": "unavailable",
+      "id": "mzTmh",
+      "board": "Vlqg0"
+    },
+    {
+      "name": "Evidence inspection",
+      "kind": "sheet",
+      "id": "BPPxO",
+      "board": "Vlqg0"
+    },
+    {
+      "name": "Capture control states",
+      "kind": "toggle-group",
+      "id": "K4esPa",
+      "board": "Vlqg0"
+    },
+    {
+      "name": "Import inspection",
+      "kind": "attachment",
+      "id": "Haqvi",
+      "board": "Vlqg0"
+    },
+    {
+      "name": "Grounded answer state",
+      "kind": "message",
+      "id": "E33Cl2",
+      "board": "Vlqg0"
+    }
+  ]
+}

@@ -1502,3 +1502,107 @@ Checked 5 November 2026 against source baseline `4a6528e728bc4c799a957730dcd6244
 | Whitespace | Changed documentation checked for whitespace errors; no application tests were needed for this documentation-only task. |
 
 The consolidated executed checks are recorded in [workflow review](workflow_review.md); temporary authoring output is not a maintained deliverable. Browser/device flows, screen-reader behavior, actual exports/imports, native persistence, API permissions and full-product acceptance were not executed in this task. The proposed design and open business/qualification decisions remain reviewable in this document.
+
+## First connected static wireframes — 5 November 2026
+
+Artifact: [flow-wireframes.pen](../../design/flow-wireframes.pen). Start at canvas frame **00 / OjON2**, then follow numbered frames and the adjacent review annotations. This is a **static flow wireframe**, not a clickable prototype. Pen's installed schema/execute API exposes no frame-navigation interaction primitive; a text `href` does not establish prototype transitions. The overview has drawn arrow connectors and each frame has explicit forward, Back/Cancel, entry, actor, state and accessibility notes outside its product UI.
+
+Review status **S** below means static contract/connection review and structural canvas check completed, with representative rendered screens inspected. It does not mean user-approved interaction design, runtime/device acceptance or individually exercised accessibility. N = native shared Android/iOS review size 390 × 844; W = browser review size 1280 × 900. Aliases on a wide frame are functional equivalents, not an additional drawn native composition; compact/wide adaptations remain open. A state under an existing ID is not a new page requirement.
+
+All content and outcomes are fictional/simulated. Inter, grayscale, rectangle controls, dimensions and spacing are disposable wireframe choices. They establish no visual system. Frame-level annotations carry state reuse and alternatives; they do not claim actual durable saving, upload, email delivery, publishing or deletion.
+
+| Frame / Pen node | Screen IDs and task/state | Drawn size | Actor / source state | Notes node | Review |
+| --- | --- | --- | --- | --- | --- |
+| 01 / `lthGv` | E01 / A09.auth — Sign in | N | Signed out | `ppIUO` | S |
+| 02 / `L3y8eK` | E01 / A09.auth — Create account | N | Signed out | `cDdTb` | S |
+| 03 / `wwGKc` | E02 / A09.verify — Check your email | N | Unverified account | `aH6fX` | S |
+| 04 / `b1BYo` | E05 / A01 — Your journeys | N | Verified first-use account | `B2D1y` | S |
+| 05 / `uNx9m` | E05 / A01 — Your journeys | N | Maya; creator capabilities | `A20ZAE` | S |
+| 06 / `Bkwp6` | E06 / A01.create — Create journey | N | Maya; verified | `q7DfjR` | S |
+| 07 / `h057sF` | E08 / A06 — Journey created | N | Maya; administrator + coauthor + publisher | `mnE7A` | S |
+| 08 / `eHHjM` | E08 / A06 — Your journey | N | Arun; participant only | `kEpRS` | S |
+| 09 / `r02AQ1` | E09 / A06.invite — Invite companion | N | Maya; administrator | `bcDdZ` | S |
+| 10 / `UwqvZ` | E09 / A06.people — Invitation status | N | Maya; administrator | `DH97n` | S |
+| 11 / `EIwYJ` | E07 / A01.join — Accept invitation? | N | Arun; verified invited account | `FBZNT` | S |
+| 12 / `HwBMY` | E07 / A01.join — Use the invited account | N | Wrong account / unavailable offer | `L46D5` | S |
+| 13 / `J9aTvd` | A02 — Capture a moment | N | Arun; owner; offline allowed | `PGTKm` | S |
+| 14 / `hU75s` | A02.destination — Destination and audience | N | Arun; owner | `q2BdW` | S |
+| 15 / `gJYPA` | A02 — Record a video | N | Arun; owner | `SPvU6` | S |
+| 16 / `Qsjhp` | A02 — Record a voice note | N | Arun; owner | `w0vwP` | S |
+| 17 / `WM1Jj` | A02 — Remembered moment | N | Arun; owner | `bkEDW` | S |
+| 18 / `cBsxL` | A03 — Saved on this device | N | Arun; own source S-VOICE | `A8k6A2` | S |
+| 19 / `jHSB6` | A02 / A03 — Capture needs attention | N | Arun; retained local work | `yC4LO` | S |
+| 20 / `B6DHn` | A04 — Personal moments | N | Arun; own library | `NEVI5` | S |
+| 21 / `O82AF` | A04.moment — Voice note | N | Arun; source owner | `mwOyy` | S |
+| 22 / `SVd1O` | A04.queue — Sync and transfers | N | Arun; own account | `Lf1mA` | S |
+| 23 / `qpvOi` | A05 — Import selected files | N | Arun; staged local batch | `GK0Sq` | S |
+| 24 / `y0dZR9` | A05.item — Inspect selected item | N | Arun; staged, not uploaded | `W0GRh` | S |
+| 25 / `FkqGt` | A05.item / A04.moment — File unavailable | N | Arun; own/staged item | `W9xHWL` | S |
+| 26 / `fDbkO` | A05 — Approve this batch | N | Arun; reviewed selection | `tKWxv` | S |
+| 27 / `Ls5AI` | A04.scope — Review contribution scope | N | Arun; source owner | `F2RUx` | S |
+| 28 / `fgskj` | A09.contributions / E15 — Your own contributions | N | Arun; former member / source owner | `A9Jds` | S |
+| 29 / `pvUGq` | A04.export — Original-file permission | N | Arun; source owner | `wZKKh` | S |
+| 30 / `IBxYT` | A07 / A07.chapter — Edit a chapter | N | Leela; coauthor, not publisher | `s62kL` | S |
+| 31 / `XaHdF` | A07.route / A07.knowledge — Correct one detail | N | Leela; coauthor | `K9eBp` | S |
+| 32 / `KImvn` | A07 / X.web / E01 — Continue in creator web | W | Leela; native authenticated | `xGZTj` | S |
+| 34 / `fVjiW` | W05 / A06.sources — Choose a permitted source | W | Leela; coauthor, review projections | `eO56s` | S |
+| 35 / `PyxKp` | W05 / A04.moment — Review source evidence | W | Leela permitted reviewer / Arun owner variant | `w8AvV` | S |
+| 39 / `llGVn` | A07.conflict / W07 — The draft changed | W | Leela; coauthor | `slSEs` | S |
+| 40 / `vVe4S` | W07 / A07.conflict — Resolve safely | W | Leela; coauthor | `Z7Pu5` | S |
+| 41 / `l3G33` | W08 / A06.publish — Review before publishing | W | Dev; publisher only | `spQp7` | S |
+| 44 / `iZeUL` | W08 / A06.preview — Candidate preview · Story | W | Dev; publisher; candidate C2 | `QZ8xL` | S |
+| 45 / `V930q3` | W08 / A06.preview — Candidate preview · Explore | W | Dev; publisher; same candidate C2 | `iF7hX` | S |
+| 46 / `kF0CJ` | W08 / A06.preview — Candidate preview · Learn | W | Dev; publisher; same candidate C2 | `SV3Qj` | S |
+| 48 / `NHrMY` | W08 / A06.publish — Review is out of date | W | Dev; publisher | `eLNs9` | S |
+| 49 / `Hmjs4` | W08 / A06 — Publication approved | W | Dev; publisher · simulated success | `yLXMf` | S |
+| 56 / `oZPC5` | A08 / W09.highlights — Choose your highlights | N | Arun; active participant; approved V1 | `iikbx` | S |
+| 57 / `GUxwL` | A08.preview / W09.highlight-preview — Preview your highlights | N | Arun; active member | `T4d8ft` | S |
+| 58 / `M6R5ee` | A08.preview / W09.highlight-preview — Share explicitly | N | Arun; hosted selection ready (simulated) | `lNIgy` | S |
+| 61 / `k7vNR` | A02 — Camera access is off | N | Arun; owner | `e80TC` | S |
+| 62 / `elcps` | A06.publish / A06.preview — Review on mobile | N | Dev; publisher only | `pColr` | S |
+| 65 / `kteiW` | A09.contributions / A04.scope — Restrict an existing contribution | N | Arun; former member, source owner | `p9EJs` | S |
+| 66 / `GUF9G` | E12 / E14 / A06.lifecycle / A06.operation — Withdraw source reuse | N | Arun; source owner | `UBNn6` | S |
+
+## Scope-to-preview refinement — 5 November 2026
+
+Continue in [flow-wireframes.pen](../../design/flow-wireframes.pen), overview **R00 / `OLIDE`**. The R labels are artifact/state references, **not new canonical screen IDs**. This refinement adds 21 paired native/compact-browser states (42 screens and 42 external annotation panels). Original first-flow frames remain intact and their relevant annotations point here. The detailed loop below supersedes their schematic treatment for this task only; unrelated canvas work is preserved.
+
+All ordinary frames use a **390 × 844** native or browser content viewport. R19 uses 200% text and a **390 × 1316 full scroll-content capture** for that same 844px viewport. R20 is a scrolled editor fragment with a 300px keyboard-occlusion allowance; its actions end at y=388, above the y=544 occlusion boundary. Browser chrome/OS keyboard are not app-owned drawings. These are temporary review sizes, not selected breakpoints or typography.
+
+Status **S** = static contract review, settled canvas bounds check, and representative screenshot inspection; no runtime/accessibility certification. Every screen has entry, action, caller-specific return, actor/current source state, failures and focus notes outside product UI. N/W are platform equivalents of the existing A/W/E responsibilities.
+
+| Artifact / Pen node | Existing screen responsibility and state | Actor | Size | Notes node | Review |
+| --- | --- | --- | --- | --- | --- |
+| R01N / `BU0DA` | A04.scope — Who may use this source? | Arun · active source owner | 390 × 844 | `R0pd2` | S |
+| R02N / `eDuwv` | A04.scope — Confirm each source | Arun · source owner | 390 × 844 | `xocAb` | S |
+| R03N / `mNhJG` | A04.scope — Review the audience again | Arun · source owner | 390 × 844 | `ysgXe` | S |
+| R04N / `Hd8iN` | A04.moment — Correct your transcript | Arun · source owner | 390 × 844 | `E7bvM8` | S |
+| R05N / `k1eJ4O` | A04.moment / A04.scope — Checking the save | Arun · source owner | 390 × 844 | `mX6Eb` | S |
+| R06N / `ah1u9` | A06.publish — Publication is blocked | Dev · publisher only | 390 × 844 | `W5SkEp` | S |
+| R07N / `cYNA5` | A06.publish — Repair the rights blocker | Leela · coauthor, not publisher | 390 × 844 | `fYxoV` | S |
+| R08N / `VchU3` | A07.chapter / A07.knowledge — Exclude the affected uses | Leela · coauthor | 390 × 844 | `KRado` | S |
+| R09N / `E6Zkze` | A07.conflict — Keep your repair candidate | Leela · coauthor | 390 × 844 | `T826Nl` | S |
+| R10N / `zygcj` | A06.publish — Preparing a fresh preview | Dev publisher / Leela reviewer | 390 × 844 | `zRrNV` | S |
+| R11N / `MbVJ1` | A06.publish — Review the refreshed result | Dev · publisher only | 390 × 844 | `c6AmKD` | S |
+| R12N / `hW4Gt` | A06.preview — Story preview | Dev · publisher; candidate C2 | 390 × 844 | `YlwfJ` | S |
+| R13N / `sypL9` | A06.preview — Explore preview | Dev · publisher; candidate C2 | 390 × 844 | `gpVXb` | S |
+| R14N / `nR9hd` | A04.moment — Inspect the review source | Dev publisher / Leela coauthor | 390 × 844 | `RWvD2` | S |
+| R15N / `pfDZn` | A06.preview — Learn preview | Dev · publisher; candidate C2 | 390 × 844 | `MN8Hr` | S |
+| R16N / `rbl1Z` | A06.publish / A06.preview — This preview is out of date | Dev · publisher | 390 × 844 | `t0RKFI` | S |
+| R17N / `NK02g` | A06.publish — Approve this exact candidate | Dev · publisher only | 390 × 844 | `e9ShKk` | S |
+| R18N / `RCfYi` | A06.unavailable / E15 — This task is unavailable | Current account lacks required access | 390 × 844 | `G82hi` | S |
+| R19N / `VQ5c5` | A04.scope — Who may use this source? | Arun · source owner · large-text review | 390 × 1316 scroll; 844 viewport | `i3PUz` | S |
+| R20N / `THU2s` | A04.moment — Correct transcript | Arun · source owner · keyboard review | 390 × 844 | `mm6Ok` | S |
+| R21N / `t1WWh` | A07 / X.web — Continue the repair | Leela · coauthor; separate device/browser sessions | 390 × 844 | `a97dsP` | S |
+
+
+## Gather component recipes — 5 November 2026
+
+The user selected Gather. [System specification](../design/gather-system.md) and [frame registry](../../design/gather-system/frames.json) own the cross-platform component candidate; these records own the native task examples in [gather.pen](../../design/gather.pen).
+
+| Recipe / screen | Frame / external note | Platform and review size | Actor, state and transition | Review status |
+|---|---|---|---|---|
+| GS13N / A04.scope | `ohx6V` / `Suwq9` | Native, 390 × 1040 full content | Arun owns source; current Journey review. Review selected proposal, independent export grant; Back to owned source. | Static component composition reviewed; runtime pending |
+| GS16N / A06.preview | `bCcaf` / `HVNE7` | Native, 390 × 1040 full content | Dev publisher; candidate C18 excludes two dependent uses. Inspect exact candidate then approval review; Back to review; any draft/permission change invalidates. | Static component composition reviewed; runtime pending |
+
+These use linked component masters. They supplement the existing R01–R21 native contracts, including unknown outcomes, stale permissions, text growth, keyboards and authenticated handoff. They do not replace all their states or establish durable saving/publication. Brand choice does not change capability rules.

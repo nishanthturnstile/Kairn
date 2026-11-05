@@ -47,7 +47,7 @@ Screen IDs identify responsibilities, not fixed navigation chrome, page counts o
 
 ## 9. Component system
 
-Component appearance and token values are undecided. The fresh design process will define anatomy, variants and layout. Preserve functional states: loading, true empty, filtered-empty, offline, pending/uncertain action, success, failure/retry, stale data and access denial. Keep labels, drafts, focus, safe returns and accessible alternatives through those transitions.
+Gather is the selected direction. The [approved component system](../design/gather-system.md) defines proposed anatomy, values, variants and platform mappings; the [design hub](../../DESIGN.md) owns its decision status. Preserve functional states: loading, true empty, filtered-empty, offline, pending/uncertain action, success, failure/retry, stale data and access denial. Keep labels, drafts, focus, safe returns and accessible alternatives through those transitions. Design specimens do not establish runtime acceptance.
 
 Web and native own their rendering. Share approved plain design values and pure behavior through the existing architecture; do not infer a color, type family or icon choice from current package contents. Existing implementation can be reused only after assessing it against the newly selected design.
 

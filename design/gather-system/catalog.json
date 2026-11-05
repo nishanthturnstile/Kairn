@@ -1,0 +1,1441 @@
+{
+  "version": "1.0-approved",
+  "date": "2026-11-05",
+  "status": "Gather 1.0 approved and frozen by user; not runtime acceptance",
+  "officialCatalogue": [
+    {
+      "id": "ui/accordion",
+      "name": "Accordion",
+      "decision": "Use",
+      "group": "Disclosure",
+      "purpose": "Help, practical detail groups",
+      "customization": "Rounded summary edge; open content stays on the page",
+      "screens": [
+        "A09.help",
+        "P04"
+      ],
+      "states": "Closed, expanded, unavailable section",
+      "source": "https://ui.shadcn.com/docs/components/accordion",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "g2vDS",
+      "board": "K6NoMw"
+    },
+    {
+      "id": "ui/alert",
+      "name": "Alert",
+      "decision": "Use",
+      "group": "Feedback",
+      "purpose": "Persistent recovery and permission notices",
+      "customization": "Quiet tinted surface, named problem and recovery; never color alone",
+      "screens": [
+        "A03",
+        "A04.queue",
+        "W08"
+      ],
+      "states": "Info, offline, pending, warning, error",
+      "source": "https://ui.shadcn.com/docs/components/alert",
+      "inventory": "Existing shadcn-style source: alert.tsx",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "lhXYH",
+      "board": "tw1FK"
+    },
+    {
+      "id": "ui/alert-dialog",
+      "name": "Alert Dialog",
+      "decision": "Use",
+      "group": "Overlay",
+      "purpose": "Irreversible impact confirmation",
+      "customization": "Calm title and exact affected object; cancel first in focus order",
+      "screens": [
+        "A06.lifecycle",
+        "E13"
+      ],
+      "states": "Impact ready, changed, submitting, unknown result",
+      "source": "https://ui.shadcn.com/docs/components/alert-dialog",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "cmyMO",
+      "board": "P8FS5"
+    },
+    {
+      "id": "ui/aspect-ratio",
+      "name": "Aspect Ratio",
+      "decision": "Use",
+      "group": "Media",
+      "purpose": "Photo and cover layout",
+      "customization": "Uneven soft corners on imagery only; preserve uncropped inspection",
+      "screens": [
+        "P02",
+        "A04.moment"
+      ],
+      "states": "Loaded, missing, loading, restricted",
+      "source": "https://ui.shadcn.com/docs/components/aspect-ratio",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "DPe9M",
+      "board": "nGwlb"
+    },
+    {
+      "id": "ui/attachment",
+      "name": "Attachment",
+      "decision": "Use",
+      "group": "Media",
+      "purpose": "Selected import candidates",
+      "customization": "File name, type and selection state; no implied upload",
+      "screens": [
+        "A05",
+        "A05.item"
+      ],
+      "states": "Selected, inspecting, excluded, unsupported, missing",
+      "source": "https://ui.shadcn.com/docs/components/attachment",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "C6r9S",
+      "board": "nGwlb"
+    },
+    {
+      "id": "ui/avatar",
+      "name": "Avatar",
+      "decision": "Use",
+      "group": "Identity",
+      "purpose": "Private people and approved credits",
+      "customization": "Soft circle with initials fallback; identity never implies a grant",
+      "screens": [
+        "W06",
+        "P05"
+      ],
+      "states": "Image, initials, unavailable public identity",
+      "source": "https://ui.shadcn.com/docs/components/avatar",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "K0xipu",
+      "board": "nGwlb"
+    },
+    {
+      "id": "ui/badge",
+      "name": "Badge",
+      "decision": "Use",
+      "group": "Identity",
+      "purpose": "Scope, evidence and operation labels",
+      "customization": "Small capsule with explicit words; no decorative semantic colors",
+      "screens": [
+        "A04.scope",
+        "P05"
+      ],
+      "states": "Review only, approved, unknown, withdrawn",
+      "source": "https://ui.shadcn.com/docs/components/badge",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "K0xipu",
+      "board": "nGwlb"
+    },
+    {
+      "id": "ui/breadcrumb",
+      "name": "Breadcrumb",
+      "decision": "Use",
+      "group": "Navigation",
+      "purpose": "Dense creator return context",
+      "customization": "Quiet text with spacious named links; full title available",
+      "screens": [
+        "W02",
+        "W04",
+        "W05"
+      ],
+      "states": "Current, long path, stale destination",
+      "source": "https://ui.shadcn.com/docs/components/breadcrumb",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "viBMO",
+      "board": "K6NoMw"
+    },
+    {
+      "id": "ui/bubble",
+      "name": "Bubble",
+      "decision": "Omit",
+      "group": "Conversation",
+      "purpose": "No social messaging in R1",
+      "customization": "Buffered grounded answers use an editorial answer block",
+      "screens": [
+        "P04.question"
+      ],
+      "states": "Not selected",
+      "source": "https://ui.shadcn.com/docs/components/bubble",
+      "inventory": "Not present in current web UI directory",
+      "native": "No native clone required"
+    },
+    {
+      "id": "ui/button",
+      "name": "Button",
+      "decision": "Use",
+      "group": "Action",
+      "purpose": "Explicit task actions",
+      "customization": "Pill; optional round arrow end only for forward navigation",
+      "screens": [
+        "All"
+      ],
+      "states": "Default, hover, focus, pressed, disabled, pending",
+      "source": "https://ui.shadcn.com/docs/components/button",
+      "inventory": "Existing shadcn-style source: button.tsx",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "lBPBg",
+      "board": "kKd6P"
+    },
+    {
+      "id": "ui/button-group",
+      "name": "Button Group",
+      "decision": "Use",
+      "group": "Action",
+      "purpose": "Related media and ordering controls",
+      "customization": "Shared capsule edge; labels remain independently focusable",
+      "screens": [
+        "P03",
+        "W02"
+      ],
+      "states": "First or last disabled, focused, compact wrap",
+      "source": "https://ui.shadcn.com/docs/components/button-group",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "oByNz",
+      "board": "kKd6P"
+    },
+    {
+      "id": "ui/calendar",
+      "name": "Calendar",
+      "decision": "Use",
+      "group": "Field",
+      "purpose": "Journey date selection",
+      "customization": "Round selected date, joined range; uncertain dates remain explicit",
+      "screens": [
+        "A01.create",
+        "W01"
+      ],
+      "states": "Single, range, unknown dates, invalid range",
+      "source": "https://ui.shadcn.com/docs/components/calendar",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "Ks3gB",
+      "board": "bXgTg"
+    },
+    {
+      "id": "ui/card",
+      "name": "Card",
+      "decision": "Use",
+      "group": "Content",
+      "purpose": "Journey and chapter containers",
+      "customization": "Chapter pocket silhouette, restrained surfaces; prose can remain unboxed",
+      "screens": [
+        "A01",
+        "W01",
+        "P01"
+      ],
+      "states": "No cover, long title, empty, stale",
+      "source": "https://ui.shadcn.com/docs/components/card",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "MYKM4",
+      "board": "nGwlb"
+    },
+    {
+      "id": "ui/carousel",
+      "name": "Carousel",
+      "decision": "Use",
+      "group": "Media",
+      "purpose": "User-directed approved gallery",
+      "customization": "Quiet counter and Previous/Next; no autoplay or swipe-only navigation",
+      "screens": [
+        "P02",
+        "P05"
+      ],
+      "states": "First, middle, last, unavailable media",
+      "source": "https://ui.shadcn.com/docs/components/carousel",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "DPe9M",
+      "board": "nGwlb"
+    },
+    {
+      "id": "ui/chart",
+      "name": "Chart",
+      "decision": "Defer",
+      "group": "Data",
+      "purpose": "No general analytics dashboard in R1",
+      "customization": "Route evidence has a purpose-built stage list and optional map",
+      "screens": [
+        "P03"
+      ],
+      "states": "Only if a real data task is approved",
+      "source": "https://ui.shadcn.com/docs/components/chart",
+      "inventory": "Not present in current web UI directory",
+      "native": "No native clone required"
+    },
+    {
+      "id": "ui/checkbox",
+      "name": "Checkbox",
+      "decision": "Use",
+      "group": "Field",
+      "purpose": "Import and highlight selection",
+      "customization": "Rounded square, visible check, whole labelled row target",
+      "screens": [
+        "A05",
+        "A08"
+      ],
+      "states": "Off, on, mixed, disabled, focus",
+      "source": "https://ui.shadcn.com/docs/components/checkbox",
+      "inventory": "Local equivalent, not registry parity: form-controls.tsx",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "i0Vl2q",
+      "board": "eKtUQ"
+    },
+    {
+      "id": "ui/code-block",
+      "name": "Code Block",
+      "decision": "Omit",
+      "group": "Developer",
+      "purpose": "No end-user code presentation task",
+      "customization": "Do not surface implementation details as product UI",
+      "screens": [
+        "None"
+      ],
+      "states": "Not selected",
+      "source": "https://ui.shadcn.com/docs/components/code-block",
+      "inventory": "Not present in current web UI directory",
+      "native": "No native clone required"
+    },
+    {
+      "id": "ui/collapsible",
+      "name": "Collapsible",
+      "decision": "Use",
+      "group": "Disclosure",
+      "purpose": "Attached approved source note",
+      "customization": "A note unfolds beside its claim; preserve opener and scroll",
+      "screens": [
+        "P02",
+        "P05"
+      ],
+      "states": "Closed, expanded, withdrawn while open",
+      "source": "https://ui.shadcn.com/docs/components/collapsible",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "c4ZjU",
+      "board": "K6NoMw"
+    },
+    {
+      "id": "ui/combobox",
+      "name": "Combobox",
+      "decision": "Use",
+      "group": "Field",
+      "purpose": "Timezone and permitted-source lookup",
+      "customization": "Rounded field, readable matched text and truthful no-results",
+      "screens": [
+        "A01.create",
+        "W02"
+      ],
+      "states": "Empty, loading, matches, no matches, error",
+      "source": "https://ui.shadcn.com/docs/components/combobox",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "Y0f7X",
+      "board": "t0wduc"
+    },
+    {
+      "id": "ui/command",
+      "name": "Command",
+      "decision": "Optional",
+      "group": "Navigation",
+      "purpose": "Creator keyboard navigation",
+      "customization": "Task names and current journey context; always visible-menu equivalent",
+      "screens": [
+        "W01"
+      ],
+      "states": "Closed, searching, no matches, denied task filtered",
+      "source": "https://ui.shadcn.com/docs/components/command",
+      "inventory": "Not present in current web UI directory",
+      "native": "No native clone required"
+    },
+    {
+      "id": "ui/context-menu",
+      "name": "Context Menu",
+      "decision": "Optional",
+      "group": "Overlay",
+      "purpose": "Desktop source-row shortcuts",
+      "customization": "Same commands as visible More; no hidden-only task",
+      "screens": [
+        "W05"
+      ],
+      "states": "Open, disabled action, permission changed",
+      "source": "https://ui.shadcn.com/docs/components/context-menu",
+      "inventory": "Not present in current web UI directory",
+      "native": "No native clone required"
+    },
+    {
+      "id": "ui/data-table",
+      "name": "Data Table",
+      "decision": "Use",
+      "group": "Data",
+      "purpose": "Creator sources and people",
+      "customization": "Unboxed rows, rounded selection cells; compact becomes labelled item rows",
+      "screens": [
+        "W05",
+        "W06"
+      ],
+      "states": "Sort, filter, selected, empty, pending, denied",
+      "source": "https://ui.shadcn.com/docs/components/data-table",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "UQHLu",
+      "board": "yfCsc"
+    },
+    {
+      "id": "ui/date-picker",
+      "name": "Date Picker",
+      "decision": "Use",
+      "group": "Field",
+      "purpose": "Dates with uncertainty",
+      "customization": "Text entry plus calendar; separate Unknown choice and timezone",
+      "screens": [
+        "A01.create",
+        "A05.item"
+      ],
+      "states": "Exact, range, unknown, invalid, keyboard",
+      "source": "https://ui.shadcn.com/docs/components/date-picker",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "mX5bx",
+      "board": "t0wduc"
+    },
+    {
+      "id": "ui/dialog",
+      "name": "Dialog",
+      "decision": "Use",
+      "group": "Overlay",
+      "purpose": "Bounded focused task",
+      "customization": "Soft upper corners, clear title and close; no decorative handle",
+      "screens": [
+        "W09",
+        "A08.preview"
+      ],
+      "states": "Open, dirty, invalid, waiting, error",
+      "source": "https://ui.shadcn.com/docs/components/dialog",
+      "inventory": "Local equivalent, not registry parity: dialog.tsx",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "R0Egi",
+      "board": "P8FS5"
+    },
+    {
+      "id": "ui/direction",
+      "name": "Direction",
+      "decision": "Use",
+      "group": "Foundation",
+      "purpose": "Logical spacing and text direction",
+      "customization": "Directional icons mirror only where meaning requires it",
+      "screens": [
+        "All"
+      ],
+      "states": "LTR, mixed source language; full RTL release not claimed",
+      "source": "https://ui.shadcn.com/docs/components/direction",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "F8x4OW",
+      "board": "t0wduc"
+    },
+    {
+      "id": "ui/drawer",
+      "name": "Drawer",
+      "decision": "Optional",
+      "group": "Overlay",
+      "purpose": "Compact-browser short tasks",
+      "customization": "Use only if keyboard and focus remain visible; explicit close",
+      "screens": [
+        "W05",
+        "compact"
+      ],
+      "states": "Open, keyboard, tall content, cancelled",
+      "source": "https://ui.shadcn.com/docs/components/drawer",
+      "inventory": "Not present in current web UI directory",
+      "native": "No native clone required"
+    },
+    {
+      "id": "ui/dropdown-menu",
+      "name": "Dropdown Menu",
+      "decision": "Use",
+      "group": "Overlay",
+      "purpose": "Secondary actions",
+      "customization": "Rounded menu and generous rows; destructive action separated",
+      "screens": [
+        "W01",
+        "W05"
+      ],
+      "states": "Open, keyboard, disabled, empty after rights change",
+      "source": "https://ui.shadcn.com/docs/components/dropdown-menu",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "VMFIM",
+      "board": "P8FS5"
+    },
+    {
+      "id": "ui/empty",
+      "name": "Empty",
+      "decision": "Use",
+      "group": "Feedback",
+      "purpose": "First-use and filtered-empty",
+      "customization": "One warm sentence and a useful next action, no fabricated activity",
+      "screens": [
+        "A01",
+        "A04",
+        "P01"
+      ],
+      "states": "First-use, no matches, no eligible items",
+      "source": "https://ui.shadcn.com/docs/components/empty",
+      "inventory": "Existing shadcn-style source: empty.tsx",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "y01U9",
+      "board": "tw1FK"
+    },
+    {
+      "id": "ui/field",
+      "name": "Field",
+      "decision": "Use",
+      "group": "Field",
+      "purpose": "Label, control, help and error",
+      "customization": "Stable visible label; helper and error occupy their own lines",
+      "screens": [
+        "All",
+        "forms"
+      ],
+      "states": "Normal, optional, required, invalid, disabled, readonly",
+      "source": "https://ui.shadcn.com/docs/components/field",
+      "inventory": "Existing shadcn-style source: field.tsx",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "Ma76u",
+      "board": "eKtUQ"
+    },
+    {
+      "id": "ui/hover-card",
+      "name": "Hover Card",
+      "decision": "Optional",
+      "group": "Disclosure",
+      "purpose": "Desktop source preview",
+      "customization": "Approved excerpt only; focus or tap opens the same information",
+      "screens": [
+        "P02"
+      ],
+      "states": "Preview, unavailable; never required to understand a claim",
+      "source": "https://ui.shadcn.com/docs/components/hover-card",
+      "inventory": "Not present in current web UI directory",
+      "native": "No native clone required"
+    },
+    {
+      "id": "ui/input",
+      "name": "Input",
+      "decision": "Use",
+      "group": "Field",
+      "purpose": "Account and practical text",
+      "customization": "20 px corners and inset breathing room; focus outside the field",
+      "screens": [
+        "E01",
+        "W04"
+      ],
+      "states": "Empty, filled, focused, invalid, disabled, readonly",
+      "source": "https://ui.shadcn.com/docs/components/input",
+      "inventory": "Existing shadcn-style source: input.tsx",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "F58T8d",
+      "board": "kKd6P"
+    },
+    {
+      "id": "ui/input-group",
+      "name": "Input Group",
+      "decision": "Use",
+      "group": "Field",
+      "purpose": "Search, amount and password controls",
+      "customization": "Joined rounded container; currency and reveal controls retain labels",
+      "screens": [
+        "P01",
+        "E01",
+        "W04"
+      ],
+      "states": "Searching, clear, error, password revealed",
+      "source": "https://ui.shadcn.com/docs/components/input-group",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "HQQ9m",
+      "board": "kKd6P"
+    },
+    {
+      "id": "ui/input-otp",
+      "name": "Input OTP",
+      "decision": "Omit",
+      "group": "Field",
+      "purpose": "Current verification uses links",
+      "customization": "Do not add a code-verification policy through a component demo",
+      "screens": [
+        "E02"
+      ],
+      "states": "Not selected",
+      "source": "https://ui.shadcn.com/docs/components/input-otp",
+      "inventory": "Not present in current web UI directory",
+      "native": "No native clone required"
+    },
+    {
+      "id": "ui/item",
+      "name": "Item",
+      "decision": "Use",
+      "group": "Content",
+      "purpose": "Sources, tasks and receipts",
+      "customization": "Open list row with curved selection area, not card-on-card",
+      "screens": [
+        "A04",
+        "W05"
+      ],
+      "states": "Default, selected, pending, denied, missing",
+      "source": "https://ui.shadcn.com/docs/components/item",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "Px3PM",
+      "board": "nGwlb"
+    },
+    {
+      "id": "ui/kbd",
+      "name": "Kbd",
+      "decision": "Use",
+      "group": "Foundation",
+      "purpose": "Optional desktop shortcuts",
+      "customization": "Quiet rounded key label; no shortcut-only action",
+      "screens": [
+        "W02"
+      ],
+      "states": "Platform modifier, unavailable shortcut",
+      "source": "https://ui.shadcn.com/docs/components/kbd",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "ZaV0H",
+      "board": "t0wduc"
+    },
+    {
+      "id": "ui/label",
+      "name": "Label",
+      "decision": "Use",
+      "group": "Field",
+      "purpose": "Every input and choice",
+      "customization": "Sentence case, source-specific wording, no placeholder-only labels",
+      "screens": [
+        "All",
+        "forms"
+      ],
+      "states": "Required, optional, long label",
+      "source": "https://ui.shadcn.com/docs/components/label",
+      "inventory": "Existing shadcn-style source: label.tsx",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "Ma76u",
+      "board": "eKtUQ"
+    },
+    {
+      "id": "ui/marker",
+      "name": "Marker",
+      "decision": "Optional",
+      "group": "Conversation",
+      "purpose": "Question-session separators",
+      "customization": "Use dated text separators only; not fake activity or route facts",
+      "screens": [
+        "P04.question"
+      ],
+      "states": "Date, reset, invalidated session",
+      "source": "https://ui.shadcn.com/docs/components/marker",
+      "inventory": "Not present in current web UI directory",
+      "native": "No native clone required"
+    },
+    {
+      "id": "ui/menubar",
+      "name": "Menubar",
+      "decision": "Defer",
+      "group": "Navigation",
+      "purpose": "Dense document editing may need it later",
+      "customization": "Current editor uses named formatting controls and More",
+      "screens": [
+        "W02"
+      ],
+      "states": "No desktop menu imposed on native",
+      "source": "https://ui.shadcn.com/docs/components/menubar",
+      "inventory": "Not present in current web UI directory",
+      "native": "No native clone required"
+    },
+    {
+      "id": "ui/message",
+      "name": "Message",
+      "decision": "Use",
+      "group": "Conversation",
+      "purpose": "Buffered grounded questions and answers",
+      "customization": "Editorial question/answer block, citation footnotes, no chat persona",
+      "screens": [
+        "P04.question"
+      ],
+      "states": "Waiting, validated answer, abstention, invalidated",
+      "source": "https://ui.shadcn.com/docs/components/message",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "QdoBs",
+      "board": "yfCsc"
+    },
+    {
+      "id": "ui/message-scroller",
+      "name": "Message Scroller",
+      "decision": "Defer",
+      "group": "Conversation",
+      "purpose": "No streaming-follow interaction required",
+      "customization": "Ordinary document flow and explicit answer navigation",
+      "screens": [
+        "P04.question"
+      ],
+      "states": "Reconsider only with validated session need",
+      "source": "https://ui.shadcn.com/docs/components/message-scroller",
+      "inventory": "Not present in current web UI directory",
+      "native": "No native clone required"
+    },
+    {
+      "id": "ui/native-select",
+      "name": "Native Select",
+      "decision": "Use",
+      "group": "Field",
+      "purpose": "Simple fixed choices",
+      "customization": "Platform-owned picker with Gather label and field shell",
+      "screens": [
+        "A07.knowledge",
+        "W04"
+      ],
+      "states": "Selected, placeholder, disabled, error",
+      "source": "https://ui.shadcn.com/docs/components/native-select",
+      "inventory": "Local equivalent, not registry parity: form-controls.tsx",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "SrdQ1",
+      "board": "eKtUQ"
+    },
+    {
+      "id": "ui/navigation-menu",
+      "name": "Navigation Menu",
+      "decision": "Use",
+      "group": "Navigation",
+      "purpose": "Public and creator destination links",
+      "customization": "Compact text links and attached task tabs; no obligatory sidebar",
+      "screens": [
+        "P01",
+        "W01"
+      ],
+      "states": "Current, compact menu, keyboard, denied filtered",
+      "source": "https://ui.shadcn.com/docs/components/navigation-menu",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "KXP8Z",
+      "board": "K6NoMw"
+    },
+    {
+      "id": "ui/pagination",
+      "name": "Pagination",
+      "decision": "Use",
+      "group": "Navigation",
+      "purpose": "Discover and source results",
+      "customization": "Previous/Next capsules with range text and restored list context",
+      "screens": [
+        "P01",
+        "W05"
+      ],
+      "states": "First, middle, last, loading, invalid page",
+      "source": "https://ui.shadcn.com/docs/components/pagination",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "iJYTE",
+      "board": "K6NoMw"
+    },
+    {
+      "id": "ui/popover",
+      "name": "Popover",
+      "decision": "Use",
+      "group": "Overlay",
+      "purpose": "Small filter and source choices",
+      "customization": "Compact soft panel anchored to trigger; sheet/page when space requires",
+      "screens": [
+        "P01",
+        "W02"
+      ],
+      "states": "Open, loading, no matches, cancelled",
+      "source": "https://ui.shadcn.com/docs/components/popover",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "FUEPX",
+      "board": "P8FS5"
+    },
+    {
+      "id": "ui/progress",
+      "name": "Progress",
+      "decision": "Use",
+      "group": "Feedback",
+      "purpose": "Known bytes or counted processing items",
+      "customization": "Rounded track, units and exact phase; indeterminate when total unknown",
+      "screens": [
+        "A04.queue"
+      ],
+      "states": "Determinate, indeterminate, paused, failed, finalizing",
+      "source": "https://ui.shadcn.com/docs/components/progress",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "TXj1f",
+      "board": "tw1FK"
+    },
+    {
+      "id": "ui/questionnaire",
+      "name": "Questionnaire",
+      "decision": "Omit",
+      "group": "Conversation",
+      "purpose": "No agent-driven questionnaire workflow",
+      "customization": "Ordinary scoped forms serve documented product tasks",
+      "screens": [
+        "None"
+      ],
+      "states": "Not selected",
+      "source": "https://ui.shadcn.com/docs/components/questionnaire",
+      "inventory": "Not present in current web UI directory",
+      "native": "No native clone required"
+    },
+    {
+      "id": "ui/radio-group",
+      "name": "Radio Group",
+      "decision": "Use",
+      "group": "Field",
+      "purpose": "Source scope and visibility",
+      "customization": "Equal-weight options; explicit selected label; never preselect wider rights",
+      "screens": [
+        "A04.scope",
+        "W08"
+      ],
+      "states": "Current, proposed, disabled, stale, invalid",
+      "source": "https://ui.shadcn.com/docs/components/radio-group",
+      "inventory": "Local equivalent, not registry parity: form-controls.tsx",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "O28kFQ",
+      "board": "eKtUQ"
+    },
+    {
+      "id": "ui/resizable",
+      "name": "Resizable",
+      "decision": "Optional",
+      "group": "Layout",
+      "purpose": "Wide creator evidence split",
+      "customization": "Quiet divider and keyboard resize/reset; stack at compact sizes",
+      "screens": [
+        "W02",
+        "W04"
+      ],
+      "states": "Two panes, min size, keyboard, stacked",
+      "source": "https://ui.shadcn.com/docs/components/resizable",
+      "inventory": "Not present in current web UI directory",
+      "native": "No native clone required"
+    },
+    {
+      "id": "ui/scroll-area",
+      "name": "Scroll Area",
+      "decision": "Optional",
+      "group": "Layout",
+      "purpose": "Bounded source picker",
+      "customization": "Native scrolling first; visible boundaries and focus scroll-into-view",
+      "screens": [
+        "W02"
+      ],
+      "states": "Overflow, keyboard, no content",
+      "source": "https://ui.shadcn.com/docs/components/scroll-area",
+      "inventory": "Not present in current web UI directory",
+      "native": "No native clone required"
+    },
+    {
+      "id": "ui/select",
+      "name": "Select",
+      "decision": "Use",
+      "group": "Field",
+      "purpose": "Rich but short choice lists",
+      "customization": "Rounded trigger and spacious options; native equivalent when appropriate",
+      "screens": [
+        "W04",
+        "W08"
+      ],
+      "states": "Open, selected, disabled, invalid",
+      "source": "https://ui.shadcn.com/docs/components/select",
+      "inventory": "Local equivalent, not registry parity: form-controls.tsx",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "SrdQ1",
+      "board": "eKtUQ"
+    },
+    {
+      "id": "ui/separator",
+      "name": "Separator",
+      "decision": "Use",
+      "group": "Foundation",
+      "purpose": "Page edge and group boundaries",
+      "customization": "One quiet line; no decorative dividers between every sentence",
+      "screens": [
+        "All"
+      ],
+      "states": "Horizontal, vertical, high contrast",
+      "source": "https://ui.shadcn.com/docs/components/separator",
+      "inventory": "Existing shadcn-style source: separator.tsx",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "rFeVQ",
+      "board": "t0wduc"
+    },
+    {
+      "id": "ui/sheet",
+      "name": "Sheet",
+      "decision": "Use",
+      "group": "Overlay",
+      "purpose": "Source inspection with retained context",
+      "customization": "Attached panel with named close/return; full screen on narrow devices",
+      "screens": [
+        "W05",
+        "P05"
+      ],
+      "states": "Open, unavailable, dirty, keyboard, return focus",
+      "source": "https://ui.shadcn.com/docs/components/sheet",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "R0Vubv",
+      "board": "P8FS5"
+    },
+    {
+      "id": "ui/sidebar",
+      "name": "Sidebar",
+      "decision": "Optional",
+      "group": "Layout",
+      "purpose": "Persistent wide creator contents",
+      "customization": "Text-led contents rail only where useful; never app-wide default",
+      "screens": [
+        "W01",
+        "W02"
+      ],
+      "states": "Expanded, compact menu, current chapter",
+      "source": "https://ui.shadcn.com/docs/components/sidebar",
+      "inventory": "Not present in current web UI directory",
+      "native": "No native clone required"
+    },
+    {
+      "id": "ui/skeleton",
+      "name": "Skeleton",
+      "decision": "Use",
+      "group": "Feedback",
+      "purpose": "Known incoming layout",
+      "customization": "Static paper placeholders shaped like actual content; no shimmer loop",
+      "screens": [
+        "A01",
+        "P01"
+      ],
+      "states": "Loading with label; replace by error after failure",
+      "source": "https://ui.shadcn.com/docs/components/skeleton",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "BEDzG",
+      "board": "tw1FK"
+    },
+    {
+      "id": "ui/slider",
+      "name": "Slider",
+      "decision": "Use",
+      "group": "Media",
+      "purpose": "Playback seek and volume where needed",
+      "customization": "Large thumb, elapsed/total text, keyboard and step controls",
+      "screens": [
+        "P03",
+        "A04.moment"
+      ],
+      "states": "Paused, playing, seek unavailable, focused",
+      "source": "https://ui.shadcn.com/docs/components/slider",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "H1iIw",
+      "board": "nGwlb"
+    },
+    {
+      "id": "ui/spinner",
+      "name": "Spinner",
+      "decision": "Use",
+      "group": "Feedback",
+      "purpose": "Brief unknown-duration operation",
+      "customization": "Small indicator plus verb; reduced-motion static waiting label",
+      "screens": [
+        "All",
+        "pending"
+      ],
+      "states": "Busy, reduced motion, timeout recovery",
+      "source": "https://ui.shadcn.com/docs/components/spinner",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "O39UTs",
+      "board": "tw1FK"
+    },
+    {
+      "id": "ui/switch",
+      "name": "Switch",
+      "decision": "Use",
+      "group": "Field",
+      "purpose": "Reversible appearance/storage preference",
+      "customization": "Label plus On/Off; never grant source or export rights with a switch",
+      "screens": [
+        "A09.appearance",
+        "A09.storage"
+      ],
+      "states": "Off, on, disabled, pending preference",
+      "source": "https://ui.shadcn.com/docs/components/switch",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "jWGpE",
+      "board": "eKtUQ"
+    },
+    {
+      "id": "ui/table",
+      "name": "Table",
+      "decision": "Use",
+      "group": "Data",
+      "purpose": "Structured comparisons and grant details",
+      "customization": "Strong row labels, gentle separators and readable values",
+      "screens": [
+        "W05",
+        "W06",
+        "A04.export"
+      ],
+      "states": "Long cells, empty, caption, responsive stack",
+      "source": "https://ui.shadcn.com/docs/components/table",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "UQHLu",
+      "board": "yfCsc"
+    },
+    {
+      "id": "ui/tabs",
+      "name": "Tabs",
+      "decision": "Use",
+      "group": "Navigation",
+      "purpose": "Story, Explore, Learn and editor tasks",
+      "customization": "Rounded tabs meet a shared page edge; context persists",
+      "screens": [
+        "P02",
+        "P03",
+        "P04",
+        "W01"
+      ],
+      "states": "Selected, focused, loading, unavailable destination",
+      "source": "https://ui.shadcn.com/docs/components/tabs",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "M8GnER",
+      "board": "K6NoMw"
+    },
+    {
+      "id": "ui/textarea",
+      "name": "Textarea",
+      "decision": "Use",
+      "group": "Field",
+      "purpose": "Notes, captions and transcripts",
+      "customization": "Soft corners and growing height; text remains upright and unmasked",
+      "screens": [
+        "A02",
+        "W02",
+        "A04.moment"
+      ],
+      "states": "Empty, long, focused, error, offline retained",
+      "source": "https://ui.shadcn.com/docs/components/textarea",
+      "inventory": "Local equivalent, not registry parity: form-controls.tsx",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "wr3V0",
+      "board": "eKtUQ"
+    },
+    {
+      "id": "ui/toast",
+      "name": "Toast",
+      "decision": "Use",
+      "group": "Feedback",
+      "purpose": "Noncritical transient feedback",
+      "customization": "Small quiet receipt with status text; durable outcomes also remain in place",
+      "screens": [
+        "W02",
+        "A08.preview"
+      ],
+      "states": "Info, success verified, failure, action with sufficient time",
+      "source": "https://ui.shadcn.com/docs/components/toast",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "mwpGf",
+      "board": "tw1FK"
+    },
+    {
+      "id": "ui/toggle",
+      "name": "Toggle",
+      "decision": "Use",
+      "group": "Action",
+      "purpose": "Formatting or reader option",
+      "customization": "Soft square; pressed indicator and accessible name",
+      "screens": [
+        "W02",
+        "P02"
+      ],
+      "states": "Off, on, focused, disabled",
+      "source": "https://ui.shadcn.com/docs/components/toggle",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "qHmoB",
+      "board": "kKd6P"
+    },
+    {
+      "id": "ui/toggle-group",
+      "name": "Toggle Group",
+      "decision": "Use",
+      "group": "Action",
+      "purpose": "Capture mode and view preferences",
+      "customization": "Joined rounded choices; explicit labels and selected marker",
+      "screens": [
+        "A02",
+        "P03"
+      ],
+      "states": "Single, multiple, focused, unavailable mode",
+      "source": "https://ui.shadcn.com/docs/components/toggle-group",
+      "inventory": "Local equivalent, not registry parity: form-controls.tsx",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "FdIfx",
+      "board": "kKd6P"
+    },
+    {
+      "id": "ui/tooltip",
+      "name": "Tooltip",
+      "decision": "Use",
+      "group": "Disclosure",
+      "purpose": "Supplementary icon explanation",
+      "customization": "Small plum bubble on focus and hover; never essential instructions",
+      "screens": [
+        "W02"
+      ],
+      "states": "Open, dismissed, reduced motion",
+      "source": "https://ui.shadcn.com/docs/components/tooltip",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "IUm2R",
+      "board": "P8FS5"
+    },
+    {
+      "id": "ui/trace",
+      "name": "Trace",
+      "decision": "Omit",
+      "group": "Conversation",
+      "purpose": "Internal reasoning is not product content",
+      "customization": "Show bounded processing status and approved citations only",
+      "screens": [
+        "None"
+      ],
+      "states": "Not selected",
+      "source": "https://ui.shadcn.com/docs/components/trace",
+      "inventory": "Not present in current web UI directory",
+      "native": "No native clone required"
+    },
+    {
+      "id": "ui/typography",
+      "name": "Typography",
+      "decision": "Use",
+      "group": "Foundation",
+      "purpose": "Story voice and calm controls",
+      "customization": "Bricolage headings; Source Sans 3 tasks/body; dated evidence stays legible",
+      "screens": [
+        "All"
+      ],
+      "states": "Body, display, long text, source script, 200 percent growth",
+      "source": "https://ui.shadcn.com/docs/components/typography",
+      "inventory": "Not present in current web UI directory",
+      "native": "Platform-native behavior with Gather values; separate React Native implementation",
+      "specimen": "WVOOR",
+      "board": "t0wduc"
+    }
+  ],
+  "productPatterns": [
+    {
+      "id": "K01",
+      "name": "Destination receipt",
+      "screens": [
+        "A02",
+        "A02.destination"
+      ],
+      "anatomy": "Selected journey and audience stay visible beside capture; Only me is an explicit value",
+      "states": "unknown journey, stale membership, offline",
+      "rule": "No location inference; selecting a destination does not contribute",
+      "specimen": "t6h5U",
+      "board": "yfCsc"
+    },
+    {
+      "id": "K02",
+      "name": "Capture controls",
+      "screens": [
+        "A02",
+        "A03"
+      ],
+      "anatomy": "Labelled Photo, Video, Voice, Text controls with a steady record/stop state",
+      "states": "denied permission, interrupted, local saving, failed",
+      "rule": "Capture confirmation follows durable local saving only",
+      "specimen": "K4esPa",
+      "board": "Vlqg0"
+    },
+    {
+      "id": "K03",
+      "name": "Transfer receipt",
+      "screens": [
+        "A03",
+        "A04.queue"
+      ],
+      "anatomy": "Separate Local file, Private backup, Contribution, Publication eligibility rows",
+      "states": "queued, transferring, finalizing, unknown, failed, missing file",
+      "rule": "A transfer bar never stands in for publication or backup verification",
+      "specimen": "n1GzNU",
+      "board": "yfCsc"
+    },
+    {
+      "id": "K04",
+      "name": "Import inspection",
+      "screens": [
+        "A05",
+        "A05.item"
+      ],
+      "anatomy": "Selected file row plus metadata correction and explicit batch approval",
+      "states": "unsupported, missing, duplicate, uncertain date/location",
+      "rule": "Selection is not approval and not upload",
+      "specimen": "Haqvi",
+      "board": "Vlqg0"
+    },
+    {
+      "id": "K05",
+      "name": "Scope review",
+      "screens": [
+        "A04.scope"
+      ],
+      "anatomy": "Equal scope choices plus Current/Proposed comparison",
+      "states": "mixed sources, stale permissions, narrowed grant, pending",
+      "rule": "Original export remains a separate task",
+      "specimen": "ZAG2O",
+      "board": "yfCsc"
+    },
+    {
+      "id": "K06",
+      "name": "Original export grant",
+      "screens": [
+        "A04.export"
+      ],
+      "anatomy": "Exact recipient, files and expiry with explicit approve/decline",
+      "states": "expired, departed recipient, revoked, fresh identity required",
+      "rule": "Membership and source reuse confer no export grant",
+      "specimen": "R26PS",
+      "board": "yfCsc"
+    },
+    {
+      "id": "K07",
+      "name": "Evidence note",
+      "screens": [
+        "P05",
+        "W05"
+      ],
+      "anatomy": "Source title, provenance, date, scope and return-to-passage",
+      "states": "review-only, approved, withdrawn, no transcript",
+      "rule": "Public projection contains approved accessible data only",
+      "specimen": "BPPxO",
+      "board": "Vlqg0"
+    },
+    {
+      "id": "K08",
+      "name": "Transcript correction",
+      "screens": [
+        "A04.moment",
+        "W05"
+      ],
+      "anatomy": "Original wording and proposed correction together with source offset",
+      "states": "unsupported language, processing, stale edit, offline",
+      "rule": "Correction does not authorize publication or grant reuse",
+      "specimen": "qLjO2",
+      "board": "e5GyKo"
+    },
+    {
+      "id": "K09",
+      "name": "Stage and branch",
+      "screens": [
+        "A07.route",
+        "W03",
+        "P03"
+      ],
+      "anatomy": "Named stage sequence and participant-specific branch labels",
+      "states": "no GPS/rest day, gap, estimated, disputed",
+      "rule": "Keep chapter, stage and source identities distinct",
+      "specimen": "og31L",
+      "board": "e5GyKo"
+    },
+    {
+      "id": "K10",
+      "name": "Practical observation",
+      "screens": [
+        "A07.knowledge",
+        "W04",
+        "P04"
+      ],
+      "anatomy": "Amount, currency, unit, party size and observation date beside evidence",
+      "states": "estimated, conflicting, unknown, redacted",
+      "rule": "A dated report is not current travel advice",
+      "specimen": "aIAO3",
+      "board": "e5GyKo"
+    },
+    {
+      "id": "K11",
+      "name": "Editor and insertion",
+      "screens": [
+        "A07.chapter",
+        "W02"
+      ],
+      "anatomy": "Readable chapter with source insertion tray and visible edit status",
+      "states": "long text, source withdrawn, offline retained",
+      "rule": "No drag-only ordering; source access checked again",
+      "specimen": "Jy2zI",
+      "board": "e5GyKo"
+    },
+    {
+      "id": "K12",
+      "name": "Conflict comparison",
+      "screens": [
+        "A07.conflict",
+        "W07"
+      ],
+      "anatomy": "Current accepted text and retained candidate, with scoped resolution",
+      "states": "stale again, rights lost, offline, evidence withdrawn",
+      "rule": "No silent overwrite or automatic retry against a changed base",
+      "specimen": "aD4bj",
+      "board": "e5GyKo"
+    },
+    {
+      "id": "K13",
+      "name": "Publication blocker",
+      "screens": [
+        "A06.publish",
+        "W08"
+      ],
+      "anatomy": "Affected source, exact dependent uses and authorized repair task",
+      "states": "owner, coauthor, publisher-only, inaccessible evidence",
+      "rule": "Repair controls are capability filtered; publisher authority is distinct",
+      "specimen": "r4gVm",
+      "board": "e5GyKo"
+    },
+    {
+      "id": "K14",
+      "name": "Exact candidate preview",
+      "screens": [
+        "A06.preview",
+        "W08"
+      ],
+      "anatomy": "Candidate identity across Story, Explore, Learn and source inspection",
+      "states": "building, ready, invalidated, failed, current publication",
+      "rule": "Approval binds the reviewed candidate and current rights",
+      "specimen": "ajK2I",
+      "board": "pW3iA"
+    },
+    {
+      "id": "K15",
+      "name": "Visibility approval",
+      "screens": [
+        "A06.publish",
+        "W08"
+      ],
+      "anatomy": "Audience explanation and explicit designated-publisher approval",
+      "states": "unlisted, public, draft changed, permission changed",
+      "rule": "Catalog listing is a separate submission",
+      "specimen": "y2irD",
+      "board": "pW3iA"
+    },
+    {
+      "id": "K16",
+      "name": "Listing receipt",
+      "screens": [
+        "A06.publish",
+        "W08"
+      ],
+      "anatomy": "Submission/status shown beside independent approved-publication state",
+      "states": "not submitted, pending, listed, rejected, removed",
+      "rule": "Listing rejection does not itself unpublish",
+      "specimen": "HkYLC",
+      "board": "pW3iA"
+    },
+    {
+      "id": "K17",
+      "name": "Highlight selection",
+      "screens": [
+        "A08",
+        "A08.preview",
+        "W09.highlight-preview"
+      ],
+      "anatomy": "Approved attributed sources, personal caption and full-journey disclosure",
+      "states": "none eligible, withdrawn, generation failure",
+      "rule": "Recipient is read-only; external copies cannot be recalled",
+      "specimen": "I65mWp",
+      "board": "pW3iA"
+    },
+    {
+      "id": "K18",
+      "name": "Grounded answer",
+      "screens": [
+        "P04.question"
+      ],
+      "anatomy": "Buffered answer, dated citations and a return to the exact source",
+      "states": "sign-in required, abstention, quota, invalidation, provider failure",
+      "rule": "No streaming internal reasoning or hidden-source citation",
+      "specimen": "E33Cl2",
+      "board": "Vlqg0"
+    },
+    {
+      "id": "K19",
+      "name": "Lifecycle impact",
+      "screens": [
+        "A06.lifecycle",
+        "A06.operation",
+        "E13"
+      ],
+      "anatomy": "Exact object, rights impact and honest operation receipt",
+      "states": "fresh identity, stale impact, unknown, cleanup pending",
+      "rule": "No success until known; source owner retains safe access after departure",
+      "specimen": "N96hv4",
+      "board": "pW3iA"
+    },
+    {
+      "id": "K20",
+      "name": "Invitation acceptance",
+      "screens": [
+        "A01.join",
+        "E07"
+      ],
+      "anatomy": "Named inviter/journey only when permitted and explicit Accept",
+      "states": "signed out, wrong account, expired, already member",
+      "rule": "Authentication preserves intent but never accepts automatically",
+      "specimen": "mc4Qa",
+      "board": "pW3iA"
+    },
+    {
+      "id": "K21",
+      "name": "Saved research",
+      "screens": [
+        "A09.research",
+        "P04"
+      ],
+      "anatomy": "Private note attached to a currently accessible reference",
+      "states": "empty, unavailable reference, save failure",
+      "rule": "Keep typed note on failure; scrub denied preview data",
+      "specimen": "HEJES",
+      "board": "Vlqg0"
+    },
+    {
+      "id": "K22",
+      "name": "Safe unavailable",
+      "screens": [
+        "P08",
+        "A09.contributions"
+      ],
+      "anatomy": "Generic public recovery and neutral source-owner destination",
+      "states": "withdrawn share/source, denied, missing, departed owner",
+      "rule": "Do not leak private title, location, cover or member list",
+      "specimen": "mzTmh",
+      "board": "Vlqg0"
+    }
+  ],
+  "inventoryNote": "shadcn 4.23.0 info detects Vite/Tailwind v4/Radix, but reports zero components because resolved alias paths include literal @. Direct file inspection establishes actual source presence. No CLI add/init/apply performed."
+}

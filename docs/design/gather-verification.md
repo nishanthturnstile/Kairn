@@ -1,0 +1,7 @@
+# Gather 1.0 qualification record
+
+Approved and frozen by the user on 5 November 2026. One actual independent OpenCode Gemini Argon 4 review inspected the 17 pre-correction boards and selected specimens. Its six finding groups were corrected: domain-specific examples, control/overlay affordances, focus and selection states, compact task composition, viewer fallback styling and proportional text growth. The parent added GS17 calendar/capture/import recovery and verified the corrections. Superseded research reports were deleted at the user’s request.
+
+The approved library has 18 boards/recipes, 18 external notes and 70 reusable design symbols. All 50 selected upstream component entries and 22 product patterns have specimen references. Twenty-two checked color pairs pass their stated thresholds; see [results](../../design/gather-system/verification.json). Parent checks covered save/reopen, zero canvas clipping/overlap/placeholders, exported references, desktop and compact HTML, proposal/cancel/focus behavior and dark 125% live text. These are design checks, not production acceptance.
+
+Still required in implementation: native/web screen readers and keyboard behavior, 200% text, source-language fallback/shaping, safe areas, full dark-state coverage, physical-device readability, server authorization and real durable save/transfer/publication outcomes. No application runtime or dependency was changed by the freeze.

@@ -22,7 +22,7 @@ Retain the functional workflows and current architecture. Existing application c
 
 ## Brand Commitments
 
-No visual direction is selected. Colors, fonts, spacing, icons, logo, imagery, page layouts and navigation composition are undecided. Follow the decision process in DESIGN.md; do not infer approval from existing source code or historical screenshots.
+Gather 1.0 is approved and frozen by the user. DESIGN.md and docs/design/gather-system.md own the baseline. Future customization is an explicit revision. Runtime and platform qualification remain separate; do not inherit old source styling.
 
 ## Evidence on Hand
 

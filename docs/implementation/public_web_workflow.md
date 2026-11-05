@@ -437,3 +437,21 @@ Coverage selected for this documentation-only change: canonical screen IDs, comp
 Next implementation handoff: use this inventory to refine the existing sample reader, add connected source and Learn transitions, then demonstrate highlight, research, profile and question edge states at the bounded depths above. Keep one fixture identity across screens. Record any business changes here and in the governing document before they become behavior. Production adapters follow the existing dependency-aware delivery plan.
 
 Initial planning checks covered all eight canonical screens, 16 acceptance scenarios, links and navigation. The combined review corrected route ownership, public search/new-journey edges and shared handoffs; current executed results are in [workflow review](workflow_review.md). No runtime tests were run for this documentation change.
+
+## First connected static wireframes — 5 November 2026
+
+Artifact: [flow-wireframes.pen](../../design/flow-wireframes.pen). Start at canvas frame **00 / OjON2**, then follow numbered frames and the adjacent review annotations. This is a **static flow wireframe**, not a clickable prototype. Pen's installed schema/execute API exposes no frame-navigation interaction primitive; a text `href` does not establish prototype transitions. The overview has drawn arrow connectors and each frame has explicit forward, Back/Cancel, entry, actor, state and accessibility notes outside its product UI.
+
+Review status **S** below means static contract/connection review and structural canvas check completed, with representative rendered screens inspected. It does not mean user-approved interaction design, runtime/device acceptance or individually exercised accessibility. N = native shared Android/iOS review size 390 × 844; W = browser review size 1280 × 900. Aliases on a wide frame are functional equivalents, not an additional drawn native composition; compact/wide adaptations remain open. A state under an existing ID is not a new page requirement.
+
+All content and outcomes are fictional/simulated. Inter, grayscale, rectangle controls, dimensions and spacing are disposable wireframe choices. They establish no visual system. Frame-level annotations carry state reuse and alternatives; they do not claim actual durable saving, upload, email delivery, publishing or deletion.
+
+| Frame / Pen node | Screen IDs and task/state | Drawn size | Actor / source state | Notes node | Review |
+| --- | --- | --- | --- | --- | --- |
+| 51 / `s2xh2` | P01 — Discover journeys | W | Guest; approved catalog only | `LSi9T` | S |
+| 52 / `CMQT8` | P02 — Rain and rest in the Nilgiris | W | Guest; approved V1 | `RgNiw` | S |
+| 53 / `LO3oR` | P03 — Explore the journey | W | Guest; approved V1 | `bTRy7` | S |
+| 54 / `iz4JC` | P04 — Learn from the journey | W | Guest; approved V1 | `MlQMZ` | S |
+| 55 / `U9hKT` | P05 — Approved source | W | Guest; safe approved projection | `njUh7` | S |
+| 59 / `iXtMm` | P06 — Arun’s highlights | W | Guest recipient; read-only | `qPqib` | S |
+| 60 / `pixLN` | P05 / P06 / P08 — This content is unavailable | W | Guest; withdrawn source/share or denied journey | `fH2dK` | S |

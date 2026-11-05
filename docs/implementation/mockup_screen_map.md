@@ -1,6 +1,6 @@
 # Kairn mockup screen map
 
-Date: 5 November 2026. Status: functional screen mapping complete for the current workflow inventory; new mockups have not started. The user requested screen mapping before mockup production. [DESIGN.md](../../DESIGN.md) remains the design authority: this map selects no visual identity, navigation chrome, page layout or implementation sequence.
+Date: 5 November 2026. Status: functional screen mapping complete for the current workflow inventory; the connected static flow and scope-to-preview refinement now have 108 screen/state frames, with broader inventory coverage still partial. The user requested screen mapping before mockup production. [DESIGN.md](../../DESIGN.md) remains the design authority: this map selects no visual identity, navigation chrome, page layout or implementation sequence.
 
 Use this map to choose a connected mockup task, find its platform equivalents, and include its permission and recovery states. Existing screen IDs describe responsibilities. A responsibility may become a page, section, inspector or overlay when designed; it is not automatically a separate page or route.
 
@@ -20,7 +20,8 @@ The map reconciles the [canonical inventory](../core/application_design.md), [mo
 
 Do not add these counts together as a page or frame estimate. States, sizes and platform adaptations multiply frames; aliases and reusable compositions reduce duplication.
 
-**Current mockup status for every entry:** mapped, not drawn under the fresh design. No new canvas/frame references or visual approvals are claimed. As mockups are made, record the artifact/frame, state, size, review result and remaining work in the owning workflow specification, with selected decisions linked from DESIGN.md. Avoid a second competing screen-status ledger.
+**Current mockup status:** the [first connected static flow](../../design/flow-wireframes.pen) contains 108 screen/state frames, 108 external annotation panels and overviews `00 / OjON2` and `R00 / OLIDE`. Frame-level coverage/status is recorded in the owning workflow specifications under “First connected static wireframes” and “Scope-to-preview refinement”. Remaining dedicated destinations and platform compositions are listed in the [shared workflow record](lifecycle_workflow_spec.md#remaining-decisions-and-undrawn-scope). Other entries remain mapped but undrawn; no visual-system approval is claimed. As mockups are made, record the artifact/frame, state, size, review result and remaining work in the owning workflow specification, with selected decisions linked from DESIGN.md. Avoid a second competing screen-status ledger.
+
 
 The Entry and Forward columns below show principal connections for planning. The full mobile directed ledger, creator N01–N27 register and public adjacency register remain the complete edge records. Global navigation, caller-specific Back/Cancel, auth, access denial and cold-link fallbacks apply in addition to the listed paths.
 
@@ -293,12 +294,16 @@ Screen mapping is complete for the current documented scope. The following choic
 | Input formats, media/route/storage limits, transcription languages and supported device set | Capture/import/processing/source/editing/help | Use declared/qualified capability and labelled samples; unsupported/conditional inputs retain fallback states. Real values require qualification. |
 | Operator channel/ownership, production domain/providers, retention and measured recovery guarantees | Reporting/listing, account/help, publication/restriction status | Preserve workflows and selected policy targets; actual operational qualification is a release gate, not a prerequisite for static screen mapping. |
 
-**Recommended first mockup task, awaiting design selection:** wireframe one connected create/join → capture/import → source-scope → compose → review/publish → public-reader path, carrying its mobile/web handoffs and consequential failure states. Use the journey list, capture confirmation, creator editor and public Story to explore the shared visual system before expanding polished screens. This recommendation is new; it does not resume the withdrawn prototype batches.
+**First connected wireframe task (now drawn as a static flow; see owner records):** wireframe one connected create/join → capture/import → source-scope → compose → review/publish → public-reader path, carrying its mobile/web handoffs and consequential failure states. Use the journey list, capture confirmation, creator editor and public Story to explore the shared visual system before expanding polished screens. This recommendation is new; it does not resume the withdrawn prototype batches.
 
-Use clearly labelled fictional content spanning long/short narrative, no-cover/no-GPS/rest days, split-party travel, mixed source scopes, a stale edit and a withdrawn source. Exact content fixture, design files and canvas frames are selected when that task starts. A Pen canvas map may mirror these connections; this document does not claim a clickable prototype exists.
+Use clearly labelled fictional content spanning long/short narrative, no-cover/no-GPS/rest days, split-party travel, mixed source scopes, a stale edit and a withdrawn source. The fictional Nilgiris fixture and frame references are recorded in the owning workflow specifications. A Pen canvas map may mirror these connections; this document does not claim a clickable prototype exists.
 
 ## 12. Mapping completion and verification
 
 Mapping completion means the current screen/subflow inventory, aliases, native boundaries and lifecycle actions have owners, principal connections, safe returns and required state coverage. It does not mean mockups are drawn, visual choices are selected, every illustrative route is implemented, or runtime acceptance has passed.
 
 Verification for this documentation checkpoint is recorded in [the workflow review record](workflow_review.md). Recheck inventory and connection coverage whenever a responsibility is combined, split or rerouted. Update the owning workflow contract before the derived map when behavior changes.
+
+## Approved visual baseline
+
+Gather 1.0 is frozen. See [system specification](../design/gather-system.md) and [library](../../design/gather.pen). The neutral connected wireframes retain functional authority; 18 approved library boards/recipes are component coverage, not a claim that every product screen has been drawn.
