@@ -1,0 +1,1703 @@
+{
+  "version": "1.0",
+  "date": "2026-11-06",
+  "status": "Static design checks passed after independent review and parent corrections; runtime qualification pending",
+  "source": {
+    "document": "../fieldwork.pen",
+    "sha256": "EA903F409B83C881F0CE4B353CE4D6C2CC3D8CCDB1E608BDB87B284F34C97AC4",
+    "savedAndReopened": true
+  },
+  "coverage": {
+    "boards": 45,
+    "reusableMasters": 102,
+    "linkedInstances": 128,
+    "components": 66,
+    "use": 50,
+    "optional": 8,
+    "deferred": 3,
+    "omitted": 5,
+    "patterns": 22,
+    "allRequiredMappingsResolve": true
+  },
+  "contrast": {
+    "method": "WCAG 2.2 sRGB relative luminance, no rounding before threshold. All visible text/icons resolve tokens in each appearance independently over solid ancestor backgrounds; transparent placeholders excluded. Declared control/focus/map pair checks supplement node checks. No pixel sampling or runtime conformance claim.",
+    "visibleTextAppearanceChecks": 3324,
+    "visibleIconAppearanceChecks": 228,
+    "excludedTransparentPlaceholders": 52,
+    "minimumObservedTextContrast": 5.170719352085829,
+    "declaredPairs": [
+      {
+        "mode": "light",
+        "foreground": "ink",
+        "background": "paper",
+        "ratio": 12.82544160500804,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "ink",
+        "background": "surface",
+        "ratio": 13.716762684230462,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "ink",
+        "background": "mist",
+        "ratio": 11.699460092814794,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "muted",
+        "background": "paper",
+        "ratio": 6.4229488209452255,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "muted",
+        "background": "surface",
+        "ratio": 6.8693201702670175,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "muted",
+        "background": "mist",
+        "ratio": 5.859060118405443,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "link",
+        "background": "paper",
+        "ratio": 6.302816221335241,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "link",
+        "background": "surface",
+        "ratio": 6.740838796273127,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "link",
+        "background": "mist",
+        "ratio": 5.749474296858814,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "onAction",
+        "background": "action",
+        "ratio": 5.170719352085829,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "onAction",
+        "background": "actionHover",
+        "ratio": 6.979800046934147,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "good",
+        "background": "goodBg",
+        "ratio": 7.741290174220712,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "warn",
+        "background": "warnBg",
+        "ratio": 6.199973190957123,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "error",
+        "background": "errorBg",
+        "ratio": 6.477962300038152,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "boundary",
+        "background": "paper",
+        "ratio": 4.0324042011857655,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "boundary",
+        "background": "surface",
+        "ratio": 4.312641480739438,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "boundary",
+        "background": "mist",
+        "ratio": 3.678388119708102,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "boundary",
+        "background": "goodBg",
+        "ratio": 3.4762395544253684,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "boundary",
+        "background": "warnBg",
+        "ratio": 3.6822254916409447,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "boundary",
+        "background": "errorBg",
+        "ratio": 3.5351891161112072,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "focus",
+        "background": "paper",
+        "ratio": 4.669201637461476,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "focus",
+        "background": "surface",
+        "ratio": 4.993693999656958,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "focus",
+        "background": "mist",
+        "ratio": 4.259279321926458,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "focus",
+        "background": "goodBg",
+        "ratio": 4.025207446951455,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "focus",
+        "background": "warnBg",
+        "ratio": 4.263722691791788,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "focus",
+        "background": "errorBg",
+        "ratio": 4.093466325828285,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "mapLabel",
+        "background": "mapBase",
+        "ratio": 7.716120808997612,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "mapRoute",
+        "background": "mapBase",
+        "ratio": 7.716120808997612,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "mapLabel",
+        "background": "mapLand",
+        "ratio": 6.954920359376016,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "mapRoute",
+        "background": "mapLand",
+        "ratio": 6.954920359376016,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "mapLabel",
+        "background": "mapRoad",
+        "ratio": 9.60388621011004,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "mapRoute",
+        "background": "mapRoad",
+        "ratio": 9.60388621011004,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "good",
+        "background": "mist",
+        "ratio": 8.191457856181492,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "surface",
+        "background": "error",
+        "ratio": 7.902583994301923,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "surface",
+        "background": "action",
+        "ratio": 4.993693999656958,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "foreground": "surface",
+        "background": "boundary",
+        "ratio": 4.312641480739438,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "ink",
+        "background": "paper",
+        "ratio": 14.518866802068494,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "ink",
+        "background": "surface",
+        "ratio": 10.958874299888016,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "ink",
+        "background": "mist",
+        "ratio": 12.577680518353391,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "muted",
+        "background": "paper",
+        "ratio": 8.676976265496151,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "muted",
+        "background": "surface",
+        "ratio": 6.549401788239884,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "muted",
+        "background": "mist",
+        "ratio": 7.516856296057288,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "link",
+        "background": "paper",
+        "ratio": 7.912246105278955,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "link",
+        "background": "surface",
+        "ratio": 5.972181691561298,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "link",
+        "background": "mist",
+        "ratio": 6.8543712847208145,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "onAction",
+        "background": "action",
+        "ratio": 6.744478842296974,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "onAction",
+        "background": "actionHover",
+        "ratio": 7.936239080382607,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "good",
+        "background": "goodBg",
+        "ratio": 8.169911018090414,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "warn",
+        "background": "warnBg",
+        "ratio": 8.090046569148875,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "error",
+        "background": "errorBg",
+        "ratio": 7.77863470792486,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "boundary",
+        "background": "paper",
+        "ratio": 5.348833548169118,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "boundary",
+        "background": "surface",
+        "ratio": 4.037311954474176,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "boundary",
+        "background": "mist",
+        "ratio": 4.633689421624627,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "boundary",
+        "background": "goodBg",
+        "ratio": 4.268875322874831,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "boundary",
+        "background": "warnBg",
+        "ratio": 4.280828310250932,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "boundary",
+        "background": "errorBg",
+        "ratio": 4.635493257167376,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "focus",
+        "background": "paper",
+        "ratio": 10.108397104292523,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "focus",
+        "background": "surface",
+        "ratio": 7.629841553716266,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "focus",
+        "background": "mist",
+        "ratio": 8.756894808920372,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "focus",
+        "background": "goodBg",
+        "ratio": 8.067457430434402,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "focus",
+        "background": "warnBg",
+        "ratio": 8.090046569148875,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "focus",
+        "background": "errorBg",
+        "ratio": 8.760303755153739,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "mapLabel",
+        "background": "mapBase",
+        "ratio": 10.643069048345435,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "mapRoute",
+        "background": "mapBase",
+        "ratio": 9.733134809198718,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "mapLabel",
+        "background": "mapLand",
+        "ratio": 8.864112236042585,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "mapRoute",
+        "background": "mapLand",
+        "ratio": 8.106270753799414,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "mapLabel",
+        "background": "mapRoad",
+        "ratio": 5.236940755776416,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "mapRoute",
+        "background": "mapRoad",
+        "ratio": 4.789206020577582,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "good",
+        "background": "mist",
+        "ratio": 8.86810398450469,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "surface",
+        "background": "error",
+        "ratio": 6.774850734004386,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "surface",
+        "background": "action",
+        "ratio": 5.972181691561298,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "foreground": "surface",
+        "background": "boundary",
+        "ratio": 4.037311954474176,
+        "threshold": 3,
+        "pass": true
+      }
+    ],
+    "nodePairs": [
+      {
+        "mode": "light",
+        "type": "text",
+        "foreground": "$fw/ink",
+        "background": [
+          247,
+          243,
+          234
+        ],
+        "ratio": 12.82544160500804,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "text",
+        "foreground": "$fw/muted",
+        "background": [
+          247,
+          243,
+          234
+        ],
+        "ratio": 6.4229488209452255,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "text",
+        "foreground": "$fw/ink",
+        "background": [
+          247,
+          243,
+          234
+        ],
+        "ratio": 12.82544160500804,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "text",
+        "foreground": "$fw/onAction",
+        "background": [
+          168,
+          86,
+          60
+        ],
+        "ratio": 5.170719352085829,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "icon",
+        "foreground": "$fw/onAction",
+        "background": [
+          168,
+          86,
+          60
+        ],
+        "ratio": 5.170719352085829,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "text",
+        "foreground": "$fw/ink",
+        "background": [
+          252,
+          251,
+          247
+        ],
+        "ratio": 13.716762684230462,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "text",
+        "foreground": "$fw/ink",
+        "background": [
+          231,
+          234,
+          229
+        ],
+        "ratio": 11.699460092814794,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "text",
+        "foreground": "$fw/paper",
+        "background": [
+          39,
+          44,
+          41
+        ],
+        "ratio": 12.82544160500804,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "text",
+        "foreground": "$fw/warn",
+        "background": [
+          245,
+          232,
+          206
+        ],
+        "ratio": 6.199973190957123,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "text",
+        "foreground": "$fw/ink",
+        "background": [
+          245,
+          232,
+          206
+        ],
+        "ratio": 11.711665215909075,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "text",
+        "foreground": "$fw/surface",
+        "background": [
+          143,
+          45,
+          34
+        ],
+        "ratio": 7.902583994301923,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "text",
+        "foreground": "$fw/onAction",
+        "background": [
+          143,
+          67,
+          45
+        ],
+        "ratio": 6.979800046934147,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "icon",
+        "foreground": "$fw/onAction",
+        "background": [
+          143,
+          67,
+          45
+        ],
+        "ratio": 6.979800046934147,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "text",
+        "foreground": "$fw/muted",
+        "background": [
+          231,
+          234,
+          229
+        ],
+        "ratio": 5.859060118405443,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "icon",
+        "foreground": "$fw/muted",
+        "background": [
+          231,
+          234,
+          229
+        ],
+        "ratio": 5.859060118405443,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "text",
+        "foreground": "$fw/muted",
+        "background": [
+          252,
+          251,
+          247
+        ],
+        "ratio": 6.8693201702670175,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "text",
+        "foreground": "$fw/error",
+        "background": [
+          247,
+          243,
+          234
+        ],
+        "ratio": 7.389070721775535,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "text",
+        "foreground": "$fw/good",
+        "background": [
+          221,
+          229,
+          223
+        ],
+        "ratio": 7.741290174220712,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "text",
+        "foreground": "$fw/ink",
+        "background": [
+          221,
+          229,
+          223
+        ],
+        "ratio": 11.05650752898018,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "icon",
+        "foreground": "$fw/ink",
+        "background": [
+          247,
+          243,
+          234
+        ],
+        "ratio": 12.82544160500804,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "icon",
+        "foreground": "$fw/good",
+        "background": [
+          231,
+          234,
+          229
+        ],
+        "ratio": 8.191457856181492,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "icon",
+        "foreground": "$fw/ink",
+        "background": [
+          252,
+          251,
+          247
+        ],
+        "ratio": 13.716762684230462,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "text",
+        "foreground": "$fw/error",
+        "background": [
+          246,
+          224,
+          221
+        ],
+        "ratio": 6.477962300038152,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "text",
+        "foreground": "$fw/ink",
+        "background": [
+          246,
+          224,
+          221
+        ],
+        "ratio": 11.244002165757966,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "text",
+        "foreground": "$fw/mapLabel",
+        "background": [
+          221,
+          229,
+          218
+        ],
+        "ratio": 7.716120808997612,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "text",
+        "foreground": "$fw/warn",
+        "background": [
+          252,
+          251,
+          247
+        ],
+        "ratio": 7.261440567258286,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "text",
+        "foreground": "$fw/ink",
+        "background": [
+          252,
+          251,
+          247
+        ],
+        "ratio": 13.716762684230462,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "icon",
+        "foreground": "$fw/good",
+        "background": [
+          247,
+          243,
+          234
+        ],
+        "ratio": 8.979821595259933,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "icon",
+        "foreground": "$fw/boundary",
+        "background": [
+          247,
+          243,
+          234
+        ],
+        "ratio": 4.0324042011857655,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "text",
+        "foreground": "$fw/muted",
+        "background": [
+          246,
+          224,
+          221
+        ],
+        "ratio": 5.630967936812452,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "text",
+        "foreground": "$fw/muted",
+        "background": [
+          245,
+          232,
+          206
+        ],
+        "ratio": 5.865172413280131,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "text",
+        "foreground": "$fw/warn",
+        "background": [
+          247,
+          243,
+          234
+        ],
+        "ratio": 6.789589067592186,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "type": "text",
+        "foreground": "$fw/link",
+        "background": [
+          247,
+          243,
+          234
+        ],
+        "ratio": 6.302816221335241,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "text",
+        "foreground": "$fw/ink",
+        "background": [
+          27,
+          31,
+          29
+        ],
+        "ratio": 14.518866802068494,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "text",
+        "foreground": "$fw/muted",
+        "background": [
+          27,
+          31,
+          29
+        ],
+        "ratio": 8.676976265496151,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "text",
+        "foreground": "$fw/ink",
+        "background": [
+          27,
+          31,
+          29
+        ],
+        "ratio": 14.518866802068494,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "text",
+        "foreground": "$fw/onAction",
+        "background": [
+          232,
+          162,
+          139
+        ],
+        "ratio": 6.744478842296974,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "icon",
+        "foreground": "$fw/onAction",
+        "background": [
+          232,
+          162,
+          139
+        ],
+        "ratio": 6.744478842296974,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "text",
+        "foreground": "$fw/ink",
+        "background": [
+          46,
+          53,
+          49
+        ],
+        "ratio": 10.958874299888016,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "text",
+        "foreground": "$fw/ink",
+        "background": [
+          37,
+          43,
+          40
+        ],
+        "ratio": 12.577680518353391,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "text",
+        "foreground": "$fw/paper",
+        "background": [
+          242,
+          239,
+          233
+        ],
+        "ratio": 14.518866802068494,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "text",
+        "foreground": "$fw/warn",
+        "background": [
+          56,
+          46,
+          27
+        ],
+        "ratio": 8.090046569148875,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "text",
+        "foreground": "$fw/ink",
+        "background": [
+          56,
+          46,
+          27
+        ],
+        "ratio": 11.619874778180721,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "text",
+        "foreground": "$fw/surface",
+        "background": [
+          245,
+          172,
+          163
+        ],
+        "ratio": 6.774850734004386,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "text",
+        "foreground": "$fw/onAction",
+        "background": [
+          240,
+          180,
+          159
+        ],
+        "ratio": 7.936239080382607,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "icon",
+        "foreground": "$fw/onAction",
+        "background": [
+          240,
+          180,
+          159
+        ],
+        "ratio": 7.936239080382607,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "text",
+        "foreground": "$fw/muted",
+        "background": [
+          37,
+          43,
+          40
+        ],
+        "ratio": 7.516856296057288,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "icon",
+        "foreground": "$fw/muted",
+        "background": [
+          37,
+          43,
+          40
+        ],
+        "ratio": 7.516856296057288,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "text",
+        "foreground": "$fw/muted",
+        "background": [
+          46,
+          53,
+          49
+        ],
+        "ratio": 6.549401788239884,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "text",
+        "foreground": "$fw/error",
+        "background": [
+          27,
+          31,
+          29
+        ],
+        "ratio": 8.975662346260398,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "text",
+        "foreground": "$fw/good",
+        "background": [
+          36,
+          51,
+          40
+        ],
+        "ratio": 8.169911018090414,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "text",
+        "foreground": "$fw/ink",
+        "background": [
+          36,
+          51,
+          40
+        ],
+        "ratio": 11.587429604847589,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "icon",
+        "foreground": "$fw/ink",
+        "background": [
+          27,
+          31,
+          29
+        ],
+        "ratio": 14.518866802068494,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "icon",
+        "foreground": "$fw/good",
+        "background": [
+          37,
+          43,
+          40
+        ],
+        "ratio": 8.86810398450469,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "icon",
+        "foreground": "$fw/ink",
+        "background": [
+          46,
+          53,
+          49
+        ],
+        "ratio": 10.958874299888016,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "text",
+        "foreground": "$fw/error",
+        "background": [
+          64,
+          33,
+          30
+        ],
+        "ratio": 7.77863470792486,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "text",
+        "foreground": "$fw/ink",
+        "background": [
+          64,
+          33,
+          30
+        ],
+        "ratio": 12.582576847196334,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "text",
+        "foreground": "$fw/mapLabel",
+        "background": [
+          32,
+          44,
+          39
+        ],
+        "ratio": 10.643069048345435,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "text",
+        "foreground": "$fw/warn",
+        "background": [
+          46,
+          53,
+          49
+        ],
+        "ratio": 7.629841553716266,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "text",
+        "foreground": "$fw/ink",
+        "background": [
+          46,
+          53,
+          49
+        ],
+        "ratio": 10.958874299888016,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "icon",
+        "foreground": "$fw/good",
+        "background": [
+          27,
+          31,
+          29
+        ],
+        "ratio": 10.236769836062942,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "icon",
+        "foreground": "$fw/boundary",
+        "background": [
+          27,
+          31,
+          29
+        ],
+        "ratio": 5.348833548169118,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "text",
+        "foreground": "$fw/muted",
+        "background": [
+          64,
+          33,
+          30
+        ],
+        "ratio": 7.519782511287269,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "text",
+        "foreground": "$fw/muted",
+        "background": [
+          56,
+          46,
+          27
+        ],
+        "ratio": 6.944438504246553,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "text",
+        "foreground": "$fw/warn",
+        "background": [
+          27,
+          31,
+          29
+        ],
+        "ratio": 10.108397104292523,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "type": "text",
+        "foreground": "$fw/link",
+        "background": [
+          27,
+          31,
+          29
+        ],
+        "ratio": 7.912246105278955,
+        "threshold": 4.5,
+        "pass": true
+      }
+    ],
+    "actualAnatomyChecks": [
+      {
+        "id": "IPB14",
+        "name": "Fieldwork / Progress / catalogue",
+        "stroke": "$fw/boundary",
+        "strokeWidth": 1,
+        "pass": true
+      },
+      {
+        "id": "mVLUo",
+        "name": "Fieldwork / Alert Dialog / catalogue",
+        "stroke": "$fw/boundary",
+        "strokeWidth": 1,
+        "pass": true
+      },
+      {
+        "id": "MwOAs",
+        "name": "Fieldwork / Dialog / catalogue",
+        "stroke": "$fw/boundary",
+        "strokeWidth": 1,
+        "pass": true
+      },
+      {
+        "id": "idu1G",
+        "name": "Fieldwork / Sheet / catalogue",
+        "stroke": "$fw/boundary",
+        "strokeWidth": 1,
+        "pass": true
+      },
+      {
+        "id": "u01tc1",
+        "name": "Fieldwork / Native map sheet",
+        "stroke": "$fw/boundary",
+        "strokeWidth": 1,
+        "pass": true
+      },
+      {
+        "id": "Jrn59",
+        "name": "Fieldwork / Native sheet anatomy",
+        "stroke": "$fw/boundary",
+        "strokeWidth": 1,
+        "pass": true
+      },
+      {
+        "id": "G3Dbm",
+        "name": "Fieldwork / Toast / catalogue",
+        "stroke": "$fw/boundary",
+        "strokeWidth": 1,
+        "pass": true
+      },
+      {
+        "id": "yjhD0",
+        "name": "Slider thumb separator",
+        "pass": true
+      },
+      {
+        "id": "j1x4P",
+        "name": "Standalone switch touch target",
+        "pass": true
+      },
+      {
+        "id": "LN1ts/N0JM6",
+        "name": "Switch off boundary and label",
+        "pass": true
+      },
+      {
+        "id": "B0MSq",
+        "name": "Selected stage has one background",
+        "pass": true
+      },
+      {
+        "id": "WXX7V/iIMz3",
+        "name": "Native field minimum height",
+        "pass": true
+      },
+      {
+        "id": "UyvNs/iIMz3",
+        "name": "Native field minimum height",
+        "pass": true
+      }
+    ],
+    "failures": [],
+    "limitations": [
+      "Ancestor-background scan is supplemented by all schematic map route/label overlaps including mapRoad and explicit adjacent-edge checks.",
+      "Live map tiles, photographs, renderer antialiasing and future component compositions are not covered by these static results."
+    ]
+  },
+  "structure": {
+    "resolvedNodes": 3078,
+    "clippedNodes": 0,
+    "collapsedFrames": 0,
+    "placeholderFrames": 0,
+    "rootOverlaps": 0
+  },
+  "review": {
+    "provider": "OpenCode",
+    "model": "opencode-go/gemini-4-argon",
+    "taskId": "node:delegated-task:command%3Amcp%3Af4da90d5-0ce3-4c17-8042-a9278a8e8a80%3Adelegate-task%3A5c18d7ff-3832-4d80-bcc7-5250d3342442",
+    "link": "<t3-thread://v2/31f647cc-bde2-4f34-880e-ee1b798808f0/thread:delegated-task:command%3Amcp%3Af4da90d5-0ce3-4c17-8042-a9278a8e8a80%3Adelegate-task%3A5c18d7ff-3832-4d80-bcc7-5250d3342442>",
+    "verdict": "Argon conditionally qualified the design with P1/P2 findings; parent verified and corrected the actionable findings. No second model signoff or runtime certification claimed.",
+    "fixes": [
+      {
+        "finding": "Hard-coded hover and map colors",
+        "resolution": "Added actionHover and map semantic roles; changed dark hover text contrast from 2.04:1 to passing; verified dark route and native map compositions."
+      },
+      {
+        "finding": "Selected day ordinals still filled on full route workspace",
+        "resolution": "Plain 28-wide ordinals, one selected-row fill, leading edge and check; picker chevrons added."
+      },
+      {
+        "finding": "Mixed platform typography and state semantics",
+        "resolution": "Fraunces editorial headings on FW44; compact web switch/day rows; native 16 text and 48 minimum fields; native primary action shown at rest."
+      },
+      {
+        "finding": "3D toggle and incomplete capture modes",
+        "resolution": "Map/Satellite replace 2D/3D; Photo/Video/Voice/Text are explicit."
+      },
+      {
+        "finding": "Focus and link inconsistency",
+        "resolution": "Outlined the input rather than its label; retained filled action inside separated focus ring; nine links use link token, underline and href."
+      },
+      {
+        "finding": "Weak progress/overlay edges and missing switch off",
+        "resolution": "Added semantic boundaries, raised light boundary margin, provided a labelled Off row, unified switch thumbs; slider uses a contrasting ring."
+      },
+      {
+        "finding": "Inconsistent feedback and destructive action styling",
+        "resolution": "Semantic status heading/seam, meaningful destructive styling and matching primary borders."
+      },
+      {
+        "finding": "Space-padded input suffixes and misleading blank-field copy",
+        "resolution": "Separate layout children for units/chevrons; named required-title placeholder and accurate retained-field error."
+      },
+      {
+        "finding": "Tooltip used success-alert anatomy",
+        "resolution": "Replaced it with a compact neutral tooltip."
+      },
+      {
+        "finding": "Cleanup would discard useful contracts",
+        "resolution": "Retained S6, boundaries, rejected patterns, interaction-review dispositions, source audit and R01–R21 bridge before removing superseded research."
+      },
+      {
+        "finding": "Native Explore board incorrectly claimed capture screen A03",
+        "resolution": "Parent removed the incorrect canonical screen alias; the board is an Explore anatomy composition."
+      }
+    ]
+  },
+  "cleanup": {
+    "removed": [
+      {
+        "path": "design/gather.pen",
+        "files": 1,
+        "bytes": 550417
+      },
+      {
+        "path": "design/gather-system",
+        "files": 93,
+        "bytes": 3372816
+      },
+      {
+        "path": "design/fieldwork-system/previews",
+        "files": 12,
+        "bytes": 2800831
+      },
+      {
+        "path": "design/fieldwork-system/interaction-research.html",
+        "files": 1,
+        "bytes": 87059
+      },
+      {
+        "path": "design/fieldwork-system/interaction-research.json",
+        "files": 1,
+        "bytes": 71790
+      },
+      {
+        "path": "docs/design/gather-system.md",
+        "files": 1,
+        "bytes": 14476
+      },
+      {
+        "path": "docs/design/gather-verification.md",
+        "files": 1,
+        "bytes": 1434
+      },
+      {
+        "path": "design/exploration-assets/fonts",
+        "files": 5,
+        "bytes": 79813
+      },
+      {
+        "path": "design/flow-wireframes-assets",
+        "files": 11,
+        "bytes": 738007
+      }
+    ],
+    "removedFiles": 126,
+    "kept": [
+      "../fieldwork.pen",
+      "tokens.json",
+      "catalog.json",
+      "manifest.json",
+      "verification.json",
+      "../flow-wireframes.pen",
+      "../exploration-assets/coonoor-mist.jpg",
+      "../exploration-assets/NOTICE.md",
+      "../../docs/design/fieldwork-system.md",
+      "../../docs/design/fieldwork-verification.md"
+    ],
+    "wireframes": {
+      "sha256": "CCC245A2FA58CA9D5F51F9D65F6818805A7F551CCF9134670A45FD7D6F4E8CC9",
+      "rootFrames": 218,
+      "externalImageDependencies": 0,
+      "font": "Inter",
+      "unchanged": true
+    },
+    "photoSha256": "13C6FA98C2E742471D68B097E95D1ACD43468464E957237CBE5CEB3418DAA597"
+  },
+  "checks": {
+    "localReferences": { "documents": 64, "localReferences": 642, "missingFilesOrAnchors": 0 },
+    "whitespace": "passed staged and unstaged tracked diff checks",
+    "applicationCodeChanged": false,
+    "dependenciesChanged": false,
+    "commitOrPush": false
+  },
+  "runtimeGates": [
+    "Keyboard focus/navigation/traps and return; screen readers on web and TalkBack/VoiceOver.",
+    "320 CSS px ordinary web reflow, 200% text resizing, 400% zoom and coarse-pointer target adaptation.",
+    "Native hit-testing, Dynamic Type, safe areas, software keyboard, gesture arbitration, physical readability.",
+    "Exact Geist/Fraunces application binaries, license preservation, multilingual/₹/Tamil shaping and fallback.",
+    "Actual Mapbox Standard/Satellite overlays and attribution; opt-in map initialization and reduced motion.",
+    "Real authorization, source/export grants, revocation, operation outcomes and durable capture."
+  ],
+  "standards": [
+    "https://www.w3.org/TR/WCAG22/",
+    "https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html",
+    "https://www.w3.org/WAI/WCAG22/Understanding/reflow.html"
+  ]
+}

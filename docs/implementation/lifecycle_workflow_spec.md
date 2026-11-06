@@ -1,6 +1,6 @@
 # Cross-surface journeys, shared screens and lifecycle workflows
 
-> **Visual reset, 5 November 2026:** [DESIGN.md](../../DESIGN.md) is the active planning hub. Keep the tasks, information, permissions, connectivity and recovery requirements below. Visual identity, layout, navigation composition and component appearance are undecided; remaining container/label examples are revisitable interaction proposals, not approved page designs.
+> **Visual baseline, 6 November 2026:** [Fieldwork 1.0](../design/fieldwork-system.md) is selected through [DESIGN.md](../../DESIGN.md). Keep the functional, permission, connectivity and recovery contracts below. Apply Fieldwork to future compositions; remaining layout/container examples are interaction proposals, not approval of every screen.
 
 Date: 5 November 2026. Status: consolidated design specification, not implementation or release evidence. Read this first when reviewing the complete screen set. It closes the boundaries between [mobile](mobile_workflow_specification.md), [creator web](creator_web_workflow_spec.md) and [public web](public_web_workflow.md). The [fresh design hub](../../DESIGN.md) owns future design choices and prototype planning; [requirements](../core/product_requirements.md), [selected decisions](accounts_journeys_access_decisions.md) and [architecture](../core/architecture.md) continue to own product policy, permissions and recovery.
 
@@ -329,8 +329,8 @@ Remaining interaction decisions: final navigation shell/viewport adaptation; exa
 **Next bounded task:** walk through R01–R21 with owner, coauthor and publisher scenarios, settling scope wording and the exclusion/return interaction before choosing visual foundations or implementing an interactive prototype. This static refinement does not establish clickable navigation; connectors and explicit transition annotations remain the review mechanism.
 
 
-## Gather component system — 5 November 2026
+## Fieldwork component system — 6 November 2026
 
-Gather is selected. The [component candidate](../design/gather-system.md), [catalogue](../../design/gather-system/catalog.json) and [frame registry](../../design/gather-system/frames.json) add GS00–GS12 (13 cross-platform library/state/foundation boards, 1280 × 960), GS17 (calendar/capture/import recovery board, 1280 × 1140; frame `bXgTg`, note `S85K5`) and GS13N–GS16N (four compact recipes with owning mobile/creator records) in [gather.pen](../../design/gather.pen). Each has an external note. Library specimens are reusable states and compositions, not new screen IDs or destinations. The collection maps 50 selected shadcn entries and 22 product patterns; all broader states remain governed by this specification. GS17 was added in the parent's bounded correction after the independent review.
+Fieldwork 1.0 is selected. The [system](../design/fieldwork-system.md), [catalogue](../../design/fieldwork-system/catalog.json), [registry](../../design/fieldwork-system/manifest.json) and [qualification record](../design/fieldwork-verification.md) accompany [fieldwork.pen](../../design/fieldwork.pen): 45 boards FW00–FW44, 50 used components, eight optional specimens and 22 Kairn patterns. These are reusable states and compositions, not new screen IDs or destinations.
 
-Gather 1.0 is approved and frozen. GS00?GS17 in [gather.pen](../../design/gather.pen) contain 18 boards/recipes and 18 notes. See the [system](../design/gather-system.md), [frame registry](../../design/gather-system/frames.json) and [qualification record](../design/gather-verification.md). The existing R01?R21 contracts remain the complete functional scope/repair/preview reference.
+The existing R01–R21 wireframes retain complete scope/repair/preview contracts. Preserve local save, private backup, contribution, source scope, original export and publication as independent facts. Static component coverage is not runtime durability, authorization or accessibility acceptance.

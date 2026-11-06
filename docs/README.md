@@ -1,6 +1,6 @@
 # Documentation
 
-Start design and workflow work with [DESIGN.md](../DESIGN.md). The user has reset visual planning; previous colors, fonts, components and layouts are withdrawn. Product requirements and technical implementation records retain their own scope.
+Start design and workflow work with [DESIGN.md](../DESIGN.md). Fieldwork 1.0 is the selected visual baseline; superseded concepts and old application styling are not design inputs. Product requirements and technical implementation records retain their own scope.
 
 | Folder | Contents |
 |---|---|
@@ -18,7 +18,7 @@ Start design and workflow work with [DESIGN.md](../DESIGN.md). The user has rese
 
 ## Design and workflows
 
-[DESIGN.md](../DESIGN.md) connects the fresh decision process to all surfaces. The user selected Gather; its [approved component system](design/gather-system.md) and [interactive collection](../design/gather-system/index.html) are the active visual references. Visual values are frozen; runtime behavior still requires qualification. Workflow documents below preserve tasks and connections; their layout/container examples remain revisitable.
+[DESIGN.md](../DESIGN.md) connects Fieldwork to all surfaces. Its [system specification](design/fieldwork-system.md), [editable library](../design/fieldwork.pen), [catalogue](../design/fieldwork-system/catalog.json) and [qualification record](design/fieldwork-verification.md) are the active visual references. Runtime behavior still requires acceptance checks. Workflow documents below preserve tasks and connections.
 
 - [Pen.dev setup and design workflow](implementation/pen_dev_setup_plan.md) — extension/MCP connection, three configured Codex profiles, verified MCP canvas access, session refresh, free-plan limits, reusable libraries and screen-by-screen handoff
 - [Cross-surface journeys and lifecycle workflows](implementation/lifecycle_workflow_spec.md) — start here for the complete journey map, shared account/history/export/highlight screens, named lifecycle actions and combined scenarios

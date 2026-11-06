@@ -2,7 +2,7 @@
 
 <!-- impeccable:product-schema 1 -->
 
-This is a concise index of product facts. [Product requirements](docs/core/product_requirements.md) govern scope; [DESIGN.md](DESIGN.md) is the active workflow and fresh-design hub.
+This is a concise index of product facts. [Product requirements](docs/core/product_requirements.md) govern scope; [DESIGN.md](DESIGN.md) is the active workflow and design hub.
 
 ## Platform
 
@@ -18,11 +18,11 @@ A shared record of a journey that happened. Capture, compose, experience and lea
 
 ## Capabilities and Constraints
 
-Retain the functional workflows and current architecture. Existing application code contains both real account behavior and simulated prototype experiences; inspect the owning implementation record before claiming a capability works. Design is restarting from scratch. Existing prototype appearance, component styling and assets do not determine the new design.
+Retain the functional workflows and current architecture. Existing application code contains both real account behavior and simulated prototype experiences; inspect the owning implementation record before claiming a capability works. Fieldwork is the selected visual baseline. Existing prototype appearance, component styling and assets do not determine the new design.
 
 ## Brand Commitments
 
-Gather 1.0 is approved and frozen by the user. DESIGN.md and docs/design/gather-system.md own the baseline. Future customization is an explicit revision. Runtime and platform qualification remain separate; do not inherit old source styling.
+Fieldwork 1.0 was selected by the user on 6 November 2026, replacing Gather. DESIGN.md and docs/design/fieldwork-system.md own the baseline. Future customization is an explicit revision. Runtime and platform qualification remain separate; do not inherit old source styling.
 
 ## Evidence on Hand
 

@@ -1,6 +1,6 @@
 # Public web: workflow and screen specification
 
-> **Visual reset, 5 November 2026:** [DESIGN.md](../../DESIGN.md) is the active planning hub. Keep the tasks, information, permissions, connectivity and recovery requirements below. Visual identity, layout, navigation composition and component appearance are undecided; remaining container/label examples are revisitable interaction proposals, not approved page designs.
+> **Visual baseline, 6 November 2026:** [Fieldwork 1.0](../design/fieldwork-system.md) is selected through [DESIGN.md](../../DESIGN.md). Keep the functional, permission, connectivity and recovery contracts below. Apply Fieldwork to future compositions; remaining layout/container examples are interaction proposals, not approval of every screen.
 
 Date: 5 November 2026. Status: complete planning draft for business and interaction review; no new screens or production capabilities implemented. Authoring checkout: Windows. Source baseline: `4a6528e728bc4c799a957730dcd6244b65417ab7`, equal to fetched `origin/development` when inspected. Branch: `chore/public-web-workflow`.
 
@@ -27,9 +27,9 @@ The public experience must answer four questions in order:
 | [Requirements](../core/product_requirements.md), sections 2, 10–17 | Canonical identity, evidence, public access, viewer, highlights, discovery, profiles, saved research, questions and revocation |
 | [Architecture](../core/architecture.md), sections 5–7, 9, 11–14 | Safe publication projection, server rendering, current access, map loading, search and buffered answers; section 14 remains the dependency authority |
 | [Functional screen inventory](../core/application_design.md#71-screen-inventory) | P01–P08 IDs, view continuity, stage navigation, source inspection and accessibility |
-| [Fresh design hub](../../DESIGN.md) | Visual direction, navigation composition and reader layout are undecided. |
+| [Design hub](../../DESIGN.md) | Fieldwork foundations and components are selected; complete reader compositions still require review. |
 | [Ecosystem direction](../core/ecosystem_direction.md) | Player and Replay responsibilities, with Privacy and Publisher as delivery boundaries; these are not additional navigation destinations |
-| [Prototype boundary](../../DESIGN.md#5-prototype-boundary) | Fictional data, explicit simulations and a new plan after relevant design decisions. |
+| [Prototype boundary](../../DESIGN.md#approval-and-qualification) | Fictional data and explicit simulations; visual approval does not establish runtime acceptance. |
 | [Account/journey handoff](accounts_journeys_access_design.md) | Ownership of sign-in, account settings, member highlight creation and new-journey handoffs |
 
 Research interpretation: a generic travel homepage, social feed, map-first dashboard or chatbot-first application would obscure the product. Use a catalog to find an event, a reader to understand it, and evidence links to inspect claims. This is a product-specific design conclusion, not a claim of market validation.
@@ -38,7 +38,7 @@ External research is limited to primary accessibility guidance relevant to these
 
 ### 1.2 Fresh visual and page planning
 
-Brand, color, type, spacing, icons, logo and page composition are undecided. Plan them through DESIGN.md; no former layout, breakpoint, reading width or token is the baseline.
+Use Fieldwork's color, type, spacing, icons and component anatomy through DESIGN.md. Logo/app icon and full page compositions remain separate work; no former application layout or token overrides Fieldwork.
 
 Keep the functional distinctions: Story explains the event, Explore adds geography/sequence, Learn exposes dated practical evidence, and Discover finds eligible journeys. Dates of travel, observation and publication remain distinct. Missing media and unknown locations need useful accessible states. Choose how those facts appear during fresh page design.
 

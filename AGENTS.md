@@ -2,9 +2,9 @@
 
 Read `docs/README.md` for the documentation map. Requirements in `docs/core/product_requirements.md` govern functional scope. `docs/core/architecture.md` section 14 is the canonical dependency register; `DESIGN.md` is the active design/workflow hub; `docs/core/application_design.md` retains functional screen responsibilities. The setup/mobile plans under `docs/implementation/` govern the foundation and host workflow. Dated research can contain superseded alternatives.
 
-## Approved design baseline — 5 November 2026
+## Approved design baseline — 6 November 2026
 
-Gather 1.0 is approved and frozen by the user. Start at `DESIGN.md` and `docs/design/gather-system.md`; use `design/gather.pen` and the catalogue/tokens under `design/gather-system/`. Competing concepts and temporary exploration research have been deleted. Do not reopen them or inherit old application styling. The neutral connected wireframes remain functional references only. The user may request future customization; record it as a deliberate baseline revision. Visual approval does not waive accessibility, permission, durability or platform acceptance checks.
+Fieldwork 1.0 is selected by the user, replacing Gather. Start at `DESIGN.md` and `docs/design/fieldwork-system.md`; use `design/fieldwork.pen` and the catalogue/tokens under `design/fieldwork-system/`. Superseded design systems and temporary exploration research are removed after preserving required contracts and provenance. Do not inherit old application styling. The neutral connected wireframes remain functional references only. Record future customization as a deliberate baseline revision. Visual approval does not waive accessibility, permission, durability or platform acceptance checks.
 
 ## Testing scope
 

@@ -1,6 +1,6 @@
 # Mobile workflow and screen specification
 
-> **Visual reset, 5 November 2026:** [DESIGN.md](../../DESIGN.md) is the active planning hub. Keep the tasks, information, permissions, connectivity and recovery requirements below. Visual identity, layout, navigation composition and component appearance are undecided; remaining container/label examples are revisitable interaction proposals, not approved page designs.
+> **Visual baseline, 6 November 2026:** [Fieldwork 1.0](../design/fieldwork-system.md) is selected through [DESIGN.md](../../DESIGN.md). Keep the functional, permission, connectivity and recovery contracts below. Apply Fieldwork to future compositions; remaining layout/container examples are interaction proposals, not approval of every screen.
 
 Date: 5 November 2026. Version: 1.0. Status: proposed detailed interaction specification for the complete mobile prototype; existing product rules remain binding. No new production capability or native acceptance is claimed.
 
@@ -25,9 +25,9 @@ Initial users are people taking self-organised multi-day trips with friends, ini
 | [Product plan](../core/product_plan.md), [requirements](../core/product_requirements.md) | Purpose, complete R1 scope, 117 functional IDs, capabilities, privacy, durability and release scenarios. |
 | [Functional screen inventory](../core/application_design.md#71-screen-inventory) | Canonical A01–A09 responsibilities; shell composition is reopened. |
 | [Architecture](../core/architecture.md), especially §§5–11, 14–16 | Modular monolith, app-owned files/SQLite, versioned operations, source grants, approval, current-access enforcement and independent restriction recovery. Section 14 alone owns dependency selection. |
-| [Fresh design hub](../../DESIGN.md), [product context](../../PRODUCT.md) | Visual decisions are reopened. Existing code and screenshots do not prescribe colors, fonts, spacing, icons or page layouts. |
+| [Design hub](../../DESIGN.md), [product context](../../PRODUCT.md) | Fieldwork governs visual values and component anatomy. Existing code and screenshots do not override it. |
 | [Account/journey decisions](accounts_journeys_access_decisions.md), [experience handoff](accounts_journeys_access_design.md) | One administrator; separate coauthor/publisher powers; limited People disclosure; selected form limits, invite/transfer expiry and lifecycle policy. E01–E16 remain cross-references. |
-| [Design process and prototype boundary](../../DESIGN.md#5-prototype-boundary) | Plan a new connected prototype after relevant choices; keep sample data and simulated capabilities explicit. |
+| [Design qualification boundary](../../DESIGN.md#approval-and-qualification) | Plan connected compositions with Fieldwork; keep sample data and simulated capabilities explicit. |
 | [Mobile plan](mobile_development_plan.md), [host guide](native_host_setup.md), [setup checkpoint](repository_setup_progress.md) | Android/iOS local compiled clients, separate native host ownership and evidence. iOS public distribution is deferred, not iOS design or local verification. |
 | Existing native source at `4a6528e728bc4c799a957730dcd6244b65417ab7` | Inspected root/prototype layouts, route inventory, account screen and prototype navigation. `/`, `/account`, `/verify-email`, `/reset-password`, `/prototype`, `/prototype/journey`, `/prototype/reader` and specimen routes exist. This is not evidence that the complete screens below work. |
 
@@ -51,14 +51,14 @@ Existing requirements and selected decisions are **baseline**. Child-screen deco
 
 ## 2. Mobile interaction requirements
 
-Visual decisions belong to the fresh design hub. No existing palette, font, spacing scale, icon family, component catalog or page layout is selected for the new work.
+Fieldwork foundations, tokens and components are selected in the design hub. Screen composition still follows each task and platform; old application styling does not override Fieldwork.
 
 Keep dates, participant-specific travel, rest days and unknown locations truthful. Evidence and permission are distinct meanings and cannot rely on color alone. An unknown route must not imply recorded geometry.
 
 - Preserve accessible labels, target sizes, text scaling, safe areas, keyboard access, reduced motion and screen-reader semantics.
 - Back/close/system gestures retain work or offer explicit discard; never silently lose a capture or accepted edit.
 - Choose page, section, sheet and tablet composition during fresh screen planning; maintain the declared entry/exit and focus-return behavior.
-- Appearance changes, if offered, retain active work and selection; their controls and visual mappings are undecided.
+- Appearance follows the system with an explicit override; preserve active work and selection. Use Fieldwork's light/dark semantic tokens.
 - Request camera, microphone, gallery or location only for the action requiring it; provide useful denial recovery.
 
 ## 3. Navigation contract
@@ -1457,7 +1457,7 @@ This orders prototype work only; it does not replace the ten production dependen
 | Default destination/scope | New or ambiguous capture context defaults to personal/Only me; explicit opt-in can target future captures to journey review | Preserve visible destination and scoped preference. Never auto-opt into publication. |
 | Creation while offline | Retain create form locally; canonical creation remains pending until accepted, with the same command ID | Do not invent a joined canonical journey or invite delivery before confirmation. |
 | Native publication | Bounded native review/preview plus explicit creator-web continuation for dense work | Proposed decomposition of existing publication capability, not permission expansion. |
-| Visual identity and page composition | Fresh decisions tracked in DESIGN.md | Undecided; existing values and old approvals are withdrawn. |
+| Visual identity and page composition | Fieldwork 1.0 tracked in DESIGN.md | Foundations and components selected; individual screen compositions and runtime qualification remain. |
 | Formats and capture/import limits | Use the declared supported set and show configured limits before action | Video/audio duration, batch/storage limits and supported device/OS set need qualification. Do not invent values. HEIC/wider scan stay conditional. |
 | Source-language support | Preserve source language and unsupported/failure states | Exact transcription language list and quality evidence remain open. |
 | Export / lifecycle values | Use selected 24h default/7-day maximum export grants; 7-day invites; 72h transfer offers; 5-minute impact previews with revision binding | Existing selected rules, not new design choices. Check server truth at action time. |
@@ -1596,13 +1596,15 @@ Status **S** = static contract review, settled canvas bounds check, and represen
 | R21N / `t1WWh` | A07 / X.web — Continue the repair | Leela · coauthor; separate device/browser sessions | 390 × 844 | `a97dsP` | S |
 
 
-## Gather component recipes — 5 November 2026
+## Fieldwork component recipes — 6 November 2026
 
-The user selected Gather. [System specification](../design/gather-system.md) and [frame registry](../../design/gather-system/frames.json) own the cross-platform component candidate; these records own the native task examples in [gather.pen](../../design/gather.pen).
+[System specification](../design/fieldwork-system.md), [catalogue](../../design/fieldwork-system/catalog.json) and [registry](../../design/fieldwork-system/manifest.json) map the selected design in [fieldwork.pen](../../design/fieldwork.pen).
 
-| Recipe / screen | Frame / external note | Platform and review size | Actor, state and transition | Review status |
-|---|---|---|---|---|
-| GS13N / A04.scope | `ohx6V` / `Suwq9` | Native, 390 × 1040 full content | Arun owns source; current Journey review. Review selected proposal, independent export grant; Back to owned source. | Static component composition reviewed; runtime pending |
-| GS16N / A06.preview | `bCcaf` / `HVNE7` | Native, 390 × 1040 full content | Dev publisher; candidate C18 excludes two dependent uses. Inspect exact candidate then approval review; Back to review; any draft/permission change invalidates. | Static component composition reviewed; runtime pending |
+| Composition | Frame / board | Native responsibility |
+|---|---|---|
+| Explore and map sheet | `DUlG6` / FW13 | Selected-day continuity, gap labels, explicit expansion |
+| Source scope and original export | K05–K06 / FW31 | A04.scope owner review; independent grants and exact return |
+| Exact candidate and approval | K14–K15 / FW33 | A06.preview / A06.publish; changes invalidate the candidate |
+| Native states and themes | FW18–FW20, FW42, FW44 | 48 minimum targets, 16 control text, keyboard/safe-area/text-growth contracts |
 
-These use linked component masters. They supplement the existing R01–R21 native contracts, including unknown outcomes, stale permissions, text growth, keyboards and authenticated handoff. They do not replace all their states or establish durable saving/publication. Brand choice does not change capability rules.
+These are reusable components and static compositions, not replacements for the R01–R21 native contracts above. Preserve unknown outcomes, stale permissions, independent browser authentication, text growth, keyboards and exact caller returns. Visual approval does not establish durable saving or publication behavior.

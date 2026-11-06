@@ -1,27 +1,30 @@
 # Kairn design hub
 
-**Gather 1.0 — approved and frozen by the user, 5 November 2026.** This is the sole active visual design system. Implement it consistently; do not reopen competing directions or infer defaults from old application styling. The user may request deliberate customization later. Record such changes here and update the specification, tokens, components and affected screens together.
+**Fieldwork 1.0 — selected by the user, 6 November 2026.** This replaces Gather as the sole active visual baseline. Preserve Fieldwork's compact editorial character and subtle relationships. Future customization is a deliberate baseline revision.
 
 ## Authoritative artifacts
 
-- [System specification](docs/design/gather-system.md): visual rules, component anatomy, state and platform contracts.
-- [Interactive component collection](design/gather-system/index.html).
-- [Editable Gather library](design/gather.pen): GS00–GS17, 18 boards/recipes with 18 external notes; 70 reusable design symbols. Start at GS00 / `kKd6P`.
-- [Approved token baseline](design/gather-system/tokens.json), [component catalogue](design/gather-system/catalog.json), [frame registry](design/gather-system/frames.json).
-- [Review and qualification record](docs/design/gather-verification.md).
+- [System specification](docs/design/fieldwork-system.md): foundations, anatomy, state contracts, platform behavior and implementation boundaries.
+- [Editable Fieldwork library](design/fieldwork.pen): FW00–FW44, 45 boards, 102 reusable masters and 128 linked instances. Start at FW00 / `exiKV`; FW44 compares web/native in light/dark.
+- [Design tokens](design/fieldwork-system/tokens.json), [component catalogue](design/fieldwork-system/catalog.json), [frame and component registry](design/fieldwork-system/manifest.json).
+- [Review and qualification record](docs/design/fieldwork-verification.md) and [machine-readable verification](design/fieldwork-system/verification.json).
 
-The catalogue covers 66 upstream entries: 50 used, eight optional, three deferred and five omitted. Twenty-two Kairn patterns have specimens. Web uses shadcn/Radix; native uses separate React Native/Unistyles components. Share semantic design values, not rendering dependencies.
+Coverage: 66 upstream entries — 50 Use, eight Optional, three Defer and five Omit — plus 22 Kairn patterns. Web uses shadcn/Radix/Tailwind; native uses separate React Native/Unistyles components. Share plain tokens and semantics, not rendering dependencies.
 
-## Functional authority and remaining work
+## Functional authority
 
-[Product requirements](docs/core/product_requirements.md) govern scope. [Screen map](docs/implementation/mockup_screen_map.md) and the owning mobile, creator, public, account and lifecycle workflow specifications govern tasks, permissions, connectivity and recovery. [Architecture](docs/core/architecture.md) governs the stack.
+[Product requirements](docs/core/product_requirements.md) govern scope. [Screen map](docs/implementation/mockup_screen_map.md) and the owning mobile, creator, public, account and lifecycle specifications govern tasks, permissions, connectivity and recovery. [Architecture](docs/core/architecture.md) owns the selected stack.
 
-[Connected functional wireframes](design/flow-wireframes.pen) remain useful: 108 screens/states, 108 notes and two overviews. First-flow overview `OjON2`; scope/repair refinement `OLIDE`. Their neutral styling has no visual authority. Broader screen coverage remains incomplete; freezing Gather does not imply that every screen has been drawn.
+[Connected functional wireframes](design/flow-wireframes.pen) remain functional references: 108 screens/states, 108 annotations and two overviews. First-flow overview `OjON2`; scope/repair overview `OLIDE`. Their neutral styling has no visual authority. Component coverage does not mean every application screen has been designed.
 
-Visual approval is not runtime qualification. Web/native implementation, screen readers, real text scaling, native font shaping, keyboard/safe areas, physical-device readability and actual durability/authorization still require their acceptance checks. Logo/app icon remain unspecified; use the approved typography and existing textual product name without inventing a new identity.
+## Approval and qualification
 
-Next bounded task: apply Gather to the complete scope → publication blocker → authorized repair → refreshed preview contracts, then implement and qualify the native/web slice.
+The final pass includes independent Gemini Argon review, parent corrections, contrast calculations, canvas bounds checks and saved-file verification. These qualify the design specification, not a running web/native application. Keyboard and screen readers, actual text scaling, font shaping, safe areas, map imagery, physical-device readability, permissions and durability still need implementation acceptance.
 
-## Freeze and cleanup decision
+Next bounded implementation/design slice: apply Fieldwork to the complete scope → publication blocker → authorized repair → refreshed exact preview contracts on native and compact web. Logo/app icon remain unspecified.
 
-The user approved the completed system and requested deletion of competing concepts, temporary experiments and design-exploration research. Removed all pre-system concept/refinement canvas frames, comparison viewers, obsolete previews and the exploration research packet. Kept the approved library, its required licensed assets, functional workflow specifications and neutral connected wireframes. No application code, dependency, commit, push or publication is part of this cleanup.
+## Baseline revision and cleanup
+
+The user selected Fieldwork and requested only required files remain. Gather's library, catalogue, viewer, tokens, previews and unused font assets are superseded. Temporary Fieldwork research viewers and redundant preview exports are removed after preserving accepted decisions, domain contracts, upstream references and asset provenance in the current catalogue/specification.
+
+Keep the editable Fieldwork source, its tokens/catalogue/registry/verification, required licensed media, functional wireframes and current workflow documents. No application implementation, dependency update, commit, push or publication is part of this task.

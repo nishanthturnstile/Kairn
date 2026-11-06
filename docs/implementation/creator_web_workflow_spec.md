@@ -1,6 +1,6 @@
 # Creator web: workflow, screen connectivity and interaction specification
 
-> **Visual reset, 5 November 2026:** [DESIGN.md](../../DESIGN.md) is the active planning hub. Keep the tasks, information, permissions, connectivity and recovery requirements below. Visual identity, layout, navigation composition and component appearance are undecided; remaining container/label examples are revisitable interaction proposals, not approved page designs.
+> **Visual baseline, 6 November 2026:** [Fieldwork 1.0](../design/fieldwork-system.md) is selected through [DESIGN.md](../../DESIGN.md). Keep the functional, permission, connectivity and recovery contracts below. Apply Fieldwork to future compositions; remaining layout/container examples are interaction proposals, not approval of every screen.
 
 Date: 5 November 2026. Version: 1.0. Scope: W01–W08, the creator journey workspace. Status: detailed design proposal grounded in the current R1 baseline; ready for screen-by-screen review. This document does not claim implemented screens, approved new business policy, or production acceptance.
 
@@ -31,11 +31,11 @@ The first design exercise is a complete workflow, not eight disconnected mockups
 | [Product plan](../core/product_plan.md), especially §§1, 3, 5–9 | Purpose, audience, whole-trip promise, exclusions and community-first direction. |
 | [Product requirements](../core/product_requirements.md), especially §§2, 6–11, 16–20 | Functional scope, source rights, editing, release requirements and acceptance. |
 | [Architecture](../core/architecture.md), especially §§5–6, 8–11, 13–17 | Module ownership, contracts, durable edits, current authorization and publication/recovery boundaries. Section 14 remains the sole dependency register. |
-| [Application experience requirements](../core/application_design.md) | Canonical screen responsibilities and functional handoff; appearance is reopened in DESIGN.md. |
+| [Application experience requirements](../core/application_design.md) | Canonical screen responsibilities and functional handoff; DESIGN.md owns the Fieldwork baseline. |
 | [Selected account/journey decisions](accounts_journeys_access_decisions.md), D03–D06, D08, D10 | One administrator, restricted roster, independent powers, freshness, expiry and lifecycle behavior. |
 | [Account/journey handoff](accounts_journeys_access_design.md) | Existing entry, history, People, reauthentication, lifecycle and operation-status destinations. |
-| [Fresh design hub](../../DESIGN.md) | All visual and composition decisions are reopened; current components are implementation history. |
-| [Prototype boundary](../../DESIGN.md#5-prototype-boundary) | Explicit sample state; new scenario/delivery planning after relevant design choices. |
+| [Design hub](../../DESIGN.md) | Fieldwork owns visual values and component anatomy; current application components are implementation history. |
+| [Prototype boundary](../../DESIGN.md#approval-and-qualification) | Explicit sample state; connected Fieldwork composition and runtime qualification remain separate. |
 | [Ecosystem direction](../core/ecosystem_direction.md) | Studio/GeoKit/Moments/Privacy/Publisher/Player responsibilities, without adding services or packages. |
 
 **Interpretation labels:** “Baseline” means an existing requirement or selected decision. “Proposed” means a screen-level design choice in this specification. “Open” means the decision is intentionally unresolved. Proposed paths and component names are planning contracts, not claims that routes or APIs already exist. A business change is allowed, but its effect on requirements, policy, schemas, screens and acceptance must be recorded before implementation.
@@ -65,9 +65,9 @@ The primary creator is organizing a recent multi-day trip with friends, often wi
 
 Success is reaching an understandable, deliberately approved story without re-entering the trip, designing pages, losing edits, or confusing private backup with sharing. The workspace must make the next useful action clear without demanding that everyone follow a rigid wizard.
 
-### 2.3 Visual direction is undecided
+### 2.3 Fieldwork visual direction
 
-Select brand, typography, colors, icons, spacing, components and page composition through DESIGN.md. The creator's functional needs are chronology, attributable evidence, understandable permissions, retained work and deliberate publication. These needs do not select a palette, sidebar, chapter spine or editorial type treatment. Authors edit journey content; R1 does not add an end-user page/theme builder.
+Use Fieldwork's typography, colors, spacing and component anatomy through DESIGN.md. Compose screens around chronology, attributable evidence, understandable permissions, retained work and deliberate publication. Fieldwork does not approve every screen layout. Authors edit journey content; R1 does not add an end-user page/theme builder.
 
 ### 2.4 Terminology to keep consistent
 
@@ -655,7 +655,7 @@ These are narrow source observations, not a full code audit. Do not replace the 
 
 ### 19.1 Baseline choices to carry forward
 
-One canonical event; private-by-default source selection; independent administration/coauthor/publisher/source/export authorities; a single administrator with accepted transfer; honest uncertainty; current grants on all historical views; expected-revision editing; immutable approved narrative with immediate restrictive overrides; complete R1 scope; selected technical stack; visual direction is undecided.
+One canonical event; private-by-default source selection; independent administration/coauthor/publisher/source/export authorities; a single administrator with accepted transfer; honest uncertainty; current grants on all historical views; expected-revision editing; immutable approved narrative with immediate restrictive overrides; complete R1 scope; selected technical stack; Fieldwork visual baseline.
 
 ### 19.2 Proposed screen-level choices in this specification
 
@@ -685,7 +685,7 @@ These proposals are ready to review, not a record of explicit user approval. The
 | Media/codecs, batch, duration and source/route limits | Render qualified configuration and sample-only bounds; explain unsupported inputs | Real import UI and release. |
 | Transcription languages, alignment and processing budgets | Prepared sample text; actual chunk offsets only; unsupported state | Real transcription/extraction. |
 | Revocation/retention/RPO/RTO guarantees | Show actual state; selected policy targets are not measured guarantees | Shared-data activation and public release. |
-| Public brand/domain, moderation ownership, production email and provider terms | Working product name; visual identity undecided; local sample links and no delivery claims | Relevant deployment/public toolkit release. |
+| Public brand/domain, moderation ownership, production email and provider terms | Working product name; Fieldwork visual system selected; logo/domain remain separate; local sample links and no delivery claims | Relevant deployment/public toolkit release. |
 
 For a business change, record: decision, prior rule, reason, affected actors, incoming/outgoing edges, source/visibility consequences, data/API implications, migration/compatibility impact and replacement acceptance scenarios. Update the governing document first when policy changes; this screen specification then follows. Do not silently add voting, unrestricted collaboration, navigation, AI chat, bookings or payment gates through a UI example.
 
@@ -837,13 +837,15 @@ Status **S** = static contract review, settled canvas bounds check, and represen
 | R21W / `nogEX` | E01 / W02 — Independent browser sign-in and repair return | Leela; browser initially signed out | 390 × 844 | `B16ou` | S |
 
 
-## Gather component recipes — 5 November 2026
+## Fieldwork component recipes — 6 November 2026
 
-[System specification](../design/gather-system.md) and [frame registry](../../design/gather-system/frames.json) describe the selected Gather direction and candidate components in [gather.pen](../../design/gather.pen).
+[System specification](../design/fieldwork-system.md), [catalogue](../../design/fieldwork-system/catalog.json) and [registry](../../design/fieldwork-system/manifest.json) map the selected design in [fieldwork.pen](../../design/fieldwork.pen).
 
-| Recipe / screen | Frame / external note | Platform and review size | Actor, state and transition | Review status |
-|---|---|---|---|---|
-| GS14W / W08 | `bp64o` / `zCKmD` | Compact browser, 390 × 1040 | Dev publisher only sees the review-only voice blocker and two dependent uses. Repair requires an independently authorized coauthor/owner; Back returns review. | Static component composition reviewed; runtime pending |
-| GS15W / W02 + W04 | `U2uvL` / `e9aJpo` | Compact browser, 390 × 1040 | Leela coauthor reviews removal of voice placement and dependent fare claim. Accepted scoped repair returns W08 for a fresh candidate; stale proposal remains retained. | Static component composition reviewed; runtime pending |
+| Composition | Frame / board | Screen responsibility |
+|---|---|---|
+| Route workspace | `KCROg` / FW12 | W03 stage selection, primary recording and honest gaps |
+| Source review | `b1O7wd` / FW15 | W05 mixed selection with capability-specific actions |
+| Narrow publication review | `b5Apb` / FW16 | W08 publisher review and blocker inspection |
+| Conflict, blocker, candidate, approval | K12–K15 / FW32–FW33 | Role-authorized repair and refreshed exact review |
 
-The role walkthrough is not an automatic account switch. Native/browser authentication remains independent. A coauthor cannot grant source reuse or approve publication; a publisher without coauthor powers cannot apply this edit. R01–R21 retain the complete repair/invalidation/return contracts.
+The source owner, coauthor and publisher keep independent capabilities. A publisher without coauthor powers cannot edit; a coauthor cannot grant source reuse or approve publication solely by being a coauthor. Native/browser authentication remains independent. The neutral R01–R21 contracts above retain all repair, invalidation, unknown-outcome and return states. Static components do not establish runtime acceptance.

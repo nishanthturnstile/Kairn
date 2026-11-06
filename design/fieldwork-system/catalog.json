@@ -1,0 +1,1824 @@
+{
+  "version": "1.0",
+  "date": "2026-11-06",
+  "status": "Selected Fieldwork baseline; design specification, runtime qualification pending",
+  "components": [
+    {
+      "id": "ui/accordion",
+      "name": "Accordion",
+      "decision": "Use",
+      "group": "Disclosure",
+      "purpose": "Help, practical detail groups",
+      "screens": [
+        "A09.help",
+        "P04"
+      ],
+      "states": "Closed, expanded, unavailable section",
+      "source": "https://ui.shadcn.com/docs/components/accordion",
+      "customization": "Attach each summary to its expanded detail with one continuous edge; preserve the reader’s position.",
+      "guardrail": "Avoid opening neighbouring sections or shifting the focused heading.",
+      "platform": "Same content order; 48px summaries on native.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "H68I7",
+      "master": "MBPI0",
+      "board": "OR06x"
+    },
+    {
+      "id": "ui/alert",
+      "name": "Alert",
+      "decision": "Use",
+      "group": "Feedback",
+      "purpose": "Persistent recovery and permission notices",
+      "screens": [
+        "A03",
+        "A04.queue",
+        "W08"
+      ],
+      "states": "Info, offline, pending, warning, error",
+      "source": "https://ui.shadcn.com/docs/components/alert",
+      "customization": "Use an evidence slip beside the affected item: what happened, what remains safe, one recovery action.",
+      "guardrail": "Persistent failures must remain discoverable after dismissal of any toast.",
+      "platform": "Native wraps the message; recovery action remains visible.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "U3y756",
+      "master": "eM0WW",
+      "board": "OR06x"
+    },
+    {
+      "id": "ui/alert-dialog",
+      "name": "Alert Dialog",
+      "decision": "Use",
+      "group": "Overlay",
+      "purpose": "Irreversible impact confirmation",
+      "screens": [
+        "A06.lifecycle",
+        "E13"
+      ],
+      "states": "Impact ready, changed, submitting, unknown result",
+      "source": "https://ui.shadcn.com/docs/components/alert-dialog",
+      "customization": "Keep the familiar dialog; add exact object, consequence and final action verb.",
+      "guardrail": "No hold-to-confirm, playful shaking or animated consent.",
+      "platform": "Platform focus/back behaviour; safe-area actions.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "P2vxC",
+      "master": "mVLUo",
+      "board": "OR06x"
+    },
+    {
+      "id": "ui/aspect-ratio",
+      "name": "Aspect Ratio",
+      "decision": "Use",
+      "group": "Media",
+      "purpose": "Photo and cover layout",
+      "screens": [
+        "P02",
+        "A04.moment"
+      ],
+      "states": "Loaded, missing, loading, restricted",
+      "source": "https://ui.shadcn.com/docs/components/aspect-ratio",
+      "customization": "Reveal the full uncropped frame from a stable editorial crop, preserving Fieldwork’s existing asymmetric photo corners and the day/moment caption.",
+      "guardrail": "Do not animate layout while images load.",
+      "platform": "Retain the same focal subject, not identical pixel cropping.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "B5e5N",
+      "master": "pYhI0",
+      "board": "OR06x"
+    },
+    {
+      "id": "ui/attachment",
+      "name": "Attachment",
+      "decision": "Use",
+      "group": "Media",
+      "purpose": "Selected import candidates",
+      "screens": [
+        "A05",
+        "A05.item"
+      ],
+      "states": "Selected, inspecting, excluded, unsupported, missing",
+      "source": "https://ui.shadcn.com/docs/components/attachment",
+      "customization": "Turn it into an inspection row with thumbnail/type, owner, destination and a separate eligibility label.",
+      "guardrail": "Selected never means uploaded or approved; unavailable thumbnails are neutral.",
+      "platform": "Tap opens inspection; no hover dependency.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "H4cB5",
+      "master": "XC5Rx",
+      "board": "OR06x"
+    },
+    {
+      "id": "ui/avatar",
+      "name": "Avatar",
+      "decision": "Use",
+      "group": "Identity",
+      "purpose": "Private people and approved credits",
+      "screens": [
+        "W06",
+        "P05"
+      ],
+      "states": "Image, initials, unavailable public identity",
+      "source": "https://ui.shadcn.com/docs/components/avatar",
+      "customization": "Show the person’s actual contribution role beside a quiet avatar; preserve identity in source context.",
+      "guardrail": "No activity halos implying live presence; no private people in public views.",
+      "platform": "Name and role readable without opening a hover card.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "b0l7h",
+      "master": "Zh247",
+      "board": "OR06x"
+    },
+    {
+      "id": "ui/badge",
+      "name": "Badge",
+      "decision": "Use",
+      "group": "Identity",
+      "purpose": "Scope, evidence and operation labels",
+      "screens": [
+        "A04.scope",
+        "P05"
+      ],
+      "states": "Review only, approved, unknown, withdrawn",
+      "source": "https://ui.shadcn.com/docs/components/badge",
+      "customization": "Use a short explicit state word with a consistent edge marker; actionable labels visibly disclose evidence.",
+      "guardrail": "Colour and shape supplement text; a static badge must not look tappable.",
+      "platform": "Enough space for translated labels; separate touch target for details.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "EdooH",
+      "master": "cdTDf",
+      "board": "fPcrM"
+    },
+    {
+      "id": "ui/breadcrumb",
+      "name": "Breadcrumb",
+      "decision": "Use",
+      "group": "Navigation",
+      "purpose": "Dense creator return context",
+      "screens": [
+        "W02",
+        "W04",
+        "W05"
+      ],
+      "states": "Current, long path, stale destination",
+      "source": "https://ui.shadcn.com/docs/components/breadcrumb",
+      "customization": "Preserve journey › day › moment context and a reliable return point after inspecting evidence.",
+      "guardrail": "Don’t animate the whole trail or replace meaningful names with icons.",
+      "platform": "Use one labelled Back destination on narrow screens.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "CEvwU",
+      "master": "i4626",
+      "board": "fPcrM"
+    },
+    {
+      "id": "ui/bubble",
+      "name": "Bubble",
+      "decision": "Omit",
+      "group": "Conversation",
+      "purpose": "No social messaging in R1",
+      "screens": [
+        "P04.question"
+      ],
+      "states": "Not selected",
+      "source": "https://ui.shadcn.com/docs/components/bubble",
+      "customization": "Keep omitted; no chat bubbles added for personality.",
+      "guardrail": "Buffered research answers remain readable documents.",
+      "platform": "Same scope on both platforms.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": null,
+      "master": null,
+      "board": "yJR9z"
+    },
+    {
+      "id": "ui/button",
+      "name": "Button",
+      "decision": "Use",
+      "group": "Action",
+      "purpose": "Explicit task actions",
+      "screens": [
+        "All"
+      ],
+      "states": "Default, hover, focus, pressed, disabled, pending",
+      "source": "https://ui.shadcn.com/docs/components/button",
+      "customization": "Keep Fieldwork’s forward edge for transitions; use a tiny internal arrow/press response and stable labels.",
+      "guardrail": "Outer hit area stays fixed; no magnetic cursor or width jumps on saving.",
+      "platform": "48px native target; optional light tap haptic only for immediate local input.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "rsOLz",
+      "master": "eBQwe",
+      "board": "fPcrM"
+    },
+    {
+      "id": "ui/button-group",
+      "name": "Button Group",
+      "decision": "Use",
+      "group": "Action",
+      "purpose": "Related media and ordering controls",
+      "screens": [
+        "P03",
+        "W02"
+      ],
+      "states": "First or last disabled, focused, compact wrap",
+      "source": "https://ui.shadcn.com/docs/components/button-group",
+      "customization": "Group related tools around the object they affect; expose selected state clearly.",
+      "guardrail": "Group layout must not suggest a sequence when actions are independent.",
+      "platform": "Wrap or use a labelled More action; don’t shrink targets.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "vofeH",
+      "master": "hRB8y",
+      "board": "fPcrM"
+    },
+    {
+      "id": "ui/calendar",
+      "name": "Calendar",
+      "decision": "Use",
+      "group": "Field",
+      "purpose": "Journey date selection",
+      "screens": [
+        "A01.create",
+        "W01"
+      ],
+      "states": "Single, range, unknown dates, invalid range",
+      "source": "https://ui.shadcn.com/docs/components/calendar",
+      "customization": "Offer journey-context marks for existing dated moments, plus explicit Unknown date.",
+      "guardrail": "Never infer a capture date or turn activity into streaks; marks need text equivalents.",
+      "platform": "Use a full-sized date sheet or native picker; contextual summary sits beside it.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "FKs8h",
+      "master": "YjPyn",
+      "board": "fPcrM"
+    },
+    {
+      "id": "ui/card",
+      "name": "Card",
+      "decision": "Use",
+      "group": "Content",
+      "purpose": "Journey and chapter containers",
+      "screens": [
+        "A01",
+        "W01",
+        "P01"
+      ],
+      "states": "No cover, long title, empty, stale",
+      "source": "https://ui.shadcn.com/docs/components/card",
+      "customization": "Give journey covers a photo and editorial title; use open rows for dense sources and controls.",
+      "guardrail": "Avoid animated card lifts in scrolling lists.",
+      "platform": "Whole-row navigation plus clearly separated secondary actions.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "SYcey",
+      "master": "GTrer",
+      "board": "fPcrM"
+    },
+    {
+      "id": "ui/carousel",
+      "name": "Carousel",
+      "decision": "Use",
+      "group": "Media",
+      "purpose": "User-directed approved gallery",
+      "screens": [
+        "P02",
+        "P05"
+      ],
+      "states": "First, middle, last, unavailable media",
+      "source": "https://ui.shadcn.com/docs/components/carousel",
+      "customization": "Use a user-driven contact strip with ordinal, caption and return to the original photo.",
+      "guardrail": "No autoplay, infinite looping or accidental navigation while zoomed.",
+      "platform": "Swipe plus visible Previous/Next; 48px controls.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "p770q",
+      "master": "eH0Rp",
+      "board": "Ydibd"
+    },
+    {
+      "id": "ui/chart",
+      "name": "Chart",
+      "decision": "Defer",
+      "group": "Data",
+      "purpose": "No general analytics dashboard in R1",
+      "screens": [
+        "P03"
+      ],
+      "states": "Only if a real data task is approved",
+      "source": "https://ui.shadcn.com/docs/components/chart",
+      "customization": "Keep deferred; an authentic route/elevation view is a separate product requirement.",
+      "guardrail": "No dashboard metrics introduced to decorate the UI.",
+      "platform": "Provide text alternatives if a chart becomes necessary.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": null,
+      "master": null,
+      "board": "yJR9z"
+    },
+    {
+      "id": "ui/checkbox",
+      "name": "Checkbox",
+      "decision": "Use",
+      "group": "Field",
+      "purpose": "Import and highlight selection",
+      "screens": [
+        "A05",
+        "A08"
+      ],
+      "states": "Off, on, mixed, disabled, focus",
+      "source": "https://ui.shadcn.com/docs/components/checkbox",
+      "customization": "Keep conventional tick/mixed states; make the containing source row show selection with a quiet edge.",
+      "guardrail": "A tick cannot mean a reuse/export grant.",
+      "platform": "Full-row touch selection only where it doesn’t conflict with inspection.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "hFLSw",
+      "master": "NYTJc",
+      "board": "Ydibd"
+    },
+    {
+      "id": "ui/code-block",
+      "name": "Code Block",
+      "decision": "Omit",
+      "group": "Developer",
+      "purpose": "No end-user code presentation task",
+      "screens": [
+        "None"
+      ],
+      "states": "Not selected",
+      "source": "https://ui.shadcn.com/docs/components/code-block",
+      "customization": "Keep omitted.",
+      "guardrail": "No technical output as product decoration.",
+      "platform": "Same scope on both platforms.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": null,
+      "master": null,
+      "board": "yJR9z"
+    },
+    {
+      "id": "ui/collapsible",
+      "name": "Collapsible",
+      "decision": "Use",
+      "group": "Disclosure",
+      "purpose": "Attached approved source note",
+      "screens": [
+        "P02",
+        "P05"
+      ],
+      "states": "Closed, expanded, withdrawn while open",
+      "source": "https://ui.shadcn.com/docs/components/collapsible",
+      "customization": "Join only the cited sentence and its evidence note with one shared margin line. Opening identifies the exact claim; Return to sentence restores its focus.",
+      "guardrail": "Preserve anchor and return focus; no private details in public evidence.",
+      "platform": "Native opens inline for short notes, inspection sheet for long evidence.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "h6LCI",
+      "master": "m8mDk",
+      "board": "Ydibd"
+    },
+    {
+      "id": "ui/combobox",
+      "name": "Combobox",
+      "decision": "Use",
+      "group": "Field",
+      "purpose": "Timezone and permitted-source lookup",
+      "screens": [
+        "A01.create",
+        "W02"
+      ],
+      "states": "Empty, loading, matches, no matches, error",
+      "source": "https://ui.shadcn.com/docs/components/combobox",
+      "customization": "For day selection, join ordinal flags to a quiet chronological index continuing from the trigger. Useful date/place/evidence labels make each option recognisable; other comboboxes retain appropriate source/timezone anatomy.",
+      "guardrail": "The index denotes day order, never GPS continuity. Recording gaps stay explicitly labelled. Focus neither commits a value nor moves the map; no forced folding animation on selection.",
+      "platform": "Search sheet with 48px rows; heavier inspection/Apply only for consequential destination changes.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "MOfMq",
+      "master": "o8BVvD",
+      "board": "Ydibd"
+    },
+    {
+      "id": "ui/command",
+      "name": "Command",
+      "decision": "Optional",
+      "group": "Navigation",
+      "purpose": "Creator keyboard navigation",
+      "screens": [
+        "W01"
+      ],
+      "states": "Closed, searching, no matches, denied task filtered",
+      "source": "https://ui.shadcn.com/docs/components/command",
+      "customization": "If needed, offer Jump to day/source with typed grouping and destination labels.",
+      "guardrail": "Navigation only by default; no silent publish/delete or fuzzy matches hiding scope.",
+      "platform": "A visible search action provides the same destinations.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "YI4vN",
+      "master": null,
+      "board": "GIdMz"
+    },
+    {
+      "id": "ui/context-menu",
+      "name": "Context Menu",
+      "decision": "Optional",
+      "group": "Overlay",
+      "purpose": "Desktop source-row shortcuts",
+      "screens": [
+        "W05"
+      ],
+      "states": "Open, disabled action, permission changed",
+      "source": "https://ui.shadcn.com/docs/components/context-menu",
+      "customization": "Mirror a small set of explicit row actions and show the affected object.",
+      "guardrail": "Never the only access path; no deep cascading submenus.",
+      "platform": "Use visible More; long press can be redundant, never required.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "gg4X6",
+      "master": null,
+      "board": "GIdMz"
+    },
+    {
+      "id": "ui/data-table",
+      "name": "Data Table",
+      "decision": "Use",
+      "group": "Data",
+      "purpose": "Creator sources and people",
+      "screens": [
+        "W05",
+        "W06"
+      ],
+      "states": "Sort, filter, selected, empty, pending, denied",
+      "source": "https://ui.shadcn.com/docs/components/data-table",
+      "customization": "Keep owner, scope and state in compact rows. A stable action shelf shows selected count and, where actions vary, per-action eligibility; inspect the affected subset before a consequential action.",
+      "guardrail": "Capabilities are independently supplied and rechecked; ownership alone never computes permission. Keep selection and focus stable through filters.",
+      "platform": "Use structured source rows, not a shrunken desktop table.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "q5AKCw",
+      "master": "x2e4D",
+      "board": "Ydibd"
+    },
+    {
+      "id": "ui/date-picker",
+      "name": "Date Picker",
+      "decision": "Use",
+      "group": "Field",
+      "purpose": "Dates with uncertainty",
+      "screens": [
+        "A01.create",
+        "A05.item"
+      ],
+      "states": "Exact, range, unknown, invalid, keyboard",
+      "source": "https://ui.shadcn.com/docs/components/date-picker",
+      "customization": "Make known date, unknown date and timezone context explicit; show journey context in the picker.",
+      "guardrail": "Unknown is distinct from invalid or empty; no natural-language inference without review.",
+      "platform": "Use native date entry plus a separate Unknown option.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "EoLDP",
+      "master": "SLfup",
+      "board": "Ydibd"
+    },
+    {
+      "id": "ui/dialog",
+      "name": "Dialog",
+      "decision": "Use",
+      "group": "Overlay",
+      "purpose": "Bounded focused task",
+      "screens": [
+        "W09",
+        "A08.preview"
+      ],
+      "states": "Open, dirty, invalid, waiting, error",
+      "source": "https://ui.shadcn.com/docs/components/dialog",
+      "customization": "Use a bounded task with an object header and stable action area; retain typed values after recoverable failure.",
+      "guardrail": "Keep focus trap and return focus with the proven primitive.",
+      "platform": "Keyboard-aware sheet/full-screen task when content needs it.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "ywVHm",
+      "master": "MwOAs",
+      "board": "TYvnd"
+    },
+    {
+      "id": "ui/direction",
+      "name": "Direction",
+      "decision": "Use",
+      "group": "Foundation",
+      "purpose": "Logical spacing and text direction",
+      "screens": [
+        "All"
+      ],
+      "states": "LTR, mixed source language; full RTL release not claimed",
+      "source": "https://ui.shadcn.com/docs/components/direction",
+      "customization": "Use logical leading/trailing edges for attached labels and forward actions.",
+      "guardrail": "Geography and geographic direction must not mirror with language.",
+      "platform": "Validate RTL text and control order independently from the map.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "gOxB9",
+      "master": "YQMgG",
+      "board": "TYvnd"
+    },
+    {
+      "id": "ui/drawer",
+      "name": "Drawer",
+      "decision": "Optional",
+      "group": "Overlay",
+      "purpose": "Compact-browser short tasks",
+      "screens": [
+        "W05",
+        "compact"
+      ],
+      "states": "Open, keyboard, tall content, cancelled",
+      "source": "https://ui.shadcn.com/docs/components/drawer",
+      "customization": "Use only for short contextual tasks; keep the originating object identifiable.",
+      "guardrail": "Do not adopt Vaul as a new foundation while it is unmaintained.",
+      "platform": "Native sheet has its own implementation and gesture contract.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "EPiou",
+      "master": null,
+      "board": "GIdMz"
+    },
+    {
+      "id": "ui/dropdown-menu",
+      "name": "Dropdown Menu",
+      "decision": "Use",
+      "group": "Overlay",
+      "purpose": "Secondary actions",
+      "screens": [
+        "W01",
+        "W05"
+      ],
+      "states": "Open, keyboard, disabled, empty after rights change",
+      "source": "https://ui.shadcn.com/docs/components/dropdown-menu",
+      "customization": "Group verbs by intent, keep a small object heading and open from the trigger’s actual edge.",
+      "guardrail": "Menus execute actions; value selection remains a Select/Combobox. No preview buttons nested in menu items.",
+      "platform": "Flatten secondary actions into a readable sheet; no hover cascades.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "DMuwB",
+      "master": "Jfrq4",
+      "board": "TYvnd"
+    },
+    {
+      "id": "ui/empty",
+      "name": "Empty",
+      "decision": "Use",
+      "group": "Feedback",
+      "purpose": "First-use and filtered-empty",
+      "screens": [
+        "A01",
+        "A04",
+        "P01"
+      ],
+      "states": "First-use, no matches, no eligible items",
+      "source": "https://ui.shadcn.com/docs/components/empty",
+      "customization": "Show the next useful step in the user’s context: clear a filter, add a moment, or retry access.",
+      "guardrail": "Filtered-empty must preserve filters; don’t call unavailable data empty.",
+      "platform": "One primary recovery action reachable above the keyboard.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "nHRI4",
+      "master": "guqHU",
+      "board": "TYvnd"
+    },
+    {
+      "id": "ui/field",
+      "name": "Field",
+      "decision": "Use",
+      "group": "Field",
+      "purpose": "Label, control, help and error",
+      "screens": [
+        "All",
+        "forms"
+      ],
+      "states": "Normal, optional, required, invalid, disabled, readonly",
+      "source": "https://ui.shadcn.com/docs/components/field",
+      "customization": "Keep labels fixed and attach help/error to the field edge; reserve only the space actually needed.",
+      "guardrail": "Don’t float labels into tiny text or validate while the person is still composing.",
+      "platform": "Grow with text size; error announcements must not repeatedly interrupt typing.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "fMjiu",
+      "master": "ft75f",
+      "board": "TYvnd"
+    },
+    {
+      "id": "ui/hover-card",
+      "name": "Hover Card",
+      "decision": "Optional",
+      "group": "Disclosure",
+      "purpose": "Desktop source preview",
+      "screens": [
+        "P02"
+      ],
+      "states": "Preview, unavailable; never required to understand a claim",
+      "source": "https://ui.shadcn.com/docs/components/hover-card",
+      "customization": "Use a restrained authorised source preview with a visible Inspect equivalent.",
+      "guardrail": "Focus and touch must reach the same information; no private prefetch.",
+      "platform": "Explicit tap opens inspection; no emulated hover.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "g71sxE",
+      "master": null,
+      "board": "GIdMz"
+    },
+    {
+      "id": "ui/input",
+      "name": "Input",
+      "decision": "Use",
+      "group": "Field",
+      "purpose": "Account and practical text",
+      "screens": [
+        "E01",
+        "W04"
+      ],
+      "states": "Empty, filled, focused, invalid, disabled, readonly",
+      "source": "https://ui.shadcn.com/docs/components/input",
+      "customization": "Add contextual suffixes only when useful, such as unit or timezone; maintain a crisp focus boundary.",
+      "guardrail": "No animated caret, disappearing placeholder-as-label or success check while saving.",
+      "platform": "Native keyboard/autofill conventions win; readable input size.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "LLQrD",
+      "master": "qfX7g",
+      "board": "TYvnd"
+    },
+    {
+      "id": "ui/input-group",
+      "name": "Input Group",
+      "decision": "Use",
+      "group": "Field",
+      "purpose": "Search, amount and password controls",
+      "screens": [
+        "P01",
+        "E01",
+        "W04"
+      ],
+      "states": "Searching, clear, error, password revealed",
+      "source": "https://ui.shadcn.com/docs/components/input-group",
+      "customization": "Keep search, clear and result scope in one stable row; show the active journey scope.",
+      "guardrail": "Async results must not overwrite a newer query or remove selection unexpectedly.",
+      "platform": "Dedicated clear button and keyboard-safe results.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "CJad0",
+      "master": "kNlec",
+      "board": "L5lDj"
+    },
+    {
+      "id": "ui/input-otp",
+      "name": "Input OTP",
+      "decision": "Omit",
+      "group": "Field",
+      "purpose": "Current verification uses links",
+      "screens": [
+        "E02"
+      ],
+      "states": "Not selected",
+      "source": "https://ui.shadcn.com/docs/components/input-otp",
+      "customization": "Keep omitted; no new authentication mechanism for visual interest.",
+      "guardrail": "Preserve current link verification flow.",
+      "platform": "Same scope on both platforms.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": null,
+      "master": null,
+      "board": "yJR9z"
+    },
+    {
+      "id": "ui/item",
+      "name": "Item",
+      "decision": "Use",
+      "group": "Content",
+      "purpose": "Sources, tasks and receipts",
+      "screens": [
+        "A04",
+        "W05"
+      ],
+      "states": "Default, selected, pending, denied, missing",
+      "source": "https://ui.shadcn.com/docs/components/item",
+      "customization": "Use a consistent anatomy: identity, evidence/state, and one trailing action; detail unfolds from its edge.",
+      "guardrail": "Do not hide ownership or failure behind decorative thumbnails.",
+      "platform": "A readable stacked row with separate inspect and selection targets.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "ED4nD",
+      "master": "sUric",
+      "board": "L5lDj"
+    },
+    {
+      "id": "ui/kbd",
+      "name": "Kbd",
+      "decision": "Use",
+      "group": "Foundation",
+      "purpose": "Optional desktop shortcuts",
+      "screens": [
+        "W02"
+      ],
+      "states": "Platform modifier, unavailable shortcut",
+      "source": "https://ui.shadcn.com/docs/components/kbd",
+      "customization": "Show optional shortcuts next to actions where they genuinely exist.",
+      "guardrail": "Hide irrelevant platform shortcuts; don’t animate keycaps or require shortcuts.",
+      "platform": "Omit from touch-first layouts.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "Dsord",
+      "master": "o9lhL",
+      "board": "L5lDj"
+    },
+    {
+      "id": "ui/label",
+      "name": "Label",
+      "decision": "Use",
+      "group": "Field",
+      "purpose": "Every input and choice",
+      "screens": [
+        "All",
+        "forms"
+      ],
+      "states": "Required, optional, long label",
+      "source": "https://ui.shadcn.com/docs/components/label",
+      "customization": "Keep plain, persistent labels; typography supplies the identity.",
+      "guardrail": "Never trade clarity for editorial naming in consent or errors.",
+      "platform": "Support wrapping and large text.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "skJaK",
+      "master": "lUZ70",
+      "board": "L5lDj"
+    },
+    {
+      "id": "ui/marker",
+      "name": "Marker",
+      "decision": "Optional",
+      "group": "Conversation",
+      "purpose": "Question-session separators",
+      "screens": [
+        "P04.question"
+      ],
+      "states": "Date, reset, invalidated session",
+      "source": "https://ui.shadcn.com/docs/components/marker",
+      "customization": "Use a modest date/session divider when it helps distinguish research sessions.",
+      "guardrail": "Do not imply a map location, unread messages or streaming progress.",
+      "platform": "Simple text separator; no scroll-follow behaviour.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "RcjGc",
+      "master": null,
+      "board": "j5kxZy"
+    },
+    {
+      "id": "ui/menubar",
+      "name": "Menubar",
+      "decision": "Defer",
+      "group": "Navigation",
+      "purpose": "Dense document editing may need it later",
+      "screens": [
+        "W02"
+      ],
+      "states": "No desktop menu imposed on native",
+      "source": "https://ui.shadcn.com/docs/components/menubar",
+      "customization": "Keep deferred until the editor’s actual tool count requires it.",
+      "guardrail": "Do not add an application-menu aesthetic to the whole product.",
+      "platform": "Use scoped editor tools if later needed.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": null,
+      "master": null,
+      "board": "yJR9z"
+    },
+    {
+      "id": "ui/message",
+      "name": "Message",
+      "decision": "Use",
+      "group": "Conversation",
+      "purpose": "Buffered grounded questions and answers",
+      "screens": [
+        "P04.question"
+      ],
+      "states": "Waiting, validated answer, abstention, invalidated",
+      "source": "https://ui.shadcn.com/docs/components/message",
+      "customization": "Render a buffered answer as readable prose with attached dated citations and explicit limits.",
+      "guardrail": "No typewriter reveal, simulated thinking or hidden-source citations.",
+      "platform": "Citations open a focused source sheet and return to the exact paragraph.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "m47Jny",
+      "master": "vCfH4",
+      "board": "L5lDj"
+    },
+    {
+      "id": "ui/message-scroller",
+      "name": "Message Scroller",
+      "decision": "Defer",
+      "group": "Conversation",
+      "purpose": "No streaming-follow interaction required",
+      "screens": [
+        "P04.question"
+      ],
+      "states": "Reconsider only with validated session need",
+      "source": "https://ui.shadcn.com/docs/components/message-scroller",
+      "customization": "Keep deferred; preserve the user’s reading position for buffered answers.",
+      "guardrail": "No automatic bottom scrolling while reading citations.",
+      "platform": "Same behaviour across platforms.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": null,
+      "master": null,
+      "board": "yJR9z"
+    },
+    {
+      "id": "ui/native-select",
+      "name": "Native Select",
+      "decision": "Use",
+      "group": "Field",
+      "purpose": "Simple fixed choices",
+      "screens": [
+        "A07.knowledge",
+        "W04"
+      ],
+      "states": "Selected, placeholder, disabled, error",
+      "source": "https://ui.shadcn.com/docs/components/native-select",
+      "customization": "Keep it for small, obvious choices; a concise surrounding summary can add Kairn context.",
+      "guardrail": "Do not replace a two-option setting with an elaborate preview panel.",
+      "platform": "Prefer platform familiarity when it serves the task.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "SquDf",
+      "master": "sTt0Y",
+      "board": "L5lDj"
+    },
+    {
+      "id": "ui/navigation-menu",
+      "name": "Navigation Menu",
+      "decision": "Use",
+      "group": "Navigation",
+      "purpose": "Public and creator destination links",
+      "screens": [
+        "P01",
+        "W01"
+      ],
+      "states": "Current, compact menu, keyboard, denied filtered",
+      "source": "https://ui.shadcn.com/docs/components/navigation-menu",
+      "customization": "Use quiet section cues and preserve the current journey title.",
+      "guardrail": "No mega-menu choreography or animated underline on every pointer movement.",
+      "platform": "Simple destination sheet or bottom navigation as the screen contract requires.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "RnMPp",
+      "master": "UJLSY",
+      "board": "LKXYN"
+    },
+    {
+      "id": "ui/pagination",
+      "name": "Pagination",
+      "decision": "Use",
+      "group": "Navigation",
+      "purpose": "Discover and source results",
+      "screens": [
+        "P01",
+        "W05"
+      ],
+      "states": "First, middle, last, loading, invalid page",
+      "source": "https://ui.shadcn.com/docs/components/pagination",
+      "customization": "Show result range and retain query/selection context when moving between pages.",
+      "guardrail": "No fake infinite scroll; don’t move focus silently into new results.",
+      "platform": "Previous/Next with 48px targets and clear page context.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "Xyacp",
+      "master": "cb5Pd",
+      "board": "LKXYN"
+    },
+    {
+      "id": "ui/popover",
+      "name": "Popover",
+      "decision": "Use",
+      "group": "Overlay",
+      "purpose": "Small filter and source choices",
+      "screens": [
+        "P01",
+        "W02"
+      ],
+      "states": "Open, loading, no matches, cancelled",
+      "source": "https://ui.shadcn.com/docs/components/popover",
+      "customization": "Anchor the surface to its trigger; use a brief opacity/near-rest transform for occasional opening.",
+      "guardrail": "Do not animate position after collision placement; keep focus ownership clear.",
+      "platform": "Promote complex popovers to a labelled sheet.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "QrZP5",
+      "master": "BqlyG",
+      "board": "LKXYN"
+    },
+    {
+      "id": "ui/progress",
+      "name": "Progress",
+      "decision": "Use",
+      "group": "Feedback",
+      "purpose": "Known bytes or counted processing items",
+      "screens": [
+        "A04.queue"
+      ],
+      "states": "Determinate, indeterminate, paused, failed, finalizing",
+      "source": "https://ui.shadcn.com/docs/components/progress",
+      "customization": "Show only known progress for the current operation; reveal a separate receipt for local, backup, contribution and publication states.",
+      "guardrail": "No synthetic percentages or one global ‘safe’ success state.",
+      "platform": "Keep the current phase and recovery action readable in compact rows.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "hPIPI",
+      "master": "IPB14",
+      "board": "LKXYN"
+    },
+    {
+      "id": "ui/questionnaire",
+      "name": "Questionnaire",
+      "decision": "Omit",
+      "group": "Conversation",
+      "purpose": "No agent-driven questionnaire workflow",
+      "screens": [
+        "None"
+      ],
+      "states": "Not selected",
+      "source": "https://ui.shadcn.com/docs/components/questionnaire",
+      "customization": "Keep omitted.",
+      "guardrail": "Do not introduce a new workflow because a library offers it.",
+      "platform": "Same scope on both platforms.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": null,
+      "master": null,
+      "board": "yJR9z"
+    },
+    {
+      "id": "ui/radio-group",
+      "name": "Radio Group",
+      "decision": "Use",
+      "group": "Field",
+      "purpose": "Source scope and visibility",
+      "screens": [
+        "A04.scope",
+        "W08"
+      ],
+      "states": "Current, proposed, disabled, stale, invalid",
+      "source": "https://ui.shadcn.com/docs/components/radio-group",
+      "customization": "Keep the control; add a concise consequence under each scope choice and a separate review action.",
+      "guardrail": "Changing a radio must not grant permissions.",
+      "platform": "Stack options with 48px targets and visible descriptions.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "XQ1V7",
+      "master": "TohXR",
+      "board": "LKXYN"
+    },
+    {
+      "id": "ui/resizable",
+      "name": "Resizable",
+      "decision": "Optional",
+      "group": "Layout",
+      "purpose": "Wide creator evidence split",
+      "screens": [
+        "W02",
+        "W04"
+      ],
+      "states": "Two panes, min size, keyboard, stacked",
+      "source": "https://ui.shadcn.com/docs/components/resizable",
+      "customization": "Allow a wide-screen story/evidence split with remembered local width.",
+      "guardrail": "Visible resize handle plus keyboard/reset control; minimum readable widths.",
+      "platform": "Use a navigation/sheet transition instead of a narrow split.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "OW6iT",
+      "master": null,
+      "board": "j5kxZy"
+    },
+    {
+      "id": "ui/scroll-area",
+      "name": "Scroll Area",
+      "decision": "Optional",
+      "group": "Layout",
+      "purpose": "Bounded source picker",
+      "screens": [
+        "W02"
+      ],
+      "states": "Overflow, keyboard, no content",
+      "source": "https://ui.shadcn.com/docs/components/scroll-area",
+      "customization": "Retain native-feeling scrolling; show boundaries only where content is genuinely clipped.",
+      "guardrail": "Never nest competing horizontal/vertical scrolling just for style.",
+      "platform": "Avoid scroll-versus-sheet gesture conflict; support switch access.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "mV6YE",
+      "master": null,
+      "board": "j5kxZy"
+    },
+    {
+      "id": "ui/select",
+      "name": "Select",
+      "decision": "Use",
+      "group": "Field",
+      "purpose": "Rich but short choice lists",
+      "screens": [
+        "W04",
+        "W08"
+      ],
+      "states": "Open, selected, disabled, invalid",
+      "source": "https://ui.shadcn.com/docs/components/select",
+      "customization": "Use clear option labels with one recognition cue where it prevents mistakes.",
+      "guardrail": "Simple choices remain simple; rich options still follow standard selection semantics.",
+      "platform": "Native select for trivial values, sheet for rich choices.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "VNFob",
+      "master": "H54qx3",
+      "board": "LKXYN"
+    },
+    {
+      "id": "ui/separator",
+      "name": "Separator",
+      "decision": "Use",
+      "group": "Foundation",
+      "purpose": "Page edge and group boundaries",
+      "screens": [
+        "All"
+      ],
+      "states": "Horizontal, vertical, high contrast",
+      "source": "https://ui.shadcn.com/docs/components/separator",
+      "customization": "Use page edges and connected source seams selectively to explain grouping.",
+      "guardrail": "Decorative lines never stand in for focus or control boundaries.",
+      "platform": "Keep logical direction and high-contrast modes in mind.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "p8Y6Zy",
+      "master": "CVmkd",
+      "board": "NC774"
+    },
+    {
+      "id": "ui/sheet",
+      "name": "Sheet",
+      "decision": "Use",
+      "group": "Overlay",
+      "purpose": "Source inspection with retained context",
+      "screens": [
+        "W05",
+        "P05"
+      ],
+      "states": "Open, unavailable, dirty, keyboard, return focus",
+      "source": "https://ui.shadcn.com/docs/components/sheet",
+      "customization": "Carry the day/source heading into the sheet; keep map context visible when possible and provide explicit Expand/Collapse.",
+      "guardrail": "Gestures are optional; keyboard/large text may require full height. Never hide attribution beneath it.",
+      "platform": "Separate map/sheet gesture areas; explicit controls, safe areas and restoration of focus.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "RUO8b",
+      "master": "idu1G",
+      "board": "NC774"
+    },
+    {
+      "id": "ui/sidebar",
+      "name": "Sidebar",
+      "decision": "Optional",
+      "group": "Layout",
+      "purpose": "Persistent wide creator contents",
+      "screens": [
+        "W01",
+        "W02"
+      ],
+      "states": "Expanded, compact menu, current chapter",
+      "source": "https://ui.shadcn.com/docs/components/sidebar",
+      "customization": "If content needs it, make it a compact journey contents list with day markers.",
+      "guardrail": "No permanent rail when it reduces useful map space; don’t adopt a dashboard shell.",
+      "platform": "Use contents sheet with the same hierarchy.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "lBRZx",
+      "master": null,
+      "board": "j5kxZy"
+    },
+    {
+      "id": "ui/skeleton",
+      "name": "Skeleton",
+      "decision": "Use",
+      "group": "Feedback",
+      "purpose": "Known incoming layout",
+      "screens": [
+        "A01",
+        "P01"
+      ],
+      "states": "Loading with label; replace by error after failure",
+      "source": "https://ui.shadcn.com/docs/components/skeleton",
+      "customization": "Reserve the actual expected image/row shape with a quiet static skeleton.",
+      "guardrail": "No perpetual shimmer; keep layout stable and announce loading once.",
+      "platform": "Respect reduced motion and avoid expensive large-area effects.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "DioAz",
+      "master": "iAZ15",
+      "board": "NC774"
+    },
+    {
+      "id": "ui/slider",
+      "name": "Slider",
+      "decision": "Use",
+      "group": "Media",
+      "purpose": "Playback seek and volume where needed",
+      "screens": [
+        "P03",
+        "A04.moment"
+      ],
+      "states": "Paused, playing, seek unavailable, focused",
+      "source": "https://ui.shadcn.com/docs/components/slider",
+      "customization": "Use a clear value/unit and useful marks; show recorded gaps honestly for playback.",
+      "guardrail": "No fake smooth interpolation over missing evidence; a slider must have keyboard/value entry alternatives.",
+      "platform": "Large touch thumb area; precise adjustment actions.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "egVjt",
+      "master": "o8z9mS",
+      "board": "NC774"
+    },
+    {
+      "id": "ui/spinner",
+      "name": "Spinner",
+      "decision": "Use",
+      "group": "Feedback",
+      "purpose": "Brief unknown-duration operation",
+      "screens": [
+        "All",
+        "pending"
+      ],
+      "states": "Busy, reduced motion, timeout recovery",
+      "source": "https://ui.shadcn.com/docs/components/spinner",
+      "customization": "Pair a small indicator with a meaningful phase such as Checking access.",
+      "guardrail": "Reduced motion uses a static progress cue; never imply duration or success.",
+      "platform": "Native status announcements; avoid repeating haptics.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "a76VYr",
+      "master": "vOUfR",
+      "board": "NC774"
+    },
+    {
+      "id": "ui/switch",
+      "name": "Switch",
+      "decision": "Use",
+      "group": "Field",
+      "purpose": "Reversible appearance/storage preference",
+      "screens": [
+        "A09.appearance",
+        "A09.storage"
+      ],
+      "states": "Off, on, disabled, pending preference",
+      "source": "https://ui.shadcn.com/docs/components/switch",
+      "customization": "Keep the familiar track/thumb; a concise state label explains the reversible preference.",
+      "guardrail": "No permission, publication or destructive action disguised as a switch.",
+      "platform": "Immediate local feedback; async persistence state stays separate.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "sT5ac",
+      "master": "yzaie",
+      "board": "NC774"
+    },
+    {
+      "id": "ui/table",
+      "name": "Table",
+      "decision": "Use",
+      "group": "Data",
+      "purpose": "Structured comparisons and grant details",
+      "screens": [
+        "W05",
+        "W06",
+        "A04.export"
+      ],
+      "states": "Long cells, empty, caption, responsive stack",
+      "source": "https://ui.shadcn.com/docs/components/table",
+      "customization": "Use aligned values and concise row labels for grants/comparisons; disclose details inline.",
+      "guardrail": "Do not turn a comparison into decorative tiles or hide differences behind motion.",
+      "platform": "Provide readable labelled records or deliberate horizontal scroll for true comparisons.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "gA2RH",
+      "master": "ucs42",
+      "board": "hZ78N"
+    },
+    {
+      "id": "ui/tabs",
+      "name": "Tabs",
+      "decision": "Use",
+      "group": "Navigation",
+      "purpose": "Story, Explore, Learn and editor tasks",
+      "screens": [
+        "P02",
+        "P03",
+        "P04",
+        "W01"
+      ],
+      "states": "Selected, focused, loading, unavailable destination",
+      "source": "https://ui.shadcn.com/docs/components/tabs",
+      "customization": "Use Fieldwork’s attached tabs; a short active seam reinforces the selected content.",
+      "guardrail": "Keyboard selection is immediate; preserve reader position separately in each view.",
+      "platform": "Keep labels visible and targets full-sized; no scroll hijacking.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "ssLEX",
+      "master": "ecors",
+      "board": "hZ78N"
+    },
+    {
+      "id": "ui/textarea",
+      "name": "Textarea",
+      "decision": "Use",
+      "group": "Field",
+      "purpose": "Notes, captions and transcripts",
+      "screens": [
+        "A02",
+        "W02",
+        "A04.moment"
+      ],
+      "states": "Empty, long, focused, error, offline retained",
+      "source": "https://ui.shadcn.com/docs/components/textarea",
+      "customization": "Let captions/notes grow naturally with an attached source or moment label.",
+      "guardrail": "Preserve text through failures; no animated height while actively typing.",
+      "platform": "Keyboard-safe actions and full-screen writing when necessary.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "urrH6",
+      "master": "PxvdZ",
+      "board": "hZ78N"
+    },
+    {
+      "id": "ui/toast",
+      "name": "Toast",
+      "decision": "Use",
+      "group": "Feedback",
+      "purpose": "Noncritical transient feedback",
+      "screens": [
+        "W02",
+        "A08.preview"
+      ],
+      "states": "Info, success verified, failure, action with sufficient time",
+      "source": "https://ui.shadcn.com/docs/components/toast",
+      "customization": "Use a concise confirmation with optional Undo only for truly reversible actions.",
+      "guardrail": "Critical sync/permission failures remain inline; hover/focus pause; no permission inferences.",
+      "platform": "Reachable dismiss/action and screen-reader announcement without stealing focus.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "J5lBp",
+      "master": "G3Dbm",
+      "board": "hZ78N"
+    },
+    {
+      "id": "ui/toggle",
+      "name": "Toggle",
+      "decision": "Use",
+      "group": "Action",
+      "purpose": "Formatting or reader option",
+      "screens": [
+        "W02",
+        "P02"
+      ],
+      "states": "Off, on, focused, disabled",
+      "source": "https://ui.shadcn.com/docs/components/toggle",
+      "customization": "Keep standard pressed state; use a stable icon plus accessible action name.",
+      "guardrail": "No decorative morph that changes the perceived action.",
+      "platform": "48px hit area and explicit state announcement.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "E2bpF",
+      "master": "m2RrL",
+      "board": "hZ78N"
+    },
+    {
+      "id": "ui/toggle-group",
+      "name": "Toggle Group",
+      "decision": "Use",
+      "group": "Action",
+      "purpose": "Capture mode and view preferences",
+      "screens": [
+        "A02",
+        "P03"
+      ],
+      "states": "Single, multiple, focused, unavailable mode",
+      "source": "https://ui.shadcn.com/docs/components/toggle-group",
+      "customization": "Use a shared quiet selected surface with compact labels for mode changes.",
+      "guardrail": "No camera movement until the map mode is deliberately changed.",
+      "platform": "The same modes, with a native-sized segmented control.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "PlkNj",
+      "master": "cyebb",
+      "board": "hZ78N"
+    },
+    {
+      "id": "ui/tooltip",
+      "name": "Tooltip",
+      "decision": "Use",
+      "group": "Disclosure",
+      "purpose": "Supplementary icon explanation",
+      "screens": [
+        "W02"
+      ],
+      "states": "Open, dismissed, reduced motion",
+      "source": "https://ui.shadcn.com/docs/components/tooltip",
+      "customization": "Use a brief initial delay and immediate neighbouring hints; place it from the actual trigger.",
+      "guardrail": "Supplementary only; errors and permission reasons stay visible.",
+      "platform": "Prefer visible labels or an explicit help action.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "RbKy6",
+      "master": "a4jqpY",
+      "board": "PxgYY"
+    },
+    {
+      "id": "ui/trace",
+      "name": "Trace",
+      "decision": "Omit",
+      "group": "Conversation",
+      "purpose": "Internal reasoning is not product content",
+      "screens": [
+        "None"
+      ],
+      "states": "Not selected",
+      "source": "https://ui.shadcn.com/docs/components/trace",
+      "customization": "Keep omitted; users receive grounded answers and sources.",
+      "guardrail": "Do not expose internal reasoning as a novel interaction.",
+      "platform": "Same scope on both platforms.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": null,
+      "master": null,
+      "board": "yJR9z"
+    },
+    {
+      "id": "ui/typography",
+      "name": "Typography",
+      "decision": "Use",
+      "group": "Foundation",
+      "purpose": "Story voice and calm controls",
+      "screens": [
+        "All"
+      ],
+      "states": "Body, display, long text, source script, 200 percent growth",
+      "source": "https://ui.shadcn.com/docs/components/typography",
+      "customization": "Use Fraunces for story identity and Geist for controls; let the words and photographs carry warmth.",
+      "guardrail": "No text scramble, scrolling text or typewriter effects in reading content.",
+      "platform": "Validate font shaping, text scaling and line length separately.",
+      "native": "Separate React Native / Unistyles implementation; 48 minimum target; no DOM dependency",
+      "specimen": "tlNHG",
+      "master": "TO9M4",
+      "board": "PxgYY"
+    }
+  ],
+  "patterns": [
+    {
+      "id": "K01",
+      "name": "Destination receipt",
+      "screens": [
+        "A02",
+        "A02.destination"
+      ],
+      "anatomy": "Selected journey and audience stay visible beside capture; Only me is an explicit value",
+      "states": "unknown journey, stale membership, offline",
+      "rule": "No location inference; selecting a destination does not contribute",
+      "specimen": "N1cALS",
+      "board": "XsQP7",
+      "fieldwork": "Destination picker shows journey/day, date certainty and owner context. A consequential move gets a separate review; ordinary navigation selects immediately."
+    },
+    {
+      "id": "K02",
+      "name": "Capture controls",
+      "screens": [
+        "A02",
+        "A03"
+      ],
+      "anatomy": "Labelled Photo, Video, Voice, Text controls with a steady record/stop state",
+      "states": "denied permission, interrupted, local saving, failed",
+      "rule": "Capture confirmation follows durable local saving only",
+      "specimen": "amlTp",
+      "board": "XsQP7",
+      "fieldwork": "The shutter acknowledges the tap immediately; ‘Saved on this device’ appears only after durable local persistence. Retain a small inspectable capture strip."
+    },
+    {
+      "id": "K03",
+      "name": "Transfer receipt",
+      "screens": [
+        "A03",
+        "A04.queue"
+      ],
+      "anatomy": "Separate Local file, Private backup, Contribution, Publication eligibility rows",
+      "states": "queued, transferring, finalizing, unknown, failed, missing file",
+      "rule": "A transfer bar never stands in for publication or backup verification",
+      "specimen": "UxjGQ",
+      "board": "XsQP7",
+      "fieldwork": "An expandable receipt shows four independent states instead of one reassuring checkmark. Retry stays attached to the failed operation."
+    },
+    {
+      "id": "K04",
+      "name": "Import inspection",
+      "screens": [
+        "A05",
+        "A05.item"
+      ],
+      "anatomy": "Selected file row plus metadata correction and explicit batch approval",
+      "states": "unsupported, missing, duplicate, uncertain date/location",
+      "rule": "Selection is not approval and not upload",
+      "specimen": "aOH33",
+      "board": "XsQP7",
+      "fieldwork": "Import becomes an inspection tray: choose, inspect crop/metadata, correct destination, then explicitly confirm selected candidates."
+    },
+    {
+      "id": "K05",
+      "name": "Scope review",
+      "screens": [
+        "A04.scope"
+      ],
+      "anatomy": "Equal scope choices plus Current/Proposed comparison",
+      "states": "mixed sources, stale permissions, narrowed grant, pending",
+      "rule": "Original export remains a separate task",
+      "specimen": "Vhvf9",
+      "board": "KrcFg",
+      "fieldwork": "Show a compact consequence summary under each scope choice; keep explicit review and separate export controls."
+    },
+    {
+      "id": "K06",
+      "name": "Original export grant",
+      "screens": [
+        "A04.export"
+      ],
+      "anatomy": "Exact recipient, files and expiry with explicit approve/decline",
+      "states": "expired, departed recipient, revoked, fresh identity required",
+      "rule": "Membership and source reuse confer no export grant",
+      "specimen": "HYHEX",
+      "board": "KrcFg",
+      "fieldwork": "Use an exact recipient/source/action receipt with explicit original-export rights and expiry where supported."
+    },
+    {
+      "id": "K07",
+      "name": "Evidence note",
+      "screens": [
+        "P05",
+        "W05"
+      ],
+      "anatomy": "Source title, provenance, date, scope and return-to-passage",
+      "states": "review-only, approved, withdrawn, no transcript",
+      "rule": "Public projection contains approved accessible data only",
+      "specimen": "J8t68E",
+      "board": "KrcFg",
+      "fieldwork": "A margin line joins the exact cited sentence to its evidence note. The note carries author, date and source type; returning restores the sentence. This association is not a truth/verification indicator."
+    },
+    {
+      "id": "K08",
+      "name": "Transcript correction",
+      "screens": [
+        "A04.moment",
+        "W05"
+      ],
+      "anatomy": "Original wording and proposed correction together with source offset",
+      "states": "unsupported language, processing, stale edit, offline",
+      "rule": "Correction does not authorize publication or grant reuse",
+      "specimen": "t1x7NZ",
+      "board": "KrcFg",
+      "fieldwork": "Show correction beside the original transcript segment and preserve its time anchor. Make changed words easy to inspect."
+    },
+    {
+      "id": "K09",
+      "name": "Stage and branch",
+      "screens": [
+        "A07.route",
+        "W03",
+        "P03"
+      ],
+      "anatomy": "Named stage sequence and participant-specific branch labels",
+      "states": "no GPS/rest day, gap, estimated, disputed",
+      "rule": "Keep chapter, stage and source identities distinct",
+      "specimen": "IW6Bj",
+      "board": "pW2LD",
+      "fieldwork": "One selected day coordinates the picker, stage index and already-open map sheet. The stage index denotes chronology, not route continuity. Map follow is explicit and stops on manual panning."
+    },
+    {
+      "id": "K10",
+      "name": "Practical observation",
+      "screens": [
+        "A07.knowledge",
+        "W04",
+        "P04"
+      ],
+      "anatomy": "Amount, currency, unit, party size and observation date beside evidence",
+      "states": "estimated, conflicting, unknown, redacted",
+      "rule": "A dated report is not current travel advice",
+      "specimen": "f6qV6g",
+      "board": "pW2LD",
+      "fieldwork": "Present practical observations as dated reports with attached evidence and uncertainty, not confident evergreen advice."
+    },
+    {
+      "id": "K11",
+      "name": "Editor and insertion",
+      "screens": [
+        "A07.chapter",
+        "W02"
+      ],
+      "anatomy": "Readable chapter with source insertion tray and visible edit status",
+      "states": "long text, source withdrawn, offline retained",
+      "rule": "No drag-only ordering; source access checked again",
+      "specimen": "o48ClR",
+      "board": "pW2LD",
+      "fieldwork": "Insert at a visible gap between story blocks; preview permitted media there before committing. Reorder keeps a clear drop marker and Move controls."
+    },
+    {
+      "id": "K12",
+      "name": "Conflict comparison",
+      "screens": [
+        "A07.conflict",
+        "W07"
+      ],
+      "anatomy": "Current accepted text and retained candidate, with scoped resolution",
+      "states": "stale again, rights lost, offline, evidence withdrawn",
+      "rule": "No silent overwrite or automatic retry against a changed base",
+      "specimen": "qHdru",
+      "board": "pW2LD",
+      "fieldwork": "A calm comparison labels Your version, Current version and affected fields, with a reliable return to the editing context."
+    },
+    {
+      "id": "K13",
+      "name": "Publication blocker",
+      "screens": [
+        "A06.publish",
+        "W08"
+      ],
+      "anatomy": "Affected source, exact dependent uses and authorized repair task",
+      "states": "owner, coauthor, publisher-only, inaccessible evidence",
+      "rule": "Repair controls are capability filtered; publisher authority is distinct",
+      "specimen": "IquY7",
+      "board": "YCxvY",
+      "fieldwork": "Each blocker opens the exact affected source or permission task; return preserves position and asks for a fresh preview when required."
+    },
+    {
+      "id": "K14",
+      "name": "Exact candidate preview",
+      "screens": [
+        "A06.preview",
+        "W08"
+      ],
+      "anatomy": "Candidate identity across Story, Explore, Learn and source inspection",
+      "states": "building, ready, invalidated, failed, current publication",
+      "rule": "Approval binds the reviewed candidate and current rights",
+      "specimen": "bKvSL",
+      "board": "YCxvY",
+      "fieldwork": "Make the exact candidate recognisable with a stable review label and visible changes since review."
+    },
+    {
+      "id": "K15",
+      "name": "Visibility approval",
+      "screens": [
+        "A06.publish",
+        "W08"
+      ],
+      "anatomy": "Audience explanation and explicit designated-publisher approval",
+      "states": "unlisted, public, draft changed, permission changed",
+      "rule": "Catalog listing is a separate submission",
+      "specimen": "GApRl",
+      "board": "YCxvY",
+      "fieldwork": "Keep visibility approval distinct from listing; make the chosen audience readable in a plain summary."
+    },
+    {
+      "id": "K16",
+      "name": "Listing receipt",
+      "screens": [
+        "A06.publish",
+        "W08"
+      ],
+      "anatomy": "Submission/status shown beside independent approved-publication state",
+      "states": "not submitted, pending, listed, rejected, removed",
+      "rule": "Listing rejection does not itself unpublish",
+      "specimen": "jTHWi",
+      "board": "YCxvY",
+      "fieldwork": "Place listing status next to, but separate from, publication status; provide the relevant next step."
+    },
+    {
+      "id": "K17",
+      "name": "Highlight selection",
+      "screens": [
+        "A08",
+        "A08.preview",
+        "W09.highlight-preview"
+      ],
+      "anatomy": "Approved attributed sources, personal caption and full-journey disclosure",
+      "states": "none eligible, withdrawn, generation failure",
+      "rule": "Recipient is read-only; external copies cannot be recalled",
+      "specimen": "VOydL",
+      "board": "w5oYra",
+      "fieldwork": "A small contact sheet shows eligible approved photographs and attribution; preview the recipient experience before sharing."
+    },
+    {
+      "id": "K18",
+      "name": "Grounded answer",
+      "screens": [
+        "P04.question"
+      ],
+      "anatomy": "Buffered answer, dated citations and a return to the exact source",
+      "states": "sign-in required, abstention, quota, invalidation, provider failure",
+      "rule": "No streaming internal reasoning or hidden-source citation",
+      "specimen": "ukSYU",
+      "board": "w5oYra",
+      "fieldwork": "Readable buffered answer, dated evidence seam and exact return anchor. Abstention gets a useful next question or source path."
+    },
+    {
+      "id": "K19",
+      "name": "Lifecycle impact",
+      "screens": [
+        "A06.lifecycle",
+        "A06.operation",
+        "E13"
+      ],
+      "anatomy": "Exact object, rights impact and honest operation receipt",
+      "states": "fresh identity, stale impact, unknown, cleanup pending",
+      "rule": "No success until known; source owner retains safe access after departure",
+      "specimen": "J3h71V",
+      "board": "w5oYra",
+      "fieldwork": "State exact impact, changed/stale impact and honest unknown outcomes in a stable dialog/receipt."
+    },
+    {
+      "id": "K20",
+      "name": "Invitation acceptance",
+      "screens": [
+        "A01.join",
+        "E07"
+      ],
+      "anatomy": "Named inviter/journey only when permitted and explicit Accept",
+      "states": "signed out, wrong account, expired, already member",
+      "rule": "Authentication preserves intent but never accepts automatically",
+      "specimen": "x3dIU",
+      "board": "w5oYra",
+      "fieldwork": "Preserve invitation intent through authentication, then show a clear invitation receipt and explicit Accept."
+    },
+    {
+      "id": "K21",
+      "name": "Saved research",
+      "screens": [
+        "A09.research",
+        "P04"
+      ],
+      "anatomy": "Private note attached to a currently accessible reference",
+      "states": "empty, unavailable reference, save failure",
+      "rule": "Keep typed note on failure; scrub denied preview data",
+      "specimen": "asMWF",
+      "board": "PqKyk",
+      "fieldwork": "Save a private note beside its accessible citation; preserve the note on failure and restore the reading position."
+    },
+    {
+      "id": "K22",
+      "name": "Safe unavailable",
+      "screens": [
+        "P08",
+        "A09.contributions"
+      ],
+      "anatomy": "Generic public recovery and neutral source-owner destination",
+      "states": "withdrawn share/source, denied, missing, departed owner",
+      "rule": "Do not leak private title, location, cover or member list",
+      "specimen": "c0t1U",
+      "board": "PqKyk",
+      "fieldwork": "Use a neutral unavailable state with a safe route back; retain only information the viewer may still see."
+    }
+  ],
+  "signatures": [
+    {
+      "id": "S1",
+      "name": "A day picker attached to the index",
+      "value": "Find the correct day/source with fewer inspections.",
+      "proposal": "Continue the chronological day index into a compact picker, with ordinal flags, place/date cues and explicit recording status. Ordinary settings remain simple selects; consequential destination moves get a separate review.",
+      "web": "Open from the actual trigger edge. Selecting a day updates the same day identity used by the visible sheet; focus alone never commits. No new map initialisation.",
+      "native": "Use the same day-index anatomy inside a full-size search sheet, not a small floating desktop popover.",
+      "cost": "Medium",
+      "test": "Compare names-only, rich rows and index-connected rows for wrong-day choice and speed. Ask what the connecting line means; reject it if mistaken for a recorded route.",
+      "track": "Signature experiment",
+      "prototypeOrder": 1
+    },
+    {
+      "id": "S2",
+      "name": "A claim visibly joined to its evidence",
+      "value": "Understand why a statement is present without losing the story.",
+      "proposal": "A quiet margin line joins only the cited sentence to its open note. Return to sentence restores focus; the line denotes association, never proof or certainty.",
+      "web": "Inline short evidence or a bounded side inspection; maintain source anchor.",
+      "native": "Inline for short notes; long source sheets carry the quoted claim in their heading. The return action restores the exact claim.",
+      "cost": "Medium",
+      "test": "Ask readers to verify a dated claim and resume reading. Observe lost position and mistaken certainty.",
+      "track": "Signature experiment",
+      "prototypeOrder": 2
+    },
+    {
+      "id": "S3",
+      "name": "One current day",
+      "value": "Stay oriented across story, photographs and map.",
+      "proposal": "Reuse one selected-day identity. Map stays uninitialised until requested; Follow story is opt-in and stops when the user pans.",
+      "web": "Day marker and content update; camera movement is a separate deliberate action or explicitly enabled follow.",
+      "native": "Persistent day heading in the map sheet; expand/collapse buttons accompany drag.",
+      "cost": "High",
+      "test": "Navigate, pan, inspect a source, rotate and return with keyboard/large text. Reject any automatic movement that overrides intent.",
+      "track": "Signature experiment",
+      "prototypeOrder": 1
+    },
+    {
+      "id": "S4",
+      "name": "Tools beside the selection",
+      "value": "Act on sources without a dashboard toolbar occupying the screen.",
+      "proposal": "A stable action area exposes selected count and per-action eligibility when capabilities differ. Ownership is shown as context, while independently supplied permissions determine available actions.",
+      "web": "Keep focus in the row; optional shortcut to the toolbar. No bouncing floating dock.",
+      "native": "A safe-area action shelf that does not cover the last row or keyboard.",
+      "cost": "Medium",
+      "test": "Select mixed-owner/mixed-eligibility items, filter and return. Inspect the exact subset before a consequential action; recheck capability. No silent partial success.",
+      "track": "Supporting task improvement",
+      "prototypeOrder": null
+    },
+    {
+      "id": "S5",
+      "name": "An editorial crop opening into the full photograph",
+      "value": "Give photographs presence while preserving the journey’s context.",
+      "proposal": "Preserve Fieldwork’s actual asymmetric frame and day/moment anchor while revealing the uncropped image, caption and attribution. Return to the same place in the story. In-story inspection is separate from K17 highlight sharing.",
+      "web": "Evaluate PhotoSwipe for the existing viewer requirement; load only authorised derivatives on explicit inspection.",
+      "native": "Native image viewer with equivalent interactions; no reuse of DOM components.",
+      "cost": "Medium–high",
+      "test": "Zoom/pan, change image, rotate and close on low-memory hardware; confirm caption legibility and return position.",
+      "track": "Signature experiment",
+      "prototypeOrder": 3
+    }
+  ],
+  "sources": [
+    {
+      "name": "Radix Dropdown Menu",
+      "url": "https://www.radix-ui.com/primitives/docs/components/dropdown-menu",
+      "decision": "Keep the existing semantic foundation; adapt trigger-aware motion and composition.",
+      "finding": "The documented primitive provides menu keyboard/focus contracts and exposes the transform origin. This is an action menu, not a universal rich picker.",
+      "license": "MIT (existing foundation)",
+      "fit": "High for selected web stack; no native DOM reuse."
+    },
+    {
+      "name": "coss ui",
+      "url": "https://coss.com/ui/docs/components/combobox",
+      "code": "https://github.com/cosscom/ui/blob/main/LICENSE",
+      "decision": "Adapt rich choice anatomy and size/clear/group variants.",
+      "finding": "Official demos/source expose small/large inputs, groups and chips. Repository license is MIT despite GitHub’s NOASSERTION classification.",
+      "license": "MIT",
+      "activity": "Repo pushed 2026-11-04; point-in-time activity, not a sustainability guarantee.",
+      "fit": "Base UI underlies its components. Borrow anatomy; don't add a second primitive foundation just for these visuals."
+    },
+    {
+      "name": "React Aria",
+      "url": "https://react-aria.adobe.com/ComboBox",
+      "code": "https://react-aria.adobe.com/dnd",
+      "decision": "Use as an accessibility and interaction reference.",
+      "finding": "Collection APIs distinguish filtering from selection; drag/drop documentation includes keyboard and screen-reader paths.",
+      "license": "Apache-2.0",
+      "activity": "Adobe repository active 2026-11-05.",
+      "fit": "Strong reference for complex collections; direct adoption adds another DOM interaction stack."
+    },
+    {
+      "name": "Motion Primitives",
+      "url": "https://github.com/ibelick/motion-primitives/blob/main/components/core/toolbar-expandable.tsx",
+      "code": "https://github.com/ibelick/motion-primitives/blob/main/components/core/animated-background.tsx",
+      "decision": "Adapt selection-surface continuity and contextual expansion; do not wholesale copy demos.",
+      "finding": "Expandable toolbar source contains hardcoded demo items and react-use-measure/Motion dependencies. Animated background uses shared layoutId; semantics and reduced-motion handling remain application responsibilities.",
+      "license": "MIT",
+      "activity": "Repo pushed 2026-09-28.",
+      "fit": "React web inspiration. Default demo dimensions/positioning do not fit native targets or Kairn’s selection rules."
+    },
+    {
+      "name": "easeful",
+      "url": "https://easeful.sanyam.sh/docs",
+      "code": "https://github.com/SanyamPunia/easeful/tree/main/packages/easeful/styles",
+      "decision": "Adopt the small CSS motion vocabulary as a design principle; evaluate own tiny styles before a package.",
+      "finding": "Inspected origin, tokens and reduced-motion source. It reads host state attributes and retains fade under reduced motion. Runtime CSS adds no JavaScript; focus/ARIA remain with the host primitive.",
+      "license": "MIT",
+      "activity": "Registry latest 0.1.3; repo pushed 2026-08-23. Small early project, so inspiration before dependency.",
+      "fit": "High conceptual fit for current web CSS approach. Validate lifecycle and CSS layer behaviour; not a native solution."
+    },
+    {
+      "name": "PhotoSwipe",
+      "url": "https://photoswipe.com/opening-or-closing-transition/",
+      "code": "https://photoswipe.com/options/",
+      "decision": "Strong web viewer candidate when the gallery is implemented; adapt its continuity, not every default.",
+      "finding": "Supports thumbnail-based opening, configurable transitions and reduced-motion behaviour; looping can be disabled.",
+      "license": "MIT",
+      "fit": "Web-only viewer; authorisation, captions, loading policy and native viewer remain Kairn responsibilities."
+    },
+    {
+      "name": "Motion",
+      "url": "https://motion.dev/docs/react-accessibility",
+      "decision": "Reserve for a demonstrated shared-layout/gesture need, not every button.",
+      "finding": "MotionConfig and useReducedMotion support reduced motion. The API does not choose appropriate product semantics or automatically make camera movement accessible.",
+      "license": "MIT core; premium offerings separate",
+      "fit": "React web. Current app CSS motion stays selected until a concrete need justifies a dependency."
+    },
+    {
+      "name": "Animate UI",
+      "url": "https://animate-ui.com/docs/primitives/radix-ui/dropdown-menu",
+      "code": "https://github.com/imskyleen/animate-ui/blob/main/LICENSE.md",
+      "decision": "Visual inspiration only for this shortlist.",
+      "finding": "Current license is MIT plus a Commons Clause condition restricting component redistribution, not plain MIT. Avoid importing a broad animated layer for small effects.",
+      "license": "MIT + Commons Clause condition",
+      "activity": "Repo pushed 2026-11-02.",
+      "fit": "React web and primitive wrappers; license and animation/API costs need explicit evaluation for reusable library distribution."
+    },
+    {
+      "name": "Vaul",
+      "url": "https://github.com/emilkowalski/vaul",
+      "decision": "Study sheet ergonomics; do not introduce as a new dependency.",
+      "finding": "Current repository README explicitly says it is unmaintained.",
+      "license": "MIT",
+      "activity": "Repo pushed 2025-10-03; maintainer notice outweighs popularity.",
+      "fit": "Web drawer; native sheet still needs a separate implementation."
+    }
+  ],
+  "baselineRequirements": [
+    {
+      "id": "S6",
+      "name": "Honest receipts — a baseline requirement",
+      "value": "Replace vague reassurance with an understandable account of what is actually saved or shared.",
+      "proposal": "Use the disclosure anatomy for separate local-file, private-backup, contribution and publication states. This is required clarity, not a signature animation experiment.",
+      "web": "Attached to source row and recoverable inline.",
+      "native": "Tap to inspect the receipt; failure and retry remain reachable offline.",
+      "cost": "Medium UI; high protocol dependency",
+      "test": "Interrupt a transfer and ask what is local, backed up, contributed and published. A user must not infer one state from another.",
+      "track": "Required product clarity",
+      "prototypeOrder": null
+    }
+  ],
+  "boundaries": [
+    "Fieldwork 1.0 selected on 6 November 2026. Design artifacts are authoritative for visuals; application code and dependency integration remain unchanged.",
+    "Share identity, semantics and tokens across web/native; do not share DOM components.",
+    "Selected stack remains web shadcn/Radix/Tailwind, native Expo/React Native/Unistyles and current Mapbox integrations.",
+    "Source scope, original export, membership, backup and publication remain separate.",
+    "Keep 36px compact desktop and at least 48px native touch targets; content can grow with text.",
+    "Maps open on explicit request; never auto-load a map through story scrolling or preview a fabricated connecting route.",
+    "Everything meaningful works without hover, drag, haptics or spatial animation.",
+    "All sample journey data in visual sketches is fictional; this is not a functioning app or proof of accessibility/performance."
+  ],
+  "rejectedPatterns": [
+    "Magnetic buttons, cursor followers, glowing borders and text scrambling: repeated distraction without task value.",
+    "Radial menus, gesture-only navigation and long-press-only actions: poor discoverability and cross-platform consistency.",
+    "Elastic menus and bouncing sheets over a map: competing motion and precision cost.",
+    "Hold-to-confirm as the only safety mechanism: inaccessible substitution for clear consequences and explicit confirmation.",
+    "Auto-advancing galleries, cinematic map flights and story scroll hijacking: loss of user control.",
+    "One universal animated wrapper or importing all libraries: hidden maintenance and rendering cost."
+  ],
+  "interactionReview": {
+    "accepted": [
+      "Corrected the truncated Fieldwork SHA-256 in the research record.",
+      "Separated creative prototype order from domain-clarity priorities.",
+      "Mapped in-story photo inspection independently of K17 recipient highlights.",
+      "Linked day selection across the picker and map-sheet sketch.",
+      "Added capability summaries to mixed-owner selection without deriving permissions from ownership.",
+      "Added all nine dimension-verified control specimens; five are additional instances, four already appear among the 32 masters.",
+      "Added a shared sentence/evidence margin and explicit return-to-sentence action."
+    ],
+    "modifiedOrRejected": [
+      "Day-index continuity is chronological only. Rejected encoding GPS continuity in that connecting line; gaps remain explicitly labelled.",
+      "Kept actual Fieldwork photo geometry (24/8/24/8 in the existing sketch), not the review’s unverified 16/16/4/16 values.",
+      "Review’s claim that narrow controls stayed 36px was not supported by the existing media rule; verify computed sizes rather than adding duplicate CSS.",
+      "No outer body/main padding added: the inline renderer owns its gutter. Kept the open editorial layout rather than adding a card grid.",
+      "The original selection action was inspection only; a plain count did not itself grant rights. Accepted richer eligibility information as a product improvement, not proof of an authorisation bug."
+    ]
+  }
+}

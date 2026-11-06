@@ -1,0 +1,1451 @@
+{
+  "version": "1.0",
+  "date": "2026-11-06",
+  "status": "User-selected Fieldwork baseline; supersedes Gather",
+  "document": "../fieldwork.pen",
+  "fieldworkSha256": "EA903F409B83C881F0CE4B353CE4D6C2CC3D8CCDB1E608BDB87B284F34C97AC4",
+  "start": {
+    "id": "exiKV",
+    "name": "FW00 / Fieldwork — start here"
+  },
+  "themeComparison": {
+    "id": "w6SEq1",
+    "name": "FW44 / Web and native / light and dark"
+  },
+  "scope": {
+    "boards": 45,
+    "reusableMasters": 102,
+    "linkedInstances": 128,
+    "components": 66,
+    "use": 50,
+    "optional": 8,
+    "deferred": 3,
+    "omitted": 5,
+    "patterns": 22,
+    "allRequiredMappingsResolve": true
+  },
+  "frames": [
+    {
+      "id": "exiKV",
+      "name": "FW00 / Fieldwork — start here",
+      "x": 0,
+      "y": 0,
+      "width": 1200,
+      "height": 880
+    },
+    {
+      "id": "emkmx",
+      "name": "FW01 / A small family of meaningful shapes",
+      "x": 1320,
+      "y": 0,
+      "width": 1200,
+      "height": 880
+    },
+    {
+      "id": "p5WTrh",
+      "name": "FW02 / Actions that answer your hand",
+      "x": 2640,
+      "y": 0,
+      "width": 1200,
+      "height": 880
+    },
+    {
+      "id": "m5kmhd",
+      "name": "FW03 / Fields make the state explicit",
+      "x": 3960,
+      "y": 0,
+      "width": 1200,
+      "height": 880
+    },
+    {
+      "id": "CvuEt",
+      "name": "FW04 / Choose deliberately",
+      "x": 0,
+      "y": 1000,
+      "width": 1200,
+      "height": 880
+    },
+    {
+      "id": "Cwn6Z",
+      "name": "FW05 / Navigation belongs to the journey",
+      "x": 1320,
+      "y": 1000,
+      "width": 1200,
+      "height": 880
+    },
+    {
+      "id": "o4NKIS",
+      "name": "FW06 / Focused tasks, soft edges",
+      "x": 2640,
+      "y": 1000,
+      "width": 1200,
+      "height": 880
+    },
+    {
+      "id": "wOBwE",
+      "name": "FW07 / Feedback without theatre",
+      "x": 3960,
+      "y": 1000,
+      "width": 1200,
+      "height": 880
+    },
+    {
+      "id": "iTsdM",
+      "name": "FW08 / Every source carries its context",
+      "x": 0,
+      "y": 2000,
+      "width": 1200,
+      "height": 880
+    },
+    {
+      "id": "C6WHO",
+      "name": "FW09 / Compose, repair, approve",
+      "x": 1320,
+      "y": 2000,
+      "width": 1200,
+      "height": 880
+    },
+    {
+      "id": "P9O2wC",
+      "name": "FW10 / A little movement, a clear reason",
+      "x": 2640,
+      "y": 2000,
+      "width": 1200,
+      "height": 880
+    },
+    {
+      "id": "fZol3",
+      "name": "FW11 / Night, without losing the meaning",
+      "x": 3960,
+      "y": 2000,
+      "width": 1200,
+      "height": 880
+    },
+    {
+      "id": "KCROg",
+      "name": "FW12 / W03 / Route workspace / coauthor / desktop",
+      "x": 0,
+      "y": 3100,
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "id": "DUlG6",
+      "name": "FW13 / Native map sheet / Explore anatomy",
+      "x": 1560,
+      "y": 3100,
+      "width": 390,
+      "height": 1100
+    },
+    {
+      "id": "SKYfp",
+      "name": "FW14 / P02 / Public story / editorial reading",
+      "x": 2070,
+      "y": 3100,
+      "width": 1200,
+      "height": 1060
+    },
+    {
+      "id": "b1O7wd",
+      "name": "FW15 / W05 / Sources / mixed batch review",
+      "x": 3390,
+      "y": 3100,
+      "width": 1280,
+      "height": 1040
+    },
+    {
+      "id": "b5Apb",
+      "name": "FW16 / W08 / Publisher review / narrow browser",
+      "x": 0,
+      "y": 4380,
+      "width": 440,
+      "height": 1160
+    },
+    {
+      "id": "k09a0",
+      "name": "FW17 / What this library proves — and what it does not",
+      "x": 560,
+      "y": 4380,
+      "width": 1200,
+      "height": 880
+    },
+    {
+      "id": "let0B",
+      "name": "FW18 / The day index becomes the picker",
+      "x": 0,
+      "y": 5700,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "id": "kbhg2",
+      "name": "FW19 / A claim and its evidence stay together",
+      "x": 1560,
+      "y": 5700,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "id": "pECkz",
+      "name": "FW20 / Inspect the photograph, keep the moment",
+      "x": 3120,
+      "y": 5700,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "id": "OR06x",
+      "name": "FW21 / Component catalogue 1 / 9",
+      "x": 0,
+      "y": 7020,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "id": "fPcrM",
+      "name": "FW22 / Component catalogue 2 / 9",
+      "x": 1560,
+      "y": 7020,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "id": "Ydibd",
+      "name": "FW23 / Component catalogue 3 / 9",
+      "x": 3120,
+      "y": 7020,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "id": "TYvnd",
+      "name": "FW24 / Component catalogue 4 / 9",
+      "x": 0,
+      "y": 8340,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "id": "L5lDj",
+      "name": "FW25 / Component catalogue 5 / 9",
+      "x": 1560,
+      "y": 8340,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "id": "LKXYN",
+      "name": "FW26 / Component catalogue 6 / 9",
+      "x": 3120,
+      "y": 8340,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "id": "NC774",
+      "name": "FW27 / Component catalogue 7 / 9",
+      "x": 0,
+      "y": 9660,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "id": "hZ78N",
+      "name": "FW28 / Component catalogue 8 / 9",
+      "x": 1560,
+      "y": 9660,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "id": "PxgYY",
+      "name": "FW29 / Component catalogue 9 / 9",
+      "x": 3120,
+      "y": 9660,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "id": "XsQP7",
+      "name": "FW30 / Kairn patterns 1 / 6",
+      "x": 0,
+      "y": 10980,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "id": "KrcFg",
+      "name": "FW31 / Kairn patterns 2 / 6",
+      "x": 1560,
+      "y": 10980,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "id": "pW2LD",
+      "name": "FW32 / Kairn patterns 3 / 6",
+      "x": 3120,
+      "y": 10980,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "id": "YCxvY",
+      "name": "FW33 / Kairn patterns 4 / 6",
+      "x": 0,
+      "y": 12300,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "id": "w5oYra",
+      "name": "FW34 / Kairn patterns 5 / 6",
+      "x": 1560,
+      "y": 12300,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "id": "PqKyk",
+      "name": "FW35 / Kairn patterns 6 / 6",
+      "x": 3120,
+      "y": 12300,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "id": "GIdMz",
+      "name": "FW36 / Optional components 1 / 2",
+      "x": 0,
+      "y": 13620,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "id": "j5kxZy",
+      "name": "FW37 / Optional components 2 / 2",
+      "x": 1560,
+      "y": 13620,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "id": "yJR9z",
+      "name": "FW38 / Explicitly deferred or omitted",
+      "x": 3120,
+      "y": 13620,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "id": "wVPjj",
+      "name": "FW39 / Platform, state and motion contracts",
+      "x": 0,
+      "y": 14940,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "id": "iomGT",
+      "name": "FW40 / Component state register 1 / 2",
+      "x": 1560,
+      "y": 14940,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "id": "vv7Qr",
+      "name": "FW41 / Component state register 2 / 2",
+      "x": 3120,
+      "y": 14940,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "id": "egNin",
+      "name": "FW42 / Shared states / native and dark",
+      "x": 0,
+      "y": 16260,
+      "width": 1440,
+      "height": 1280
+    },
+    {
+      "id": "pEhV6",
+      "name": "FW43 / Implementation references / clear boundaries",
+      "x": 1560,
+      "y": 16260,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "id": "w6SEq1",
+      "name": "FW44 / Web and native / light and dark",
+      "x": 0,
+      "y": 17660,
+      "width": 1600,
+      "height": 1200
+    }
+  ],
+  "masters": [
+    {
+      "id": "UWpQr",
+      "name": "Fieldwork / Continue to preview"
+    },
+    {
+      "id": "eBQwe",
+      "name": "Fieldwork / Save draft"
+    },
+    {
+      "id": "q82KY",
+      "name": "Fieldwork / Cancel"
+    },
+    {
+      "id": "BbmfR",
+      "name": "Fieldwork / Recorded, with a gap"
+    },
+    {
+      "id": "tkGqk",
+      "name": "Fieldwork / Inspect moment"
+    },
+    {
+      "id": "d9s761",
+      "name": "Fieldwork / Journey title"
+    },
+    {
+      "id": "ZQgpz",
+      "name": "Fieldwork / Withdraw source"
+    },
+    {
+      "id": "i30sNt",
+      "name": "Fieldwork / Checking…"
+    },
+    {
+      "id": "axxyb",
+      "name": "Fieldwork / Publish"
+    },
+    {
+      "id": "gUjBR",
+      "name": "Fieldwork / Journey title"
+    },
+    {
+      "id": "ZcBgR",
+      "name": "Fieldwork / Required title"
+    },
+    {
+      "id": "d5Kz4l",
+      "name": "Fieldwork / Combobox results"
+    },
+    {
+      "id": "j1x4P",
+      "name": "Fieldwork / Switch on"
+    },
+    {
+      "id": "YjPyn",
+      "name": "Fieldwork / Calendar month"
+    },
+    {
+      "id": "W4l0u",
+      "name": "Fieldwork / Story tab"
+    },
+    {
+      "id": "p7wTW4",
+      "name": "Fieldwork / Explore tab"
+    },
+    {
+      "id": "E78XZ",
+      "name": "Fieldwork / Learn tab"
+    },
+    {
+      "id": "kn1sj",
+      "name": "Fieldwork / Stage 01"
+    },
+    {
+      "id": "Y4b0bq",
+      "name": "Fieldwork / Stage 02"
+    },
+    {
+      "id": "hqWye",
+      "name": "Fieldwork / Stage 03"
+    },
+    {
+      "id": "BPVTs",
+      "name": "Fieldwork / Attached disclosure"
+    },
+    {
+      "id": "zaqbV",
+      "name": "Fieldwork / Edit sharing caption"
+    },
+    {
+      "id": "yMAY8",
+      "name": "Fieldwork / Withdraw this source?"
+    },
+    {
+      "id": "DW5da",
+      "name": "Fieldwork / Filter permitted sources"
+    },
+    {
+      "id": "CTgBE",
+      "name": "Fieldwork / Action menu"
+    },
+    {
+      "id": "Jrn59",
+      "name": "Fieldwork / Native sheet anatomy"
+    },
+    {
+      "id": "sSW0a",
+      "name": "Fieldwork / Saved to shared draft"
+    },
+    {
+      "id": "Q899m",
+      "name": "Fieldwork / Source unavailable"
+    },
+    {
+      "id": "ax93I",
+      "name": "Fieldwork / Photo"
+    },
+    {
+      "id": "v5he4",
+      "name": "Fieldwork / Four-axis transfer receipt"
+    },
+    {
+      "id": "hj1Wp",
+      "name": "Fieldwork / Back"
+    },
+    {
+      "id": "u01tc1",
+      "name": "Fieldwork / Native map sheet"
+    },
+    {
+      "id": "MBPI0",
+      "name": "Fieldwork / Accordion / catalogue"
+    },
+    {
+      "id": "eM0WW",
+      "name": "Fieldwork / Alert / catalogue"
+    },
+    {
+      "id": "mVLUo",
+      "name": "Fieldwork / Alert Dialog / catalogue"
+    },
+    {
+      "id": "pYhI0",
+      "name": "Fieldwork / Aspect Ratio / catalogue"
+    },
+    {
+      "id": "XC5Rx",
+      "name": "Fieldwork / Attachment / complete anatomy"
+    },
+    {
+      "id": "Zh247",
+      "name": "Fieldwork / Avatar / catalogue"
+    },
+    {
+      "id": "cdTDf",
+      "name": "Fieldwork / Badge / catalogue"
+    },
+    {
+      "id": "i4626",
+      "name": "Fieldwork / Breadcrumb / catalogue"
+    },
+    {
+      "id": "hRB8y",
+      "name": "Fieldwork / Button Group / catalogue"
+    },
+    {
+      "id": "GTrer",
+      "name": "Fieldwork / Card / complete anatomy"
+    },
+    {
+      "id": "eH0Rp",
+      "name": "Fieldwork / Carousel / complete anatomy"
+    },
+    {
+      "id": "NYTJc",
+      "name": "Fieldwork / Checkbox / catalogue"
+    },
+    {
+      "id": "m8mDk",
+      "name": "Fieldwork / Collapsible / catalogue"
+    },
+    {
+      "id": "o8BVvD",
+      "name": "Fieldwork / Combobox / complete anatomy"
+    },
+    {
+      "id": "x2e4D",
+      "name": "Fieldwork / Data Table / complete anatomy"
+    },
+    {
+      "id": "SLfup",
+      "name": "Fieldwork / Date Picker / catalogue"
+    },
+    {
+      "id": "MwOAs",
+      "name": "Fieldwork / Dialog / catalogue"
+    },
+    {
+      "id": "YQMgG",
+      "name": "Fieldwork / Direction / catalogue"
+    },
+    {
+      "id": "Jfrq4",
+      "name": "Fieldwork / Dropdown Menu / catalogue"
+    },
+    {
+      "id": "guqHU",
+      "name": "Fieldwork / Empty / complete anatomy"
+    },
+    {
+      "id": "ft75f",
+      "name": "Fieldwork / Field / catalogue"
+    },
+    {
+      "id": "qfX7g",
+      "name": "Fieldwork / Input / catalogue"
+    },
+    {
+      "id": "kNlec",
+      "name": "Fieldwork / Input Group / catalogue"
+    },
+    {
+      "id": "sUric",
+      "name": "Fieldwork / Item / catalogue"
+    },
+    {
+      "id": "o9lhL",
+      "name": "Fieldwork / Kbd / catalogue"
+    },
+    {
+      "id": "lUZ70",
+      "name": "Fieldwork / Persistent field label"
+    },
+    {
+      "id": "vCfH4",
+      "name": "Fieldwork / Message / complete anatomy"
+    },
+    {
+      "id": "sTt0Y",
+      "name": "Fieldwork / Native Select / catalogue"
+    },
+    {
+      "id": "UJLSY",
+      "name": "Fieldwork / Navigation Menu / catalogue"
+    },
+    {
+      "id": "cb5Pd",
+      "name": "Fieldwork / Pagination / catalogue"
+    },
+    {
+      "id": "BqlyG",
+      "name": "Fieldwork / Popover / catalogue"
+    },
+    {
+      "id": "IPB14",
+      "name": "Fieldwork / Progress / catalogue"
+    },
+    {
+      "id": "TohXR",
+      "name": "Fieldwork / Radio Group / complete anatomy"
+    },
+    {
+      "id": "H54qx3",
+      "name": "Fieldwork / Select / catalogue"
+    },
+    {
+      "id": "CVmkd",
+      "name": "Fieldwork / Separator / catalogue"
+    },
+    {
+      "id": "idu1G",
+      "name": "Fieldwork / Sheet / catalogue"
+    },
+    {
+      "id": "iAZ15",
+      "name": "Fieldwork / Skeleton / catalogue"
+    },
+    {
+      "id": "o8z9mS",
+      "name": "Fieldwork / Slider / catalogue"
+    },
+    {
+      "id": "vOUfR",
+      "name": "Fieldwork / Spinner / catalogue"
+    },
+    {
+      "id": "yzaie",
+      "name": "Fieldwork / Switch / catalogue"
+    },
+    {
+      "id": "ucs42",
+      "name": "Fieldwork / Table / complete anatomy"
+    },
+    {
+      "id": "ecors",
+      "name": "Fieldwork / Tabs / catalogue"
+    },
+    {
+      "id": "PxvdZ",
+      "name": "Fieldwork / Textarea / catalogue"
+    },
+    {
+      "id": "G3Dbm",
+      "name": "Fieldwork / Toast / catalogue"
+    },
+    {
+      "id": "m2RrL",
+      "name": "Fieldwork / Toggle / catalogue"
+    },
+    {
+      "id": "cyebb",
+      "name": "Fieldwork / Toggle Group / catalogue"
+    },
+    {
+      "id": "a4jqpY",
+      "name": "Fieldwork / Tooltip / complete anatomy"
+    },
+    {
+      "id": "TO9M4",
+      "name": "Fieldwork / Typography / catalogue"
+    },
+    {
+      "id": "N1cALS",
+      "name": "Fieldwork / K01 / Destination receipt"
+    },
+    {
+      "id": "amlTp",
+      "name": "Fieldwork / K02 / Capture controls"
+    },
+    {
+      "id": "UxjGQ",
+      "name": "Fieldwork / K03 / Transfer receipt"
+    },
+    {
+      "id": "aOH33",
+      "name": "Fieldwork / K04 / Import inspection"
+    },
+    {
+      "id": "Vhvf9",
+      "name": "Fieldwork / K05 / Scope review"
+    },
+    {
+      "id": "HYHEX",
+      "name": "Fieldwork / K06 / Original export grant"
+    },
+    {
+      "id": "J8t68E",
+      "name": "Fieldwork / K07 / Evidence note"
+    },
+    {
+      "id": "t1x7NZ",
+      "name": "Fieldwork / K08 / Transcript correction"
+    },
+    {
+      "id": "IW6Bj",
+      "name": "Fieldwork / K09 / Stage and branch"
+    },
+    {
+      "id": "f6qV6g",
+      "name": "Fieldwork / K10 / Practical observation"
+    },
+    {
+      "id": "o48ClR",
+      "name": "Fieldwork / K11 / Editor and insertion"
+    },
+    {
+      "id": "qHdru",
+      "name": "Fieldwork / K12 / Conflict comparison"
+    },
+    {
+      "id": "IquY7",
+      "name": "Fieldwork / K13 / Publication blocker"
+    },
+    {
+      "id": "bKvSL",
+      "name": "Fieldwork / K14 / Exact candidate preview"
+    },
+    {
+      "id": "GApRl",
+      "name": "Fieldwork / K15 / Visibility approval"
+    },
+    {
+      "id": "jTHWi",
+      "name": "Fieldwork / K16 / Listing receipt"
+    },
+    {
+      "id": "VOydL",
+      "name": "Fieldwork / K17 / Highlight selection"
+    },
+    {
+      "id": "ukSYU",
+      "name": "Fieldwork / K18 / Grounded answer"
+    },
+    {
+      "id": "J3h71V",
+      "name": "Fieldwork / K19 / Lifecycle impact"
+    },
+    {
+      "id": "x3dIU",
+      "name": "Fieldwork / K20 / Invitation acceptance"
+    },
+    {
+      "id": "asMWF",
+      "name": "Fieldwork / K21 / Saved research"
+    },
+    {
+      "id": "c0t1U",
+      "name": "Fieldwork / K22 / Safe unavailable"
+    }
+  ],
+  "instances": [
+    {
+      "id": "jdO7v",
+      "name": "Fieldwork / Save draft",
+      "ref": "eBQwe"
+    },
+    {
+      "id": "gzLGk",
+      "name": "Fieldwork / Review selected scope",
+      "ref": "UWpQr"
+    },
+    {
+      "id": "w15vQ",
+      "name": "Default / hover forward instance",
+      "ref": "UWpQr"
+    },
+    {
+      "id": "wP4E4",
+      "name": "Hover / theme-aware action fill",
+      "ref": "UWpQr"
+    },
+    {
+      "id": "e9Hae",
+      "name": "Keyboard focus forward instance",
+      "ref": "UWpQr"
+    },
+    {
+      "id": "a6uETf",
+      "name": "Focused progression",
+      "ref": "UWpQr"
+    },
+    {
+      "id": "zB3gl",
+      "name": "Pressed / pending forward instance",
+      "ref": "UWpQr"
+    },
+    {
+      "id": "yxCoz",
+      "name": "Fieldwork / Filter",
+      "ref": "q82KY"
+    },
+    {
+      "id": "J1ltCf",
+      "name": "Fieldwork / More actions",
+      "ref": "q82KY"
+    },
+    {
+      "id": "AQeGC",
+      "name": "Fieldwork / Clear",
+      "ref": "q82KY"
+    },
+    {
+      "id": "AoHh8",
+      "name": "Fieldwork / Search permitted sources",
+      "ref": "gUjBR"
+    },
+    {
+      "id": "w51d4",
+      "name": "Fieldwork / Observed on",
+      "ref": "gUjBR"
+    },
+    {
+      "id": "xP3PX",
+      "name": "Fieldwork / Field note",
+      "ref": "gUjBR"
+    },
+    {
+      "id": "lqH7C",
+      "name": "Fieldwork / Stage title",
+      "ref": "gUjBR"
+    },
+    {
+      "id": "Q0m1Tq",
+      "name": "Fieldwork / Distance",
+      "ref": "gUjBR"
+    },
+    {
+      "id": "P1kZVK",
+      "name": "Fieldwork / Candidate retained",
+      "ref": "BbmfR"
+    },
+    {
+      "id": "h9QZuV",
+      "name": "Fieldwork / Native text grows",
+      "ref": "sSW0a"
+    },
+    {
+      "id": "oQIyw",
+      "name": "Fieldwork / Link a stage",
+      "ref": "gUjBR"
+    },
+    {
+      "id": "GMOuX",
+      "name": "Fieldwork / Date unknown",
+      "ref": "q82KY"
+    },
+    {
+      "id": "XEamO",
+      "name": "Fieldwork / Back to publication review",
+      "ref": "q82KY"
+    },
+    {
+      "id": "IubKv",
+      "name": "Fieldwork / Close note",
+      "ref": "q82KY"
+    },
+    {
+      "id": "K4GQd",
+      "name": "Previous page",
+      "ref": "q82KY"
+    },
+    {
+      "id": "z9wVT7",
+      "name": "Next page",
+      "ref": "q82KY"
+    },
+    {
+      "id": "aXrCZ",
+      "name": "Fieldwork / Cancel",
+      "ref": "q82KY"
+    },
+    {
+      "id": "C1l9j",
+      "name": "Fieldwork / Keep caption",
+      "ref": "eBQwe"
+    },
+    {
+      "id": "wfl1P",
+      "name": "Fieldwork / Cancel",
+      "ref": "q82KY"
+    },
+    {
+      "id": "qMGMn",
+      "name": "Fieldwork / Withdraw source",
+      "ref": "ZQgpz"
+    },
+    {
+      "id": "aidVT",
+      "name": "Fieldwork / Cancel",
+      "ref": "q82KY"
+    },
+    {
+      "id": "UbbBK",
+      "name": "Fieldwork / Apply filters",
+      "ref": "eBQwe"
+    },
+    {
+      "id": "E1hG8A",
+      "name": "Fieldwork / Expand details",
+      "ref": "hj1Wp"
+    },
+    {
+      "id": "N4zyXM",
+      "name": "Fieldwork / Waiting for connection",
+      "ref": "BbmfR"
+    },
+    {
+      "id": "dc01x",
+      "name": "Fieldwork / Choose files",
+      "ref": "UWpQr"
+    },
+    {
+      "id": "FLhph",
+      "name": "Fieldwork / Previous",
+      "ref": "q82KY"
+    },
+    {
+      "id": "rqSc5",
+      "name": "Fieldwork / Next",
+      "ref": "q82KY"
+    },
+    {
+      "id": "RUkm5",
+      "name": "Fieldwork / Photo could not load",
+      "ref": "BbmfR"
+    },
+    {
+      "id": "i9Uvi",
+      "name": "Fieldwork / Retry photo",
+      "ref": "q82KY"
+    },
+    {
+      "id": "smayE",
+      "name": "Fieldwork / Morning walk.gpx",
+      "ref": "sSW0a"
+    },
+    {
+      "id": "R65gb",
+      "name": "Fieldwork / Inspect recording",
+      "ref": "UWpQr"
+    },
+    {
+      "id": "OEPax",
+      "name": "Fieldwork / View transfer status",
+      "ref": "q82KY"
+    },
+    {
+      "id": "ucUqd",
+      "name": "Fieldwork / Review proposed scope",
+      "ref": "BbmfR"
+    },
+    {
+      "id": "cbQ6l",
+      "name": "Fieldwork / Review change",
+      "ref": "UWpQr"
+    },
+    {
+      "id": "UXi8G",
+      "name": "Fieldwork / Original export is separate",
+      "ref": "BbmfR"
+    },
+    {
+      "id": "jzDk6",
+      "name": "Fieldwork / Unknown transfer outcome",
+      "ref": "BbmfR"
+    },
+    {
+      "id": "HTaVh",
+      "name": "Fieldwork / Add moment",
+      "ref": "q82KY"
+    },
+    {
+      "id": "hHfEm",
+      "name": "Fieldwork / Add note",
+      "ref": "q82KY"
+    },
+    {
+      "id": "zjCuP",
+      "name": "Fieldwork / Insert permitted evidence",
+      "ref": "BbmfR"
+    },
+    {
+      "id": "qeqgr",
+      "name": "Fieldwork / Original and correction",
+      "ref": "BbmfR"
+    },
+    {
+      "id": "CD6Xn",
+      "name": "Fieldwork / A newer revision exists",
+      "ref": "sSW0a"
+    },
+    {
+      "id": "YCixQ",
+      "name": "Fieldwork / Compare revisions",
+      "ref": "UWpQr"
+    },
+    {
+      "id": "bXIwx",
+      "name": "Fieldwork / One source needs repair",
+      "ref": "BbmfR"
+    },
+    {
+      "id": "g2Ye6",
+      "name": "Fieldwork / Review dependent uses",
+      "ref": "UWpQr"
+    },
+    {
+      "id": "uQmdh",
+      "name": "Fieldwork / Exact candidate C18",
+      "ref": "sSW0a"
+    },
+    {
+      "id": "K69XV",
+      "name": "Fieldwork / Visibility and listing",
+      "ref": "BbmfR"
+    },
+    {
+      "id": "KjDbr",
+      "name": "Press · 120 ms action",
+      "ref": "UWpQr"
+    },
+    {
+      "id": "OJULV",
+      "name": "Select · 180 ms action",
+      "ref": "UWpQr"
+    },
+    {
+      "id": "VJr7z",
+      "name": "Reveal · 220 ms action",
+      "ref": "UWpQr"
+    },
+    {
+      "id": "Us9pw",
+      "name": "Fieldwork / Reduced motion",
+      "ref": "BbmfR"
+    },
+    {
+      "id": "SfOoL",
+      "name": "Fieldwork / Consent stays still",
+      "ref": "sSW0a"
+    },
+    {
+      "id": "r1gBL",
+      "name": "Dark forward action",
+      "ref": "UWpQr"
+    },
+    {
+      "id": "nwSVT",
+      "name": "Fieldwork / Stage title",
+      "ref": "gUjBR"
+    },
+    {
+      "id": "OFHtp",
+      "name": "Focused forward action in dark",
+      "ref": "UWpQr"
+    },
+    {
+      "id": "U345E",
+      "name": "Fieldwork / Saved to shared draft",
+      "ref": "sSW0a"
+    },
+    {
+      "id": "rAX4f",
+      "name": "Fieldwork / Recording gap",
+      "ref": "BbmfR"
+    },
+    {
+      "id": "MrZMR",
+      "name": "Fieldwork / Source withdrawn",
+      "ref": "Q899m"
+    },
+    {
+      "id": "yK2bl",
+      "name": "Fieldwork / Open exact preview",
+      "ref": "UWpQr"
+    },
+    {
+      "id": "i2o2b",
+      "name": "Fieldwork / Move stage…",
+      "ref": "q82KY"
+    },
+    {
+      "id": "Tj0Fe",
+      "name": "Fieldwork / Map / Satellite",
+      "ref": "q82KY"
+    },
+    {
+      "id": "sugk4",
+      "name": "Fieldwork / Fit stage",
+      "ref": "q82KY"
+    },
+    {
+      "id": "TmBik",
+      "name": "Fieldwork / List view",
+      "ref": "q82KY"
+    },
+    {
+      "id": "K0joGS",
+      "name": "Fieldwork / Inspect moment",
+      "ref": "UWpQr"
+    },
+    {
+      "id": "UIyXL",
+      "name": "Fieldwork / Recording gap",
+      "ref": "BbmfR"
+    },
+    {
+      "id": "Xhw8T",
+      "name": "Fieldwork / Primary recording",
+      "ref": "gUjBR"
+    },
+    {
+      "id": "jiHyz",
+      "name": "Fieldwork / Linked chapter",
+      "ref": "gUjBR"
+    },
+    {
+      "id": "Gvsf3",
+      "name": "Fieldwork / Inspect evidence",
+      "ref": "UWpQr"
+    },
+    {
+      "id": "b09W5",
+      "name": "Fieldwork / View revision history",
+      "ref": "q82KY"
+    },
+    {
+      "id": "AClb5",
+      "name": "Fieldwork / A gap in the recording",
+      "ref": "BbmfR"
+    },
+    {
+      "id": "god4z",
+      "name": "Fieldwork / Inspect 3 moments",
+      "ref": "tkGqk"
+    },
+    {
+      "id": "j6E3S",
+      "name": "Fieldwork / Expand details",
+      "ref": "hj1Wp"
+    },
+    {
+      "id": "bw6Ig",
+      "name": "Reader Story tab",
+      "ref": "W4l0u"
+    },
+    {
+      "id": "XYJkt",
+      "name": "Reader Explore tab",
+      "ref": "p7wTW4"
+    },
+    {
+      "id": "EtsnD",
+      "name": "Reader Learn tab",
+      "ref": "E78XZ"
+    },
+    {
+      "id": "DmHQF",
+      "name": "Fieldwork / About this observation",
+      "ref": "sSW0a"
+    },
+    {
+      "id": "zczNx",
+      "name": "Fieldwork / Read source",
+      "ref": "UWpQr"
+    },
+    {
+      "id": "e4u3w",
+      "name": "Fieldwork / Not enough evidence",
+      "ref": "BbmfR"
+    },
+    {
+      "id": "pWd6D",
+      "name": "Fieldwork / Search",
+      "ref": "gUjBR"
+    },
+    {
+      "id": "pKBLa",
+      "name": "Fieldwork / Type: All",
+      "ref": "q82KY"
+    },
+    {
+      "id": "peVTw",
+      "name": "Fieldwork / Date: Any",
+      "ref": "q82KY"
+    },
+    {
+      "id": "mN8DF",
+      "name": "Fieldwork / Choose files",
+      "ref": "UWpQr"
+    },
+    {
+      "id": "atvDM",
+      "name": "Fieldwork / 4 accepted · 1 needs attention",
+      "ref": "BbmfR"
+    },
+    {
+      "id": "lG2pC",
+      "name": "Previous page",
+      "ref": "q82KY"
+    },
+    {
+      "id": "KjqkL",
+      "name": "Next page",
+      "ref": "q82KY"
+    },
+    {
+      "id": "tOaG7",
+      "name": "Fieldwork / Journey review only",
+      "ref": "BbmfR"
+    },
+    {
+      "id": "upq5U",
+      "name": "Fieldwork / Inspect source",
+      "ref": "UWpQr"
+    },
+    {
+      "id": "cpNy9",
+      "name": "Fieldwork / One source needs repair",
+      "ref": "BbmfR"
+    },
+    {
+      "id": "bL9Ol",
+      "name": "Fieldwork / Inspect blocker",
+      "ref": "tkGqk"
+    },
+    {
+      "id": "KPsYD",
+      "name": "Fieldwork / Refresh the exact preview",
+      "ref": "BbmfR"
+    },
+    {
+      "id": "gZUg4",
+      "name": "Fieldwork / Refresh preview",
+      "ref": "hj1Wp"
+    },
+    {
+      "id": "vBnvN",
+      "name": "Fieldwork / Failure is part of the component",
+      "ref": "BbmfR"
+    },
+    {
+      "id": "M2bsr",
+      "name": "Calendar October 2026",
+      "ref": "YjPyn"
+    },
+    {
+      "id": "zd90A",
+      "name": "Corrected day choices",
+      "ref": "d5Kz4l"
+    },
+    {
+      "id": "LN1ts",
+      "name": "Fieldwork / Switch off",
+      "ref": "yzaie"
+    },
+    {
+      "id": "NHeTA",
+      "name": "Story tab",
+      "ref": "W4l0u"
+    },
+    {
+      "id": "J2qEi",
+      "name": "Explore tab",
+      "ref": "p7wTW4"
+    },
+    {
+      "id": "x3zs2",
+      "name": "Learn tab",
+      "ref": "E78XZ"
+    },
+    {
+      "id": "eGSEj",
+      "name": "Web journey title",
+      "ref": "gUjBR"
+    },
+    {
+      "id": "ly0hK",
+      "name": "Web labelled switch",
+      "ref": "yzaie"
+    },
+    {
+      "id": "RlcyC",
+      "name": "Web hover action",
+      "ref": "UWpQr"
+    },
+    {
+      "id": "Zmz5p",
+      "name": "Web focused save",
+      "ref": "eBQwe"
+    },
+    {
+      "id": "BAtpf",
+      "name": "Web gap message",
+      "ref": "BbmfR"
+    },
+    {
+      "id": "kX2Oq",
+      "name": "Web unavailable source",
+      "ref": "Q899m"
+    },
+    {
+      "id": "IDG4G",
+      "name": "Web journey title",
+      "ref": "gUjBR"
+    },
+    {
+      "id": "rb0T5",
+      "name": "Web labelled switch",
+      "ref": "yzaie"
+    },
+    {
+      "id": "Bi9Vn",
+      "name": "Web hover action",
+      "ref": "UWpQr"
+    },
+    {
+      "id": "Jk9K6",
+      "name": "Web focused save",
+      "ref": "eBQwe"
+    },
+    {
+      "id": "bIOwf",
+      "name": "Web gap message",
+      "ref": "BbmfR"
+    },
+    {
+      "id": "R4hBfm",
+      "name": "Web unavailable source",
+      "ref": "Q899m"
+    },
+    {
+      "id": "WXX7V",
+      "name": "Native journey title",
+      "ref": "gUjBR"
+    },
+    {
+      "id": "yClkt",
+      "name": "Native labelled switch",
+      "ref": "yzaie"
+    },
+    {
+      "id": "ZXXSO",
+      "name": "Native default forward action",
+      "ref": "UWpQr"
+    },
+    {
+      "id": "oinXf",
+      "name": "Native focused save",
+      "ref": "eBQwe"
+    },
+    {
+      "id": "jIS1X",
+      "name": "Native gap message",
+      "ref": "BbmfR"
+    },
+    {
+      "id": "YSiVT",
+      "name": "Native unavailable source",
+      "ref": "Q899m"
+    },
+    {
+      "id": "UyvNs",
+      "name": "Native journey title",
+      "ref": "gUjBR"
+    },
+    {
+      "id": "Edrf6",
+      "name": "Native labelled switch",
+      "ref": "yzaie"
+    },
+    {
+      "id": "d29eL",
+      "name": "Native default forward action",
+      "ref": "UWpQr"
+    },
+    {
+      "id": "GThif",
+      "name": "Native focused save",
+      "ref": "eBQwe"
+    },
+    {
+      "id": "Tx9fR",
+      "name": "Native gap message",
+      "ref": "BbmfR"
+    },
+    {
+      "id": "T0mi3q",
+      "name": "Native unavailable source",
+      "ref": "Q899m"
+    }
+  ],
+  "tokens": "tokens.json",
+  "catalogue": "catalog.json",
+  "verification": "verification.json",
+  "asset": {
+    "path": "../exploration-assets/coonoor-mist.jpg",
+    "notice": "../exploration-assets/NOTICE.md",
+    "sha256": "13C6FA98C2E742471D68B097E95D1ACD43468464E957237CBE5CEB3418DAA597"
+  },
+  "dimensionNote": "Pen specimens use resolved numeric dimensions. Implement dimensions as content-growing minima; do not blindly copy fixed frame heights.",
+  "review": "Independent Gemini Argon review and parent corrections are recorded in verification.json and docs/design/fieldwork-verification.md. Static evidence does not establish production conformance."
+}

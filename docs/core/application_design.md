@@ -1,6 +1,6 @@
 # Application experience requirements
 
-Updated 5 November 2026 after the user's full visual-design reset. [DESIGN.md](../../DESIGN.md) is the active design and workflow hub. The previous aesthetic direction, reference studies, palette, typography, spacing, iconography, component styling and fixed page layouts have been removed from this document.
+Updated 6 November 2026 after the user selected Fieldwork 1.0. [DESIGN.md](../../DESIGN.md) owns the active visual baseline; this document retains functional screen responsibilities. Superseded styling and fixed layouts do not override the selected system.
 
 ## 1. Functional purpose
 
@@ -47,7 +47,7 @@ Screen IDs identify responsibilities, not fixed navigation chrome, page counts o
 
 ## 9. Component system
 
-Gather is the selected direction. The [approved component system](../design/gather-system.md) defines proposed anatomy, values, variants and platform mappings; the [design hub](../../DESIGN.md) owns its decision status. Preserve functional states: loading, true empty, filtered-empty, offline, pending/uncertain action, success, failure/retry, stale data and access denial. Keep labels, drafts, focus, safe returns and accessible alternatives through those transitions. Design specimens do not establish runtime acceptance.
+Fieldwork 1.0 is the selected direction. The [approved component system](../design/fieldwork-system.md) defines approved visual anatomy, values, variants and platform mappings; the [design hub](../../DESIGN.md) owns its decision status. Preserve functional states: loading, true empty, filtered-empty, offline, pending/uncertain action, success, failure/retry, stale data and access denial. Keep labels, drafts, focus, safe returns and accessible alternatives through those transitions. Design specimens do not establish runtime acceptance.
 
 Web and native own their rendering. Share approved plain design values and pure behavior through the existing architecture; do not infer a color, type family or icon choice from current package contents. Existing implementation can be reused only after assessing it against the newly selected design.
 

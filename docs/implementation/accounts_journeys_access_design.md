@@ -4,19 +4,19 @@ Date: 3 November 2026. Status: detailed experience handoff; the first B01 web fo
 
 Independent-review reconciliation: [findings and dispositions](../research/accounts-journey-access/review_2026-11-03.md). The [selected baseline](accounts_journeys_access_decisions.md) now fixes authority, lifecycle and limits; former visual asset choices have been reopened for implementation plan 1.2. Real rendering/API/device acceptance remains required.
 
-[DESIGN.md](../../DESIGN.md) owns fresh visual planning; no visual direction is currently selected. This document specifies its first delivery handoff: account access, private history, journey setup, membership/People, permission primitives and lifecycle feedback. It adds no new visual identity or product scope. Screen references below refine existing A01/A06/A09/W01/W06/W09 and shared entry flows; they do not renumber the core inventory.
+[DESIGN.md](../../DESIGN.md) owns the selected Fieldwork visual baseline. This document specifies account access, private history, journey setup, membership/People, permission primitives and lifecycle feedback. It adds no product scope. Screen references below refine existing A01/A06/A09/W01/W06/W09 and shared entry flows; they do not renumber the core inventory.
 
 ## 1. Experience goal
 
 A first-time participant should understand three facts without reading documentation: this is one shared journey, their personal material stays private, and each action has a clear audience and consequence. An organiser should invite people and manage powers without mistaking administration for ownership of their files. Returning users should reach their journeys quickly and trust what happened after a save, error or access change.
 
-Account and People screens need clear tasks, audiences and results. Their visual identity and composition will be designed afresh.
+Account and People screens need clear tasks, audiences and results. Compose them with Fieldwork components while preserving their functional contracts.
 
 ## 2. Functional component requirements
 
-### 2.1 Visual choices reopened
+### 2.1 Fieldwork foundations
 
-Select colors, typography, spacing, shapes, icons, imagery, motion and layout through DESIGN.md. Existing component values and font assets do not constrain those choices. Keep the selected rendering/styling architecture, current field validation, accessible interaction, safe native Back and keyboard behavior. New assets need appropriate licenses and actual rendering checks; selected semantic roles must be verified in context.
+Use Fieldwork colors, typography, spacing, shapes, icons and motion through DESIGN.md. Existing application values and font assets do not override this baseline. Keep the selected rendering/styling architecture, current field validation, accessible interaction, safe native Back and keyboard behavior. New assets need appropriate licenses and actual rendering checks; semantic roles must be verified in context.
 
 ### 2.2 Build a small useful component set
 

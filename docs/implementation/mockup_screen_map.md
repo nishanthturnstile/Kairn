@@ -306,4 +306,4 @@ Verification for this documentation checkpoint is recorded in [the workflow revi
 
 ## Approved visual baseline
 
-Gather 1.0 is frozen. See [system specification](../design/gather-system.md) and [library](../../design/gather.pen). The neutral connected wireframes retain functional authority; 18 approved library boards/recipes are component coverage, not a claim that every product screen has been drawn.
+Fieldwork 1.0 is selected. See the [system specification](../design/fieldwork-system.md) and [library](../../design/fieldwork.pen). The neutral connected wireframes retain functional authority; 45 library boards are component and composition coverage, not a claim that every product screen has been drawn.
