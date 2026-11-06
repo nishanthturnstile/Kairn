@@ -1,6 +1,6 @@
 # Creator web: workflow, screen connectivity and interaction specification
 
-> **Visual reset, 5 November 2026:** [DESIGN.md](../../DESIGN.md) is the active planning hub. Keep the tasks, information, permissions, connectivity and recovery requirements below. Visual identity, layout, navigation composition and component appearance are undecided; remaining container/label examples are revisitable interaction proposals, not approved page designs.
+> **Visual baseline, 6 November 2026:** [Fieldwork 1.0](../design/fieldwork-system.md) is selected through [DESIGN.md](../../DESIGN.md). Keep the functional, permission, connectivity and recovery contracts below. Apply Fieldwork to future compositions; remaining layout/container examples are interaction proposals, not approval of every screen.
 
 Date: 5 November 2026. Version: 1.0. Scope: W01–W08, the creator journey workspace. Status: detailed design proposal grounded in the current R1 baseline; ready for screen-by-screen review. This document does not claim implemented screens, approved new business policy, or production acceptance.
 
@@ -31,11 +31,11 @@ The first design exercise is a complete workflow, not eight disconnected mockups
 | [Product plan](../core/product_plan.md), especially §§1, 3, 5–9 | Purpose, audience, whole-trip promise, exclusions and community-first direction. |
 | [Product requirements](../core/product_requirements.md), especially §§2, 6–11, 16–20 | Functional scope, source rights, editing, release requirements and acceptance. |
 | [Architecture](../core/architecture.md), especially §§5–6, 8–11, 13–17 | Module ownership, contracts, durable edits, current authorization and publication/recovery boundaries. Section 14 remains the sole dependency register. |
-| [Application experience requirements](../core/application_design.md) | Canonical screen responsibilities and functional handoff; appearance is reopened in DESIGN.md. |
+| [Application experience requirements](../core/application_design.md) | Canonical screen responsibilities and functional handoff; DESIGN.md owns the Fieldwork baseline. |
 | [Selected account/journey decisions](accounts_journeys_access_decisions.md), D03–D06, D08, D10 | One administrator, restricted roster, independent powers, freshness, expiry and lifecycle behavior. |
 | [Account/journey handoff](accounts_journeys_access_design.md) | Existing entry, history, People, reauthentication, lifecycle and operation-status destinations. |
-| [Fresh design hub](../../DESIGN.md) | All visual and composition decisions are reopened; current components are implementation history. |
-| [Prototype boundary](../../DESIGN.md#5-prototype-boundary) | Explicit sample state; new scenario/delivery planning after relevant design choices. |
+| [Design hub](../../DESIGN.md) | Fieldwork owns visual values and component anatomy; current application components are implementation history. |
+| [Prototype boundary](../../DESIGN.md#approval-and-qualification) | Explicit sample state; connected Fieldwork composition and runtime qualification remain separate. |
 | [Ecosystem direction](../core/ecosystem_direction.md) | Studio/GeoKit/Moments/Privacy/Publisher/Player responsibilities, without adding services or packages. |
 
 **Interpretation labels:** “Baseline” means an existing requirement or selected decision. “Proposed” means a screen-level design choice in this specification. “Open” means the decision is intentionally unresolved. Proposed paths and component names are planning contracts, not claims that routes or APIs already exist. A business change is allowed, but its effect on requirements, policy, schemas, screens and acceptance must be recorded before implementation.
@@ -65,9 +65,9 @@ The primary creator is organizing a recent multi-day trip with friends, often wi
 
 Success is reaching an understandable, deliberately approved story without re-entering the trip, designing pages, losing edits, or confusing private backup with sharing. The workspace must make the next useful action clear without demanding that everyone follow a rigid wizard.
 
-### 2.3 Visual direction is undecided
+### 2.3 Fieldwork visual direction
 
-Select brand, typography, colors, icons, spacing, components and page composition through DESIGN.md. The creator's functional needs are chronology, attributable evidence, understandable permissions, retained work and deliberate publication. These needs do not select a palette, sidebar, chapter spine or editorial type treatment. Authors edit journey content; R1 does not add an end-user page/theme builder.
+Use Fieldwork's typography, colors, spacing and component anatomy through DESIGN.md. Compose screens around chronology, attributable evidence, understandable permissions, retained work and deliberate publication. Fieldwork does not approve every screen layout. Authors edit journey content; R1 does not add an end-user page/theme builder.
 
 ### 2.4 Terminology to keep consistent
 
@@ -655,7 +655,7 @@ These are narrow source observations, not a full code audit. Do not replace the 
 
 ### 19.1 Baseline choices to carry forward
 
-One canonical event; private-by-default source selection; independent administration/coauthor/publisher/source/export authorities; a single administrator with accepted transfer; honest uncertainty; current grants on all historical views; expected-revision editing; immutable approved narrative with immediate restrictive overrides; complete R1 scope; selected technical stack; visual direction is undecided.
+One canonical event; private-by-default source selection; independent administration/coauthor/publisher/source/export authorities; a single administrator with accepted transfer; honest uncertainty; current grants on all historical views; expected-revision editing; immutable approved narrative with immediate restrictive overrides; complete R1 scope; selected technical stack; Fieldwork visual baseline.
 
 ### 19.2 Proposed screen-level choices in this specification
 
@@ -685,7 +685,7 @@ These proposals are ready to review, not a record of explicit user approval. The
 | Media/codecs, batch, duration and source/route limits | Render qualified configuration and sample-only bounds; explain unsupported inputs | Real import UI and release. |
 | Transcription languages, alignment and processing budgets | Prepared sample text; actual chunk offsets only; unsupported state | Real transcription/extraction. |
 | Revocation/retention/RPO/RTO guarantees | Show actual state; selected policy targets are not measured guarantees | Shared-data activation and public release. |
-| Public brand/domain, moderation ownership, production email and provider terms | Working product name; visual identity undecided; local sample links and no delivery claims | Relevant deployment/public toolkit release. |
+| Public brand/domain, moderation ownership, production email and provider terms | Working product name; Fieldwork visual system selected; logo/domain remain separate; local sample links and no delivery claims | Relevant deployment/public toolkit release. |
 
 For a business change, record: decision, prior rule, reason, affected actors, incoming/outgoing edges, source/visibility consequences, data/API implications, migration/compatibility impact and replacement acceptance scenarios. Update the governing document first when policy changes; this screen specification then follows. Do not silently add voting, unrestricted collaboration, navigation, AI chat, bookings or payment gates through a UI example.
 
@@ -769,3 +769,83 @@ Authoring host: Windows. Source baseline: `4a6528e728bc4c799a957730dcd6244b65417
 Chosen checks: canonical W01–W08 inventory; entry/exit/action/state/acceptance coverage; contextual-edge references and endpoint vocabulary; relative Markdown links; requirement-ID references; whitespace/diff review. No application tests are required for this reversible documentation change, and no product acceptance is claimed.
 
 Executed results: all eight canonical screen sections present; N01–N27 defined once with no undefined N references; local source links resolve; explicitly named requirement IDs and numeric ranges resolve against the governing register; screen-section structure check passed after heading normalization; `git diff --check` passed. Manual review reconciled publisher read-only access, restricted People disclosure, current-grant revision access, return-to-review freshness and separate publication/listing state. Replaced the initial W07 source-link shorthand with the explicit N10 connection. This checks document consistency, not runtime navigation or accessibility conformance.
+
+## First connected static wireframes — 5 November 2026
+
+Artifact: [flow-wireframes.pen](../../design/flow-wireframes.pen). Start at canvas frame **00 / OjON2**, then follow numbered frames and the adjacent review annotations. This is a **static flow wireframe**, not a clickable prototype. Pen's installed schema/execute API exposes no frame-navigation interaction primitive; a text `href` does not establish prototype transitions. The overview has drawn arrow connectors and each frame has explicit forward, Back/Cancel, entry, actor, state and accessibility notes outside its product UI.
+
+Review status **S** below means static contract/connection review and structural canvas check completed, with representative rendered screens inspected. It does not mean user-approved interaction design, runtime/device acceptance or individually exercised accessibility. N = native shared Android/iOS review size 390 × 844; W = browser review size 1280 × 900. Aliases on a wide frame are functional equivalents, not an additional drawn native composition; compact/wide adaptations remain open. A state under an existing ID is not a new page requirement.
+
+All content and outcomes are fictional/simulated. Inter, grayscale, rectangle controls, dimensions and spacing are disposable wireframe choices. They establish no visual system. Frame-level annotations carry state reuse and alternatives; they do not claim actual durable saving, upload, email delivery, publishing or deletion.
+
+| Frame / Pen node | Screen IDs and task/state | Drawn size | Actor / source state | Notes node | Review |
+| --- | --- | --- | --- | --- | --- |
+| 33 / `T6qgn4` | W01 — Journey workspace | W | Leela; coauthor | `v3wWJ` | S |
+| 34 / `fVjiW` | W05 / A06.sources — Choose a permitted source | W | Leela; coauthor, review projections | `eO56s` | S |
+| 35 / `PyxKp` | W05 / A04.moment — Review source evidence | W | Leela permitted reviewer / Arun owner variant | `w8AvV` | S |
+| 36 / `qKIem` | W02 — Compose the shared story | W | Leela; coauthor | `tDfVR` | S |
+| 37 / `CFcUc` | W03 — Correct stages and route | W | Leela; coauthor | `X7y53X` | S |
+| 38 / `P4c2Mg` | W04 — Correct practical detail | W | Leela; coauthor | `m6z8MP` | S |
+| 39 / `llGVn` | A07.conflict / W07 — The draft changed | W | Leela; coauthor | `slSEs` | S |
+| 40 / `vVe4S` | W07 / A07.conflict — Resolve safely | W | Leela; coauthor | `Z7Pu5` | S |
+| 41 / `l3G33` | W08 / A06.publish — Review before publishing | W | Dev; publisher only | `spQp7` | S |
+| 42 / `f9V4j` | W08 — Publication blocked | W | Dev publisher / Leela coauthor variant | `yWy9L` | S |
+| 43 / `fDsjx` | W02 — Repair publication blocker | W | Leela; coauthor | `PEjMh` | S |
+| 44 / `iZeUL` | W08 / A06.preview — Candidate preview · Story | W | Dev; publisher; candidate C2 | `QZ8xL` | S |
+| 45 / `V930q3` | W08 / A06.preview — Candidate preview · Explore | W | Dev; publisher; same candidate C2 | `iF7hX` | S |
+| 46 / `kF0CJ` | W08 / A06.preview — Candidate preview · Learn | W | Dev; publisher; same candidate C2 | `SV3Qj` | S |
+| 47 / `zTbWh` | W08 — Choose audience and approve | W | Dev; publisher only | `TBBJb` | S |
+| 48 / `NHrMY` | W08 / A06.publish — Review is out of date | W | Dev; publisher | `eLNs9` | S |
+| 49 / `Hmjs4` | W08 / A06 — Publication approved | W | Dev; publisher · simulated success | `yLXMf` | S |
+| 50 / `C3mig` | W08 — Discover listing status | W | Dev; publisher | `o5YLT` | S |
+| 56 / `oZPC5` | A08 / W09.highlights — Choose your highlights | N | Arun; active participant; approved V1 | `iikbx` | S |
+| 57 / `GUxwL` | A08.preview / W09.highlight-preview — Preview your highlights | N | Arun; active member | `T4d8ft` | S |
+| 58 / `M6R5ee` | A08.preview / W09.highlight-preview — Share explicitly | N | Arun; hosted selection ready (simulated) | `lNIgy` | S |
+| 63 / `XRAlV` | W09.history / E05 — Your journeys | W | Leela; authenticated browser | `jgNlL` | S |
+| 64 / `ejLTk` | W09.highlights / W09.highlight-preview — Create personal highlights | W | Arun; browser authenticated active member | `P5bLr` | S |
+
+## Scope-to-preview refinement — 5 November 2026
+
+Continue in [flow-wireframes.pen](../../design/flow-wireframes.pen), overview **R00 / `OLIDE`**. The R labels are artifact/state references, **not new canonical screen IDs**. This refinement adds 21 paired native/compact-browser states (42 screens and 42 external annotation panels). Original first-flow frames remain intact and their relevant annotations point here. The detailed loop below supersedes their schematic treatment for this task only; unrelated canvas work is preserved.
+
+All ordinary frames use a **390 × 844** native or browser content viewport. R19 uses 200% text and a **390 × 1316 full scroll-content capture** for that same 844px viewport. R20 is a scrolled editor fragment with a 300px keyboard-occlusion allowance; its actions end at y=388, above the y=544 occlusion boundary. Browser chrome/OS keyboard are not app-owned drawings. These are temporary review sizes, not selected breakpoints or typography.
+
+Status **S** = static contract review, settled canvas bounds check, and representative screenshot inspection; no runtime/accessibility certification. Every screen has entry, action, caller-specific return, actor/current source state, failures and focus notes outside product UI. N/W are platform equivalents of the existing A/W/E responsibilities.
+
+| Artifact / Pen node | Existing screen responsibility and state | Actor | Size | Notes node | Review |
+| --- | --- | --- | --- | --- | --- |
+| R01W / `LJEtT` | W05 — Who may use this source? | Arun · active source owner | 390 × 844 | `znqWe` | S |
+| R02W / `m8tWo` | W05 — Confirm each source | Arun · source owner | 390 × 844 | `uXoXp` | S |
+| R03W / `RdJzN` | W05 — Review the audience again | Arun · source owner | 390 × 844 | `Qsdmq` | S |
+| R04W / `WdVPg` | W05 — Correct your transcript | Arun · source owner | 390 × 844 | `y4rQ6L` | S |
+| R05W / `YyMhg` | W05 — Checking the save | Arun · source owner | 390 × 844 | `wAdWk` | S |
+| R06W / `b4WarO` | W08 — Publication is blocked | Dev · publisher only | 390 × 844 | `P6uAa` | S |
+| R07W / `S3T8z` | W08 — Repair the rights blocker | Leela · coauthor, not publisher | 390 × 844 | `rDg4S` | S |
+| R08W / `Z3mZnS` | W02 / W04 — Exclude the affected uses | Leela · coauthor | 390 × 844 | `HUN8b` | S |
+| R09W / `iQR1w` | W07 — Keep your repair candidate | Leela · coauthor | 390 × 844 | `q2jt6v` | S |
+| R10W / `fBGR0` | W08 — Preparing a fresh preview | Dev publisher / Leela reviewer | 390 × 844 | `i5WK2` | S |
+| R11W / `coNL2` | W08 — Review the refreshed result | Dev · publisher only | 390 × 844 | `QvK3r` | S |
+| R12W / `pzSqg` | W08 — Story preview | Dev · publisher; candidate C2 | 390 × 844 | `KH9dT` | S |
+| R13W / `gtOF8` | W08 — Explore preview | Dev · publisher; candidate C2 | 390 × 844 | `Z7d52` | S |
+| R14W / `gb0Tf` | W05 — Inspect the review source | Dev publisher / Leela coauthor | 390 × 844 | `h5rxCX` | S |
+| R15W / `S83Qn` | W08 — Learn preview | Dev · publisher; candidate C2 | 390 × 844 | `DBZvw` | S |
+| R16W / `FAHfZ` | W08 — This preview is out of date | Dev · publisher | 390 × 844 | `p3TH7M` | S |
+| R17W / `o1BT9` | W08 — Approve this exact candidate | Dev · publisher only | 390 × 844 | `E6efZw` | S |
+| R18W / `oAsxq` | E15 — This task is unavailable | Current account lacks required access | 390 × 844 | `mkhGo` | S |
+| R19W / `thlOr` | W05 — Who may use this source? | Arun · source owner · large-text review | 390 × 1316 scroll; 844 viewport | `MGUGN` | S |
+| R20W / `mBN8F` | W05 — Correct transcript | Arun · source owner · keyboard review | 390 × 844 | `nvAMm` | S |
+| R21W / `nogEX` | E01 / W02 — Independent browser sign-in and repair return | Leela; browser initially signed out | 390 × 844 | `B16ou` | S |
+
+
+## Fieldwork component recipes — 6 November 2026
+
+[System specification](../design/fieldwork-system.md), [catalogue](../../design/fieldwork-system/catalog.json) and [registry](../../design/fieldwork-system/manifest.json) map the selected design in [fieldwork.pen](../../design/fieldwork.pen).
+
+| Composition | Frame / board | Screen responsibility |
+|---|---|---|
+| Route workspace | `KCROg` / FW12 | W03 stage selection, primary recording and honest gaps |
+| Source review | `b1O7wd` / FW15 | W05 mixed selection with capability-specific actions |
+| Narrow publication review | `b5Apb` / FW16 | W08 publisher review and blocker inspection |
+| Conflict, blocker, candidate, approval | K12–K15 / FW32–FW33 | Role-authorized repair and refreshed exact review |
+
+The source owner, coauthor and publisher keep independent capabilities. A publisher without coauthor powers cannot edit; a coauthor cannot grant source reuse or approve publication solely by being a coauthor. Native/browser authentication remains independent. The neutral R01–R21 contracts above retain all repair, invalidation, unknown-outcome and return states. Static components do not establish runtime acceptance.

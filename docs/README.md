@@ -1,6 +1,6 @@
 # Documentation
 
-Start design and workflow work with [DESIGN.md](../DESIGN.md). The user has reset visual planning; previous colors, fonts, components and layouts are withdrawn. Product requirements and technical implementation records retain their own scope.
+Start design and workflow work with [DESIGN.md](../DESIGN.md). Fieldwork 1.0 is the selected visual baseline; superseded concepts and old application styling are not design inputs. Product requirements and technical implementation records retain their own scope.
 
 | Folder | Contents |
 |---|---|
@@ -18,7 +18,7 @@ Start design and workflow work with [DESIGN.md](../DESIGN.md). The user has rese
 
 ## Design and workflows
 
-[DESIGN.md](../DESIGN.md) connects the fresh decision process to all surfaces. No new visual direction is selected. Workflow documents below preserve tasks and connections; their layout/container examples remain revisitable.
+[DESIGN.md](../DESIGN.md) connects Fieldwork to all surfaces. Its [system specification](design/fieldwork-system.md), [editable library](../design/fieldwork.pen), [catalogue](../design/fieldwork-system/catalog.json) and [qualification record](design/fieldwork-verification.md) are the active visual references. Runtime behavior still requires acceptance checks. Workflow documents below preserve tasks and connections.
 
 - [Pen.dev setup and design workflow](implementation/pen_dev_setup_plan.md) — extension/MCP connection, three configured Codex profiles, verified MCP canvas access, session refresh, free-plan limits, reusable libraries and screen-by-screen handoff
 - [Cross-surface journeys and lifecycle workflows](implementation/lifecycle_workflow_spec.md) — start here for the complete journey map, shared account/history/export/highlight screens, named lifecycle actions and combined scenarios
@@ -30,6 +30,8 @@ Start design and workflow work with [DESIGN.md](../DESIGN.md). The user has rese
 - [Workflow review and reset verification](implementation/workflow_review.md) — functional findings, corrections and documentation checks
 
 ## Implementation plans
+
+- [Repository cleanup and structure review](implementation/repository_cleanup_progress.md) ? removed superseded app prototypes, folder purposes, retained runtime boundaries and verification limits
 
 - [Ecosystem planning progress](implementation/ecosystem_direction_progress.md) — recorded direction, branch baseline, documentation checks and unimplemented follow-ups
 

@@ -90,17 +90,15 @@ Use Pen's installed tool/skill guidance for canvas operations. Existing design s
 
 Create documents through Pen after the connection works; do not fabricate `.pen` JSON directly. Keep design sources, libraries and necessary assets together and version them with Git. IDE saving is managed by VS Code; unsaved recovery is not version history. [Pen files](https://docs.pen.dev/core-concepts/pen-files).
 
-Proposed organization, to create as work begins:
+Current retained design organization:
 
 ```text
-DESIGN.md                         current choices and links
+DESIGN.md                         current baseline and links
 design/
-  explorations.pen                labelled candidate directions
-  kairn-system.lib.pen            selected components and variables
-  mobile.pen                      A-screen states
-  creator-web.pen                 W-screen states
-  public-web.pen                  P-screen states
-  assets/                         selected fonts, icons, logo and licensed media
+  fieldwork.pen                   selected component system, FW00–FW44
+  fieldwork-system/               tokens, catalogue, manifest and verification
+  flow-wireframes.pen             neutral functional screen/state references
+  exploration-assets/            required licensed reference photo and notice
 ```
 
 Start from an ordinary blank document while exploring. Package the selected system into a library when ready, then import it into screen documents. Keep a source checkpoint before conversion: Pen documents library conversion as irreversible and restricts conversion when libraries are already imported. Save library changes and reopen consuming documents to refresh them. Instances can override inherited values, so inspect unexpected differences. [Library workflow](https://docs.pen.dev/design-systems/design-libraries).

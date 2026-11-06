@@ -827,8 +827,6 @@ function ConfiguredAccount({ origin }: { origin: string }) {
       />
       {showLicenses ? (
         <View style={styles.section}>
-          <Text style={styles.fontSpecimen}>Newsreader Medium 500</Text>
-          <Text style={styles.fontStrong}>Instrument Sans Bold 700</Text>
           <Text style={styles.body}>{fontNotices.Newsreader}</Text>
           <Text style={styles.body}>{fontNotices.InstrumentSans}</Text>
         </View>
@@ -851,7 +849,6 @@ const styles = StyleSheet.create((theme, rt) => ({
     padding: theme.spacing.xl,
     gap: theme.spacing.md,
   },
-  fontSpecimen: { fontFamily: "Newsreader500", fontSize: 24, color: theme.colors.text },
   fontStrong: { fontFamily: "InstrumentSans700", fontSize: 16, color: theme.colors.text },
   heading: { fontFamily: "Newsreader600", fontSize: 34, lineHeight: 40, color: theme.colors.text },
   subheading: { fontFamily: "InstrumentSans600", fontSize: 22, color: theme.colors.text },

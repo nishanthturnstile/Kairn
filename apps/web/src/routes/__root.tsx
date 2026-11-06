@@ -1,4 +1,4 @@
-import { createRootRouteWithContext, Link, Outlet, useLocation } from "@tanstack/react-router";
+import { createRootRouteWithContext, Link, Outlet } from "@tanstack/react-router";
 import type { QueryClient } from "@tanstack/react-query";
 import { fontLicenses } from "../font-licenses";
 import { AppearanceControl, AppearanceProvider } from "../components/appearance";
@@ -13,8 +13,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: () => <p role="alert">This page could not be loaded.</p>,
 });
 function Root() {
-  const path = useLocation({ select: (location) => location.pathname });
-  if (path.startsWith("/prototype")) return <Outlet />;
   return (
     <main className="creator-shell">
       <header className="creator-header">
@@ -26,7 +24,6 @@ function Root() {
           document.documentElement.dataset.accountsEnabled === "true" ? (
             <Link to="/account">Your account</Link>
           ) : null}
-          {import.meta.env.DEV ? <Link to="/setup/accounts">Account specimens</Link> : null}
         </nav>
       </header>
       <Outlet />

@@ -2,9 +2,9 @@
 
 Read `docs/README.md` for the documentation map. Requirements in `docs/core/product_requirements.md` govern functional scope. `docs/core/architecture.md` section 14 is the canonical dependency register; `DESIGN.md` is the active design/workflow hub; `docs/core/application_design.md` retains functional screen responsibilities. The setup/mobile plans under `docs/implementation/` govern the foundation and host workflow. Dated research can contain superseded alternatives.
 
-## Fresh design reset — 5 November 2026
+## Approved design baseline — 6 November 2026
 
-The user withdrew the previous visual identity, design constraints, component styling, page layouts and prototype/redesign plans. Start design work at `DESIGN.md`. Colors, fonts, spacing, icons, logo, motion and every page are undecided; do not infer defaults from existing tokens, components, screenshots or installed icon/font packages. Workflow documents remain functional inputs; their presentation proposals are revisitable. Do not resume old prototype/design milestone sequences. Archived visual progress under `docs/archive/design-before-2026-11-05/` is for explicitly requested historical implementation audits only, not default planning context. Preserve functional requirements, authorization, accessibility, durability and the selected technical stack.
+Fieldwork 1.0 is selected by the user, replacing Gather. Start at `DESIGN.md` and `docs/design/fieldwork-system.md`; use `design/fieldwork.pen` and the catalogue/tokens under `design/fieldwork-system/`. Superseded design systems and temporary exploration research are removed after preserving required contracts and provenance. Do not inherit old application styling. The neutral connected wireframes remain functional references only. Record future customization as a deliberate baseline revision. Visual approval does not waive accessibility, permission, durability or platform acceptance checks.
 
 ## Testing scope
 

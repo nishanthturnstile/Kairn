@@ -4,9 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test:design-system": "pnpm build:web && vp test run --config config/integration/vite.design-system.config.ts",
-    "prototype:seed": "node scripts/prototype/fixtures.mjs",
-    "prototype:check": "node scripts/prototype/fixtures.mjs --check && vp test run tests/shared/prototype.test.ts",
+    "test:account-ui": "pnpm build:web && vp test run --config config/integration/vite.account-ui.config.ts",
     "checkout:status": "node scripts/checkouts.mjs status",
     "checkout:sync": "node scripts/checkouts.mjs sync",
     "doctor": "node scripts/doctor.mjs",

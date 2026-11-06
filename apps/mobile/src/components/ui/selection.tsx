@@ -5,44 +5,6 @@ import { Button } from "./button";
 import { useModalFocus } from "./modal-focus";
 
 export type Choice = { value: string; label: string; description?: string; disabled?: boolean };
-export function Checkbox({
-  label,
-  description,
-  checked,
-  onChange,
-  disabled = false,
-}: {
-  label: string;
-  description?: string;
-  checked: boolean;
-  onChange: (value: boolean) => void;
-  disabled?: boolean;
-}) {
-  return (
-    <Pressable
-      accessibilityRole="checkbox"
-      accessibilityLabel={label}
-      accessibilityHint={description}
-      accessibilityState={{ checked, disabled }}
-      disabled={disabled}
-      onPress={() => onChange(!checked)}
-      style={({ pressed }) => [
-        styles.choice,
-        checked && styles.selected,
-        pressed && styles.pressed,
-        disabled && styles.disabled,
-      ]}
-    >
-      <View style={[styles.indicator, checked && styles.checked]}>
-        <View style={checked && styles.checkMark} />
-      </View>
-      <View style={styles.copy}>
-        <Text style={styles.label}>{label}</Text>
-        {description && <Text style={styles.detail}>{description}</Text>}
-      </View>
-    </Pressable>
-  );
-}
 export function RadioGroup({
   label,
   value,
@@ -80,38 +42,6 @@ export function RadioGroup({
             <Text style={styles.label}>{option.label}</Text>
             {option.description && <Text style={styles.detail}>{option.description}</Text>}
           </View>
-        </Pressable>
-      ))}
-    </View>
-  );
-}
-export function SegmentedControl({
-  label,
-  value,
-  options,
-  onChange,
-}: {
-  label: string;
-  value: string;
-  options: readonly string[];
-  onChange: (value: string) => void;
-}) {
-  return (
-    <View accessibilityRole="radiogroup" accessibilityLabel={label} style={styles.segments}>
-      {options.map((option) => (
-        <Pressable
-          key={option}
-          accessibilityRole="radio"
-          accessibilityLabel={option}
-          accessibilityState={{ checked: option === value }}
-          onPress={() => onChange(option)}
-          style={({ pressed }) => [
-            styles.segment,
-            option === value && styles.selected,
-            pressed && styles.pressed,
-          ]}
-        >
-          <Text style={styles.label}>{option}</Text>
         </Pressable>
       ))}
     </View>
@@ -237,37 +167,12 @@ const styles = StyleSheet.create((theme, rt) => ({
     justifyContent: "center",
   },
   checked: { backgroundColor: theme.colors.primary, borderColor: theme.colors.primary },
-  checkMark: {
-    width: 9,
-    height: 5,
-    borderLeftWidth: 2,
-    borderBottomWidth: 2,
-    borderColor: theme.colors.primaryText,
-    transform: [{ rotate: "-45deg" }],
-  },
   radio: { borderRadius: theme.radius.round },
   radioDot: {
     width: 8,
     height: 8,
     borderRadius: theme.radius.round,
     backgroundColor: theme.colors.primaryText,
-  },
-  segments: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: theme.spacing.xs,
-    borderWidth: 1,
-    borderColor: theme.colors.controlBorder,
-    borderRadius: theme.controlRadius,
-    padding: theme.spacing.xs,
-  },
-  segment: {
-    flexGrow: 1,
-    minHeight: theme.control.minHeight,
-    padding: theme.spacing.sm,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: theme.controlRadius,
   },
   scrim: { flex: 1, backgroundColor: theme.colors.scrim, justifyContent: "flex-end" },
   sheet: {

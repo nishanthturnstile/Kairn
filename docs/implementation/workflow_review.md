@@ -57,3 +57,13 @@ Chosen verification: documentation inventory equality, identifier uniqueness, so
 - Local file/anchor links in the four changed documents resolve; whitespace checks include the new untracked map as well as tracked edits. Private checker/input hashes and results are under `.kairn/verification/mockup-screen-map/`.
 
 The checks use the pinned Windows environment with a process-scoped execution-policy adjustment for its activation script. Application tests/builds, browser/device work and Pen canvas creation were outside this documentation-only checkpoint; no new test suite or runtime acceptance is claimed. Mockup design starts from DESIGN.md and the selected bounded task, with each resulting frame/state/size recorded in its owning workflow specification.
+
+## Fieldwork baseline revision — 6 November 2026
+
+The user selected Fieldwork 1.0, requested an independent Gemini Argon review and authorized cleanup of superseded design files. [Design hub](../../DESIGN.md) and [qualification record](../design/fieldwork-verification.md) now own the baseline and final evidence. Earlier visual-reset statements in this dated history do not override that selection.
+
+Chosen checks cover complete component/pattern mapping, light/dark text and control contrast, native/compact specimen dimensions, canvas clipping/overlap, saved-file identity, asset dependencies and local documentation references. Final results: 45 boards; 50 Use + 8 Optional specimens; 22 patterns; 3,324 text and 228 icon appearance checks plus 72 declared contrast pairs pass; no clipped/collapsed/unfinished/overlapping canvas frames. Argon findings were corrected in one bounded parent pass and representative final surfaces inspected. Runtime/native/application tests were not run because this task changes design artifacts and documentation only; the qualification record retains those gates.
+
+Removed 126 superseded/temporary design files after preserving accepted research and domain contracts. Functional wireframes and the required licensed photograph retain their original hashes. Application code, dependencies and host configuration were not changed; no commit or push was made.
+
+Final local-reference check: 64 maintained documents, 642 relative file/anchor targets, zero failures. Staged and unstaged whitespace checks passed; required application/dependency paths have no diff.

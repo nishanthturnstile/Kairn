@@ -13,7 +13,6 @@ export function createApp(options: {
   publicOrigin: string;
   onError?: (error: Error) => void;
   checkReady?: () => Promise<void>;
-  designSpecimens?: boolean;
   accounts?: {
     // Owning transport supplies the trusted connection/proxy identity. The app
     // factory never interprets a caller-controlled forwarded-IP header.
@@ -123,24 +122,9 @@ export function createApp(options: {
     context.header("X-Robots-Tag", "noindex, nofollow");
     return context.html(await options.web.reader({ marker }, context.req.url));
   });
-  if (options.designSpecimens) {
-    app.get("/setup/accounts", async (context) => {
-      context.header("Cache-Control", "no-store");
-      context.header("X-Robots-Tag", "noindex, nofollow");
-      context.header("Referrer-Policy", "no-referrer");
-      return context.html(
-        (await options.web.creator(context.req.url)).replace(
-          "<html",
-          `<html data-accounts-enabled="${Boolean(options.accounts)}"`,
-        ),
-      );
-    });
-  }
   for (const path of [
     "/",
     "/setup/status",
-    "/prototype",
-    "/prototype/*",
     ...(options.accounts
       ? ["/sign-in", "/create-account", "/recover", "/reset-password", "/verify-email", "/account"]
       : []),

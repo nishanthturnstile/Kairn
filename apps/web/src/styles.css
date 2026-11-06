@@ -111,7 +111,7 @@ button:not([data-slot]):disabled {
   margin-top: var(--kairn-spacing-xxl);
   font-size: 0.75rem;
 }
-.creator-shell:has(.account-specimens) {
+.creator-shell:has(.account-live) {
   max-width: var(--kairn-layout-page-max);
   margin-block: var(--kairn-spacing-xxl);
   padding-inline: var(--kairn-layout-margin-compact);
