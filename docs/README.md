@@ -31,6 +31,8 @@ Start design and workflow work with [DESIGN.md](../DESIGN.md). Fieldwork 1.0 is 
 
 ## Implementation plans
 
+- [Repository cleanup and structure review](implementation/repository_cleanup_progress.md) ? removed superseded app prototypes, folder purposes, retained runtime boundaries and verification limits
+
 - [Ecosystem planning progress](implementation/ecosystem_direction_progress.md) — recorded direction, branch baseline, documentation checks and unimplemented follow-ups
 
 - [Repository setup](implementation/repository_setup_plan.md) — completed foundation interface, acceptance gates, and constraints on later changes

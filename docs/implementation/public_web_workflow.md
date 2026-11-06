@@ -76,7 +76,7 @@ Canonical P IDs are retained. Suffixes below identify states or subflows, not co
 | X-member | Highlight creation/profile management | Authorized member or account owner | Configure personal presentation | W09.highlights / W09.highlight-preview / W09.public-profile in the shared specification |
 | X-info | About, privacy, terms and support | Anyone | Understand product and data use | Supporting content destinations; copy remains a separate handoff |
 
-Existing code is a starting point, not full coverage: `apps/web/src/routes/prototype.reader.tsx` validates view, chapter, one/all-days and category; `apps/web/src/prototype/experience.tsx` contains sample Discover and reader compositions; `reader-navigation.ts` delegates selection parsing to shared logic. Their existence does not demonstrate production permissions, public SSR, real discovery, saved research or questions. Do not replace existing route semantics silently when implementing this plan.
+The former sample Discover/reader routes and shared prototype selection parser were retired on 6 November 2026; see the [cleanup record](repository_cleanup_progress.md). Implement reader context contracts against real authorized publication data. The foundation SSR reader harness does not demonstrate production permissions, real discovery, saved research or questions.
 
 ## 3. Connectivity: incoming and outgoing navigation
 

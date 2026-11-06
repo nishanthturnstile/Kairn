@@ -46,7 +46,6 @@ const vite = await createViteServer({
 const RenderedSchema = z.strictObject({ html: z.string(), title: z.string() });
 const app = createApp({
   ...(accountsRuntime ? { accounts: accountsRuntime.accounts } : {}),
-  designSpecimens: true,
   checkReady: async () => {
     await checkDatabase(database);
     await accountsRuntime?.checkReady();

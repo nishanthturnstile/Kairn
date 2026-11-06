@@ -55,7 +55,6 @@ export default function RootLayout() {
           <Stack.Screen name="reset-password" options={{ title: "Reset password" }} />
           <Stack.Screen name="verify-email" options={{ title: "Verify email" }} />
           <Stack.Screen name="index" options={{ title: "Kairn Dev" }} />
-          <Stack.Screen name="prototype" options={{ headerShown: false }} />
         </Stack>
       </AppearanceProvider>
     </QueryClientProvider>

@@ -12,18 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as CreateAccountRouteImport } from './routes/create-account'
-import { Route as PrototypeRouteImport } from './routes/prototype'
 import { Route as RecoverRouteImport } from './routes/recover'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SignInRouteImport } from './routes/sign-in'
 import { Route as VerifyEmailRouteImport } from './routes/verify-email'
-import { Route as PrototypeIndexRouteImport } from './routes/prototype.index'
-import { Route as PrototypeComponentsRouteImport } from './routes/prototype.components'
-import { Route as PrototypeDiscoverRouteImport } from './routes/prototype.discover'
-import { Route as PrototypeReaderRouteImport } from './routes/prototype.reader'
-import { Route as SetupAccountsRouteImport } from './routes/setup.accounts'
 import { Route as SetupStatusRouteImport } from './routes/setup.status'
-import { Route as PrototypeJourneyJourneyIdRouteImport } from './routes/prototype.journey.$journeyId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -38,11 +31,6 @@ const AccountRoute = AccountRouteImport.update({
 const CreateAccountRoute = CreateAccountRouteImport.update({
   id: '/create-account',
   path: '/create-account',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrototypeRoute = PrototypeRouteImport.update({
-  id: '/prototype',
-  path: '/prototype',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RecoverRoute = RecoverRouteImport.update({
@@ -65,59 +53,21 @@ const VerifyEmailRoute = VerifyEmailRouteImport.update({
   path: '/verify-email',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PrototypeIndexRoute = PrototypeIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => PrototypeRoute,
-} as any)
-const PrototypeComponentsRoute = PrototypeComponentsRouteImport.update({
-  id: '/components',
-  path: '/components',
-  getParentRoute: () => PrototypeRoute,
-} as any)
-const PrototypeDiscoverRoute = PrototypeDiscoverRouteImport.update({
-  id: '/discover',
-  path: '/discover',
-  getParentRoute: () => PrototypeRoute,
-} as any)
-const PrototypeReaderRoute = PrototypeReaderRouteImport.update({
-  id: '/reader',
-  path: '/reader',
-  getParentRoute: () => PrototypeRoute,
-} as any)
-const SetupAccountsRoute = SetupAccountsRouteImport.update({
-  id: '/setup/accounts',
-  path: '/setup/accounts',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const SetupStatusRoute = SetupStatusRouteImport.update({
   id: '/setup/status',
   path: '/setup/status',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PrototypeJourneyJourneyIdRoute =
-  PrototypeJourneyJourneyIdRouteImport.update({
-    id: '/journey/$journeyId',
-    path: '/journey/$journeyId',
-    getParentRoute: () => PrototypeRoute,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/create-account': typeof CreateAccountRoute
-  '/prototype': typeof PrototypeRouteWithChildren
   '/recover': typeof RecoverRoute
   '/reset-password': typeof ResetPasswordRoute
   '/sign-in': typeof SignInRoute
   '/verify-email': typeof VerifyEmailRoute
-  '/prototype/components': typeof PrototypeComponentsRoute
-  '/prototype/discover': typeof PrototypeDiscoverRoute
-  '/prototype/reader': typeof PrototypeReaderRoute
-  '/setup/accounts': typeof SetupAccountsRoute
   '/setup/status': typeof SetupStatusRoute
-  '/prototype/': typeof PrototypeIndexRoute
-  '/prototype/journey/$journeyId': typeof PrototypeJourneyJourneyIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -127,31 +77,18 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/sign-in': typeof SignInRoute
   '/verify-email': typeof VerifyEmailRoute
-  '/prototype/components': typeof PrototypeComponentsRoute
-  '/prototype/discover': typeof PrototypeDiscoverRoute
-  '/prototype/reader': typeof PrototypeReaderRoute
-  '/setup/accounts': typeof SetupAccountsRoute
   '/setup/status': typeof SetupStatusRoute
-  '/prototype': typeof PrototypeIndexRoute
-  '/prototype/journey/$journeyId': typeof PrototypeJourneyJourneyIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/create-account': typeof CreateAccountRoute
-  '/prototype': typeof PrototypeRouteWithChildren
   '/recover': typeof RecoverRoute
   '/reset-password': typeof ResetPasswordRoute
   '/sign-in': typeof SignInRoute
   '/verify-email': typeof VerifyEmailRoute
-  '/prototype/components': typeof PrototypeComponentsRoute
-  '/prototype/discover': typeof PrototypeDiscoverRoute
-  '/prototype/reader': typeof PrototypeReaderRoute
-  '/setup/accounts': typeof SetupAccountsRoute
   '/setup/status': typeof SetupStatusRoute
-  '/prototype/': typeof PrototypeIndexRoute
-  '/prototype/journey/$journeyId': typeof PrototypeJourneyJourneyIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -159,18 +96,11 @@ export interface FileRouteTypes {
     | '/'
     | '/account'
     | '/create-account'
-    | '/prototype'
     | '/recover'
     | '/reset-password'
     | '/sign-in'
     | '/verify-email'
-    | '/prototype/components'
-    | '/prototype/discover'
-    | '/prototype/reader'
-    | '/setup/accounts'
     | '/setup/status'
-    | '/prototype/'
-    | '/prototype/journey/$journeyId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -180,42 +110,27 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/sign-in'
     | '/verify-email'
-    | '/prototype/components'
-    | '/prototype/discover'
-    | '/prototype/reader'
-    | '/setup/accounts'
     | '/setup/status'
-    | '/prototype'
-    | '/prototype/journey/$journeyId'
   id:
     | '__root__'
     | '/'
     | '/account'
     | '/create-account'
-    | '/prototype'
     | '/recover'
     | '/reset-password'
     | '/sign-in'
     | '/verify-email'
-    | '/prototype/components'
-    | '/prototype/discover'
-    | '/prototype/reader'
-    | '/setup/accounts'
     | '/setup/status'
-    | '/prototype/'
-    | '/prototype/journey/$journeyId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccountRoute: typeof AccountRoute
   CreateAccountRoute: typeof CreateAccountRoute
-  PrototypeRoute: typeof PrototypeRouteWithChildren
   RecoverRoute: typeof RecoverRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   SignInRoute: typeof SignInRoute
   VerifyEmailRoute: typeof VerifyEmailRoute
-  SetupAccountsRoute: typeof SetupAccountsRoute
   SetupStatusRoute: typeof SetupStatusRoute
 }
 
@@ -240,13 +155,6 @@ declare module '@tanstack/react-router' {
       path: '/create-account'
       fullPath: '/create-account'
       preLoaderRoute: typeof CreateAccountRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/prototype': {
-      id: '/prototype'
-      path: '/prototype'
-      fullPath: '/prototype'
-      preLoaderRoute: typeof PrototypeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/recover': {
@@ -277,41 +185,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VerifyEmailRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/prototype/': {
-      id: '/prototype/'
-      path: '/'
-      fullPath: '/prototype/'
-      preLoaderRoute: typeof PrototypeIndexRouteImport
-      parentRoute: typeof PrototypeRoute
-    }
-    '/prototype/components': {
-      id: '/prototype/components'
-      path: '/components'
-      fullPath: '/prototype/components'
-      preLoaderRoute: typeof PrototypeComponentsRouteImport
-      parentRoute: typeof PrototypeRoute
-    }
-    '/prototype/discover': {
-      id: '/prototype/discover'
-      path: '/discover'
-      fullPath: '/prototype/discover'
-      preLoaderRoute: typeof PrototypeDiscoverRouteImport
-      parentRoute: typeof PrototypeRoute
-    }
-    '/prototype/reader': {
-      id: '/prototype/reader'
-      path: '/reader'
-      fullPath: '/prototype/reader'
-      preLoaderRoute: typeof PrototypeReaderRouteImport
-      parentRoute: typeof PrototypeRoute
-    }
-    '/setup/accounts': {
-      id: '/setup/accounts'
-      path: '/setup/accounts'
-      fullPath: '/setup/accounts'
-      preLoaderRoute: typeof SetupAccountsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/setup/status': {
       id: '/setup/status'
       path: '/setup/status'
@@ -319,46 +192,17 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SetupStatusRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/prototype/journey/$journeyId': {
-      id: '/prototype/journey/$journeyId'
-      path: '/journey/$journeyId'
-      fullPath: '/prototype/journey/$journeyId'
-      preLoaderRoute: typeof PrototypeJourneyJourneyIdRouteImport
-      parentRoute: typeof PrototypeRoute
-    }
   }
 }
-
-interface PrototypeRouteChildren {
-  PrototypeComponentsRoute: typeof PrototypeComponentsRoute
-  PrototypeDiscoverRoute: typeof PrototypeDiscoverRoute
-  PrototypeReaderRoute: typeof PrototypeReaderRoute
-  PrototypeIndexRoute: typeof PrototypeIndexRoute
-  PrototypeJourneyJourneyIdRoute: typeof PrototypeJourneyJourneyIdRoute
-}
-
-const PrototypeRouteChildren: PrototypeRouteChildren = {
-  PrototypeComponentsRoute: PrototypeComponentsRoute,
-  PrototypeDiscoverRoute: PrototypeDiscoverRoute,
-  PrototypeReaderRoute: PrototypeReaderRoute,
-  PrototypeIndexRoute: PrototypeIndexRoute,
-  PrototypeJourneyJourneyIdRoute: PrototypeJourneyJourneyIdRoute,
-}
-
-const PrototypeRouteWithChildren = PrototypeRoute._addFileChildren(
-  PrototypeRouteChildren,
-)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccountRoute: AccountRoute,
   CreateAccountRoute: CreateAccountRoute,
-  PrototypeRoute: PrototypeRouteWithChildren,
   RecoverRoute: RecoverRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   SignInRoute: SignInRoute,
   VerifyEmailRoute: VerifyEmailRoute,
-  SetupAccountsRoute: SetupAccountsRoute,
   SetupStatusRoute: SetupStatusRoute,
 }
 export const routeTree = rootRouteImport

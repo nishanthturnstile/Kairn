@@ -1,3 +1,5 @@
+> **Prototype retirement, 6 November 2026:** `/setup/accounts` and the interaction prototypes described in historical entries below were removed. Real account/auth functionality remains; see the [cleanup record](repository_cleanup_progress.md) for retained boundaries, tests and the Fieldwork implementation gap.
+
 > **Design reset, 5 November 2026:** visual choices and visual instructions in this historical record are withdrawn. Font/color/icon references describe past artifacts only. Use [DESIGN.md](../../DESIGN.md) for new design; technical evidence and domain policy retain their recorded scope.
 
 # Accounts, journeys and access: implementation progress

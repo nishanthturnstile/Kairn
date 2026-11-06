@@ -1,5 +1,5 @@
-import { useId, useState, type Ref } from "react";
-import { Text, TextInput, View, type TextInputProps } from "react-native";
+import { useState, type Ref } from "react";
+import { TextInput, type TextInputProps } from "react-native";
 import { StyleSheet, useUnistyles } from "react-native-unistyles";
 
 export function Input({
@@ -31,41 +31,6 @@ export function Input({
       ]}
       {...props}
     />
-  );
-}
-export function TextArea(props: TextInputProps) {
-  return <Input multiline textAlignVertical="top" {...props} />;
-}
-export function Field({
-  label,
-  hint,
-  error,
-  optional = false,
-  ...props
-}: TextInputProps & { label: string; hint?: string; error?: string; optional?: boolean }) {
-  const labelId = useId();
-  return (
-    <View style={styles.field}>
-      <Text nativeID={labelId} style={styles.label}>
-        {label}
-        {optional ? " (optional)" : ""}
-      </Text>
-      <Input
-        accessibilityLabel={label}
-        accessibilityLabelledBy={labelId}
-        accessibilityHint={error || hint}
-        {...props}
-        style={[error && styles.errorBorder, props.style]}
-      />
-      {!!(error || hint) && (
-        <Text
-          accessibilityLiveRegion={error ? "polite" : "none"}
-          style={[styles.hint, error && styles.error]}
-        >
-          {error || hint}
-        </Text>
-      )}
-    </View>
   );
 }
 const styles = StyleSheet.create((theme) => ({

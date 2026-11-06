@@ -4,6 +4,8 @@ Date: 3 November 2026. All seven foundation implementation and local acceptance 
 
 ## Current checkpoint
 
+Prototype cleanup, 6 November 2026: the [structure review](repository_cleanup_progress.md) records removal of superseded mobile/web interaction prototypes and account specimens, preserved foundation/account boundaries, and current verification results. Fieldwork runtime adoption remains future implementation; earlier prototype evidence does not qualify it.
+
 CI policy update, 5 November 2026: the user selected lightweight PR checks into `development` and full verification for promotion into `main`. The existing required status and branch protections remain intact. Development PRs run dependency-free whitespace, unresolved-merge-marker and package-manifest JSON validation with a three-minute job timeout; Quality/Android are skipped. PRs targeting `main`, main pushes and manual dispatch retain the existing full suites. The aggregate fails closed on failed/cancelled or unexpectedly skipped selected jobs. There is no duplicate CI run on development pushes. See the [checkout policy](checkout_workflow.md) and setup plan section 8.3.
 
 Executed local CI-policy checks: actionlint passed; YAML parsed; the exact embedded Node step validated all 13 tracked package manifests; eight aggregate success/failure/skip/cancellation cases passed; whitespace and unresolved-marker checks passed. Private validation scripts are under `.kairn/verification/ci-policy/`. These quick checks do not claim application/native acceptance. Hosted results belong to the actual updated PR head.

@@ -32,7 +32,6 @@ import {
   ownAccount,
   useAccountEpoch,
 } from "./session";
-import "./specimens.css";
 import "./account.css";
 
 type Mode =
@@ -187,13 +186,9 @@ export function AccountPage({ mode }: { mode: Mode }) {
     account: "Your account",
   };
   return (
-    <section
-      className="account-specimens account-live"
-      data-view={mode}
-      aria-labelledby="account-heading"
-    >
-      <div className="specimen-intro">
-        <p className="specimen-kicker">KAIRN / YOUR PRIVATE ACCOUNT</p>
+    <section className="account-live" data-view={mode} aria-labelledby="account-heading">
+      <div className="account-intro">
+        <p className="account-kicker">KAIRN / YOUR PRIVATE ACCOUNT</p>
         <h1 id="account-heading">{titles[mode]}</h1>
         <p>Your profile stays private. Sharing a journey is always a separate choice.</p>
       </div>
@@ -240,7 +235,7 @@ export function AccountPage({ mode }: { mode: Mode }) {
           </p>
         )
       ) : (
-        <section className="specimen-panel">
+        <section className="account-panel">
           <form
             noValidate
             onSubmit={(event) => {
@@ -458,7 +453,7 @@ function PrivateAccount({
   const [failedAvatar, setFailedAvatar] = useState("");
   return (
     <>
-      <section className="specimen-panel">
+      <section className="account-panel">
         <h2>Private profile</h2>
         <p>{account.privateEmail}</p>
         {message ? <Notice message={message} /> : null}
@@ -692,7 +687,7 @@ function PrivateAccount({
           Download account data
         </Button>
       </section>
-      <section className="specimen-panel">
+      <section className="account-panel">
         <h2>Security and sessions</h2>
         <p>
           Sign in again to refresh authentication before managing sessions or changing your
